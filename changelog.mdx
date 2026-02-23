@@ -1,0 +1,146 @@
+---
+title: Changelog
+description: Stay updated with the latest releases, feature enhancements, and improvements in Productised.
+---
+
+## Recent Releases
+
+Track the evolution of Productised with our changelog. We release updates regularly to enhance your AI-powered assessments, improve performance, and introduce new customization options.
+
+<Callout kind="info">
+Subscribe to our changelog feed or join the waitlist at https://www.productised.ai/wait-list to get notified about new releases.
+</Callout>
+
+| Version | Date       | Key Changes                  |
+|---------|------------|------------------------------|
+| v1.2.0  | 2024-10-15 | Assessment customization     |
+| v1.1.0  | 2024-09-20 | Performance improvements     |
+| v1.0.0  | 2024-08-10 | Initial release              |
+
+## v1.2.0 - 2024-10-15
+
+<Update label="2024-10-15" description="v1.2.0" tags={["feature", "improvement"]}>
+
+## New Features
+
+- Added advanced assessment customization options, including dynamic AI prompts for personalized outcome pages.
+- Introduced branded report templates with your logo and brand colors (e.g., `#FED86D`).
+
+## Improvements
+
+- Enhanced AI reasoning for more context-aware lead reports.
+- Faster generation of personalized outcomes, reducing wait times by `>50%`.
+
+## Bug Fixes
+
+- Fixed issue with multi-step assessments not saving partial responses.
+- Resolved rendering errors in custom outcome pages.
+
+</Update>
+
+## v1.1.0 - 2024-09-20
+
+<Update label="2024-09-20" description="v1.1.0" tags={["bugfix", "improvement"]}>
+
+## Improvements
+
+- Optimized performance for high-traffic assessments, handling `>1000` leads per day.
+- Better integration with lead generation tools via webhooks.
+
+## Bug Fixes
+
+- Patched security vulnerability in report generation (no user data exposed).
+- Fixed email delivery failures for personalized reports.
+
+## Deprecations
+
+- Legacy static outcome templates deprecated. Migrate to AI-powered dynamic templates.
+
+</Update>
+
+## v1.0.0 - 2024-08-10
+
+<Update label="2024-08-10" description="v1.0.0" tags={["feature", "breaking"]}>
+
+## New Features
+
+- Core AI-powered assessments for lead generation.
+- Instant personalized reports and outcome pages.
+- No-code builder for quizzes and funnels.
+
+## Breaking Changes
+
+- Initial API structure updated. See migration guide below.
+
+</Update>
+
+## Migration Guide
+
+Follow these steps to update your Productised assessments to the latest version.
+
+<Steps>
+  <Step title="Backup Your Data" icon="database">
+
+    Export your current assessments:
+
+````bash
+# Via dashboard
+# Go to Settings > Export > Download JSON
+````
+
+  </Step>
+  <Step title="Update Integration" icon="settings">
+
+    Update your webhook URL to `https://api.productised.ai/v2/webhooks`.
+
+    <CodeGroup tabs="JavaScript,Python">
+````javascript
+// New endpoint
+const webhookUrl = 'https://api.productised.ai/v2/webhooks';
+fetch(webhookUrl, { method: 'POST', body: JSON.stringify(leadData) });
+````
+````python
+# New endpoint
+import requests
+webhook_url = 'https://api.productised.ai/v2/webhooks'
+requests.post(webhook_url, json=lead_data)
+````
+    </CodeGroup>
+
+  </Step>
+  <Step title="Test Assessments" icon="play">
+
+    Create a test assessment and verify personalized reports generate correctly.
+
+  </Step>
+</Steps>
+
+<Expandable title="Detailed Deprecations" default-open="false">
+
+If using deprecated static templates:
+
+1. Open your assessment editor.
+2. Switch to "AI Dynamic" mode under Outcomes.
+3. Map old fields to new AI prompts, e.g., `{user_responses}` becomes `{lead_context}`.
+
+No downtime expected during migration.
+
+</Expandable>
+
+## Next Steps
+
+<Columns cols={3}>
+  <Card title="Quickstart" icon="rocket" href="/quickstart">
+    Get started with your first assessment.
+  </Card>
+  <Card title="Customization" icon="palette" href="/configuration">
+    Explore new branding options.
+  </Card>
+  <Card title="API Reference" icon="code" href="/authentication">
+    Integrate with your tools.
+  </Card>
+</Columns>
+
+<Callout kind="tip">
+Check the [Productised dashboard](https://dashboard.productised.ai) for auto-update notifications.
+</Callout>
