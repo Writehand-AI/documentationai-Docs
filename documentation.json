@@ -2,10 +2,10 @@
   "name": "Productised",
   "colors": {
     "light": {
-      "brand": "#FDC21B"
+      "brand": "#FD4994"
     },
     "dark": {
-      "brand": "#FAD46B"
+      "brand": "#FD4994"
     }
   },
   "navigation": {
