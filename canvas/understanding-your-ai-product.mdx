@@ -1,0 +1,140 @@
+---
+title: Understanding your AI Product
+description: The AI Product node is the heart of every product on Productised — here's what every setting actually does.
+---
+
+The **AI Product** node is the centrepiece of your canvas. It's the conversational AI that your audience interacts with — asking questions, listening to responses, and preparing to deliver a personalised outcome. Everything else on the canvas (Powers and Outcomes) connects to it.
+
+When you click the AI Product node on your canvas, the settings panel opens on the right. It's organised into three tabs: **Content**, **Design**, and **Behaviour**. Here's what each section controls.
+
+<Callout kind="info">📸 **Screenshot needed:** The AI Product node selected on the canvas with the settings panel open — showing the three tabs (Content, Design, Behaviour) at the top, and the Content tab active with the system prompt and welcome message visible</Callout>
+
+## Content tab
+
+The Content tab is where you define what the AI says, what it asks, and how it makes decisions.
+
+### Welcome message
+
+This is the first thing your audience sees when they open your product. Write it in the voice of your product — warm, direct, and clear about what they're about to experience. If you've enabled a title page (in Design), the welcome message appears as the headline on that screen.
+
+The **welcome subtitle** is optional — use it to add a short line that provides context or builds anticipation. Something like "This takes about 5 minutes and the result is personalised to you" works well.
+
+### System prompt
+
+The system prompt is the instruction set you give the AI. It shapes how the AI talks, how it frames questions, and what persona it takes on during the conversation. Think of it as briefing the AI on its role.
+
+You don't need to write a system prompt from scratch — Productised includes quick-start templates for common use cases (lead capture, assessment, consultation booking, customer feedback) that you can select and customise. Or you can write your own from the "Custom" option.
+
+A strong system prompt includes:
+- Who the AI is (the expert it's playing the role of)
+- Who the audience is (and how to speak to them)
+- The tone and style the conversation should have
+- Any domain-specific context that makes responses more relevant
+
+<Callout kind="info">📸 **Screenshot needed:** The system prompt text area with a filled-in example, and the quick-prompt template selector above it showing options like "Lead Capture", "Assessment", "Consultation Booking"</Callout>
+
+### Conversation starters
+
+These are suggested prompts shown to your audience at the start of the conversation — clickable shortcuts that help people get started without staring at a blank input. They're especially useful if your product is open-ended or conversational in nature.
+
+### Collection goals
+
+Collection goals are the specific pieces of information the AI needs to gather from each person. Each goal has:
+
+- A **field name** (how the data is stored internally)
+- A **field type** — short text, email, number, scale (0–10), yes/no, multiple choice, image selection, long text, URL, or file upload
+- A **label** (the human-readable name for the question)
+- Whether the field is **required** or optional
+- For choice and scale fields: the available **options** or **range**
+
+The AI uses these goals to guide the conversation — it works through them naturally, one at a time, making the exchange feel like a real discussion rather than a form.
+
+<Callout kind="tip">You can enable **scoring** on individual collection goals (for choice, yes/no, and scale fields). This gives the AI a point value to assign per answer, which feeds into the decision model and allows you to route different people to different outcomes based on their total score.</Callout>
+
+### Decision model
+
+The decision model is how your AI Product determines what outcome — and what version of that outcome — is right for each person. There are three modes:
+
+<Columns cols="3">
+  <Card title="AI Judgement" icon="cpu">
+    The AI makes a holistic decision based on the full conversation. No structured scoring — it weighs everything it collected and makes a call. Best for nuanced, qualitative products.
+  </Card>
+  <Card title="AI Scorecard" icon="bar-chart-2">
+    The AI uses light structured scoring behind the scenes for more consistent results. Good when you want rough categories (low/medium/high fit) without manual configuration.
+  </Card>
+  <Card title="Advanced Manual" icon="sliders">
+    Full control over scoring thresholds, labels, and per-field score overrides. Designed for power users who want precise segmentation.
+  </Card>
+</Columns>
+
+You also set the **decision objective** — what the decision is actually trying to determine. Options include:
+
+- **Lead Fit** — is this person a good fit for your offer?
+- **Readiness** — how ready are they to take the next step?
+- **Diagnosis** — what's their current situation or challenge?
+- **Recommendation** — which option or path is right for them?
+- **Offer Match** — which of your services or products fits them best?
+- **Custom** — define your own objective
+
+The AI uses the decision objective as context when generating the outcome — so a "Lead Fit" decision produces a different kind of report than a "Diagnosis" decision, even with the same questions.
+
+---
+
+## Design tab
+
+The Design tab controls how your product looks to the people going through it.
+
+### Theme presets
+
+Select from a set of pre-built visual themes — each one sets your background colour, text colour, button colours, and font in one click. You can use a preset as a starting point and then customise individual elements.
+
+### Welcome style
+
+Choose between two layouts for the entry point to your product:
+
+- **Title page** — a full-screen landing page before the conversation starts, with your logo, headline, call-to-action button, and optionally a disclaimer and social proof figures. Great for lead generation products where first impressions matter.
+- **Chat interface** — drops the audience directly into the conversation without a title page. Faster, more utilitarian — works well for internal tools or when the product is embedded mid-page on a website.
+
+### Colours and fonts
+
+Set the background colour (solid or gradient), text colour, button colour, and font for the entire experience. These can all be set independently or synced from a theme preset.
+
+### Background effects
+
+Optionally add a background image or video, or choose from a set of animated background presets that give your product a more dynamic, premium feel.
+
+### Social proof
+
+If you're using the title page layout, you can enable social proof — three customisable metrics displayed beneath your CTA button (e.g. "500+ users", "4.9★ rated", "2 min avg"). These are free-text fields you fill in yourself.
+
+<Callout kind="info">📸 **Screenshot needed:** The Design tab of the AI Product settings — showing the theme presets row, the background colour picker, and the welcome style toggle</Callout>
+
+---
+
+## Behaviour tab
+
+The Behaviour tab controls the operational settings that determine how the conversation runs.
+
+### After collection
+
+This is what happens once the AI has gathered all its collection goals. The options are:
+
+- **Collect only** — the conversation ends and the data is saved. No AI-generated outcome is produced immediately. Use this when you're handling leads manually or routing them via a Connections power.
+- **Generate report** — the AI generates a personalised report using the collected data and the Report Outcome node you've connected.
+- **Generate document** — the AI generates a personalised document (connected Document Outcome node required).
+- **Generate offer** — the AI generates a tailored commercial offer (connected Offer Outcome node required).
+- **Continue as advisor** — after collecting, the AI shifts into an open advisory mode, answering questions and giving personalised guidance based on everything that was shared.
+
+### AI model
+
+By default, Productised selects the best available AI model for your product automatically. You can override this if you have a specific preference or are connected via your own API key in workspace settings.
+
+### Message limits
+
+Set the maximum number of messages in the collection phase and, if advisor mode is enabled, in the advisor phase. These limits prevent conversations from running indefinitely and help you control the experience length.
+
+### Completion redirect
+
+Optionally redirect your audience to a specific URL after the outcome is delivered. Add a button label and destination URL. Useful for sending people to your booking page, website, or a community after they've received their result.
+
+<Callout kind="info">📸 **Screenshot needed:** The Behaviour tab showing the "After collection" options with "Generate report" selected, and the completion redirect section below with a URL and button label filled in</Callout>

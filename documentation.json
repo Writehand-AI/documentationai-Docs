@@ -23,90 +23,328 @@
             "icon": "rocket",
             "pages": [
               {
-                "title": "Introduction",
+                "title": "What is Productised?",
                 "path": "introduction",
                 "icon": "home"
               },
               {
-                "title": "Quickstart",
-                "path": "quickstart",
+                "title": "How it works",
+                "path": "how-it-works",
+                "icon": "layers"
+              },
+              {
+                "title": "Create your first product",
+                "path": "getting-started/create-with-ai",
                 "icon": "zap"
               }
             ]
           },
           {
-            "group": "Core Concepts",
-            "icon": "layers",
+            "group": "The Canvas",
+            "icon": "grid",
             "pages": [
               {
-                "title": "Features",
-                "path": "features",
+                "title": "Understanding the canvas",
+                "path": "canvas/understanding-the-canvas",
+                "icon": "layout"
+              },
+              {
+                "title": "Using the AI assistant",
+                "path": "canvas/using-the-ai-assistant",
+                "icon": "message-square"
+              },
+              {
+                "title": "Understanding your AI Product",
+                "path": "canvas/understanding-your-ai-product",
+                "icon": "cpu"
+              },
+              {
+                "title": "Connecting Powers and Outcomes",
+                "path": "canvas/connecting-powers-and-outcomes",
+                "icon": "git-merge"
+              }
+            ]
+          },
+          {
+            "group": "Powers",
+            "icon": "bolt",
+            "pages": [
+              {
+                "title": "What are Powers?",
+                "path": "powers/what-are-powers",
+                "icon": "star"
+              },
+              {
+                "title": "Research",
+                "path": "powers/research",
+                "icon": "search"
+              },
+              {
+                "title": "Knowledge",
+                "path": "powers/knowledge",
+                "icon": "book-open"
+              },
+              {
+                "title": "Visual Insights",
+                "path": "powers/visual-insights",
+                "icon": "bar-chart-2"
+              },
+              {
+                "title": "Connections",
+                "path": "powers/connections",
+                "icon": "share-2"
+              }
+            ]
+          },
+          {
+            "group": "Outcomes",
+            "icon": "flag",
+            "pages": [
+              {
+                "title": "What are Outcomes?",
+                "path": "outcomes/what-are-outcomes",
+                "icon": "target"
+              },
+              {
+                "title": "Report",
+                "path": "outcomes/report",
                 "icon": "file-text"
               },
               {
-                "title": "Integrations",
-                "path": "integrations",
-                "icon": "plug"
+                "title": "Document",
+                "path": "outcomes/document",
+                "icon": "file"
               },
               {
-                "title": "Webhooks",
-                "path": "webhooks",
-                "icon": "antenna"
+                "title": "Offer",
+                "path": "outcomes/offer",
+                "icon": "tag"
+              },
+              {
+                "title": "Redirect",
+                "path": "outcomes/redirect",
+                "icon": "external-link"
+              }
+            ]
+          },
+          {
+            "group": "Personalisation",
+            "icon": "sliders",
+            "pages": [
+              {
+                "title": "Conditional vs AI personalisation",
+                "path": "personalisation/conditional-vs-ai",
+                "icon": "git-branch"
+              },
+              {
+                "title": "Decision model",
+                "path": "personalisation/decision-model",
+                "icon": "cpu"
+              },
+              {
+                "title": "Adaptive collection",
+                "path": "personalisation/adaptive-collection",
+                "icon": "activity"
+              },
+              {
+                "title": "Why this is the future",
+                "path": "personalisation/why-this-is-the-future",
+                "icon": "trending-up"
+              }
+            ]
+          },
+          {
+            "group": "Product Settings",
+            "icon": "settings",
+            "pages": [
+              {
+                "title": "General",
+                "path": "product-settings/general",
+                "icon": "info"
+              },
+              {
+                "title": "Branding",
+                "path": "product-settings/branding",
+                "icon": "image"
+              },
+              {
+                "title": "Secrets",
+                "path": "product-settings/secrets",
+                "icon": "lock"
+              },
+              {
+                "title": "Deployment",
+                "path": "product-settings/deployment",
+                "icon": "globe"
+              },
+              {
+                "title": "More tools",
+                "path": "product-settings/more-tools",
+                "icon": "tool"
+              },
+              {
+                "title": "Webhook",
+                "path": "product-settings/webhook",
+                "icon": "radio"
+              },
+              {
+                "title": "Page SEO",
+                "path": "product-settings/page-seo",
+                "icon": "search"
+              },
+              {
+                "title": "Social",
+                "path": "product-settings/social",
+                "icon": "share"
+              },
+              {
+                "title": "Growth playbook",
+                "path": "product-settings/growth-playbook",
+                "icon": "trending-up"
+              },
+              {
+                "title": "AI",
+                "path": "product-settings/ai",
+                "icon": "cpu"
+              },
+              {
+                "title": "Tracking",
+                "path": "product-settings/tracking",
+                "icon": "bar-chart"
+              }
+            ]
+          },
+          {
+            "group": "Product Analytics",
+            "icon": "bar-chart",
+            "pages": [
+              {
+                "title": "Analytics explained",
+                "path": "product-analytics/analytics-explained",
+                "icon": "pie-chart"
+              },
+              {
+                "title": "Exporting data",
+                "path": "product-analytics/exporting-data",
+                "icon": "download"
+              },
+              {
+                "title": "Viewing results",
+                "path": "product-analytics/viewing-results",
+                "icon": "eye"
+              }
+            ]
+          },
+          {
+            "group": "Workspace Settings",
+            "icon": "briefcase",
+            "pages": [
+              {
+                "title": "Profile",
+                "path": "workspace/profile",
+                "icon": "user"
+              },
+              {
+                "title": "Members",
+                "path": "workspace/members",
+                "icon": "users"
+              },
+              {
+                "title": "Subscription",
+                "path": "workspace/subscription",
+                "icon": "credit-card"
+              },
+              {
+                "title": "Credits",
+                "path": "workspace/credits",
+                "icon": "zap"
+              },
+              {
+                "title": "Account",
+                "path": "workspace/account",
+                "icon": "settings"
+              },
+              {
+                "title": "Offer profile",
+                "path": "workspace/offer-profile",
+                "icon": "briefcase"
+              },
+              {
+                "title": "Secrets",
+                "path": "workspace/secrets",
+                "icon": "lock"
+              },
+              {
+                "title": "Variables",
+                "path": "workspace/variables",
+                "icon": "code"
+              },
+              {
+                "title": "Prompts",
+                "path": "workspace/prompts",
+                "icon": "message-circle"
+              },
+              {
+                "title": "API",
+                "path": "workspace/api",
+                "icon": "terminal"
+              },
+              {
+                "title": "Logs",
+                "path": "workspace/logs",
+                "icon": "list"
               }
             ]
           }
         ]
       },
       {
-        "tab": "API Reference",
-        "icon": "code",
+        "tab": "Integrations",
+        "icon": "plug",
         "groups": [
           {
-            "group": "Endpoints",
-            "openapi": "api-reference/openapi.yaml",
-            "pages": []
+            "group": "Integrations",
+            "pages": [
+              {
+                "title": "Webhooks",
+                "path": "integrations/webhooks",
+                "icon": "radio"
+              },
+              {
+                "title": "Zapier",
+                "path": "integrations/zapier",
+                "icon": "zap"
+              },
+              {
+                "title": "Connections",
+                "path": "integrations/connections",
+                "icon": "share-2"
+              }
+            ]
           }
         ]
       },
       {
-        "tab": "Help Center",
+        "tab": "Help Centre",
         "icon": "help-circle",
-        "pages": [
+        "groups": [
           {
-            "title": "Help Center",
-            "path": "help-center",
-            "icon": "home"
-          },
-          {
-            "group": "FAQs",
-            "icon": "help-circle",
-            "expandable": false,
+            "group": "Help Centre",
             "pages": [
               {
-                "title": "How to Add a Project",
-                "path": "help-center/faq/how-to-add-a-project"
-              }
-            ]
-          },
-          {
-            "group": "Troubleshooting",
-            "icon": "alert-triangle",
-            "expandable": false,
-            "pages": [
+                "title": "FAQs",
+                "path": "help-centre/faqs",
+                "icon": "help-circle"
+              },
               {
-                "title": "Cannot Access Dashboard",
-                "path": "help-center/troubleshooting/cannot-access-dashboard"
-              }
-            ]
-          },
-          {
-            "group": "Guides",
-            "icon": "book-open",
-            "expandable": false,
-            "pages": [
+                "title": "Troubleshooting",
+                "path": "help-centre/troubleshooting",
+                "icon": "alert-triangle"
+              },
               {
-                "title": "Organize Projects",
-                "path": "help-center/guides/organize-projects"
+                "title": "Guides",
+                "path": "help-centre/guides",
+                "icon": "book-open"
               }
             ]
           }

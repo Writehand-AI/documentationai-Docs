@@ -1,0 +1,83 @@
+---
+title: Connecting Powers and Outcomes
+description: Learn how to add Powers and Outcomes to your canvas and connect them to your AI Product.
+---
+
+Your AI Product node sits at the centre of your canvas. Powers and Outcomes extend it — but they only work once they're connected. This page explains exactly how to add nodes to your canvas and draw the connections between them.
+
+<Callout kind="info">📸 **Screenshot needed:** A complete canvas showing an AI Product node in the centre, a Knowledge node connected at the top, a Visual Insights node connected on the left, and a Report Outcome node connected at the bottom — with visible connection lines between them</Callout>
+
+## Adding a node to the canvas
+
+Every Power and Outcome lives in the floating toolbar at the bottom of the canvas. The toolbar has two tabs — **Powers** and **Outcomes** — so start by clicking the right tab for what you want to add.
+
+<Steps>
+  <Step title="Find the node you want">
+    Click the **Powers** or **Outcomes** tab in the toolbar. Hover over each item to see a tooltip explaining what it does.
+  </Step>
+  <Step title="Drag it onto the canvas">
+    Click and hold on the node item, then drag it onto the canvas. Drop it somewhere near your AI Product node — the positioning is flexible, but keeping related nodes close together makes the canvas easier to read.
+  </Step>
+  <Step title="The node appears on the canvas">
+    Once you drop it, the node appears and is ready to configure. Click it to open its settings in the right panel.
+  </Step>
+</Steps>
+
+<Callout kind="info">📸 **Screenshot needed:** A node mid-drag from the toolbar onto the canvas — cursor visible, node ghosted, canvas below</Callout>
+
+## Drawing a connection
+
+Once a node is on the canvas, you connect it to your AI Product by drawing a line between the two.
+
+Every node has **connection handles** — small dots that appear on the edges of the node. Your AI Product has handles at the bottom (for connecting Outcomes and some Powers). Other nodes have handles at the top.
+
+<Steps>
+  <Step title="Hover over the source node">
+    Hover your cursor over the AI Product node. The connection handles (small dots) will become visible.
+  </Step>
+  <Step title="Click and drag from a handle">
+    Click on one of the handles and drag toward the node you want to connect. A line will follow your cursor.
+  </Step>
+  <Step title="Drop onto the target node">
+    Release the cursor over the target node — you'll see it highlight as you approach. The connection snaps into place.
+  </Step>
+</Steps>
+
+<Callout kind="info">📸 **Screenshot needed:** Close-up of a connection line being drawn — the cursor mid-drag between the bottom handle of the AI Product node and the top handle of a Report Outcome node</Callout>
+
+## How Powers connect
+
+Powers connect **into** your AI Product from above or the sides. They enhance what the AI can do during the conversation and when generating outcomes.
+
+When you connect a Power, the AI Product automatically becomes aware of it. For example:
+- Connecting a **Knowledge** node means the AI can reference your uploaded documents when answering questions and generating outcomes
+- Connecting a **Research** node means the AI can pull real-time web information relevant to each person's situation
+- Connecting a **Visual Insights** node means charts and visual blocks will be available in the outcome you deliver
+
+You can connect multiple Powers to a single AI Product. Each one adds a new capability without replacing any of the others.
+
+## How Outcomes connect
+
+Outcomes connect **below** your AI Product. They define what your audience receives at the end of the conversation.
+
+You typically connect one Outcome to your AI Product. The Outcome type you choose (Report, Document, or Offer) must match what you've set in the **After collection** setting in your AI Product's Behaviour tab — if those two are mismatched, the Outcome won't trigger.
+
+<Callout kind="tip">Your AI Product's "After collection" setting and the Outcome node you've connected need to match. If you've dragged a Document Outcome onto the canvas, make sure "Generate document" is selected in the Behaviour tab of your AI Product.</Callout>
+
+## Removing a connection
+
+To remove a connection between two nodes, click on the line connecting them to select it, then press the **Delete** or **Backspace** key on your keyboard. This removes the connection but leaves both nodes on the canvas.
+
+To remove a node entirely, click it to select it, then click the **Delete** button that appears in the top-right corner of the node on hover, or press Delete/Backspace.
+
+## What a complete product looks like
+
+A complete, functional product typically has:
+
+- **One AI Product node** — configured with questions, a system prompt, and a decision model
+- **Zero or more Powers** — connected above or to the side of the AI Product
+- **One Outcome node** — connected below the AI Product, matching the "After collection" setting
+
+<Callout kind="info">📸 **Screenshot needed:** A clean, minimal example of a finished canvas — AI Product in the centre, one Knowledge Power above it, one Report Outcome below it, with labelled callouts pointing to each part</Callout>
+
+The canvas auto-saves as you work, so you can build incrementally — add a Power, preview the experience, tweak settings, add an Outcome — without ever worrying about losing your progress.
