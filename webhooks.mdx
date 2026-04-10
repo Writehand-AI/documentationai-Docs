@@ -1,0 +1,316 @@
+---
+title: Productised Webhook Guide
+description: Connect Productised with external systems using incoming and outgoing webhooks, including endpoint details, payloads, Zapier setup, testing, and troubleshooting.
+---
+
+## Overview
+
+Webhooks connect Productised to external systems in two directions: incoming requests create Responses, and outgoing events notify your tools when a Response completes.
+
+| Direction | What it does | Where to configure |
+| --- | --- | --- |
+| Incoming | External system sends data in to create a Response. | POST /api/webhooks/incoming/{productId} |
+| Outgoing | Productised sends data out when a Response is completed. | Product Settings > Webhook tab |
+
+## Get your API key
+
+Use a workspace API key for all incoming webhook requests.
+
+<Steps>
+  <Step title="Open API settings" icon="settings">
+    In your Productised workspace dashboard, go to **Settings → API → Keys**.
+  </Step>
+
+  <Step title="Create a new API key" icon="plus">
+    Create a new key and give it a descriptive name so you remember where it is used later.
+  </Step>
+
+  <Step title="Store the key securely" icon="lock">
+    Copy the key value and store it securely.
+
+    You will pass it in the `Authorization` header as `Bearer YOUR_API_KEY` for incoming webhook requests.
+  </Step>
+</Steps>
+
+## Incoming webhook setup
+
+Use the incoming webhook to create a Response from any external system.
+
+### Endpoint and headers
+
+<CodeGroup tabs="curl,JSON">
+
+```bash
+curl -s -X POST "https://app.productised.ai/api/webhooks/incoming/{productId}" \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "userData": {
+      "email": "jane@example.com",
+      "name": "Jane Smith",
+      "company": "Acme Corp",
+      "biggest_challenge": "Lead generation"
+    }
+  }'
+```
+
+```json
+{
+  "endpoint": "POST https://app.productised.ai/api/webhooks/incoming/{productId}",
+  "headers": {
+    "Authorization": "Bearer YOUR_API_KEY",
+    "Content-Type": "application/json"
+  },
+  "body": {
+    "userData": {
+      "email": "jane@example.com",
+      "name": "Jane Smith",
+      "company": "Acme Corp",
+      "biggest_challenge": "Lead generation"
+    }
+  }
+}
+```
+
+</CodeGroup>
+
+- **Method:** `POST`
+- **URL:** `https://app.productised.ai/api/webhooks/incoming/{productId}`
+- **Required headers:**
+  - `Authorization: Bearer YOUR_API_KEY`
+  - `Content-Type: application/json`
+
+### Request body example
+
+<CodeGroup tabs="JSON">
+
+```json
+{
+  "userData": {
+    "email": "jane@example.com",
+    "name": "Jane Smith",
+    "company": "Acme Corp",
+    "biggest_challenge": "Lead generation"
+  }
+}
+```
+
+</CodeGroup>
+
+### 201 success response
+
+<CodeGroup tabs="201 Created">
+
+```json
+{
+  "success": true,
+  "response": {
+    "id": "clx...",
+    "productId": "cmm...",
+    "createdAt": "2026-04-10T12:00:00.000Z"
+  }
+}
+```
+
+</CodeGroup>
+
+When the request succeeds, the API returns `201` with `success: true` and a `response` object that includes the new Response `id`, the `productId`, and `createdAt` timestamp.
+
+<Callout kind="info" title="What happens next">
+
+Productised creates a Response record and fires the `response.created` event.
+
+This triggers:
+
+- The outgoing webhook (see below)
+- Any **Connections** nodes on the canvas (Gmail, Sheets, HubSpot, Slack, Airtable)
+
+</Callout>
+
+## Optional request body fields
+
+Use these optional fields in the incoming webhook body to pass richer data into Productised.
+
+<ParamField body="userData" param-type="object" required="false" show-location="false">
+Form-style answers for the contact.
+
+Keys like `email`, `name`, and `company` are auto-extracted into the outgoing webhook `contact` object, and the full set of answers appears in `form_answers`.
+</ParamField>
+
+<ParamField body="formData" param-type="object" required="false" show-location="false">
+Raw SurveyJS form schema data if you are posting full form submissions instead of a simple `userData` object.
+
+Productised uses this to map structured form answers into the outgoing webhook payload.
+</ParamField>
+
+<ParamField body="result" param-type="object" required="false" show-location="false">
+Pre-computed AI results if you already generated outputs externally.
+
+Productised includes this in the Response so downstream tools receive the existing AI output instead of generating it again.
+</ParamField>
+
+<ParamField body="userToken" param-type="string" required="false" show-location="false">
+Token for tracking a user or session across systems.
+
+If you omit it, Productised auto-generates a value like `webhook_{timestamp}` and includes it with the Response.
+</ParamField>
+
+## Outgoing webhook setup (incl. Zapier)
+
+Configure an outgoing webhook URL so Productised notifies your systems whenever a Response is completed.
+
+<Steps>
+  <Step title="Open product webhook settings" icon="settings">
+    In the Productised dashboard, open your product and go to **Product Settings → Webhook**.
+  </Step>
+
+  <Step title="Add the destination URL" icon="upload">
+    Paste your destination URL (for example, a **Zapier Catch Hook** URL) into the **Outgoing Webhook URL** field.
+
+    Click **Save** to store the URL.
+  </Step>
+
+  <Step title="Send a test payload" icon="play-circle">
+    Click **Send Test** to send a sample payload to your destination.
+
+    Use this to confirm that your receiver (Zapier, server, or other tool) parses the payload correctly.
+  </Step>
+</Steps>
+
+### When the outgoing webhook fires
+
+Productised sends the outgoing webhook whenever a Response is completed:
+
+- From the AI Chat at `/c/{productId}`
+- From an incoming webhook call that creates and completes a Response
+
+Each completion triggers one `response.completed` event.
+
+### Payload shape
+
+<CodeGroup tabs="JSON">
+
+```json
+{
+  "event": "response.completed",
+  "timestamp": "2026-04-10T12:00:00.000Z",
+  "data": {
+    "response_id": "clx...",
+    "product": {
+      "id": "cmm...",
+      "name": "Business Growth Diagnostic",
+      "summary": "AI-powered growth assessment"
+    },
+    "contact": {
+      "email": "jane@example.com",
+      "name": "Jane Smith",
+      "company": "Acme Corp"
+    },
+    "form_answers": {
+      "email": "jane@example.com",
+      "name": "Jane Smith",
+      "biggest_challenge": "Lead generation"
+    },
+    "ai_report": {
+      "reportNode": "Your personalised growth plan..."
+    }
+  }
+}
+```
+
+</CodeGroup>
+
+- `event` is always `response.completed` for this webhook.
+- `timestamp` is the time the Response completed.
+- `data.response_id` identifies the Response created in Productised.
+- `data.product` includes the product id, name, and summary.
+- `data.form_answers` mirrors the answers recorded for the Response.
+- `data.ai_report` contains AI-generated outputs such as reports or summaries.
+
+<Callout kind="tip" title="How contact auto-extraction works">
+
+Productised builds the `contact` object by inspecting `form_answers` for fields whose names contain common contact keys such as `email`, `name`, `phone`, or `company`.
+
+Use clear field names in your forms so the outgoing webhook includes a clean `contact` block for your CRM or email tool.
+
+</Callout>
+
+### Zapier-specific setup
+
+Use Zapier to route outgoing webhooks into spreadsheets, CRMs, or email tools without writing code.
+
+<Steps>
+  <Step title="Create a Zapier trigger" icon="zap">
+    In Zapier, create a new Zap.
+
+    For the trigger, choose **Webhooks by Zapier → Catch Hook**, then continue to get your **Custom Webhook URL**.
+  </Step>
+
+  <Step title="Connect Zapier to Productised" icon="link">
+    Copy the Zapier hook URL.
+
+    In Productised, go to **Product Settings → Webhook**, paste the URL into the **Outgoing Webhook URL** field, and click **Save**.
+  </Step>
+
+  <Step title="Teach Zapier the payload shape" icon="play-circle">
+    Back in Productised, click **Send Test** so Zapier receives a sample `response.completed` payload.
+
+    In Zapier, click **Test trigger** and confirm the event appears with the expected fields.
+  </Step>
+
+  <Step title="Add downstream actions" icon="arrow-right">
+    Add one or more Zapier actions, such as:
+
+    - Google Sheets: append a new row with contact and AI report fields
+    - CRM: create or update a contact with `contact.email` and `contact.company`
+    - Email: send a follow-up email using `ai_report` content
+
+    Turn the Zap **On** when you are satisfied with the mapping.
+  </Step>
+</Steps>
+
+## Testing
+
+Run a one-line `curl` command to validate your incoming webhook, outgoing webhook, and any Zapier integration.
+
+<CodeGroup tabs="curl">
+
+```bash
+curl -s -X POST "https://app.productised.ai/api/webhooks/incoming/{productId}" -H "Authorization: Bearer YOUR_API_KEY" -H "Content-Type: application/json" -d '{"userData":{"email":"zapier-test@example.com","name":"Zapier Test User","company":"Test Corp","biggest_challenge":"Automating lead capture"}}'
+```
+
+</CodeGroup>
+
+Expected response:
+
+```json
+{ "success": true, "response": { "id": "...", "productId": "...", "createdAt": "..." } }
+```
+
+### Verify the end-to-end flow
+
+After sending the test request:
+
+- **Zapier:** In your Zap, click **Test trigger** and confirm you see an event with `event: "response.completed"` and the `userData` fields in `form_answers` and `contact`.
+- **Productised dashboard:** Open your product and check the **Results** tab. You should see a new Response corresponding to the test call.
+
+<Callout kind="info" title="Single-line curl in zsh">
+
+If your shell is `zsh`, multiline `curl` commands with backslashes can sometimes cause parse errors.
+
+Use the single-line command above to avoid quoting issues.
+
+</Callout>
+
+## Troubleshooting
+
+Use these common symptoms to quickly diagnose webhook issues.
+
+| What you see | Meaning | Fix |
+| --- | --- | --- |
+| `401 Unauthorized` | API key is missing, wrong, or inactive. | Confirm the key in `Settings → API → Keys`, update the `Authorization: Bearer YOUR_API_KEY` header, and retry. |
+| `403 Forbidden` | API key workspace does not match the product workspace. | Generate and use an API key from the same workspace as the target product. |
+| `404 Not Found` | `productId` is incorrect in the URL. | Copy `{productId}` from the URL of `/c/{productId}` in the Productised dashboard and update the endpoint. |
+| `400 Bad Request` | Malformed JSON body or missing `{productId}`. | Validate the JSON payload and ensure the endpoint includes a valid `{productId}` segment. |
+| `curl` succeeds but Zapier shows nothing | Outgoing webhook URL is not saved or is empty. | Re-open **Product Settings → Webhook**, re-enter the outgoing URL, click **Save**, then click **Send Test**. |
+| zsh parse errors on `curl` | Shell is splitting or mis-parsing multiline commands. | Run the provided single-line `curl` command instead of a multiline variant. |
