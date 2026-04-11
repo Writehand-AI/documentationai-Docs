@@ -19,6 +19,27 @@
         "icon": "book",
         "groups": [
           {
+            "group": "Getting Started",
+            "icon": "rocket",
+            "pages": [
+              {
+                "title": "What is Productised?",
+                "path": "introduction",
+                "icon": "home"
+              },
+              {
+                "title": "How it works",
+                "path": "how-it-works",
+                "icon": "layers"
+              },
+              {
+                "title": "Create your first product",
+                "path": "getting-started/create-with-ai",
+                "icon": "zap"
+              }
+            ]
+          },
+          {
             "group": "Use Cases",
             "icon": "compass",
             "pages": [
@@ -50,28 +71,7 @@
             ]
           },
           {
-            "group": "Getting Started",
-            "icon": "rocket",
-            "pages": [
-              {
-                "title": "What is Productised?",
-                "path": "introduction",
-                "icon": "home"
-              },
-              {
-                "title": "How it works",
-                "path": "how-it-works",
-                "icon": "layers"
-              },
-              {
-                "title": "Create your first product",
-                "path": "getting-started/create-with-ai",
-                "icon": "zap"
-              }
-            ]
-          },
-          {
-            "group": "The Canvas",
+            "group": "The Product Canvas",
             "icon": "grid",
             "pages": [
               {
