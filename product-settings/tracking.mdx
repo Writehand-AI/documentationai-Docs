@@ -1,0 +1,54 @@
+---
+title: Tracking
+description: Add your own analytics scripts to your product's public page — Google Analytics, Meta Pixel, GTM, and more.
+---
+
+The Tracking tab lets you inject third-party analytics and tracking scripts directly into your product's public page. Scripts are injected only on your product's public page and are not shared with Productised.
+
+<Callout kind="info">📸 **Screenshot needed:** The Tracking tab showing the Head scripts textarea with a Google Analytics snippet pasted in, and the Body scripts textarea below it</Callout>
+
+## How tracking works
+
+Your product's public page (`/c/{product-id}`) renders as a standard web page that supports custom script injection. The Tracking tab gives you two injection points:
+
+**Head scripts** — injected inside the `<head>` of the page. Use this for scripts that need to load early: Google Analytics (GA4), Google Tag Manager, and similar.
+
+**Body scripts** — injected before the closing `</body>` tag. Use this for scripts that load after the page content: Meta Pixel, TikTok Tag, LinkedIn Insight Tag, Hotjar, and similar.
+
+## Setting up Google Analytics (GA4)
+
+1. Go to your Google Analytics property and copy the GA4 measurement tag (the full `<script async src="...gtag/js?id=G-XXXXXXX">` snippet including the `gtag('config', ...)` call)
+2. Paste the full snippet into the **Head scripts** textarea
+3. Click **Save tracking scripts**
+
+## Setting up Google Tag Manager
+
+1. Copy the GTM head snippet from your GTM container (the `<script>` tag)
+2. Paste it into the **Head scripts** textarea
+3. Copy the GTM body snippet (the `<noscript>` tag)
+4. Paste it into the **Body scripts** textarea
+5. Click **Save tracking scripts**
+
+With GTM in place, you can configure all subsequent tracking (GA4, conversion pixels, etc.) inside GTM without returning to this settings page.
+
+## Setting up Meta Pixel
+
+1. Go to Facebook Events Manager and copy your Pixel base code
+2. Paste the Pixel script into the **Body scripts** textarea
+3. Click **Save tracking scripts**
+
+## Other tracking providers
+
+The same pattern applies to any provider that delivers a JavaScript snippet:
+- **LinkedIn Insight Tag** — body scripts
+- **TikTok Pixel** — body scripts
+- **Hotjar** — head scripts
+- **Intercom** — body scripts
+- Any other provider that gives you a script tag
+
+## Important notes
+
+- Scripts only fire on your product's public page. They do not fire in the Productised dashboard or during canvas editing.
+- Scripts are not validated before saving. Paste incorrectly formatted scripts and they may silently fail. Test after saving.
+- Productised does not process or have access to any data collected by your third-party scripts. Your analytics data flows directly between your product's public page and your chosen platform.
+- Tracking scripts do not affect product performance or response data stored by Productised.

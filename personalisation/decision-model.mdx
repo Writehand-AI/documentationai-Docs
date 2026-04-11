@@ -1,0 +1,74 @@
+---
+title: The decision model
+description: How your AI product evaluates each person — and how that evaluation shapes the outcome they receive.
+---
+
+## What the decision model is
+
+After your AI product finishes collecting, something important happens before the outcome appears. The AI evaluates what it learned. It makes a determination about this person: where they are, what they need, how ready they are, how strong a fit they are for what you do. That evaluation is the decision model.
+
+The decision model is the hidden intelligence layer of your AI product. It turns a collection of answers into a structured verdict — and that verdict flows into every outcome the product generates.
+
+Without a decision model, the AI produces an outcome that is informed by the conversation but not structured around a conclusion. With a decision model active, every outcome — Report, Document, Offer — is shaped by the AI's specific determination of who this person is and what they need.
+
+<Callout kind="info">📸 **Screenshot needed:** The decision model settings panel in the AI Product node sidebar, showing the three mode options and the objective selector</Callout>
+
+## Three modes
+
+**AI Judgement**
+
+The AI weighs the full conversation and makes a holistic call. There is no structured scoring behind the scenes — the evaluation is qualitative, contextual, and entirely AI-driven. The AI considers everything: confidence level, depth of answers, contradictions, signals the person may not have stated directly.
+
+Use AI Judgement for nuanced products where context matters more than a number. It requires no configuration and produces excellent results for most use cases. This is the right starting point.
+
+**AI Scorecard**
+
+The AI applies light structured scoring behind the scenes. This produces consistent categories — the equivalent of low, medium, or high fit — without requiring you to manually configure score maps or thresholds. The AI derives the scoring from the collection goals and its understanding of the domain.
+
+Use AI Scorecard when you want rough segmentation without the setup overhead. It adds predictability to the outcome without removing the AI's qualitative reasoning.
+
+**Advanced Manual**
+
+Full control. You configure score thresholds, dimension weights, per-field score maps, and outcome labels explicitly. The AI uses this structured scoring to determine status, but the outcomes are still AI-generated — the scores inform the reasoning, they do not replace it with static pages.
+
+Use Advanced Manual only when you have a specific segmentation requirement and are comfortable with the configuration. The default thresholds are: 0–39% = low, 40–69% = medium, 70–100% = high.
+
+## Decision objectives
+
+The objective shapes what the decision model is trying to determine, and in turn shapes how the outcome is framed.
+
+**Lead Fit** — evaluates how well this person fits your ideal client profile. The conclusion produced is a fit assessment: Low fit, Moderate fit, High fit. Use this for qualification products and lead capture tools.
+
+**Readiness** — evaluates how ready this person is to act. Conclusions: Low readiness, Moderate readiness, High readiness. Use this for products where the key question is timing and preparedness.
+
+**Diagnosis** — evaluates the health or strength of something the person is working on or within. Conclusions: Needs attention, Mixed signals, Strong baseline. Use this for diagnostic products and assessment tools.
+
+**Recommendation** — evaluates the clarity of the next step this person should take. Conclusions: Needs guidance, Promising direction, Clear next step. Use this for advisory and strategy products.
+
+**Offer Match** — evaluates how strongly this person's situation maps to a specific offer or engagement. Conclusions: Low offer match, Possible match, Strong offer match. Use this for products designed to qualify into a particular service.
+
+**Custom** — define your own objective label and outcome labels. The AI will reason toward the objective you describe.
+
+## What the decision model produces
+
+At the end of the collection phase, the decision model produces a `DecisionResult`: a structured object that contains the overall status (low, medium, or high), the label that matches that status (using your custom labels or the defaults for the chosen objective), a short summary, and a confidence level.
+
+When Advanced Manual mode is used with scored fields, the result also includes a full score context: total score, maximum possible score, percentage, per-dimension breakdowns, top strengths, and top gaps.
+
+This result is passed to every connected Outcome. The Report uses it to shape the tone of the verdict, the emphasis of the breakdown, and the strength of the CTA. The Document uses it to frame recommendations. The Offer uses it to calibrate the pitch. Every outcome receives the full picture.
+
+## How status and confidence work
+
+Status is straightforward: low, medium, or high. It maps to the outcome labels you configure (or the defaults for your chosen objective).
+
+Confidence reflects how reliably the score was computed. In AI Judgement mode, confidence is not computed from structured data. In AI Scorecard and Advanced Manual modes, confidence is derived from the number of scored dimensions: four or more scored fields produces high confidence; two or three produces medium; fewer produces low. Higher confidence means the outcome can be more specific and more assertive.
+
+## Practical advice
+
+Start with AI Judgement. It requires no configuration, handles nuance well, and produces excellent outcomes across most professional services products. The AI understands what you are trying to evaluate from your collection goals and system prompt context.
+
+Move to AI Scorecard if you find yourself wanting consistent categories across responses — if you want to be able to say "this person was high-fit" and mean the same thing every time.
+
+Use Advanced Manual only when you have a specific requirement: a known scoring framework, a particular threshold you need to enforce, or a structured diagnostic where the dimension breakdown is itself part of the value delivered.
+
+<Callout kind="info">📸 **Screenshot needed:** The expanded decision model panel showing an objective selected, custom labels filled in, and the threshold sliders visible in Advanced Manual mode</Callout>

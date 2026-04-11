@@ -1,0 +1,35 @@
+---
+title: Credits
+description: How model credits work and how to monitor your usage.
+---
+
+Productised uses a credit system to manage AI model usage across your workspace. Credits are consumed when your products run AI operations — conversations, report generation, document creation, and similar.
+
+<Callout kind="info">📸 **Screenshot needed:** The Credits page showing the current credit balance, usage over the billing period, and a breakdown by product or operation type</Callout>
+
+## What uses credits
+
+Credits are consumed by AI operations within your products:
+
+- **Collection conversations** — each message exchange in an AI Product conversation
+- **Report generation** — generating a personalised Report outcome
+- **Document generation** — generating a Document outcome
+- **Offer generation** — generating an Offer outcome
+- **Knowledge retrieval** — searching your uploaded knowledge base
+- **Research / web search** — the Research power
+
+The amount of credits consumed per operation varies based on the complexity of the operation and the length of the input and output.
+
+## Credit allocations
+
+Your plan includes a monthly credit allocation. Allocations reset at the start of each billing period. If you exceed your allocation, you may need to upgrade your plan or wait for the next reset.
+
+## Bring Your Own Key
+
+Pro plan users can add their own Anthropic API key to a product (in **Product Settings → Secrets**). When a BYOK key is set, core Claude model usage for that product is billed directly to your Anthropic account and does not consume Productised model credits.
+
+Knowledge retrieval, Research, and image generation still use Productised infrastructure and credits even with BYOK enabled.
+
+## Monitoring usage
+
+The Credits page shows your current balance and usage for the current billing period. If you are approaching your allocation limit, consider reviewing which products have the heaviest usage or upgrading your plan.

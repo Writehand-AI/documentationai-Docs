@@ -1,0 +1,58 @@
+---
+title: Viewing results
+description: How to view and explore individual user responses — what data is shown and how to find what you need.
+---
+
+The All Results tab shows every response record for your product in a filterable, sortable table. Click any row to open the full response detail and see exactly what that person collected, what the AI generated, and how the decision model evaluated them.
+
+<Callout kind="info">📸 **Screenshot needed:** The All Results tab showing the response table with status pills (Completed, Lead, Abandoned) and a decision label visible in one row</Callout>
+
+## The results table
+
+Each row in the All Results table represents one session. The table shows:
+
+- **Status pill** — the lifecycle state of the session: Completed, In Progress, Abandoned, or Lead (sessions where lead data was captured are additionally flagged)
+- **Created date** — when the session was started
+- **Contact info** — name and email, where collected
+- **Decision label** — the outcome of the decision model evaluation (e.g. "High fit", "Moderate readiness") if the decision model is active
+- **Outcome flags** — indicators showing whether the session generated a Report, Document, or Offer
+
+## Status states explained
+
+**Completed** — the session reached the end of the experience. All collection goals were addressed and the outcome was generated.
+
+**In Progress** — the session has been started but not yet completed. The user is still mid-experience or returned to it and has not finished.
+
+**Abandoned** — the session went inactive for more than 24 hours before completion. The conversation started but was not finished.
+
+**Lead** — shown as an additional badge on sessions where lead capture data (typically email) was collected, regardless of completion status. A session can be both Abandoned and a Lead if the user provided their email before dropping off.
+
+## Opening a response
+
+Click any row to open the full response detail. The detail view shows:
+
+- **User data** — all collected field values from the conversation, including any lead capture fields (name, email, phone, company)
+- **Extracted data** — the structured data the AI extracted from the conversation answers
+- **Conversation history** — the full exchange between the user and the AI during collection
+- **Decision result** — if the decision model was active: the status (low/medium/high), the label, the confidence level, and the dimension breakdown if scored fields were used
+- **AI output** — the generated Report, Document, or Offer content from this session
+
+## Finding specific responses
+
+Use the search and filter tools above the table to narrow down responses:
+
+- Filter by status to see only Completed sessions, only Leads, or only Abandoned sessions
+- Sort by date to find the most recent or oldest sessions
+- Search by name or email to find a specific person
+
+## What the decision result tells you
+
+The decision result in a response is the output of the decision model for that specific session. It shows:
+
+- **Status** — low, medium, or high
+- **Label** — the human-readable label for that status (e.g. "High fit" or "Strong baseline")
+- **Confidence** — low, medium, or high, based on the number of scored dimensions available
+- **Top strengths** — the dimensions or areas where the person scored strongest
+- **Top gaps** — the dimensions or areas where the person scored lowest
+
+For scorecard products, the response detail also shows the full dimension breakdown — each scored field's score and percentage — so you can understand exactly how the overall result was derived.

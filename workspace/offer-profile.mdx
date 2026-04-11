@@ -1,0 +1,118 @@
+---
+title: Offer Profile
+description: The commercial foundation of your workspace — the expertise, positioning, and guardrails that make every product feel like you.
+---
+
+The Offer Profile is the most important thing you will configure in your workspace. Fill it in once, and every AI product you build — every Report, Document, and Offer it generates — will carry your positioning, your methodology, your proof, and your commercial guardrails.
+
+Without an Offer Profile, the AI produces outputs that are technically accurate but generically framed. With one, every output sounds like it was written by someone who knows exactly what you do, who you serve, and what you will and will not say.
+
+<Callout kind="info">📸 **Screenshot needed:** The Offer Profile settings page showing the main fields filled in, with the AI helper button visible at the top</Callout>
+
+## Building your Offer Profile
+
+You can fill in the fields manually, or use the **Build with AI** button to open an AI-guided helper that walks you through your positioning through a short conversation and drafts all the fields for your review.
+
+If you already have a partial profile, the button changes to **Refine with AI** — the helper will read what you have and help you improve or extend it.
+
+The helper drafts everything for review before saving. Nothing is saved until you explicitly click Save.
+
+## Fields
+
+### What I do
+
+Your core positioning statement in one sentence. This is used as the base promise across offers, reports, and advisor responses. Be specific about the outcome you deliver, not the service category.
+
+Example: `I help early-stage SaaS founders fix their pricing before they scale`
+
+### Who I serve
+
+The primary audience this positioning is written for. Keep this specific enough that the AI can write for these people rather than a generic professional audience.
+
+Example: `Founders with an established offer who need stronger positioning and lead conversion`
+
+### How I work
+
+Your methodology, framework, or signature process. Used to explain why your recommendation is credible — the "how" that underpins the "what". This is where your differentiated approach lives.
+
+Example: `I use a 3-phase approach: Diagnose pricing gaps, Model new tiers against market data, Test with a controlled rollout over 60 days.`
+
+### My credentials
+
+Experience, certifications, or trust signals. Used where Productised needs to establish proof and authority — in offer summaries, report footers, and advisor introductions.
+
+Example: `12 years in B2B pricing, 200+ SaaS clients, former VP Revenue at Acme Corp`
+
+### My signature result
+
+The outcome you are most known for. Keep it accurate and defensible — this will appear in commercial outputs.
+
+Example: `Clients typically see a 20-40% revenue increase within 90 days`
+
+### My website
+
+Your website URL. Used as the default destination for CTAs when an output needs a next step and no specific CTA URL has been configured on the node.
+
+### Default CTA
+
+**CTA button text** — the label that appears on the call-to-action button in commercial outputs. This becomes the fallback CTA across Reports, Documents, and Offers that do not override it at the node level.
+
+Example: `Book a strategy call`
+
+**CTA destination URL** — where the CTA button points. Defaults to your website URL if left blank.
+
+## Commercial guardrails
+
+The guardrails section (expandable) gives you fine-grained control over what the AI will and will not say on your behalf.
+
+### Who this is not for
+
+Optional, but powerful. Use this to help the AI filter out poor-fit leads in offer copy — it makes the product more commercially specific and signals confidence in your positioning.
+
+Example: `Founders who only want tactical marketing tips without changing their offer or positioning`
+
+### Approved claims
+
+Claims the AI is permitted to reuse across all outputs. Write one per line. These should be accurate, defensible statements about what you do.
+
+Example:
+```
+Help founders clarify their positioning
+Design a commercially stronger next step
+Turn vague expertise into a clear offer
+```
+
+### Claims to avoid
+
+Language or categories of claim the AI should not use in any output. Write one per line. Use this to prevent exaggerated promises, regulatory risk, or language that does not match your brand.
+
+Example:
+```
+Guaranteed revenue increase
+Legal or compliance promises
+Any claim that depends on unverified case studies
+```
+
+### Default disclaimer
+
+A legal or contextual disclaimer appended to commercial outputs. Use calm, accurate language. This appears at the bottom of Offers and, where configured, in Reports and Documents.
+
+Example: `This guidance is informational and based on the details shared. Final scope, pricing, and commercial terms are confirmed separately.`
+
+## How the Offer Profile flows into products
+
+When your product generates a Report, Document, or Offer, the AI receives the full Offer Profile as context. It uses it to:
+
+- Frame the outcome in the voice of your positioning
+- Apply your methodology as the credibility layer behind recommendations
+- Default to your CTA settings when the node does not override them
+- Stay within your approved claims and avoid your guardrail language
+- Append your disclaimer to commercial outputs
+
+The Offer Profile does not override node-level settings. If a specific Report node has its own CTA configured, that takes precedence. The Offer Profile is the fallback layer that ensures consistency across everything you build.
+
+## Brand Brief
+
+The Offer Profile includes an advanced Brand Brief field (stored as structured JSON) that captures deeper positioning context: your internal positioning brief, audience description, core problem you solve, desired outcome, expanded methodology, tone of voice, origin story, differentiators, offer themes, content angles, and proof points.
+
+The Brand Brief is populated through the AI helper conversation. If you build or refine your profile with the helper, it generates this richer context alongside the standard fields, giving the AI a deeper understanding of your brand to work from.

@@ -1,0 +1,72 @@
+---
+title: Webhook
+description: Send response data to external systems every time someone completes your product.
+---
+
+The Webhook tab gives you two URLs: one for triggering your product from external systems (incoming), and one for sending response data out when someone completes it (outgoing). Webhooks are the primary way to connect Productised to your CRM, email platform, or any automation tool.
+
+<Callout kind="info">📸 **Screenshot needed:** The Webhook tab showing both the Incoming Webhook URL (read-only with copy button) and the Outgoing Webhook URL input with the Save and Send Test buttons</Callout>
+
+## Incoming webhook
+
+Your product has a unique incoming webhook URL:
+
+```
+https://app.productised.ai/api/webhooks/incoming/{product-id}
+```
+
+Use this URL to trigger your product from external systems. For example, you could trigger the product from a CRM workflow, a marketing automation sequence, or a custom application. The incoming URL is read-only — copy it using the Copy button.
+
+## Outgoing webhook
+
+The outgoing webhook fires a POST request to a URL you specify every time someone completes your product. This is how you send response data — contact information, form answers, and AI output — to any external system.
+
+**Compatible with:** Zapier (Webhooks by Zapier → Catch Hook), Make (Webhooks), HubSpot, Google Sheets, or any service that accepts POST requests with a JSON body.
+
+**To set up with Zapier:**
+1. Create a new Zap
+2. Choose "Webhooks by Zapier" as the trigger and "Catch Hook" as the event
+3. Copy the webhook URL Zapier gives you
+4. Paste it into the Webhook URL field in Productised
+5. Connect it to any of Zapier's downstream apps
+
+## Payload format
+
+Every outgoing webhook delivers a JSON payload in this structure:
+
+```json
+{
+  "event": "response.completed",
+  "timestamp": "2026-03-23T10:30:00.000Z",
+  "data": {
+    "response_id": "clu...",
+    "product": {
+      "id": "cmm...",
+      "name": "Business Growth Diagnostic",
+      "summary": "..."
+    },
+    "contact": {
+      "email": "john@example.com",
+      "name": "John Smith",
+      "phone": "+44..."
+    },
+    "form_answers": {
+      "email": "john@example.com",
+      "revenue": "50k-100k",
+      "biggest_challenge": "Lead generation"
+    },
+    "ai_report": {
+      "title": "Your Growth Diagnostic Report",
+      "content": "..."
+    }
+  }
+}
+```
+
+The `form_answers` object contains all collected field values, keyed by field name. The `ai_report` object contains the generated output title and content.
+
+## Testing your webhook
+
+Once you have saved an outgoing webhook URL, the **Send Test** button appears. Click it to send a sample payload to your webhook URL. The test payload includes realistic-looking data so you can verify your integration is receiving and parsing the payload correctly before going live.
+
+After sending a test, a status indicator shows whether the webhook received the request successfully (along with the HTTP response code) or whether it failed.

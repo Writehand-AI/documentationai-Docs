@@ -1,0 +1,56 @@
+---
+title: Analytics explained
+description: What the analytics dashboard shows, what each metric means, and how to use them to improve your product.
+---
+
+The analytics page gives you a complete picture of how your product is performing — from top-level session counts down to individual response quality. It loads instantly with summary metrics and a trend chart, while full response data loads in the background.
+
+<Callout kind="info">📸 **Screenshot needed:** The Analytics page showing the summary metric cards at the top, the area chart in the middle, and the results table below</Callout>
+
+## Tabs
+
+The analytics page has four tabs:
+
+- **Charts** — summary metrics and a trend chart showing sessions over time
+- **All Results** — a full table of every response record, with filtering and sorting
+- **AI Insights** — AI-generated analysis of patterns across your responses (Pro feature)
+- **Talking Points** — AI-generated discussion material derived from your response data
+
+## Summary metrics
+
+The metrics at the top of the Charts tab give you a quick health check on your product.
+
+**All Sessions** — the total number of response records created for this product, including all states: viewed, started, completed, and abandoned. This is the broadest measure of reach.
+
+**Completed** — sessions that reached the end of the experience and were marked as complete. This is your primary success metric.
+
+**In Progress** — sessions that have been started but not yet completed or abandoned. These are active users currently mid-experience.
+
+**Abandoned** — sessions that went inactive for more than 24 hours before completion. High abandonment relative to completions indicates a friction point in the experience.
+
+**Leads** — sessions where lead capture data (email, phone, or similar) was successfully collected. For lead generation products, this is often more meaningful than the raw completion count.
+
+**Completion Rate** — completed sessions divided by started sessions, expressed as a percentage. This is the single most useful metric for identifying whether the product experience is working. A healthy completion rate varies by product type, but anything below 50% warrants investigation.
+
+**Avg Messages** — the average number of user messages sent across started sessions. This tells you how engaged users are during the conversation. Very low average messages may indicate users are dropping off early.
+
+**Avg Score** — the average scoring percentage across responses where scoring is enabled. Only meaningful for products with the decision model's Advanced Manual or AI Scorecard mode active and scored fields configured.
+
+**Documents / Reports / Offers** — counts of completed sessions that generated each outcome type. Useful for understanding which outcomes are being reached and in what proportion.
+
+**Decisions** — a breakdown of how the AI decision model classified completed sessions. Shows the distribution of decision labels (e.g. "High fit", "Moderate fit", "Low fit") across your responses.
+
+## The trend chart
+
+The area chart shows total sessions over time. Use it to spot traffic patterns: peaks from a launch or campaign, drops after a change to the product, or steady growth from organic distribution. Hover over any point for the session count on that date.
+
+## Interpreting completion rate
+
+Completion rate is the most actionable metric in the dashboard. When it is lower than expected:
+
+- Review the collection goals — are there questions that are particularly difficult or sensitive to answer?
+- Check average messages — do users drop off after a certain number of exchanges?
+- Consider switching from Structured to Adaptive collection, which can reduce drop-off by resolving ambiguous questions before moving on
+- Check whether the product is too long — more collection goals means more time, and time is the most common barrier to completion
+
+A product with a 70%+ completion rate is performing well. Below 50%, investigate the experience.

@@ -1,0 +1,55 @@
+---
+title: Variables
+description: Workspace-level custom variables that you can reference in any product using the {{ custom:key }} syntax.
+---
+
+Variables let you define workspace-level key/value pairs that can be referenced anywhere in your products — in the page builder, in prompts, in report templates. Change the value once, and it updates everywhere it is used.
+
+<Callout kind="info">📸 **Screenshot needed:** The Variables settings page showing a list of existing variables with their keys and values, and the Add Variable form at the bottom</Callout>
+
+## What variables are for
+
+Variables solve a specific problem: information that appears in multiple products but changes periodically. Your pricing, your booking link, your phone number, your company address, your current offer name. If these are hardcoded into your products, you have to update each one individually when they change. With variables, you update once and every product that references the variable shows the new value.
+
+Variables are also useful for content that should stay consistent across products — your brand tagline, your standard disclaimer, your risk disclosure — where consistency matters and human error in copy-pasting is a real risk.
+
+## The `{{ custom:key }}` syntax
+
+Reference a variable in any product output by wrapping the key in the double-curly-brace syntax:
+
+```
+{{ custom:your-variable-key }}
+```
+
+For example, if you have a variable with the key `booking_url` and the value `https://calendly.com/yourname/30min`, writing `{{ custom:booking_url }}` anywhere in a page or template will render as the full booking URL.
+
+This syntax works in:
+- The page builder (ContentBox editor)
+- Report and Document prompt fields
+- Any text field in a product that renders output
+
+## Adding a variable
+
+1. Go to **Workspace Settings → Variables**
+2. Click **Add Variable**
+3. Enter a **key** — use lowercase letters, numbers, and underscores. No spaces. The key is what you will type in the `{{ custom:key }}` syntax.
+4. Enter a **value** — the text that will be rendered wherever the variable is referenced
+5. Save
+
+## Editing a variable
+
+Click on any existing variable to edit its value. The key cannot be changed after creation (as it may be referenced in products). If you need a different key, add a new variable with the correct key.
+
+## Deleting a variable
+
+Variables can be deleted from the variables list. Before deleting, check that the key is not actively used in any products — references to a deleted variable's key will render as blank or as the raw syntax string.
+
+## Practical examples
+
+| Key | Value | Example use |
+|---|---|---|
+| `booking_url` | `https://calendly.com/yourname/30min` | CTA links in reports and offers |
+| `offer_price` | `£4,500` | Pricing shown in offer outcomes |
+| `company_phone` | `+44 20 7946 0958` | Contact details in page footers |
+| `current_cohort` | `May 2026` | Programme cohort name in onboarding products |
+| `standard_disclaimer` | `Results may vary...` | Legal text in commercial outputs |

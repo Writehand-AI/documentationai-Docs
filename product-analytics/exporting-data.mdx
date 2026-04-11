@@ -1,0 +1,46 @@
+---
+title: Exporting data
+description: How to export your response data as CSV or JSON for use in CRMs, spreadsheets, and external tools.
+---
+
+The analytics page lets you export your response data in two formats: CSV for spreadsheets and CRMs, and JSON for technical integrations. Export buttons are available in the All Results tab.
+
+<Callout kind="info">📸 **Screenshot needed:** The All Results tab showing the export buttons (Leads CSV, All Responses CSV, JSON) at the top of the results table</Callout>
+
+## Export options
+
+**Leads CSV** — exports only the responses where lead capture data was collected (email, name, phone, company). Each row is one lead. Columns include: ID, created date, name, email, phone, company, and any additional collected fields. This is the most useful export for importing into a CRM or email marketing platform.
+
+**All Responses CSV** — exports the full response dataset, including all sessions regardless of whether lead data was captured. Includes all form answers, session metadata, and outcome flags. Useful for analysis in a spreadsheet or a data tool.
+
+**JSON** — exports the full response dataset as a JSON file with the complete response structure. Useful for technical integrations, custom analysis, or importing into a database.
+
+## What is included in each export
+
+Each response record in the export includes:
+
+- **ID** — the unique response identifier
+- **Created at** — the timestamp when the session was created
+- **Name, Email, Phone, Company** — lead capture fields, where collected
+- **All form answers** — every field collected during the conversation, keyed by field name
+- **Session metadata** — completion status, session lifecycle state
+- **Extracted data** — structured data extracted from the AI conversation
+
+Fields that were not collected in a given session will be blank in that row.
+
+## Using the Leads CSV export
+
+The Leads CSV is formatted for direct import into most CRM and email platforms. When importing:
+
+1. Download the Leads CSV from the All Results tab
+2. Open your CRM or email platform's import tool
+3. Map the columns (name, email, phone, etc.) to your CRM's contact fields
+4. Run the import
+
+If your CRM has custom fields you want to populate from collected data, use the All Responses CSV export which includes all collected fields, or set up a webhook to push data automatically at the moment of completion.
+
+## Automating data export
+
+For real-time data delivery without manual exports, use the **Webhook** integration instead. The outgoing webhook fires every time a response is completed, sending the full data payload to any URL you configure — including Zapier, Make, HubSpot, or Google Sheets via automation.
+
+See the [Webhook settings](/product-settings/webhook) page for setup instructions.

@@ -1,0 +1,50 @@
+---
+title: Deployment
+description: Control who can access your product, where it lives, and how it is shared.
+---
+
+The Deployment tab manages everything about how your product reaches the world: publishing status, the public URL, custom domain configuration, embed code, and domain allowlists. Available on Starter plan and above.
+
+<Callout kind="info">📸 **Screenshot needed:** The Deployment tab showing the Publishing & Visibility toggle switched to Published, the public URL displayed, and the custom domain input field below</Callout>
+
+## Publishing and visibility
+
+Your product can be either **Draft** (private, only accessible to you) or **Published** (live and accessible to anyone with the link).
+
+Toggle the **Published** switch to make your product live. You can toggle it back to Draft at any time to take the product offline without deleting it.
+
+When Published, the public URL becomes active and can be shared.
+
+## Your product's public URL
+
+Every AI Product gets a canonical public URL at:
+
+```
+https://app.productised.ai/c/{product-id}
+```
+
+This URL is shown in the Deployment tab. Use it to share your product directly, embed it, or set up tracking in analytics platforms.
+
+## Custom domain
+
+If you want your product to live at your own domain (e.g. `tool.yourcompany.com`), you can configure a custom domain here.
+
+1. Enter your domain in the **Custom Domain** field
+2. Follow the DNS instructions provided to point your domain to Productised's servers (CNAME record)
+3. Productised handles SSL certificate issuance automatically
+
+Custom domain is available on Starter plan and above. DNS propagation can take up to 24 hours.
+
+## Allowed domains
+
+If your product is embedded in a website, you can restrict which domains are allowed to load it. Enter the domains that should be permitted to host the embed (comma-separated). This prevents your product from being embedded on domains you have not authorised.
+
+## Embed code
+
+Once your product is published, the Deployment tab provides embed code you can paste into any website. The embed loads your product in an iframe at your published URL.
+
+Copy the embed code and paste it into the HTML of your website, landing page, or any platform that allows custom HTML.
+
+## Lock submissions
+
+If you want to prevent new submissions while keeping the product publicly accessible (for example, while you update content), use the **Lock Submissions** toggle. When locked, the product is visible but users cannot complete or submit it.

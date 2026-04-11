@@ -1,0 +1,32 @@
+---
+title: API
+description: Generate and manage API keys for programmatic access to your workspace.
+---
+
+The API settings page is where you create and manage API keys for your Productised workspace. Use API keys to authenticate requests from your own applications, scripts, or integrations.
+
+<Callout kind="info">📸 **Screenshot needed:** The API settings page showing a generated API key (partially masked) with a copy button and a regenerate option</Callout>
+
+## Generating an API key
+
+Your API key is generated on the Secrets settings page (also accessible from the API section). Once generated, the key is shown once — copy it immediately and store it securely. If you lose the key, you will need to regenerate it.
+
+The key is associated with your user account, not the workspace as a whole. It provides access to workspace resources that your account has permission to access.
+
+## Using your API key
+
+Include your API key in the Authorization header of API requests:
+
+```
+Authorization: Bearer YOUR_API_KEY
+```
+
+Requests without a valid API key will be rejected with a 401 Unauthorized response.
+
+## Regenerating your key
+
+If your key is compromised or you need to rotate it, regenerate it from the Secrets page. The old key is immediately invalidated when a new one is generated. Any integrations using the old key will stop working until updated.
+
+## API documentation
+
+Full API reference documentation is available in the [API Reference](/api-reference) section. This covers available endpoints, request formats, and response schemas.
