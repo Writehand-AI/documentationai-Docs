@@ -255,14 +255,40 @@
                 "icon": "pie-chart"
               },
               {
-                "title": "Exporting data",
-                "path": "product-analytics/exporting-data",
-                "icon": "download"
-              },
-              {
                 "title": "Viewing results",
                 "path": "product-analytics/viewing-results",
                 "icon": "eye"
+              },
+              {
+                "title": "AI Insights",
+                "path": "product-analytics/ai-insights",
+                "icon": "cpu"
+              },
+              {
+                "title": "Talking Points",
+                "path": "product-analytics/talking-points",
+                "icon": "mic"
+              },
+              {
+                "title": "Exporting data",
+                "path": "product-analytics/exporting-data",
+                "icon": "download"
+              }
+            ]
+          },
+          {
+            "group": "Products",
+            "icon": "grid",
+            "pages": [
+              {
+                "title": "Products gallery",
+                "path": "products/products-gallery",
+                "icon": "layers"
+              },
+              {
+                "title": "Marketplace",
+                "path": "products/marketplace",
+                "icon": "share-2"
               }
             ]
           },
