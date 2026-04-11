@@ -19,6 +19,37 @@
         "icon": "book",
         "groups": [
           {
+            "group": "Use Cases",
+            "icon": "compass",
+            "pages": [
+              {
+                "title": "Overview",
+                "path": "use-cases/overview",
+                "icon": "map"
+              },
+              {
+                "title": "Lead generation",
+                "path": "use-cases/lead-generation",
+                "icon": "user-plus"
+              },
+              {
+                "title": "Client onboarding",
+                "path": "use-cases/client-onboarding",
+                "icon": "clipboard"
+              },
+              {
+                "title": "Offer and proposal delivery",
+                "path": "use-cases/offer-and-proposal",
+                "icon": "tag"
+              },
+              {
+                "title": "Training and learning",
+                "path": "use-cases/training-and-learning",
+                "icon": "book-open"
+              }
+            ]
+          },
+          {
             "group": "Getting Started",
             "icon": "rocket",
             "pages": [
