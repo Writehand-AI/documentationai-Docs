@@ -19,6 +19,27 @@
         "icon": "book",
         "groups": [
           {
+            "group": "Getting Started",
+            "icon": "rocket",
+            "pages": [
+              {
+                "title": "What is Productised?",
+                "path": "introduction",
+                "icon": "home"
+              },
+              {
+                "title": "How it works",
+                "path": "how-it-works",
+                "icon": "layers"
+              },
+              {
+                "title": "Create your first product",
+                "path": "getting-started/create-with-ai",
+                "icon": "zap"
+              }
+            ]
+          },
+          {
             "group": "Use Cases",
             "icon": "compass",
             "pages": [
@@ -46,32 +67,37 @@
                 "title": "Training and learning",
                 "path": "use-cases/training-and-learning",
                 "icon": "book-open"
+              },
+              {
+                "group": "Personalisation",
+                "icon": "sliders",
+                "pages": [
+                  {
+                    "title": "Conditional vs AI personalisation",
+                    "path": "personalisation/conditional-vs-ai",
+                    "icon": "git-branch"
+                  },
+                  {
+                    "title": "Decision model",
+                    "path": "personalisation/decision-model",
+                    "icon": "cpu"
+                  },
+                  {
+                    "title": "Adaptive collection",
+                    "path": "personalisation/adaptive-collection",
+                    "icon": "activity"
+                  },
+                  {
+                    "title": "Why this is the future",
+                    "path": "personalisation/why-this-is-the-future",
+                    "icon": "trending-up"
+                  }
+                ]
               }
             ]
           },
           {
-            "group": "Getting Started",
-            "icon": "rocket",
-            "pages": [
-              {
-                "title": "What is Productised?",
-                "path": "introduction",
-                "icon": "home"
-              },
-              {
-                "title": "How it works",
-                "path": "how-it-works",
-                "icon": "layers"
-              },
-              {
-                "title": "Create your first product",
-                "path": "getting-started/create-with-ai",
-                "icon": "zap"
-              }
-            ]
-          },
-          {
-            "group": "The Canvas",
+            "group": "The Product Canvas",
             "icon": "grid",
             "pages": [
               {
@@ -159,28 +185,23 @@
             ]
           },
           {
-            "group": "Personalisation",
-            "icon": "sliders",
+            "group": "Product Analytics",
+            "icon": "bar-chart",
             "pages": [
               {
-                "title": "Conditional vs AI personalisation",
-                "path": "personalisation/conditional-vs-ai",
-                "icon": "git-branch"
+                "title": "Analytics explained",
+                "path": "product-analytics/analytics-explained",
+                "icon": "pie-chart"
               },
               {
-                "title": "Decision model",
-                "path": "personalisation/decision-model",
-                "icon": "cpu"
+                "title": "Exporting data",
+                "path": "product-analytics/exporting-data",
+                "icon": "download"
               },
               {
-                "title": "Adaptive collection",
-                "path": "personalisation/adaptive-collection",
-                "icon": "activity"
-              },
-              {
-                "title": "Why this is the future",
-                "path": "personalisation/why-this-is-the-future",
-                "icon": "trending-up"
+                "title": "Viewing results",
+                "path": "product-analytics/viewing-results",
+                "icon": "eye"
               }
             ]
           },
@@ -242,27 +263,6 @@
                 "title": "Tracking",
                 "path": "product-settings/tracking",
                 "icon": "bar-chart"
-              }
-            ]
-          },
-          {
-            "group": "Product Analytics",
-            "icon": "bar-chart",
-            "pages": [
-              {
-                "title": "Analytics explained",
-                "path": "product-analytics/analytics-explained",
-                "icon": "pie-chart"
-              },
-              {
-                "title": "Exporting data",
-                "path": "product-analytics/exporting-data",
-                "icon": "download"
-              },
-              {
-                "title": "Viewing results",
-                "path": "product-analytics/viewing-results",
-                "icon": "eye"
               }
             ]
           },
