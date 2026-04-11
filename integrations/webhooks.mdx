@@ -1,0 +1,65 @@
+---
+title: Webhooks
+description: Send real-time data from your AI product to any external system the moment a response is completed.
+---
+
+<Callout kind="info">📸 **Screenshot needed:** The Webhook settings tab in a product, showing the outgoing webhook URL field and test button</Callout>
+
+Webhooks let you push response data from your AI product to any external system — your CRM, your email platform, your own server, or any tool that accepts HTTP requests. Every time someone completes your product, the data is sent automatically, in real time.
+
+## How it works
+
+When a response is completed, Productised sends a `POST` request to the URL you configure. The payload contains everything from that session — the person's answers, the AI's decision result, any generated outcomes, and metadata about the product.
+
+You don't need to poll for new responses. The data arrives the moment the conversation ends.
+
+## Setting up a webhook
+
+<Steps>
+  <Step title="Open Product Settings">
+    From your product canvas, click **Settings** in the top bar, then select **Webhook** from the left menu.
+  </Step>
+  <Step title="Enter your endpoint URL">
+    Paste the URL of the server or service you want to receive the data. This could be a Zapier webhook, a Make (Integromat) trigger URL, or your own endpoint.
+  </Step>
+  <Step title="Test the connection">
+    Use the **Test Webhook** button to send a sample payload and confirm your endpoint is receiving data correctly.
+  </Step>
+  <Step title="Save and publish">
+    Save your settings. From this point, every completed response will trigger the webhook automatically.
+  </Step>
+</Steps>
+
+## Payload structure
+
+The webhook payload is a JSON object containing:
+
+```json
+{
+  "productId": "string",
+  "responseId": "string",
+  "completedAt": "ISO 8601 timestamp",
+  "userData": {
+    "fieldName": "collected value"
+  },
+  "result": {
+    "nodeVar": "AI output content"
+  },
+  "decisionResult": {
+    "status": "string",
+    "label": "high_fit | low_fit | strategy_gap",
+    "summary": "string",
+    "confidence": 0.0
+  }
+}
+```
+
+<Callout kind="tip">If you're connecting to a CRM or email platform, Zapier is often the easiest path — it handles the field mapping visually without any code. See the Zapier integration guide for step-by-step instructions.</Callout>
+
+## Use cases
+
+- Push every completed lead into your CRM automatically
+- Trigger a personalised email sequence based on the decision result
+- Notify your team on Slack when a high-fit lead comes through
+- Log responses to a Google Sheet for reporting
+- Trigger a booking confirmation flow when someone receives an Offer outcome

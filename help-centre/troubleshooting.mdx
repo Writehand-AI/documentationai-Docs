@@ -1,0 +1,45 @@
+---
+title: Troubleshooting
+description: Common issues and how to resolve them.
+---
+
+## Product not loading or showing a blank screen
+
+- Check that your product is set to **Published** in Product Settings → Deployment. Draft products are not accessible via the public URL.
+- If you're testing via the embed code, make sure the domain you're testing on is listed in the Allowed Domains field in Deployment settings, or that the field is left empty (which allows all domains).
+
+## AI conversation feels off or generic
+
+- Review your system prompt in the AI Product node's Content tab. The more specific you are about the AI's role, your audience, and the tone, the better the conversation will be.
+- Check that your collection goals are clearly defined — vague field labels produce vague questions.
+- Consider switching to **Adaptive** collection style if answers are frequently incomplete.
+
+## Outcome not generating after the conversation ends
+
+- Check the **Behaviour** tab of your AI Product node — confirm that the After Collection setting matches the Outcome node you've connected (e.g. "Generate report" requires a Report node to be connected).
+- Confirm the Outcome node is properly connected to the AI Product node on the canvas (a line should run between them).
+- Check your credit balance — if your workspace has run out of credits, outcome generation will not complete.
+
+## Webhook not receiving data
+
+- Use the **Test Webhook** button in Product Settings → Webhook to confirm your endpoint is reachable.
+- Check that the outgoing webhook URL is saved correctly — it should start with `https://`.
+- If using Zapier, make sure the Zap is turned on and the trigger URL is the most recent one from your Zap.
+
+## Knowledge Power not influencing the output
+
+- Make sure at least one file has been successfully uploaded to the Knowledge Power — the file list should show a green status.
+- Check the Query tab in the Knowledge Power settings — the search query should reference variables from your product (e.g. `{{form:industry}}`) so it retrieves relevant content for each person.
+
+## Research Power returning no results
+
+- Check the objective or search queries in the Research Power's Content tab — the more specific they are, the better the results.
+- If using Extract mode, verify the URLs you've specified are publicly accessible (not behind a login).
+
+## Pages showing 404 in the docs
+
+If you're seeing a 404 on any page in these docs, the page may not have been published yet. Try refreshing — if the issue persists, contact support.
+
+---
+
+<Callout kind="tip">If you're stuck on something not covered here, use the **Chat with us** button at the bottom of any page to reach the team directly.</Callout>

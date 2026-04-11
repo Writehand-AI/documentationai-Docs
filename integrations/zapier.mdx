@@ -1,0 +1,47 @@
+---
+title: Zapier
+description: Connect your AI product to 6,000+ apps — without writing a line of code.
+---
+
+<Callout kind="info">📸 **Screenshot needed:** A Zapier zap showing Productised as the trigger app, with a CRM or email tool as the action</Callout>
+
+Zapier connects Productised to thousands of apps — CRMs, email platforms, project tools, spreadsheets, Slack, and more. When someone completes your AI product, Zapier catches the data and routes it wherever your business needs it.
+
+## Setting up your Zap
+
+<Steps>
+  <Step title="Get your Zapier webhook URL">
+    In Zapier, create a new Zap and choose **Webhooks by Zapier** as the trigger. Select **Catch Hook** and copy the webhook URL provided.
+  </Step>
+  <Step title="Add the URL to your product">
+    In Productised, go to your product's **Settings → Webhook** and paste the Zapier URL into the outgoing webhook field. Save.
+  </Step>
+  <Step title="Complete a test response">
+    Go through your product as a test user and complete the conversation. Zapier will capture the payload so you can map the fields.
+  </Step>
+  <Step title="Map your fields">
+    Back in Zapier, you'll see all the data fields from your product's response. Map them to the action app of your choice — your CRM contact fields, email list tags, spreadsheet columns, or anything else.
+  </Step>
+  <Step title="Turn on your Zap">
+    Test the full flow, then activate your Zap. From now on, every completed response flows automatically.
+  </Step>
+</Steps>
+
+## Common Zap ideas for coaches and consultants
+
+<Columns cols="2">
+  <Card title="Lead to CRM" icon="user-plus">
+    When a response is completed, create or update a contact in HubSpot, Salesforce, or your CRM of choice — tagged with their decision result.
+  </Card>
+  <Card title="High-fit alert" icon="bell">
+    Send yourself a Slack message or email when someone scores as high-fit — so you can follow up while they're warm.
+  </Card>
+  <Card title="Email sequence trigger" icon="mail">
+    Add the lead to a nurture sequence in your email platform, tagged by outcome — different sequences for different fit levels.
+  </Card>
+  <Card title="Response to spreadsheet" icon="grid">
+    Log every response to a Google Sheet for reporting, filtering, or sharing with your team.
+  </Card>
+</Columns>
+
+<Callout kind="tip">Use the **decision result label** (high_fit, low_fit, strategy_gap) as a filter in Zapier to route different people to different actions — high-fit leads to your calendar invite flow, everyone else to your email nurture sequence.</Callout>
