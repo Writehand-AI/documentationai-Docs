@@ -1,0 +1,56 @@
+---
+title: Connections
+description: Bridge your AI Product to the rest of your business — your CRM, your email, your spreadsheets, and your team notifications.
+---
+
+## What it does
+
+The Connections Power fires automatically when a workflow completes. It sends data from the conversation and outcome to an external service using your workspace's connected account — so the intelligence your AI product generates flows directly into the tools your business already runs on.
+
+You do not need to export data manually. You do not need to check a dashboard and copy things across. When a product run completes, Connections handles the routing — to your CRM, your spreadsheet, your Slack channel, or wherever the lead or client record needs to land.
+
+<Callout kind="info">📸 **Screenshot needed:** The canvas showing a Connections node at the end of a workflow, with the sidebar open</Callout>
+
+## The bridge between your AI product and your business systems
+
+Every lead your product generates, every response it collects, every outcome it delivers — Connections makes sure that intelligence flows into the tools your business already runs on. Not as a CSV export at the end of the month. In real time, the moment a product run completes.
+
+This is the difference between a product that creates data and one that puts that data to work.
+
+## Sidebar settings
+
+When you click the Connections node on the canvas, the sidebar opens with four sections.
+
+**Integration** — a grid of available integration providers. Select the one you want to connect to. Currently available: Gmail, Google Sheets, HubSpot, Slack, and Airtable. Each provider is shown with its logo for easy identification.
+
+**Action** — once you select a provider, the available actions appear. Each action has a label and a short description. Select the action you want to trigger when the workflow completes (for example: add a row to a sheet, create a contact in HubSpot, send a Slack message).
+
+**Connection** — shows the current connection status for the selected provider. If not yet connected:
+- For OAuth providers (Gmail, Google Sheets, HubSpot, Slack, Airtable), a Connect button opens an authentication popup. Once you authorise access, the status updates to Connected.
+- For API key providers, a field appears to paste your API key. Save it to connect.
+
+Once connected, a re-connect or switch account option appears if you need to update the authorisation.
+
+**Field Mappings** — this is where you map your product's collected data to the fields the integration expects. Use `{{form:fieldName}}` syntax to reference form inputs and `{{node:varName}}` syntax to reference AI outputs. For example: `{{form:email}}` in an email address field, or `{{node:ai_chat}}` in a notes or summary field.
+
+Multi-line fields (like email body or notes) support a textarea for more complex templates.
+
+**Status** — a toggle to enable or disable the Connections node without removing it from the canvas. When disabled, the integration no longer fires on workflow completion. When enabled, it fires automatically every time.
+
+<Callout kind="info">📸 **Screenshot needed:** The Connections sidebar showing an integration selected, a connected status badge, and field mappings filled in</Callout>
+
+## When to use Connections
+
+- When you want leads captured automatically in your CRM the moment they complete your product
+- When you want to log every response to a Google Sheet for review or analysis
+- When you want to notify your team via Slack when a high-fit lead comes through
+- When you want to trigger a follow-up email via Gmail based on what the product collected
+- When you want to create or update records in Airtable from your product's outputs
+
+## An idea to get you started
+
+A high-fit lead completes your diagnostic. Connections routes their details and the AI's summary to your CRM, creates a contact record tagged as high-priority, and sends you a Slack notification with the key findings — before you have even looked at your dashboard. You follow up within the hour. That is what a connected product looks like.
+
+<Callout kind="info">
+Connections uses your workspace's connected accounts. Each integration is authorised once per workspace and is available to all products in that workspace. You only need to connect Gmail (for example) once — all products that use a Gmail Connections node share the same authorised account.
+</Callout>
