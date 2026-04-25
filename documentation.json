@@ -270,11 +270,6 @@
                 "icon": "trending-up"
               },
               {
-                "title": "AI",
-                "path": "product-settings/ai",
-                "icon": "cpu"
-              },
-              {
                 "title": "Tracking",
                 "path": "product-settings/tracking",
                 "icon": "bar-chart"
