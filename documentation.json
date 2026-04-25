@@ -33,9 +33,45 @@
                 "icon": "layers"
               },
               {
+                "title": "Platform features",
+                "path": "features",
+                "icon": "grid"
+              },
+              {
                 "title": "Create your first product",
                 "path": "getting-started/create-with-ai",
                 "icon": "zap"
+              }
+            ]
+          },
+          {
+            "group": "Brain",
+            "icon": "sparkles",
+            "pages": [
+              {
+                "title": "What is Brain?",
+                "path": "brain/what-is-brain",
+                "icon": "cpu"
+              },
+              {
+                "title": "Having a conversation",
+                "path": "brain/having-a-conversation",
+                "icon": "message-square"
+              },
+              {
+                "title": "Memory",
+                "path": "brain/memory",
+                "icon": "database"
+              },
+              {
+                "title": "Product ideas",
+                "path": "brain/ideas",
+                "icon": "lightbulb"
+              },
+              {
+                "title": "Brain Knowledge Bases",
+                "path": "brain/knowledge-bases",
+                "icon": "book-open"
               }
             ]
           },
@@ -59,7 +95,7 @@
                 "icon": "clipboard"
               },
               {
-                "title": "Offer and proposal delivery",
+                "title": "Proposal delivery",
                 "path": "use-cases/offer-and-proposal",
                 "icon": "tag"
               },
@@ -93,6 +129,16 @@
                 "title": "Connecting Powers and Outcomes",
                 "path": "canvas/connecting-powers-and-outcomes",
                 "icon": "git-merge"
+              },
+              {
+                "title": "Scoring Node",
+                "path": "canvas/scoring-node",
+                "icon": "bar-chart-2"
+              },
+              {
+                "title": "Prompt chaining",
+                "path": "canvas/prompt-chaining",
+                "icon": "link"
               }
             ]
           },
@@ -114,11 +160,6 @@
                 "title": "Knowledge",
                 "path": "powers/knowledge",
                 "icon": "book-open"
-              },
-              {
-                "title": "Visual Insights",
-                "path": "powers/visual-insights",
-                "icon": "bar-chart-2"
               },
               {
                 "title": "Connections",
@@ -145,11 +186,6 @@
                 "title": "Document",
                 "path": "outcomes/document",
                 "icon": "file"
-              },
-              {
-                "title": "Offer",
-                "path": "outcomes/offer",
-                "icon": "tag"
               },
               {
                 "title": "Redirect",
@@ -322,7 +358,7 @@
                 "icon": "settings"
               },
               {
-                "title": "Offer profile",
+                "title": "Brand Voice",
                 "path": "workspace/offer-profile",
                 "icon": "briefcase"
               },

@@ -1,173 +1,136 @@
 ---
-title: Core Features
-description: Learn about the essential tools and capabilities in Productised for designing engaging, AI-enhanced assessments tailored to your brand.
+title: Platform Features
+description: A complete overview of what Productised can do — from the canvas to Brain to deployment.
 ---
 
-## Overview
+Productised is an AI product builder for coaches, consultants, and experts. You build on a visual canvas, chain AI nodes together, and ship products your audience can use — diagnostics, strategy sessions, proposals, and more. Here's everything the platform can do.
 
-Productised provides no-code tools to build AI-powered assessments that generate personalized reports and outcome pages for leads. You structure question flows, configure AI prompts for dynamic responses, customize branding, and track engagement metrics—all from an intuitive dashboard.
-
-<Columns cols={3}>
-  <Card title="Question Flows" icon="edit-3" href="#question-flows">
-    Build branching logic without code.
+<Columns cols="2">
+  <Card title="The Canvas" icon="layout" href="#the-canvas">
+    Drag-and-drop workspace where every product is built.
   </Card>
-  <Card title="AI Reasoning" icon="zap" href="#ai-reasoning">
-    Generate context-aware outcomes.
+  <Card title="AI Products" icon="cpu" href="#ai-products">
+    The conversational AI at the heart of every product.
   </Card>
-  <Card title="Branding" icon="palette" href="#branding">
-    Match your visual identity.
+  <Card title="Powers" icon="zap" href="#powers">
+    Extend your AI with knowledge, research, and integrations.
   </Card>
-  <Card title="Analytics" icon="bar-chart-3" href="#analytics">
-    Monitor leads and completions.
+  <Card title="Outcomes" icon="file-text" href="#outcomes">
+    What your audience actually receives at the end.
   </Card>
-</Columns>
-
-## Structuring Questions and Flows
-
-Create assessments with drag-and-drop question blocks. Add single-choice, multi-select, or open-ended questions that branch based on responses.
-
-<Steps>
-  <Step title="Add Questions" icon="plus">
-    Drag questions from the sidebar to build your flow.
-
-````json
-{
-  "questions": [
-    {
-      "id": "q1",
-      "type": "multiple_choice",
-      "text": "What is your biggest challenge?"
-    }
-  ]
-}
-````
-  </Step>
-  <Step title="Set Branching" icon="git-branch">
-    Define conditions like `if response == "A" then next: "q2"`.
-
-    <Callout kind="tip">
-      Use simple conditions for 90% of flows—no scripting required.
-    </Callout>
-  </Step>
-  <Step title="Preview Flow" icon="eye">
-    Test the entire assessment in real-time.
-  </Step>
-</Steps>
-
-```mermaid
-graph TD
-    A[Start] --> B[Q1: Challenge?]
-    B -->|A| C[Q2: Marketing]
-    B -->|B| D[Q2: Sales]
-    C --> E[AI Outcome]
-    D --> E
-```
-
-## Configuring AI Reasoning
-
-Tailor AI prompts to produce personalized reports. You define the reasoning chain, and Productised generates dynamic content like recommendations or scores.
-
-<Tabs>
-  <Tab title="Basic Prompt" icon="edit">
-    Set a core instruction for all outcomes.
-
-````javascript
-const prompt = `
-Analyze responses and generate a personalized report.
-Key factors: ${userResponses}
-Output: Score + 3 recommendations.
-`;
-````
-  </Tab>
-  <Tab title="Advanced Chain" icon="link">
-    Chain multiple AI steps for deeper insights.
-
-````json
-{
-  "reasoning": [
-    "Summarize responses",
-    "Calculate maturity score",
-    "Generate branded report"
-  ]
-}
-````
-  </Tab>
-</Tabs>
-
-<CodeGroup tabs="Dashboard,API">
-```javascript
-// Dashboard: Edit prompt directly
-await productised.assessment.update({
-  id: "assess-123",
-  aiPrompt: "Generate lead-specific advice..."
-});
-```
-
-```python
-# API: Configure via endpoint
-import requests
-requests.post("https://api.example.com/v1/assessments/123/ai", 
-              json={"prompt": "Your custom prompt here"})
-```
-</CodeGroup>
-
-## Customizing Branding and Visuals
-
-Match your brand with custom themes, logos, and colors. Upload assets and apply them across outcome pages and reports.
-
-<Expandable title="Theme Configuration" default-open="true">
-  Set primary color, fonts, and layouts.
-
-| Element     | Customization Options          |
-|-------------|--------------------------------|
-| Header      | Logo, title, background color  |
-| Outcome     | Cards, buttons, typography     |
-| Report PDF  | Watermark, footer, styling     |
-
-  Apply changes live—no redeploys needed.
-</Expandable>
-
-<Callout kind="success">
-  Branded outcomes boost perceived value and conversion rates by 40%.
-</Callout>
-
-## Tracking Completion Rates and Lead Data
-
-Monitor how users engage with your assessments. Access leads, drop-off points, and AI-generated insights via dashboard or webhooks.
-
-<ParamField path="assessment_id" param-type="string" required="true">
-  Unique ID for the assessment.
-</ParamField>
-
-<ResponseField name="leads" field-type="array" required="true">
-  Array of completed responses with emails and scores.
-</ResponseField>
-
-<ResponseField name="completion_rate" field-type="number">
-  Percentage of starts that finish (e.g., 0.75).
-</ResponseField>
-
-Set up webhooks for real-time notifications:
-
-````javascript
-// Webhook payload example
-{
-  "event": "assessment_completed",
-  "data": {
-    "email": "lead@example.com",
-    "score": 85,
-    "report": "Personalized content here"
-  }
-}
-````
-
-## Next Steps
-
-<Columns cols={2}>
-  <Card title="Build Your First Assessment" icon="rocket" href="/quickstart">
-    Follow the quickstart guide.
+  <Card title="Prompt Chaining" icon="link" href="#prompt-chaining">
+    Chain multiple AI nodes for multi-step products.
   </Card>
-  <Card title="API Reference" icon="code" href="/authentication">
-    Integrate with your stack.
+  <Card title="Brain" icon="brain" href="#brain">
+    Your strategic AI assistant for deciding what to build.
+  </Card>
+  <Card title="Funnel View" icon="filter" href="#funnel-view">
+    Organise products by ToFU, MoFU, and BoFU.
+  </Card>
+  <Card title="Analytics" icon="bar-chart-2" href="#analytics">
+    Responses, insights, talking points, and exports.
   </Card>
 </Columns>
+
+## The Canvas
+
+The canvas is your building workspace. Every product you create lives here as a visual graph — drag nodes onto the canvas, connect them with edges, and wire up your logic without writing a line of code. Changes save automatically as you work.
+
+Node types fall into three categories: **AI Product** (the conversational core), **Powers** (capabilities you attach to an AI Product), and **Outcomes** (the deliverables your audience receives). You can have multiple nodes of each type on a single canvas and chain them together.
+
+[Build on the canvas &rarr;](/canvas)
+
+## AI Products
+
+The AI Product node is the conversational engine inside every product. It collects inputs from your audience through a structured flow — text fields, choice questions, scales, yes/no prompts, image selections, and more — then processes those inputs through your configured AI model to produce a personalised result.
+
+Each AI Product has a **collection goal** (what you're trying to learn), a **decision model** (how the AI evaluates responses — AI Judgement or AI Scorecard), and optional scoring to segment your audience into persona profiles. This is where you set up your prompts, configure your Brand Voice guardrails, and define what gets passed downstream.
+
+[Configure AI Products &rarr;](/canvas#ai-product-node)
+
+## Powers
+
+Powers extend what your AI Product can do. Attach them to an AI Product node on the canvas to give it new capabilities:
+
+- **Knowledge** — upload your own documents (PDFs, text files, spreadsheets) or index URLs. The AI draws on your content when generating responses, so outputs reflect your methodology, not just the model's defaults.
+- **Research** — give your AI Product live web search. Useful for products that need up-to-date market data, news, or competitor context.
+- **Connections** — send collected data to your other tools after a product is completed. Supports Gmail, Google Sheets, HubSpot, Slack, Airtable, and Zapier.
+
+[Set up Powers &rarr;](/powers)
+
+## Outcomes
+
+Outcomes are what your audience receives after completing a product. Connect an Outcome node to your AI Product on the canvas to define the deliverable:
+
+- **Report** — a visual, page-built diagnostic. Sections pull in AI-generated content and collected data via variables. Best for lead magnets and diagnostics.
+- **Document** — a written deliverable: strategy brief, action plan, proposal. Structured, text-forward, and fully personalised.
+- **Slides / Advisor** — a presentation-format output, or an open-ended advisor mode where the AI shifts into a Q&A conversation after the collection phase ends.
+
+Every outcome is unique to the person who completed the product — no two outputs are the same.
+
+[Design Outcomes &rarr;](/outcomes)
+
+## Prompt Chaining
+
+You're not limited to a single AI node. Add multiple AI Product nodes to the canvas and connect them in sequence — the output of one becomes the input of the next. Reference outputs using `{{ node:varName }}` syntax anywhere downstream.
+
+This lets you build sophisticated multi-step products: collect information in the first node, run a scoring pass in the second, generate a detailed report in the third. Each step can have its own prompt, model, and configuration.
+
+[Chain nodes together &rarr;](/canvas#prompt-chaining)
+
+## Brain
+
+Brain is your workspace-level strategic AI assistant. Unlike AI Products — which are built for your audience — Brain is built for you. It helps you decide what to build, how to position it, and where it fits in your funnel.
+
+Brain has four tabs:
+
+- **Chat** — have a strategy conversation. Ask it to help you design a product, stress-test an idea, or draft a prompt.
+- **Memory** — Brain automatically saves context from every conversation. You never have to re-explain your business or methodology.
+- **Sources** — Brain has its own knowledge base (separate from the Knowledge Power). Upload files or paste URLs and Brain draws on them in every conversation.
+- **Ideas** — BUILD_THIS cards surface build-ready concepts you've discussed. Open any card directly on the canvas to start building immediately.
+
+[Use Brain &rarr;](/brain)
+
+## Funnel View
+
+Your products gallery includes a funnel view so you can see your product suite the way your audience moves through it — top of funnel to bottom:
+
+- **ToFU** — lead magnets and diagnostics that attract and convert cold audiences
+- **MoFU** — deeper strategy sessions and assessments for warmer leads
+- **BoFU** — proposals, ROI calculators, and decision tools for buyers ready to commit
+
+Filter by funnel tier, switch between compact and visual view modes, and use colour labels to organise your product library at a glance.
+
+[Manage your gallery &rarr;](/products)
+
+## Product Personalisation
+
+Every product produces a unique output for the person who went through it. Personalisation is driven by three mechanisms:
+
+- **AI judgement** — the model reads all collected inputs holistically and generates a response tailored to that specific person.
+- **Scoring** — the Scoring Node evaluates responses and assigns a numeric score. You define the thresholds.
+- **Personas** — map score ranges to named persona profiles, each with its own content, call-to-action, and (optionally) a redirect. A high-scoring respondent sees different content and a different CTA than a low-scoring one.
+
+[Set up scoring and personas &rarr;](/canvas#scoring-node)
+
+## Analytics
+
+Every response is stored and accessible in your product's analytics view. From there you can:
+
+- Browse individual responses with all collected inputs and AI-generated outputs
+- View AI-generated insights that summarise trends across all responses
+- Get talking points — ready-to-use conversation starters for sales follow-up
+- Export response data to CSV
+
+[View analytics &rarr;](/analytics)
+
+## Deployment
+
+When your product is ready, deploy it in seconds. Options include:
+
+- **Share link** — a hosted URL you can send directly or embed in a button
+- **Website embed** — drop a snippet into any website or landing page
+- **Custom domain** — map your own domain to the product
+- **Product settings** — control visibility, collect email, set redirect behaviour after completion
+
+[Deploy your product &rarr;](/deployment)

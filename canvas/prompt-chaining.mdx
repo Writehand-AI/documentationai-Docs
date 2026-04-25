@@ -1,0 +1,106 @@
+---
+title: "Prompt Chaining"
+description: "Build products where multiple AI steps run in sequence — each one focused, each one building on the last."
+---
+
+A single AI node doing everything at once — collecting information, evaluating the person, and writing a personalised report — has an inherent ceiling. It's trying to be a researcher, a judge, and a writer simultaneously. The outputs are fine. They're rarely excellent.
+
+Prompt chaining solves this by breaking the work into stages. Each node has one job. It does that job well, passes its output to the next node, and the chain produces something meaningfully better than any single step could have alone.
+
+---
+
+## What prompt chaining is
+
+Prompt chaining is connecting multiple AI nodes on the canvas in sequence, where each node's output becomes available as input to the next.
+
+The simplest chain is two steps: collect, then generate. A more sophisticated chain might be three steps: collect → evaluate → write. Each step runs in order, automatically, after the person completes the conversation.
+
+The key distinction: this is not about a single AI Product node trying to do more things. It's about separate nodes, each with their own purpose and prompt, running in sequence and passing their work forward.
+
+---
+
+## Why it produces better results
+
+When you ask one AI node to collect information, evaluate fit, and write a personalised 1,500-word report — all in a single pass — the constraints compound. The prompt gets complex. The AI is balancing multiple competing objectives. The output tends toward competent generality.
+
+When you chain three nodes with a clear single objective each:
+
+- The **AI Product** node is entirely focused on having a great conversation — asking the right questions, adapting to responses, gathering everything it needs
+- The **Scoring Node** is entirely focused on evaluation — reading what was collected and making a precise judgement about this person's profile
+- The **Report node** is entirely focused on writing — it receives both the raw data and the scoring result, and writes for a specific profile rather than an average of all possible people
+
+Each step is excellent at its specific job. The final output reflects that.
+
+---
+
+## Example chains
+
+### Lead diagnostic
+
+The most common chain on Productised. Used by consultants, coaches, and service businesses to qualify and convert leads.
+
+**AI Product** (collect context and situation) → **Scoring Node** (assign a profile: Strong Fit, Needs More Foundation, Not the Right Fit) → **Report** (a personalised diagnostic report written to that profile, with a profile-matched CTA)
+
+The person who's a strong fit receives a report that mirrors their ambition and moves them toward a sales conversation. The person who isn't ready yet receives something that meets them where they are — building trust rather than pushing prematurely.
+
+### Strategy tool
+
+Used when the output is a detailed, written deliverable — an action plan, a strategy brief, a prioritised recommendation set.
+
+**AI Product** (collect context, goals, constraints, current situation) → **AI Node** (generate structured recommendations based on what was shared) → **Document** (formatted, client-ready output built from the recommendations)
+
+The intermediate AI Node step means the Document doesn't have to "think" — it receives structured recommendations and formats them well. Each step does one thing.
+
+---
+
+## How to build a chain on the canvas
+
+<Steps>
+  <Step title="Add your nodes">
+    Drag each node you need from the toolbar onto the canvas. For a three-step chain, you'll have your AI Product node (already there), plus two additional nodes — for example, a Scoring Node and a Report Outcome.
+  </Step>
+  <Step title="Connect them in sequence">
+    Draw connections in order: AI Product → Scoring Node → Report. Each node passes its output downstream. The flow direction is left to right or top to bottom — whichever makes the canvas easier to read.
+  </Step>
+  <Step title="Configure each node's prompt">
+    Click each node and configure its settings. The power of chaining comes from how you write the prompts at each stage.
+
+    For downstream nodes, reference the previous node's output using the `{{ node:varName }}` variable syntax. For example, in your Report node's prompt, you might reference `{{ node:scoringResult }}` to have the AI write in response to the scoring judgement, or `{{ node:recommendations }}` to format an intermediate step's output.
+  </Step>
+  <Step title="Preview the full chain">
+    Use the Preview button to run through the product as a user. After completing the conversation, you'll see the full chain execute and receive the final output — so you can evaluate the end result before publishing.
+  </Step>
+</Steps>
+
+---
+
+## Passing outputs between nodes with `{{ node:varName }}`
+
+The canvas uses a variable syntax to pass data between nodes. Any node output can be referenced in a downstream node's prompt or settings using:
+
+```
+{{ node:varName }}
+```
+
+Where `varName` is the output variable name you've set on the upstream node. For example, if your Scoring Node has an output called `persona`, your Report prompt can reference `{{ node:persona }}` to write specifically to that profile.
+
+The **Available Variables** section in each node's sidebar shows all upstream outputs that are accessible at that point in the chain — so you don't need to remember variable names manually.
+
+This variable passing is what makes chaining more than just running nodes in order. It's what allows each step to build on what the previous step produced.
+
+---
+
+## When to use chaining vs a single node
+
+Most products don't need chaining. A single AI Product node connected to a Report or Document Outcome is the right structure for the majority of use cases — it's simpler to build, simpler to maintain, and fast to iterate on.
+
+Add chaining when:
+
+- **You need a separate evaluation step.** If who the person is should determine what they receive — not just the details of their situation — a Scoring Node in the chain makes that separation clean and deliberate.
+- **Your output needs to be dramatically different based on profile.** A chain lets the writing step know exactly who it's writing for, not just infer it from raw inputs.
+- **You're doing multi-stage processing.** When one pass of AI reasoning isn't enough — you need one step to analyse, another to synthesise, another to format — chaining is the natural structure.
+- **You want auditability.** Chains produce intermediate outputs that you can inspect in the response data. You can see exactly what the scoring step decided before the report was written.
+
+<Callout kind="tip">
+Start with a single node. Build the product, test it with real inputs, and evaluate the output quality. Most of the time, a well-prompted single node is exactly what you need. Add chaining only when you find a specific point in the output where a separate focused step would genuinely improve the result. Complexity should earn its place.
+</Callout>

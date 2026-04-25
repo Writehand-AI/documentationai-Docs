@@ -1,88 +1,12 @@
 ---
 title: Visual Insights
-description: >-
-  Add charts, graphs, and data visualisations to your AI Product's outcomes —
-  making complex insights immediately clear.
+description: Visual Insights has been removed from the platform.
 ---
-## What it does
 
-Visual Insights lets you configure interactive charts, tables, and visual blocks that the AI can render as part of your product's outcomes. These are not static images — they are first-party visual components generated from the data collected during the conversation, rendered live in the outcome the person receives.
+<Callout kind="warning">
+**Visual Insights has been discontinued.** This Power is no longer available on the canvas. If you have an existing product that used Visual Insights, those nodes can be safely removed — your product will continue to function without them.
+</Callout>
 
-You define the visual blocks you want, describe what they should show, and the AI uses the collected conversation data to populate them. A score gauge fills in with the actual score. A radar chart populates with the real dimension scores. A comparison table draws from what the person told you about their situation.
+Visual charts and data visualisations are now handled natively within the **Report** and **Document** outcome builders. You can insert scored results, AI-evaluated metrics, and comparison tables directly into your outcome pages using the page builder's variable system.
 
-📸 **Screenshot needed:** The canvas showing a Visual Insights node, with the sidebar open showing the Builder Summary
-
-## Why visuals matter in client-facing AI products
-
-Data without context is noise. Data with the right visual makes a finding land.
-
-When someone receives a scorecard result as a paragraph, they read it. When they receive it as a score gauge showing 62 out of 100, surrounded by a radar chart breaking down their performance across five dimensions, they feel it. The visual adds a layer of professional credibility that words alone cannot — the kind of presentation you would expect from a bespoke consultancy report, not a generic AI tool.
-
-Visual Insights adds that layer without any design work on your part. You describe what you want to show. The AI renders it.
-
-## When to use Visual Insights
-
-- Scorecard products where a visual score or breakdown transforms the outcome from text into an experience
-
-- Diagnostic products where showing someone their results graphically increases the perceived value and impact
-
-- Readiness assessments where a radar chart across multiple dimensions is more meaningful than a list of observations
-
-- Any product where a visual will make the outcome feel more considered, more premium, and more worth keeping
-
-## An idea to get you started
-
-A readiness scorecard with a visual breakdown of where someone sits across five dimensions hits differently than a paragraph of analysis. A score gauge at 74% followed by a radar chart breaking down their strategic, operational, financial, team, and market readiness — that is an outcome people save, share, and bring to a conversation. Visual Insights makes that possible without any design work on your part.
-
-## Sidebar settings
-
-When you click the Visual Insights node on the canvas, the sidebar opens with a summary and quick-access builder.
-
-**Builder Summary** shows how many visual blocks are currently configured. This gives you a quick status view without needing to open the expanded view.
-
-The sidebar also includes the **compact visual builder** — a lightweight version where you can add and configure visual blocks without leaving the sidebar. Each visual block has a type, a title, and an instructions field where you describe what the AI should populate it with.
-
-The sidebar is intentionally compact. For the full building and preview experience, use the **Expand** button to open the expanded view.
-
-📸 **Screenshot needed:** The Visual Insights sidebar showing the Builder Summary and the compact visual block list
-
-## Expanded view
-
-Click the **Expand** button (or the Expand icon in the canvas top bar) to open the Visual Insights expanded view. This is where you do the majority of your visual configuration.
-
-The expanded view has two panels side by side:
-
-**Visuals panel (left)** — this is your visual block library. Each block you add is listed here with its type and title. You can:
-
-- Add a new visual block with the **Add visual** button
-
-- Select a block to edit its settings in the detail area
-
-- Reorder blocks using the up/down arrows
-
-- Delete individual blocks with the trash icon
-
-**Preview panel (right)** — a live preview of the visual blocks as they would appear in the outcome, rendered with placeholder data. Switch between **Preview** and **Visuals** tabs in the top bar to toggle between the rendered preview and the block configuration list.
-
-**Visual block settings** — when you select a block in the left panel, you configure it with:
-
-- **Type** — choose from seven visual types (see below)
-
-- **Title** — the heading that appears above this visual in the outcome
-
-- **Instructions** — describe what this visual should show, what data it should draw on, and how it should be interpreted. The AI uses this guidance to populate the visual with the right data from the conversation.
-
-📸 **Screenshot needed:** The expanded view showing the two-panel layout — visual block list on the left and live preview on the right
-
-## Visual types
-
-| Type                 | What it shows                                                                                                        |
-| -------------------- | -------------------------------------------------------------------------------------------------------------------- |
-| **Score Gauge**      | A circular ring showing a score out of 100. Best for overall scores, readiness levels, or single-dimension results.  |
-| **Radar Chart**      | A multi-axis spider diagram comparing capability areas. Best for multi-dimension assessments and skills evaluations. |
-| **Bar Chart**        | Horizontal or vertical bars comparing values. Best for ranking, comparison, or showing relative performance.         |
-| **Donut Chart**      | A segmented ring showing proportions or category distribution. Best for mix, allocation, or breakdown by category.   |
-| **Timeline**         | Sequential steps or implementation phases. Best for roadmaps, plans, and phased next steps.                          |
-| **Comparison Table** | Side-by-side comparison of options, approaches, or scenarios. Best for decision support and option evaluation.       |
-| **Flow Diagram**     | A process or decision flow visualisation. Best for showing workflows, decision trees, or sequential processes.       |
-
+See [Report](/outcomes/report) and [Document](/outcomes/document) for details on building rich visual outcomes.

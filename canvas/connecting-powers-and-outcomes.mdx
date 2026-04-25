@@ -5,7 +5,7 @@ description: Learn how to add Powers and Outcomes to your canvas and connect the
 
 Your AI Product node sits at the centre of your canvas. Powers and Outcomes extend it — but they only work once they're connected. This page explains exactly how to add nodes to your canvas and draw the connections between them.
 
-<Callout kind="info">📸 **Screenshot needed:** A complete canvas showing an AI Product node in the centre, a Knowledge node connected at the top, a Visual Insights node connected on the left, and a Report Outcome node connected at the bottom — with visible connection lines between them</Callout>
+<Callout kind="info">📸 **Screenshot needed:** A complete canvas showing an AI Product node in the centre, a Knowledge node connected at the top-left, a Scoring node connected at the right, and a Report Outcome node connected at the bottom — with visible connection lines between them</Callout>
 
 ## Adding a node to the canvas
 
@@ -52,7 +52,7 @@ Powers connect **into** your AI Product from above or the sides. They enhance wh
 When you connect a Power, the AI Product automatically becomes aware of it. For example:
 - Connecting a **Knowledge** node means the AI can reference your uploaded documents when answering questions and generating outcomes
 - Connecting a **Research** node means the AI can pull real-time web information relevant to each person's situation
-- Connecting a **Visual Insights** node means charts and visual blocks will be available in the outcome you deliver
+- Connecting a **Scoring** node means the AI will evaluate the collected data and assign a persona profile before generating the Outcome
 
 You can connect multiple Powers to a single AI Product. Each one adds a new capability without replacing any of the others.
 
@@ -60,7 +60,7 @@ You can connect multiple Powers to a single AI Product. Each one adds a new capa
 
 Outcomes connect **below** your AI Product. They define what your audience receives at the end of the conversation.
 
-You typically connect one Outcome to your AI Product. The Outcome type you choose (Report, Document, or Offer) must match what you've set in the **After collection** setting in your AI Product's Behaviour tab — if those two are mismatched, the Outcome won't trigger.
+You typically connect one Outcome to your AI Product. The Outcome type you choose (Report, Document, or Redirect) must match what you've set in the **After collection** setting in your AI Product's Behaviour tab — if those two are mismatched, the Outcome won't trigger.
 
 <Callout kind="tip">Your AI Product's "After collection" setting and the Outcome node you've connected need to match. If you've dragged a Document Outcome onto the canvas, make sure "Generate document" is selected in the Behaviour tab of your AI Product.</Callout>
 

@@ -1,146 +1,126 @@
 ---
 title: Changelog
-description: Stay updated with the latest releases, feature enhancements, and improvements in Productised.
+description: Every update, improvement, and new feature — newest first.
 ---
 
-## Recent Releases
+We ship continuously. This page logs every meaningful release — new features, improvements, and the occasional breaking change.
 
-Track the evolution of Productised with our changelog. We release updates regularly to enhance your AI-powered assessments, improve performance, and introduce new customization options.
+<Update label="April 2026" description="Brain knowledge bases + prompt chaining" tags={["feature", "improvement"]}>
 
-<Callout kind="info">
-Subscribe to our changelog feed or join the waitlist at https://www.productised.ai/wait-list to get notified about new releases.
-</Callout>
+### New
+- **Brain Sources tab** — upload PDFs, TXT, MD, and CSV files or paste URLs directly into Brain. Files are indexed into your workspace knowledge base and drawn on in every Brain conversation.
+- **Prompt chaining on the canvas** — chain multiple AI Product nodes in sequence. Pass outputs from one node to the next using `{{ node:varName }}` syntax in any downstream prompt or outcome.
+- **Scoring Node enhancements** — define named persona profiles with custom score thresholds. Each persona can route to different outcome content, a different CTA, and an optional redirect URL.
 
-| Version | Date       | Key Changes                  |
-|---------|------------|------------------------------|
-| v1.2.0  | 2024-10-15 | Assessment customization     |
-| v1.1.0  | 2024-09-20 | Performance improvements     |
-| v1.0.0  | 2024-08-10 | Initial release              |
+### Improved
+- Variable picker updated to include chained node outputs alongside form fields and custom variables.
+- Brain Chat response quality improved when Sources are active — citations now surface inline.
 
-## v1.2.0 - 2024-10-15
-
-<Update label="2024-10-15" description="v1.2.0" tags={["feature", "improvement"]}>
-
-## New Features
-
-- Added advanced assessment customization options, including dynamic AI prompts for personalized outcome pages.
-- Introduced branded report templates with your logo and brand colors (e.g., `#FED86D`).
-
-## Improvements
-
-- Enhanced AI reasoning for more context-aware lead reports.
-- Faster generation of personalized outcomes, reducing wait times by `>50%`.
-
-## Bug Fixes
-
-- Fixed issue with multi-step assessments not saving partial responses.
-- Resolved rendering errors in custom outcome pages.
+### Fixed
+- Canvas edge reconnection occasionally failed to persist after save. Resolved.
+- Scoring Node threshold validation allowed overlapping ranges. Now enforced on save.
 
 </Update>
 
-## v1.1.0 - 2024-09-20
+<Update label="February 2026" description="Brain: your strategic AI assistant" tags={["feature"]}>
 
-<Update label="2024-09-20" description="v1.1.0" tags={["bugfix", "improvement"]}>
+### New
+- **Brain** — workspace-level AI assistant to help you decide what to build and how to position it. Accessible from the main nav; not tied to any individual product.
+- **Brain Memory** — automatically saves context from every conversation so you never have to re-explain your business, audience, or methodology.
+- **Brain Ideas** — BUILD_THIS cards surface build-ready concepts from your conversations. Open any card directly on the canvas to start building immediately.
+- **Conversation tier limits** — Free (1 Brain conversation/month), Starter (5/month), Pro (unlimited).
 
-## Improvements
-
-- Optimized performance for high-traffic assessments, handling `>1000` leads per day.
-- Better integration with lead generation tools via webhooks.
-
-## Bug Fixes
-
-- Patched security vulnerability in report generation (no user data exposed).
-- Fixed email delivery failures for personalized reports.
-
-## Deprecations
-
-- Legacy static outcome templates deprecated. Migrate to AI-powered dynamic templates.
+### Improved
+- Workspace onboarding updated to introduce Brain in the first session.
 
 </Update>
 
-## v1.0.0 - 2024-08-10
+<Update label="December 2025" description="Funnel view + product organisation" tags={["feature", "improvement"]}>
 
-<Update label="2024-08-10" description="v1.0.0" tags={["feature", "breaking"]}>
+### New
+- **Funnel view in the gallery** — organise and filter your products by funnel tier: ToFU, MoFU, or BoFU. Assign a tier to any product from its settings.
+- **Product colour labels** — tag products with a colour for visual organisation at a glance.
+- **Compact and Visual view modes** — switch between a dense list view and the card grid depending on how many products you're managing.
 
-## New Features
-
-- Core AI-powered assessments for lead generation.
-- Instant personalized reports and outcome pages.
-- No-code builder for quizzes and funnels.
-
-## Breaking Changes
-
-- Initial API structure updated. See migration guide below.
+### Improved
+- Gallery filter bar redesigned — filter by funnel tier, label, and status simultaneously.
+- Product card now shows funnel tier badge alongside status.
 
 </Update>
 
-## Migration Guide
+<Update label="October 2025" description="Scoring and personas" tags={["feature"]}>
 
-Follow these steps to update your Productised assessments to the latest version.
+### New
+- **Scoring Node** — add a Scoring Node to the canvas to evaluate collected responses and produce a numeric score. Three modes: AI Judgement, AI Scorecard, and Advanced Manual.
+- **Per-field score weights** — in Advanced Manual mode, assign a weight to each collected field so the scoring reflects what matters most to you.
+- **Persona profiles** — define named segments (e.g. "Ready to Scale", "Building Foundations") with custom content, CTAs, and optional redirects. Each persona activates when a response falls within its score threshold.
 
-<Steps>
-  <Step title="Backup Your Data" icon="database">
+### Improved
+- AI Scorecard mode now accepts a rubric description alongside the numeric range, giving the AI clearer grading criteria.
 
-    Export your current assessments:
+### Fixed
+- Outcome pages occasionally showed raw variable syntax when a field was left blank. Now falls back to an empty string gracefully.
 
-````bash
-# Via dashboard
-# Go to Settings > Export > Download JSON
-````
+</Update>
 
-  </Step>
-  <Step title="Update Integration" icon="settings">
+<Update label="August 2025" description="Brand Voice + workspace context" tags={["feature", "improvement"]}>
 
-    Update your webhook URL to `https://api.productised.ai/v2/webhooks`.
+### New
+- **Brand Voice** (formerly Offer Profile) — captures your positioning, methodology, credentials, target audience, and guardrails. Feeds every AI Product in your workspace.
+- **AI Brand Voice builder** — a short guided conversation that helps you build and refine your Brand Voice without starting from a blank form.
 
-    <CodeGroup tabs="JavaScript,Python">
-````javascript
-// New endpoint
-const webhookUrl = 'https://api.productised.ai/v2/webhooks';
-fetch(webhookUrl, { method: 'POST', body: JSON.stringify(leadData) });
-````
-````python
-# New endpoint
-import requests
-webhook_url = 'https://api.productised.ai/v2/webhooks'
-requests.post(webhook_url, json=lead_data)
-````
-    </CodeGroup>
+### Improved
+- Brand Voice now feeds Brain conversations as well as product outputs — consistent context everywhere.
+- Renamed throughout the app from "Offer Profile" to "Brand Voice" for clarity.
 
-  </Step>
-  <Step title="Test Assessments" icon="play">
+### Fixed
+- Brand Voice changes not reflecting in active products without a manual save. Resolved.
 
-    Create a test assessment and verify personalized reports generate correctly.
+</Update>
 
-  </Step>
-</Steps>
+<Update label="June 2025" description="Connections and integrations" tags={["feature", "improvement"]}>
 
-<Expandable title="Detailed Deprecations" default-open="false">
+### New
+- **Connections Power** — send lead data to external tools automatically after a product is completed. Supported destinations: Gmail, Google Sheets, HubSpot, Slack, Airtable.
+- **Zapier integration** — trigger any Zap on product completion using the structured webhook payload.
 
-If using deprecated static templates:
+### Improved
+- Webhook payload restructured — now includes the full response object: all collected fields, AI outputs keyed by node variable, timestamp, and product metadata.
+- Connections setup moved to a dedicated canvas node so the data flow is visible and editable alongside your other nodes.
 
-1. Open your assessment editor.
-2. Switch to "AI Dynamic" mode under Outcomes.
-3. Map old fields to new AI prompts, e.g., `{user_responses}` becomes `{lead_context}`.
+</Update>
 
-No downtime expected during migration.
+<Update label="March 2025" description="Report and Document improvements" tags={["feature", "improvement"]}>
 
-</Expandable>
+### New
+- **Rich page builder for Report and Document outcomes** — drag sections, add blocks, and arrange your outcome layout visually.
+- **Variable browser** — search and insert any collected field, AI output, or custom variable into your outcome content using `{{ category:key }}` syntax. Preview live values from the latest response.
+- **Theme presets** — choose from a set of pre-built visual themes for outcome pages, then customise from there.
 
-## Next Steps
+### Improved
+- Report and Document outcomes now inherit Brand Voice styling defaults on creation.
+- Outcome preview loads faster — no longer requires a full page reload when switching between responses.
 
-<Columns cols={3}>
-  <Card title="Quickstart" icon="rocket" href="/quickstart">
-    Get started with your first assessment.
-  </Card>
-  <Card title="Customization" icon="palette" href="/configuration">
-    Explore new branding options.
-  </Card>
-  <Card title="API Reference" icon="code" href="/authentication">
-    Integrate with your tools.
-  </Card>
-</Columns>
+</Update>
 
-<Callout kind="tip">
-Check the [Productised dashboard](https://dashboard.productised.ai) for auto-update notifications.
-</Callout>
+<Update label="December 2024" description="Research Power + advisor mode" tags={["feature"]}>
+
+### New
+- **Research Power** — give your AI Product live web search capabilities. Useful for products that need current data, market context, or competitor information.
+- **Advisor mode** — after the collection phase ends, the AI shifts into an open-ended Q&A conversation. Respondents can ask follow-up questions and get personalised answers based on everything collected.
+- **Knowledge Power URL indexing** — alongside file uploads, you can now paste a URL and have it indexed into your product's knowledge base.
+
+### Improved
+- Knowledge Power file processing now handles larger PDFs more reliably.
+
+</Update>
+
+<Update label="October 2024" description="Initial launch" tags={["feature"]}>
+
+### New
+- **Productised public launch** — the canvas, AI Product node, Knowledge Power, Report and Document outcomes.
+- **Collection goals** — 10 field types available: text, email, choice (single and multi), scale, yes/no, image selection, and more.
+- **Decision model** — two modes for how the AI evaluates responses: AI Judgement (holistic) and AI Scorecard (rubric-based).
+- **Product deployment** — share via link or embed code. Product-level settings for visibility and email collection.
+
+</Update>

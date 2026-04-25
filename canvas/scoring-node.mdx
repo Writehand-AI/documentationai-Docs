@@ -1,0 +1,131 @@
+---
+title: "Scoring Node"
+description: "Define how Brain evaluates and categorises the people going through your product — so every outcome is matched to who they actually are."
+---
+
+Most products collect information and generate an output. The Scoring Node goes one step further: it evaluates what was collected, decides which profile this person fits, and shapes the outcome they receive accordingly.
+
+Without scoring, everyone who completes your product gets roughly the same output, personalised only by the details they shared. With scoring, the outcome changes meaningfully based on *who they are* — a high-fit lead gets a different report, a different call to action, and a different redirect than someone who isn't ready yet.
+
+📸 **Screenshot needed:** A canvas showing an AI Product node connected to a Scoring Node, which in turn connects to a Report Outcome node — with the scoring sidebar open on the right
+
+---
+
+## What the Scoring Node does
+
+The Scoring Node sits between your AI Product and your Outcome node on the canvas. It receives the data collected during the conversation and applies your scoring logic to it — producing a profile (a named category or score band) that the Outcome node then uses to tailor what the person receives.
+
+The scoring happens automatically, immediately after the conversation ends and before the outcome is generated. The person never sees the scoring logic — they only see the outcome it produces.
+
+---
+
+## Adding it to the canvas
+
+<Steps>
+  <Step title="Open the Powers tab">
+    In the floating toolbar at the bottom of the canvas, click the **Powers** tab and find the **Scoring** node.
+  </Step>
+  <Step title="Drag it onto the canvas">
+    Drag the Scoring node onto the canvas and position it between your AI Product node and your Outcome node. Proximity matters for readability, not for function — but a clear left-to-right or top-to-bottom arrangement makes the flow easy to follow at a glance.
+  </Step>
+  <Step title="Connect the nodes in sequence">
+    Draw a connection from your **AI Product** node to the **Scoring** node, then draw a second connection from the **Scoring** node to your **Outcome** node. The chain should read: AI Product → Scoring → Outcome.
+  </Step>
+  <Step title="Configure the scoring logic">
+    Click the Scoring node to open its settings in the right panel. Choose your scoring objective, select a mode, and define your personas.
+  </Step>
+</Steps>
+
+---
+
+## Scoring objectives
+
+Before choosing a mode, select the **objective** that best describes what you're evaluating. The objective tells the scoring engine what it is optimising for and frames the AI's judgement (in AI modes) appropriately.
+
+| Objective | Use when you want to evaluate… |
+|---|---|
+| **Lead Fit** | How well the person matches your ideal client profile |
+| **Readiness** | Whether they're ready to act, buy, or move forward now |
+| **Diagnosis** | What category of problem or situation they're in |
+| **Recommendation** | Which approach, tier, or solution best fits their situation |
+| **Offer Match** | Which of your offers, packages, or services fits them best |
+| **Custom** | Something specific to your product — define your own framing |
+
+---
+
+## The three scoring modes
+
+### AI Judgement
+
+The AI reads the full conversation and makes a holistic decision about which persona this person fits. You don't define criteria or weights — you describe each persona and what it looks like, and the AI applies its judgement.
+
+This mode works best when:
+- The signals are qualitative and hard to reduce to numbers (e.g. a founder's level of strategic clarity)
+- You trust the AI to weigh context holistically rather than mechanically
+- You want to get a product live quickly without designing a detailed scorecard
+
+Set up: write a clear description of each persona — the kind of person who fits it, what their answers tend to reveal, and what they need. The richer the descriptions, the more accurate the judgement.
+
+### AI Scorecard
+
+A light structured scoring approach. You define the dimensions that matter — factors like company stage, team size, engagement level, urgency — and the AI scores each one based on what it read in the conversation. The scores are combined into a total, and the persona is assigned based on where the total lands.
+
+This mode works best when:
+- You want more consistency and auditability than pure AI Judgement
+- You can articulate the 3–6 factors that actually matter for your scoring objective
+- You want to see per-dimension scores in the response data
+
+Set up: define your scoring dimensions, give each a label and a brief description of what a high vs low score looks like on that dimension. Set the weight (importance) of each dimension if some matter more than others.
+
+### Advanced Manual
+
+Full control. You define the exact scoring logic: which form fields or AI response elements are evaluated, how each is scored, the point weights for each, the threshold bands, and the label assigned to each band. Nothing is left to the AI — the logic is deterministic.
+
+This mode works best when:
+- You need complete predictability (the same inputs always produce the same profile)
+- You're building a lead qualification funnel where the score gates a commercial decision
+- You want to be able to explain to a prospect or client exactly how they were categorised
+
+Set up: map each scoring variable to a field or node output. Define the point value for each possible response. Set the threshold ranges that correspond to each persona.
+
+<Callout kind="tip">
+If you're using the Scoring Node for lead qualification — deciding which leads go to discovery calls versus a nurture sequence — Advanced Manual is worth the extra setup time. The deterministic logic means sales-qualified leads are scored consistently regardless of how the AI interpreted a nuanced response. You can also audit any individual result to verify exactly how the score was reached.
+</Callout>
+
+---
+
+## Defining personas
+
+Personas are the named profiles your scoring produces. Each persona represents a category of person with a distinct situation, fit level, or readiness — and each one can have a different outcome.
+
+You define personas in the **Personas** section of the Scoring node settings. At minimum, give each persona:
+
+- **A name** — something descriptive and internally meaningful (e.g. "Growth-Ready", "Not Yet Ready", "Strong Fit", "Needs Foundation Work")
+- **A description** — what this profile represents; used by the AI in AI Judgement and AI Scorecard modes to make accurate assignments
+- **A score range** — in AI Scorecard and Advanced Manual modes, the point band that maps to this persona
+
+Each persona can also have:
+
+- **Custom outcome content** — a different prompt, framing, or headline for the Report, Document, or Offer that this profile receives
+- **A different CTA** — different button text and/or destination URL, so a strong-fit lead is taken to a booking page while a lower-fit lead is taken to a nurture sequence or free resource
+- **A redirect URL** — if you want to send certain profiles to a different page entirely rather than showing the standard outcome
+
+📸 **Screenshot needed:** The Personas section of the Scoring node sidebar — showing two or three persona entries with name, description, and CTA fields visible
+
+---
+
+## How personas affect outcomes
+
+When the Scoring Node assigns a persona, it passes that profile to the connected Outcome node. The Outcome uses the persona in two ways:
+
+**Content personalisation** — the AI writing the Report, Document, or Offer is told which persona this person was assigned. It uses that context to frame the output appropriately. A "Growth-Ready" persona gets a forward-looking, action-oriented report. A "Needs Foundation Work" persona gets a report that meets them where they are and builds confidence rather than overwhelming them with next steps.
+
+**CTA and redirect** — if you've defined persona-specific CTAs or redirect URLs, those override the defaults. The person with the best fit profile sees the booking link. Everyone else sees the appropriate next step for where they actually are.
+
+This means the same product can produce meaningfully different commercial outcomes for different people — all from the same conversation, with no branching logic to maintain.
+
+---
+
+## What a scored result looks like in the data
+
+Each completed response in your analytics will show the assigned persona alongside the standard response data. In AI Scorecard and Advanced Manual modes, you'll also see the per-dimension or per-field scores that contributed to the total. This makes it easy to review how your scoring logic is performing and spot patterns across your leads.
