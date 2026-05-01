@@ -2,12 +2,12 @@
   "name": "Productised",
   "colors": {
     "light": {
-      "brand": "#ff2d5e",
+      "brand": "#f17463",
       "heading": "#1a1a1a",
       "text": "#374151"
     },
     "dark": {
-      "brand": "#ff2d5e",
+      "brand": "#f17463",
       "heading": "#f2f2f2",
       "text": "#c1c1c1"
     }
@@ -452,9 +452,9 @@
     ]
   },
   "template": "atlas",
-  "logo-light": "https://blob-cdn.documentation.ai/org-708d97b3-a195-4b0f-8911-093c012c99d6/doc-8283fb6b-099f-47ea-b32b-34e7f582103c/1775514927521-ycpifzvst-productised_logo_exact_no_bg.svg?fm=auto&auto=compress%2Cformat",
-  "favicon": "https://blob-cdn.documentation.ai/org-708d97b3-a195-4b0f-8911-093c012c99d6/doc-8283fb6b-099f-47ea-b32b-34e7f582103c/1775512220940-w94qnhf1zm-logo-bolt-black.svg?fm=auto&auto=compress%2Cformat",
-  "logo-dark": "https://blob-cdn.documentation.ai/org-708d97b3-a195-4b0f-8911-093c012c99d6/doc-8283fb6b-099f-47ea-b32b-34e7f582103c/1775510224289-wi9u030uhs8-Untitled-design--1-.png?fm=auto&auto=compress%2Cformat",
+  "logo-light": "https://blob-cdn.documentation.ai/org-708d97b3-a195-4b0f-8911-093c012c99d6/doc-8283fb6b-099f-47ea-b32b-34e7f582103c/1777608091227-ip5bktzy4d-ChatGPT-Image-May-1--2026--04_01_21-PM.png?fm=auto&auto=compress%2Cformat",
+  "favicon": "https://blob-cdn.documentation.ai/org-708d97b3-a195-4b0f-8911-093c012c99d6/doc-8283fb6b-099f-47ea-b32b-34e7f582103c/1777607633943-zn89ttk854r-ChatGPT-Image-May-1--2026--03_44_27-PM.png?fm=auto&auto=compress%2Cformat",
+  "logo-dark": "https://blob-cdn.documentation.ai/org-708d97b3-a195-4b0f-8911-093c012c99d6/doc-8283fb6b-099f-47ea-b32b-34e7f582103c/1777608043114-h871iz2v8gh-ChatGPT-Image-May-1--2026--03_58_52-PM.png?fm=auto&auto=compress%2Cformat",
   "ai": {
     "page-actions": [
       "claude"
