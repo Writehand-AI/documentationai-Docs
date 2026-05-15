@@ -1,0 +1,112 @@
+---
+title: Advisor Chat node
+description: The Advisor Chat node delivers a full-screen, personalised advisory session — the AI speaks first using everything collected upstream, then opens the floor for follow-up questions.
+---
+
+The **Advisor Chat** node is a conversational outcome. Where a Report or Document delivers a static, formatted result, the Advisor Chat delivers something different: an interactive, contextualised advisory session where the AI draws on everything it collected during the conversation to open a personalised exchange.
+
+The AI speaks first. It synthesises the form answers and any upstream AI outputs into an opening statement — tailored specifically to what this person shared. Then the session opens for follow-up questions, additional context, and a genuine back-and-forth.
+
+This is the closest a Productised product can get to a real advisory conversation. The prospect has handed over their context; the Advisor Chat turns that into something that feels like a practitioner actually read it and prepared for them.
+
+---
+
+## Two ways to use the Advisor Chat node
+
+**As a standalone outcome after a form workflow.**
+Add an Advisor Chat node to the canvas and connect it as an outcome from your AI Product. When the form is complete, the person is taken directly into the advisor session. The AI already has everything they submitted and uses it to open the conversation.
+
+**As an advisor phase at the end of an AI Chat product.**
+If your AI Product node is set to "Continue as advisor" in the Behaviour tab, it connects directly to an Advisor Chat node. After the AI has finished collecting everything it needs through the conversational flow, it transitions seamlessly into advisory mode — same interface, same session, different mode. The collecting is done; now it advises.
+
+<Callout kind="info">When the Advisor Chat is used as an advisor phase (connected from an AI Chat), it inherits the session context automatically. When used as a standalone outcome (connected from a form workflow), the form answers are passed in as context and the AI uses them to craft its opening message.</Callout>
+
+---
+
+## Settings
+
+Click the Advisor Chat node on the canvas to open its settings panel on the right. Settings are organised into five sections.
+
+### Advisor Identity
+
+Give your advisor a name, description, and visual identity.
+
+- **Advisor name** — displayed in the session header. Shown to the person as their advisor. Falls back to the product name if left blank.
+- **Description** — a short subtitle shown beneath the name, e.g. "Specialising in early-stage founders" or "Your leadership readiness advisor."
+- **Advisor icon** — upload a square image (128×128px minimum) to represent the advisor. This could be your photo, a brand avatar, or a role-specific illustration.
+- **Theme colour** — the accent colour used for the send button, highlights, and interactive elements. Defaults to the AI Product node's brand colour if left blank.
+
+### Advisor Persona
+
+Define how the advisor thinks and speaks.
+
+- **System prompt** — the instruction set for the advisor. This shapes the AI's approach, expertise framing, and focus areas. You can reference collected form answers and upstream AI outputs using variable syntax (e.g. `{form:challenge}`, `{node:outputVar}`). The Variable picker button lists all available variables from the connected workflow.
+- **Tone** — choose from four tone profiles:
+  - **Advisory** — expert guidance in second person, warm and specific
+  - **Casual** — friendly and conversational, no jargon
+  - **Formal** — professional and precise, business-appropriate
+  - **Informative** — clear and educational, objectively presented
+
+<Callout kind="tip">A strong advisor system prompt includes: the role the AI is playing (e.g. "You are a specialist marketing strategist for service businesses"), the specific expertise it should draw on, and instructions to reference what the person told you rather than giving generic advice. Use the Variable picker to pull in specific form fields so the prompt is personalised.</Callout>
+
+### Chat Interface
+
+Control how the conversational elements are presented during the advisor session.
+
+- **Show chat** — when enabled, the follow-up input stays visible alongside the advisor's response. When disabled, the input appears after the opening statement, giving the advisor's response full-screen prominence first.
+- **Chat style** — choose between Standard (full-width input panel) and Floating (compact input card, less visual weight).
+- **Navigation style** — choose between Standard (progress dots) and Numbered (progress dots with current/total count).
+- **Input placeholder text** — the text shown in the chat input before the person types. Defaults to "Reply to your advisor…"
+- **Message cap** — the maximum number of advisor replies per session (1–20). Prevents the session from running indefinitely.
+
+### Opening Message
+
+*(Available when used as a standalone outcome, not when connected from an AI Chat.)*
+
+Choose how the AI opens the advisory session:
+
+- **Auto-generate** — Brain crafts a personalised opening message based on the form answers and the advisor's system prompt. No two opening messages are the same.
+- **Custom instructions** — you provide specific guidance for how the opening message should be framed (e.g. "Start by acknowledging their biggest challenge from `{form:challenge}` and give them one immediate action they can take today."). The Variable picker is available here too.
+
+### Appearance
+
+Control the visual environment of the advisor session.
+
+- **Background colour** — the base colour for the full-screen experience. Choose from preset options or set a custom hex colour.
+- **Background image** — upload a full-screen image shown behind the advisor interface. Works with any background colour.
+- **Input panel pattern** — a subtle decorative pattern behind the chat input area. Options include none, dots, grid, diagonal lines, plus marks, waves, and topographic.
+
+### End Action
+
+*(Available when used as a standalone outcome.)*
+
+Optionally display a call-to-action button after the advisor's first response.
+
+- **Button label** — e.g. "Book a free discovery call"
+- **Button URL** — where the button takes them (your booking link, your website, a specific page)
+
+Leave blank to show no CTA. This is useful when you want the session to feel purely advisory before directing them anywhere.
+
+---
+
+## What the advisor receives as context
+
+The Advisor Chat receives all available upstream context automatically — you don't need to configure this separately.
+
+**From a form workflow:** all form answers submitted before the session begins.
+
+**From an AI Chat product:** all form answers collected during the conversational AI phase, plus any AI-generated outputs from upstream nodes that were connected before the advisor.
+
+This means the advisor opens every session knowing exactly what the person said, what they scored, and what the AI already determined — before the person has to say a single word.
+
+---
+
+## Best use cases for the Advisor Chat
+
+**Post-diagnostic advisory session** — a prospect completes a scored diagnostic and instead of receiving a static report, they receive an advisor who opens by acknowledging their specific situation and invites them to go deeper.
+
+**Discovery call replacement** — collect everything you'd normally ask on a discovery call through the form, then let the advisor deliver a personalised assessment and open the floor for follow-up. The prospect arrives at the booking stage already feeling understood.
+
+**Client onboarding session** — collect initial context from a new client and use the advisor to deliver a personalised orientation: what to expect, where they're starting from, what the first priorities are — all grounded in what they specifically said.
+
+**Post-programme review** — collect end-of-programme feedback and reflections, then deliver a personalised advisor session that summarises their journey, highlights their growth, and suggests next steps.

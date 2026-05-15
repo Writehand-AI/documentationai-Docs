@@ -1,0 +1,191 @@
+---
+title: Claude MCP
+description: Connect your Productised workspace directly to Claude — read your leads, ask your Brain, and create products without leaving a conversation.
+---
+
+Productised is the first platform in this space to ship a native MCP integration. MCP (Model Context Protocol) is Anthropic's open standard for connecting Claude to external tools and data in real time.
+
+Once connected, Claude can reach into your Productised workspace — reading your products, pulling lead data, asking your Brain strategic questions, and creating new products — all from inside a Claude conversation. You never need to switch tabs.
+
+<Callout kind="info">
+**What makes this different from the Claude integrations you might already use (Google Drive, Notion, etc.)?** Those are built and hosted by Anthropic. The Productised MCP is self-hosted — we built and control it, which means we can expose tools that are specific to your coaching business: your Brain, your lead responses, your Journey Plan, your brand voice. No generic file-reading — live access to the things that actually matter.
+</Callout>
+
+## What Claude can do with your workspace
+
+Once connected, Claude gains 8 tools against your Productised account:
+
+<Columns cols="2">
+  <Card title="list_products" icon="layers">
+    See all your AI products — names, response counts, visibility, and public URLs.
+  </Card>
+  <Card title="get_product" icon="file-text">
+    Get full details on a specific product including its form questions and workflow summary.
+  </Card>
+  <Card title="get_responses" icon="inbox">
+    Pull recent lead submissions — contact details, form answers, and AI-generated outputs.
+  </Card>
+  <Card title="get_product_url" icon="link">
+    Generate a shareable link, optionally pre-filled with a contact's name and email — ready to send.
+  </Card>
+  <Card title="brain_ask" icon="cpu">
+    Ask your Brain a strategic question. Uses your brand voice and existing products as context for a specific, tailored answer.
+  </Card>
+  <Card title="save_idea" icon="lightbulb">
+    Save a product idea directly to your Brain backlog — appears immediately in your Ideas tab.
+  </Card>
+  <Card title="get_latest_plan" icon="map">
+    Fetch your most recently generated Journey Plan — all stages, product recommendations, and priorities.
+  </Card>
+  <Card title="create_product" icon="zap">
+    Create a new product from a description. Returns a one-click link that opens the AI generation pipeline — fully built in ~30 seconds.
+  </Card>
+</Columns>
+
+---
+
+## Setup
+
+<Steps>
+  <Step title="Get your API key">
+    Go to **Settings → API → Keys** in your Productised workspace. Click **Create new key**, give it a name (e.g. "Claude MCP"), and copy the key.
+
+    <Callout kind="warning">Copy the key immediately — it's only shown once. If you lose it, generate a new one from the same page.</Callout>
+  </Step>
+  <Step title="Connect to your Claude client">
+    Follow the instructions for whichever client you use — Claude Desktop or Claude.ai.
+  </Step>
+  <Step title="Test the connection">
+    In a new Claude conversation, type: **"List my Productised products"**
+
+    Claude will call `list_products` and return a live view of your workspace. You'll see a 🔧 tool icon each time Claude makes an MCP call.
+  </Step>
+</Steps>
+
+---
+
+## Claude Desktop
+
+<Steps>
+  <Step title="Open the config file">
+    In Claude Desktop, go to **Settings** (⌘,) → **Developer** → **Edit Config**. This opens a JSON file.
+  </Step>
+  <Step title="Add the Productised server">
+    Paste the following, replacing `YOUR_API_KEY` with the key you copied:
+
+    ```json
+    {
+      "mcpServers": {
+        "productised": {
+          "url": "https://app.productised.ai/api/mcp",
+          "headers": {
+            "Authorization": "Bearer YOUR_API_KEY"
+          }
+        }
+      }
+    }
+    ```
+
+    If you already have other MCP servers in the file, add the `"productised"` block inside the existing `"mcpServers"` object.
+  </Step>
+  <Step title="Restart Claude Desktop">
+    Save the file and restart the app. A 🔌 icon in the chat input confirms the connection is live.
+  </Step>
+</Steps>
+
+---
+
+## Claude.ai (browser)
+
+<Steps>
+  <Step title="Open Integrations">
+    Go to **claude.ai → Settings → Integrations** and click **Add integration**.
+  </Step>
+  <Step title="Enter the connection details">
+    Fill in:
+    - **Name:** Productised
+    - **URL:** `https://app.productised.ai/api/mcp`
+    - **Auth header:** `Authorization: Bearer YOUR_API_KEY`
+  </Step>
+  <Step title="Save and start a conversation">
+    Click Save. Start a new conversation — Claude will now have access to your Productised tools.
+  </Step>
+</Steps>
+
+---
+
+## Example conversations
+
+These are real things you can say to Claude once connected.
+
+**Pull your leads:**
+> *"Show me the last 10 people who completed my Business Readiness Assessment"*
+
+Claude calls `get_responses` and returns contact details, form answers, and AI outputs inline — no need to log into Productised.
+
+---
+
+**Create a product from a description:**
+> *"Build me a lead magnet scorecard for executive coaches that assesses leadership readiness across 5 dimensions and generates a personalised report"*
+
+Claude calls `create_product`, creates the draft in your workspace, and returns a one-click link. Open it, and the full product is built in ~30 seconds — exactly as if you'd used Quick Create.
+
+---
+
+**Strategic advice with full context:**
+> *"Based on my existing products and brand voice, what should I build next for my middle-of-funnel?"*
+
+Claude calls `brain_ask`, loads your brand voice and product list, and answers with recommendations specific to your niche and audience.
+
+---
+
+**Save an idea mid-conversation:**
+> *"Save this to my Brain — a client retention scorecard for coaches, scored report output, mofu stage"*
+
+Claude calls `save_idea` — the idea appears in your Brain's Ideas tab immediately.
+
+---
+
+**Send a personalised product link:**
+> *"Give me the link to my Diagnostic pre-filled for Sarah Jones at sarah@acmecorp.com"*
+
+Claude calls `get_product_url` with Sarah's contact details and returns the ready-to-send personalised URL.
+
+---
+
+**Review your Journey Plan:**
+> *"What does my latest Journey Plan recommend for top-of-funnel?"*
+
+Claude calls `get_latest_plan` and walks you through the plan stage by stage.
+
+---
+
+## Privacy and security
+
+**Does Claude need my password?**
+No. Claude authenticates only via your API key. You control access and can revoke the key at any time from **Settings → API → Keys**.
+
+**Can Claude modify or delete my products?**
+The MCP gives Claude read access to products and responses, and write access to create draft products and save Brain ideas. It cannot edit, publish, or delete existing products or responses.
+
+**Is my data sent to Anthropic?**
+When Claude uses an MCP tool, the data returned (e.g. your lead list) is included in your conversation context and processed by Anthropic under their standard privacy policy. This is equivalent to copying and pasting that data into Claude yourself.
+
+**Can I see what Claude accessed?**
+Yes. Every MCP call is logged in **Settings → API → Logs** with the timestamp, tool name, and result. You have a full audit trail.
+
+---
+
+## MCP vs other integrations
+
+<Columns cols="3">
+  <Card title="MCP (Claude)" icon="cpu">
+    Claude talks directly to your Productised workspace. Works inside Claude conversations — no tab switching. Best for coaches who live in Claude and want their workspace accessible from there.
+  </Card>
+  <Card title="Zapier" icon="zap">
+    Automates what happens after a lead submits — routes data to your CRM, email platform, or spreadsheet. Best for post-response automation with 6,000+ apps.
+  </Card>
+  <Card title="Webhooks" icon="radio">
+    Sends raw response data to any URL. Best for developers building custom workflows or connecting to tools not in Zapier.
+  </Card>
+</Columns>

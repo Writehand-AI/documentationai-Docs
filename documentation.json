@@ -72,6 +72,11 @@
                 "title": "Brain Knowledge Bases",
                 "path": "brain/knowledge-bases",
                 "icon": "book-open"
+              },
+              {
+                "title": "Journey Plan",
+                "path": "brain/plan",
+                "icon": "map"
               }
             ]
           },
@@ -139,6 +144,11 @@
                 "title": "Prompt chaining",
                 "path": "canvas/prompt-chaining",
                 "icon": "link"
+              },
+              {
+                "title": "Advisor Chat node",
+                "path": "canvas/advisor-chat-node",
+                "icon": "message-circle"
               }
             ]
           },
@@ -391,7 +401,17 @@
         "icon": "plug",
         "groups": [
           {
-            "group": "Integrations",
+            "group": "AI & Claude",
+            "pages": [
+              {
+                "title": "Claude MCP",
+                "path": "integrations/mcp",
+                "icon": "cpu"
+              }
+            ]
+          },
+          {
+            "group": "Automation",
             "pages": [
               {
                 "title": "Webhooks",
