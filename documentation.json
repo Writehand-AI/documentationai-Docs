@@ -477,7 +477,8 @@
   "logo-dark": "https://blob-cdn.documentation.ai/org-708d97b3-a195-4b0f-8911-093c012c99d6/doc-8283fb6b-099f-47ea-b32b-34e7f582103c/1777608043114-h871iz2v8gh-ChatGPT-Image-May-1--2026--03_58_52-PM.png?fm=auto&auto=compress%2Cformat",
   "ai": {
     "page-actions": [
-      "claude"
+      "claude",
+      "mcp"
     ]
   }
 }
