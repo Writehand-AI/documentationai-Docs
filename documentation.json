@@ -149,6 +149,11 @@
                 "title": "Advisor Chat node",
                 "path": "canvas/advisor-chat-node",
                 "icon": "message-circle"
+              },
+              {
+                "title": "Design node",
+                "path": "canvas/design-node",
+                "icon": "code"
               }
             ]
           },
@@ -201,6 +206,11 @@
                 "title": "Redirect",
                 "path": "outcomes/redirect",
                 "icon": "external-link"
+              },
+              {
+                "title": "Design (custom HTML)",
+                "path": "canvas/design-node",
+                "icon": "code"
               }
             ]
           },

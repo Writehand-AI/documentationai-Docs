@@ -1,0 +1,123 @@
+---
+title: Design node
+description: Deliver a fully custom HTML output page — paste any design, embed live variable tokens, and render a personalised experience for every client.
+---
+
+The **Design node** is a multi-page output node that lets you deliver a completely custom HTML experience at the end of a product. Unlike Report and Document nodes — which use the Productised page builder — the Design node accepts raw HTML. You paste any layout, embed variable tokens, and the platform resolves them live when a client views the page.
+
+This is the output node to reach for when you want complete visual control: a premium branded report layout you generated with Claude, a design from Gamma or another AI design tool, or a custom-built experience you've coded yourself.
+
+---
+
+## How it works
+
+1. Add a **Design node** to your canvas and connect it to your AI Product node as an output.
+2. Open the node's settings panel and add one or more pages.
+3. For each page, paste your HTML (and optionally CSS) into the editor.
+4. Embed `{{ variable }}` tokens anywhere in the HTML — they are resolved live when a client views the page.
+5. Publish your product. Every client who completes it receives their own personalised version of the design.
+
+<Callout kind="info">Variable tokens are resolved server-side at view time — not at generation time. This means you can update the HTML of a live product and all future views will use the new design, without re-running the AI workflow.</Callout>
+
+---
+
+## Variable tokens
+
+The Design node supports four variable categories, all using the same `{{ category:key }}` syntax:
+
+| Token | Source | Example |
+|---|---|---|
+| `{{ form:fieldName }}` | A field from the product's form | `{{ form:company }}` |
+| `{{ node:varName }}` | Full text output from an AI node | `{{ node:reportOutput }}` |
+| `{{ object:varName }}` | A named field inside a structured AI output | `{{ object:score }}` |
+| `{{ custom:key }}` | A workspace-level custom variable | `{{ custom:bookingUrl }}` |
+
+<Callout kind="tip">Not sure what tokens are available in your product? Ask Claude: *"List the variable tokens for my [product name] product"* — Claude calls `get_variables` and returns every form field and AI node output with their exact `{{ }}` syntax ready to copy.</Callout>
+
+### Example
+
+If your AI Product node has `nodeVar` set to `report` and your form has a field named `firstName`, your HTML could include:
+
+```html
+<h1>Hi {{ form:firstName }}, here's your report</h1>
+<div class="report-body">
+  {{ node:report }}
+</div>
+```
+
+When a client named "Sarah" views the page, they see their name and their specific AI-generated report — no one else's.
+
+---
+
+## Multi-page output
+
+A single Design node can have multiple pages. Use pages to structure a longer deliverable:
+
+- **Page 1** — Executive summary or score overview
+- **Page 2** — Detailed analysis or recommendations
+- **Page 3** — Next steps and call to action
+
+Each page has its own HTML and can reference any variable in the product. Clients navigate between pages sequentially.
+
+---
+
+## Building your HTML
+
+You can write HTML by hand or generate it with an AI tool and paste it in. A few approaches that work well:
+
+**With Claude (via MCP)**
+Ask Claude to generate a premium HTML layout for your report, then apply it directly:
+> *"Generate a dark-themed premium HTML layout for a leadership readiness report. Use {{ node:report }} for the main content and {{ form:firstName }} in the header. Then apply it to my Leadership Assessment product."*
+
+Claude calls `get_variables` to know what tokens are available, writes the HTML, and calls `update_page` to apply it. Returns a demo URL so you can preview the result.
+
+**From Gamma or another AI design tool**
+Export as HTML, paste into the Design node's HTML editor, then manually replace the placeholder content with `{{ variable }}` tokens.
+
+**Hand-coded**
+Write your own HTML and CSS for complete control. Use the Variable picker button in the settings panel to browse and insert available tokens.
+
+---
+
+## Settings panel
+
+Click the Design node on the canvas to open its settings panel. It contains:
+
+**Pages list**
+Add, reorder, and delete pages. Each page has a name for your reference (not shown to clients).
+
+**HTML editor**
+Paste or type the full HTML for the selected page. The Variable picker button (top right) lists all available `{{ }}` tokens from the connected workflow.
+
+**Custom HTML field**
+A quick-entry field for simpler layouts. If this is populated, it takes priority over the full page builder template for this page.
+
+**CSS (optional)**
+Apply additional CSS to the page. This is applied alongside the page's HTML — useful for adding fonts, overriding link colours, or fine-tuning spacing.
+
+---
+
+## Design node vs Report node
+
+| | Design node | Report node |
+|---|---|---|
+| **How you design it** | Raw HTML + CSS | Productised page builder (drag-and-drop sections) |
+| **Visual control** | Complete — any layout you can write | Section-based — confined to the builder's blocks |
+| **Best for** | Premium branded layouts, AI-generated designs, custom-coded experiences | Standard reports where the builder's sections are sufficient |
+| **Variable tokens** | Same `{{ }}` syntax | Same `{{ }}` syntax |
+| **Multi-page** | Yes — multiple pages per node | Yes — multiple sections per page |
+
+Both nodes can be used in the same product. You can have a Report node for one output and a Design node for another.
+
+---
+
+## Using the MCP to edit output pages
+
+Once a product is live, you can update its Design node output pages directly from Claude without opening the canvas:
+
+1. **`get_page`** — lists all pages with their IDs and a preview of the current HTML
+2. **`get_variables`** — lists every `{{ }}` token available in the product
+3. **`update_page`** — replaces the HTML (and optionally CSS) of a specific page
+4. **`get_product`** — returns the demo URL so you can preview the change immediately
+
+This is the full conversational editing loop described in the [Claude MCP integration](/integrations/mcp).

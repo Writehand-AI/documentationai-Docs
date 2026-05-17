@@ -24,8 +24,8 @@ Productised is an AI product builder for coaches, consultants, and experts. You 
   <Card title="Brain" icon="brain" href="#brain">
     Your strategic AI assistant for deciding what to build.
   </Card>
-  <Card title="Funnel View" icon="filter" href="#funnel-view">
-    Organise products by ToFU, MoFU, and BoFU.
+  <Card title="Claude MCP" icon="cpu" href="#claude-mcp">
+    Build, edit, and publish products conversationally from inside Claude.
   </Card>
   <Card title="Analytics" icon="bar-chart-2" href="#analytics">
     Responses, insights, talking points, and exports.
@@ -64,6 +64,7 @@ Outcomes are what your audience receives after completing a product. Connect an 
 
 - **Report** — a visual, page-built diagnostic. Sections pull in AI-generated content and collected data via variables. Best for lead magnets and diagnostics.
 - **Document** — a written deliverable: strategy brief, action plan, proposal. Structured, text-forward, and fully personalised.
+- **Design** — a fully custom HTML output page. Paste any layout — from Claude, Gamma, or your own code — embed `{{ variable }}` tokens, and the platform renders a personalised version for every client. Full visual control.
 - **Advisor Chat** — a full-screen, personalised advisory session. The AI speaks first using everything it collected — no prompting required — then opens the floor for follow-up questions. The closest a Productised product gets to a real-time advisor conversation.
 - **Redirect** — routes the audience to a specific URL when the product completes. Useful for routing different personas to different pages based on their result.
 
@@ -114,6 +115,24 @@ Every product produces a unique output for the person who went through it. Perso
 - **Personas** — map score ranges to named persona profiles, each with its own content, call-to-action, and (optionally) a redirect. A high-scoring respondent sees different content and a different CTA than a low-scoring one.
 
 [Set up scoring and personas &rarr;](/canvas#scoring-node)
+
+## Claude MCP
+
+Productised ships a native MCP (Model Context Protocol) server at `https://app.productised.ai/api/mcp`. Connect it to Claude Desktop or Claude.ai and you can control your entire workspace from inside a Claude conversation — no dashboard required.
+
+With the 16-tool MCP integration, Claude can:
+
+- **Read** your products, leads, and analytics
+- **Create** a product from a description and return a one-click build link
+- **Edit** the AI prompt, welcome message, and button config without opening the canvas
+- **Replace** the HTML design of an output page with a single message
+- **Publish** a product and return the live URL
+- **Ask your Brain** strategic questions with full workspace context
+- **Preview** every change instantly via a demo URL
+
+Every write operation returns a demo URL — a live, publicly accessible preview — so you can see the result without logging in.
+
+[Set up Claude MCP →](/integrations/mcp)
 
 ## Analytics
 
