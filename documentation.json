@@ -478,6 +478,17 @@
             "icon": "history"
           }
         ]
+      },
+      {
+        "tab": "Legal",
+        "icon": "shield",
+        "pages": [
+          {
+            "title": "Legal documents",
+            "path": "legal",
+            "icon": "file-text"
+          }
+        ]
       }
     ]
   },
