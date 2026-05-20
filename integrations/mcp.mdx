@@ -13,7 +13,36 @@ Productised ships a native MCP (Model Context Protocol) integration — Anthropi
 
 ## What Claude can do
 
-Once connected, Claude gains **16 live tools** against your Productised workspace, organised across four areas:
+Once connected, Claude gains **22 live tools** against your Productised workspace, organised across five areas:
+
+### Daily briefing & lead pipeline
+
+<Columns cols="2">
+  <Card title="get_morning_briefing" icon="sun">
+    Start every session with a full daily briefing — new leads today vs yesterday, hot prospects needing attention, and a per-product activity breakdown. No parameters needed.
+  </Card>
+  <Card title="get_hot_leads" icon="flame">
+    Return your most promising leads — responses tagged "hot-lead" or with a high AI score — across all products. Optionally filter by product, score threshold, or lookback period.
+  </Card>
+  <Card title="get_recent_activity" icon="activity">
+    A feed of recent submissions across all products — contact details, product, segment, pipeline status, and tags. Great for a quick scan before a follow-up session.
+  </Card>
+  <Card title="get_responses" icon="inbox">
+    Pull recent submissions for a specific product — contact details, form answers, and AI-generated outputs, with human-readable question labels.
+  </Card>
+  <Card title="tag_response" icon="tag">
+    Add, remove, or replace tags on a response. Use tags like "hot-lead", "booked-call", "converted" to organise your pipeline.
+  </Card>
+  <Card title="update_response_status" icon="check-circle">
+    Move a lead through your pipeline: "new" → "contacted" → "in_progress" → "converted" or "lost".
+  </Card>
+  <Card title="get_response" icon="user">
+    Full detail on one response — all form answers, AI outputs, tags, status, and contact info.
+  </Card>
+  <Card title="search_responses" icon="search">
+    Filter responses by date, segment, status, tags, or keyword. Use this to find specific contacts or segment groups.
+  </Card>
+</Columns>
 
 ### Read your workspace
 
@@ -24,14 +53,14 @@ Once connected, Claude gains **16 live tools** against your Productised workspac
   <Card title="get_product" icon="file-text">
     Full details for a specific product: form questions, workflow structure, and node IDs.
   </Card>
-  <Card title="get_responses" icon="inbox">
-    Pull recent lead submissions — contact details, form answers, and AI-generated outputs, with human-readable question labels.
-  </Card>
   <Card title="get_product_url" icon="link">
     Generate a shareable link, optionally pre-filled with a contact's name and email — ready to send.
   </Card>
   <Card title="get_analytics" icon="bar-chart-2">
     Response count, last submission date, 7-day daily trend, and completion rate for any product.
+  </Card>
+  <Card title="get_workspace_stats" icon="layout-dashboard">
+    High-level workspace totals — product counts, response counts, top products — across your entire account.
   </Card>
 </Columns>
 
@@ -44,6 +73,9 @@ Once connected, Claude gains **16 live tools** against your Productised workspac
   <Card title="publish_product" icon="globe">
     Set a product to public and get the live shareable URL — without opening the canvas.
   </Card>
+  <Card title="clone_product" icon="copy">
+    Clone an existing product to reuse as a template for a new niche or audience. Follow up with `update_node` to customise.
+  </Card>
 </Columns>
 
 ### Edit conversationally
@@ -55,6 +87,12 @@ Once connected, Claude gains **16 live tools** against your Productised workspac
   <Card title="update_node" icon="sliders">
     Patch any canvas node's configuration by node ID or type. Change the system prompt on an AI Chat node, update a node label, or modify any node-level setting.
   </Card>
+  <Card title="get_form_questions" icon="list">
+    Read the current intake questions for a product — field names, labels, and required flags.
+  </Card>
+  <Card title="update_form_questions" icon="edit">
+    Replace the intake question set for a product conversationally — no canvas needed.
+  </Card>
   <Card title="get_page" icon="file">
     Retrieve the current HTML and page IDs for a product's Design node output pages. Read the existing design before replacing it.
   </Card>
@@ -63,6 +101,9 @@ Once connected, Claude gains **16 live tools** against your Productised workspac
   </Card>
   <Card title="get_variables" icon="hash">
     List every `{{ form:x }}` and `{{ node:x }}` token available in a product — with their human labels and copy-ready syntax. Call this before writing HTML for `update_page`.
+  </Card>
+  <Card title="set_variable" icon="key">
+    Create or update a workspace variable — brand voice, pricing, ICP, niche — available as `{{ custom:key }}` across all products automatically.
   </Card>
 </Columns>
 
@@ -159,7 +200,7 @@ This is what the whitepaper calls the "Live Preview System" — you describe wha
     - **Auth header:** `Authorization: Bearer YOUR_API_KEY`
   </Step>
   <Step title="Save and start a conversation">
-    Click Save. Start a new conversation — Claude will now have access to your 16 Productised tools.
+    Click Save. Start a new conversation — Claude will now have access to your 22 Productised tools.
   </Step>
 </Steps>
 
@@ -168,6 +209,34 @@ This is what the whitepaper calls the "Live Preview System" — you describe wha
 ## Example conversations
 
 These are real things you can say to Claude once connected.
+
+**Start your day without opening the dashboard:**
+> *"Give me my morning briefing"*
+
+Claude calls `get_morning_briefing` and returns new leads today vs yesterday, hot prospects needing attention, and a per-product breakdown — formatted and ready to read.
+
+---
+
+**Find your best prospects:**
+> *"Show me my hot leads from the last two weeks"*
+
+Claude calls `get_hot_leads` and returns contacts tagged "hot-lead" or with a high AI score, sorted by recency across all your products.
+
+---
+
+**Review recent activity:**
+> *"What came in this week across all my products?"*
+
+Claude calls `get_recent_activity` and returns a feed of submissions with contact details, product, segment, and pipeline status.
+
+---
+
+**Move a lead through the pipeline:**
+> *"Tag Sarah from Acme Corp as a hot lead and mark her as contacted"*
+
+Claude calls `search_responses` to find Sarah, then `tag_response` and `update_response_status` in sequence. No CRM login needed.
+
+---
 
 **Build a product end-to-end:**
 > *"Build me a leadership readiness scorecard for executive coaches — scored report output, top of funnel"*
@@ -187,13 +256,6 @@ Claude calls `get_product` to find the node ID, then `update_node` to patch the 
 > *"Show me what my Leadership Report output page currently looks like, then replace it with a premium dark-theme layout"*
 
 Claude calls `get_page` (reads current HTML + page IDs), then `get_variables` (finds all `{{ }}` tokens), then writes and applies new HTML via `update_page`. Returns the demo URL.
-
----
-
-**Pull your leads:**
-> *"Show me the last 10 people who completed my Business Readiness Assessment"*
-
-Claude calls `get_responses` and returns contact details, form answers, and AI outputs inline — no need to log into Productised.
 
 ---
 
