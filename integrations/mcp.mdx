@@ -3,7 +3,7 @@ title: Claude MCP
 description: Connect your Productised workspace directly to Claude — build, edit, and publish AI products without leaving a conversation.
 ---
 
-Productised ships a native MCP (Model Context Protocol) integration — Anthropic's open standard for connecting Claude to external tools and live data. Once connected, Claude can read your workspace, pull lead data, create products, edit their design, and publish them — all from inside a Claude conversation, without you opening a dashboard.
+Productised ships a native MCP (Model Context Protocol) integration — Anthropic's open standard for connecting Claude to external tools and live data. Once connected, Claude can read your workspace, pull lead data, create products, edit their design, theme, branding, domain, and publish them — all from inside a Claude conversation, without you opening a dashboard.
 
 <Callout kind="info">
 **What makes this different from Claude's built-in integrations (Google Drive, Notion, etc.)?** Those are built by Anthropic and give Claude read access to files. The Productised MCP gives Claude *write* access to your actual workspace objects — your products, their AI prompts, their output page HTML, their visibility. Claude can create and fully edit a live AI product conversationally, then give you a shareable preview URL instantly.
@@ -13,7 +13,7 @@ Productised ships a native MCP (Model Context Protocol) integration — Anthropi
 
 ## What Claude can do
 
-Once connected, Claude gains **22 live tools** against your Productised workspace, organised across five areas:
+Once connected, Claude gains **43 live tools** against your Productised workspace, organised across six areas:
 
 ### Daily briefing & lead pipeline
 
@@ -107,6 +107,38 @@ Once connected, Claude gains **22 live tools** against your Productised workspac
   </Card>
 </Columns>
 
+### Branding, theme & domain
+
+<Columns cols="2">
+  <Card title="list_themes" icon="palette">
+    See all 20 visual theme presets — name, description, primary colour, and font — so you can pick the right look for your product.
+  </Card>
+  <Card title="apply_theme" icon="paint-bucket">
+    Apply a named theme preset to a product in one call — sets background colour, text, button colour, font, and gradient all at once.
+  </Card>
+  <Card title="update_font" icon="type">
+    Switch the typeface used across a product's chat interface. Choose from 15 options including Inter, Poppins, Space Grotesk, and Oxanium.
+  </Card>
+  <Card title="update_branding" icon="image">
+    Set a custom logo URL for a product and optionally a click-through link — replaces the default Productised branding in the product header.
+  </Card>
+  <Card title="set_custom_domain" icon="globe">
+    Configure a custom hostname (e.g. quiz.yoursite.com) and get the exact DNS CNAME record to add at your registrar.
+  </Card>
+  <Card title="get_domain_status" icon="radio">
+    Check whether a custom domain is active, pending DNS propagation, or not yet configured — includes setup instructions if still pending.
+  </Card>
+  <Card title="update_seo" icon="search">
+    Set page title, meta description, Open Graph image, favicon, and keywords for a product's output pages — without opening the editor.
+  </Card>
+  <Card title="update_product_settings" icon="settings">
+    Lock submissions after a set number of responses, or toggle email notifications when new leads arrive.
+  </Card>
+  <Card title="set_webhook" icon="radio">
+    Add or remove an outgoing webhook — Productised fires a POST to your URL each time a response is submitted, payload includes all form answers and AI outputs.
+  </Card>
+</Columns>
+
 ### Brain and strategy
 
 <Columns cols="2">
@@ -196,11 +228,14 @@ This is what the whitepaper calls the "Live Preview System" — you describe wha
   <Step title="Enter the connection details">
     Fill in:
     - **Name:** Productised
-    - **URL:** `https://app.productised.ai/api/mcp`
-    - **Auth header:** `Authorization: Bearer YOUR_API_KEY`
+    - **URL:** `https://app.productised.ai/api/mcp?apiKey=YOUR_API_KEY`
+
+    Replace `YOUR_API_KEY` with the key you copied. The key goes in the URL — no separate auth header needed.
+
+    <Callout kind="info">Claude.ai's custom connector (currently in beta) doesn't support custom auth headers in the UI. Embedding your key in the URL is the supported workaround. The key is sent over HTTPS and never exposed to other users.</Callout>
   </Step>
   <Step title="Save and start a conversation">
-    Click Save. Start a new conversation — Claude will now have access to your 22 Productised tools.
+    Click Save. Start a new conversation — Claude will now have access to your Productised tools.
   </Step>
 </Steps>
 
@@ -294,13 +329,34 @@ Claude calls `update_product` with the `ai_chat_config` patch. Returns the demo 
 
 ---
 
+**Change the theme:**
+> *"Show me the available themes and apply the dark one to my Leadership product"*
+
+Claude calls `list_themes` and presents the 20 options. Once you pick, it calls `apply_theme` — all colours, font, and gradient updated in one shot. Returns the demo URL.
+
+---
+
+**Set up a custom domain:**
+> *"Set quiz.mysite.com as the URL for my Business Diagnostic"*
+
+Claude calls `set_custom_domain`, saves the domain, and returns the exact CNAME record you need to add at your registrar. Run `get_domain_status` to check propagation.
+
+---
+
+**Configure a webhook for your CRM:**
+> *"Send every new lead from my Readiness product to https://hooks.zapier.com/hooks/catch/12345/abcde"*
+
+Claude calls `set_webhook` with the URL and `enabled: true`. Productised will POST full response data — contact details, form answers, and AI output — each time a lead completes.
+
+---
+
 ## Privacy and security
 
 **Does Claude need my password?**
 No. Claude authenticates only via your API key. You control access and can revoke any key at any time from **Settings → API → Keys**.
 
 **What can Claude write or change?**
-Claude can create products, update products (name, visibility, AI chat config, individual node config, output page HTML), save Brain ideas, and publish products. It cannot delete products, pages, or responses.
+Claude can create products, update products (name, visibility, AI chat config, node config, output page HTML, theme, font, branding, custom domain, SEO metadata, submission settings, and webhooks), save Brain ideas, and publish products. It cannot delete products, pages, or responses.
 
 **Is my data sent to Anthropic?**
 When Claude uses an MCP tool, the data returned (e.g. your lead list) is included in your conversation context and processed by Anthropic under their standard privacy policy. This is equivalent to copying and pasting that data into Claude yourself.
