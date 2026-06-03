@@ -1,0 +1,140 @@
+---
+title: Privacy & security
+description: How the connector authenticates, what Claude can see, what it can change, and how to audit and revoke access.
+---
+
+The Claude Connector is a deliberately scoped, auditable, fully revocable connection between Claude and your Productised workspace. It does not give Claude broad access to your account — it gives Claude access to a specific set of read and write operations, tied to a specific API key, every call of which is logged.
+
+---
+
+## Authentication
+
+The connector authenticates only via an **API key** you generate in **Settings → API → Keys**. The key:
+
+- Is unique to your workspace
+- Is shown once at creation and never displayed again
+- Can be **revoked at any time** from the same page
+- Can be **rotated** by generating a new one and deleting the old
+
+Claude never sees your password. You can have multiple API keys (e.g. one for Claude Desktop, one for Claude.ai, one for an automated agent) and revoke any of them independently.
+
+---
+
+## What Claude can read
+
+Through the connector, Claude can read:
+
+- Your products — names, configs, workflows, page HTML, settings
+- Your responses — every submission, including all form answers and AI-generated outputs
+- Your analytics — counts, trends, segments, AI insights
+- Your Brain — saved ideas, memory, journey plans, knowledge sources
+- Your workspace variables and webhook URLs
+
+When Claude reads data through an MCP tool, that data is included in your Claude conversation context and processed by Anthropic under their standard privacy policy. This is **equivalent to manually copying and pasting that data into Claude** — the connector is just automating the copy/paste.
+
+---
+
+## What Claude can write
+
+Claude can:
+
+- **Create** products
+- **Update** products (name, visibility, AI chat config, node config, scoring config, output page HTML, theme, font, branding, custom domain, SEO metadata, submission settings)
+- **Publish** products
+- **Tag** and **re-status** responses
+- **Save** Brain ideas, memory items, and knowledge sources
+- **Set or remove** workspace variables and webhooks
+- **Upload** images (re-hosted from URLs or base64)
+
+Every write is logged in **Settings → API → Logs** with the timestamp, tool name, and result.
+
+---
+
+## What Claude cannot do
+
+- **Delete responses.** Leads and their data are immutable through the connector — protecting your audit trail.
+- **Change billing or subscription state.** No financial actions exposed.
+- **Read or send personal email/messages.** It operates on your Productised workspace only.
+- **Access other workspaces.** Each API key is scoped to a single workspace.
+- **Bypass workspace permissions.** If your account doesn't have access to something, the connector doesn't either.
+
+Product deletion (`delete_product`) does exist and is destructive — but it requires `confirm:true` as a second step, and is logged like everything else. Use cautiously.
+
+---
+
+## Audit trail
+
+Every MCP call is recorded in **Settings → API → Logs** with:
+
+- Timestamp
+- API key name (so you can tell which client made the call)
+- Tool name
+- Parameters
+- Result (success/failure)
+- Origin (Claude.ai, Claude Desktop, Claude Code, custom)
+
+You can filter, search, and export the log. This gives you a full record of every action Claude took on your workspace.
+
+---
+
+## Data flow
+
+When you ask Claude a question:
+
+1. **Your prompt** is sent to Anthropic for processing
+2. If the prompt triggers a tool call, **Anthropic sends a tool request** to `mcp.productised.ai/mcp` with your API key
+3. The Productised MCP server **authenticates** the key, **performs the operation**, and **returns a structured result** to Anthropic
+4. **Claude reads the result** and uses it to compose its reply
+
+At every step:
+
+- The Productised MCP server logs the tool call
+- Anthropic processes the prompt, tool args, and tool results under their privacy policy
+- The data Claude reads is in your conversation context (same as if you'd pasted it)
+
+The connector does not send your data anywhere else — there's no third party in the loop.
+
+---
+
+## Hosting & infrastructure
+
+- The MCP server is hosted on Fly.io in the `iad` (US East) region, co-located with the Productised main app and database
+- It runs on multiple machines with session affinity (via Fly's `fly-replay` header) for zero-downtime deploys and redundancy
+- All traffic is over HTTPS / TLS 1.2+
+- Standard security headers (HSTS, X-Content-Type-Options, X-Frame-Options) are set on every response
+- Rate limits prevent abuse — both per-key and per-IP
+
+---
+
+## SSRF protection
+
+The `upload_image` tool fetches images from arbitrary URLs. This is a common SSRF vector if unguarded, so the connector enforces:
+
+- HTTPS / HTTP only (no `file://`, `data:`, `javascript:`)
+- Blocked: loopback (`localhost`, `127.0.0.1`), private ranges (`10.*`, `172.16-31.*`, `192.168.*`), link-local (`169.254.*`), cloud metadata (`169.254.169.254`)
+- 12-second timeout on the fetch
+- 10 MB size cap
+- Content-type validation against an allowlist of image MIME types
+
+---
+
+## Revoking access
+
+To stop Claude from making any further calls:
+
+1. Go to **Settings → API → Keys** in Productised
+2. Click **Revoke** on the relevant key
+
+The revocation is immediate. Any subsequent tool call from Claude using that key returns a `401 Unauthorized`. The Claude conversation continues — Claude just can't execute connector tools any more.
+
+You can also **delete the connector** from Claude.ai or Claude Desktop entirely. This removes the tool list from Claude's context immediately.
+
+---
+
+## Compliance & data handling
+
+- Productised stores responses in a PostgreSQL database hosted on Supabase (US East region)
+- Backups are encrypted at rest
+- The connector inherits Productised's data-handling policies — see [Legal](/legal) for the full privacy policy
+
+For any specific compliance question — GDPR, SOC 2, data residency — email `support@productised.ai`.

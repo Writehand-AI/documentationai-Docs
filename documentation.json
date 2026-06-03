@@ -407,19 +407,123 @@
         ]
       },
       {
-        "tab": "Integrations",
-        "icon": "plug",
+        "tab": "Claude Connector",
+        "icon": "sparkles",
         "groups": [
           {
-            "group": "AI & Claude",
+            "group": "Get started",
+            "icon": "rocket",
             "pages": [
               {
-                "title": "Claude MCP",
-                "path": "integrations/mcp",
+                "title": "What is the Claude Connector?",
+                "path": "claude-connector/overview",
+                "icon": "home"
+              },
+              {
+                "title": "Why connect Productised to Claude",
+                "path": "claude-connector/why-use-it",
+                "icon": "compass"
+              },
+              {
+                "title": "Setup",
+                "path": "claude-connector/setup",
+                "icon": "plug"
+              },
+              {
+                "title": "Your first conversation",
+                "path": "claude-connector/first-conversation",
+                "icon": "message-square"
+              }
+            ]
+          },
+          {
+            "group": "Working in Claude",
+            "icon": "sparkles",
+            "pages": [
+              {
+                "title": "Build a product end-to-end",
+                "path": "claude-connector/build-a-product",
+                "icon": "zap"
+              },
+              {
+                "title": "Design custom result pages",
+                "path": "claude-connector/result-pages",
+                "icon": "code"
+              },
+              {
+                "title": "Result page templates",
+                "path": "claude-connector/result-templates",
+                "icon": "layout"
+              },
+              {
+                "title": "Landing pages",
+                "path": "claude-connector/landing-pages",
+                "icon": "globe"
+              },
+              {
+                "title": "Add images, logos & favicons",
+                "path": "claude-connector/assets",
+                "icon": "image"
+              },
+              {
+                "title": "Branding, themes & domain",
+                "path": "claude-connector/branding",
+                "icon": "palette"
+              },
+              {
+                "title": "Manage leads & responses",
+                "path": "claude-connector/leads",
+                "icon": "users"
+              },
+              {
+                "title": "Ask your Brain",
+                "path": "claude-connector/brain",
                 "icon": "cpu"
               }
             ]
           },
+          {
+            "group": "Reference",
+            "icon": "book",
+            "pages": [
+              {
+                "title": "All tools",
+                "path": "claude-connector/tools-reference",
+                "icon": "list"
+              },
+              {
+                "title": "Demo URLs & live preview",
+                "path": "claude-connector/demo-urls",
+                "icon": "eye"
+              },
+              {
+                "title": "Token resolution",
+                "path": "claude-connector/tokens",
+                "icon": "hash"
+              },
+              {
+                "title": "Example conversations",
+                "path": "claude-connector/examples",
+                "icon": "message-circle"
+              },
+              {
+                "title": "Privacy & security",
+                "path": "claude-connector/security",
+                "icon": "shield"
+              },
+              {
+                "title": "Troubleshooting",
+                "path": "claude-connector/troubleshooting",
+                "icon": "alert-triangle"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "Integrations",
+        "icon": "plug",
+        "groups": [
           {
             "group": "Automation",
             "pages": [

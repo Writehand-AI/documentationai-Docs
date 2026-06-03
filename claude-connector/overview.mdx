@@ -1,0 +1,91 @@
+---
+title: What is the Claude Connector?
+description: Connect your Productised workspace directly to Claude — build, design, edit, and publish AI products without ever leaving a conversation.
+---
+
+The Claude Connector is Productised's native MCP (Model Context Protocol) integration with Claude. Once connected, Claude can read your workspace, build entire AI products from scratch, edit the design of result pages, manage your leads, publish products to public URLs, and ask your Brain for strategic advice — all from inside a Claude conversation.
+
+You don't have to choose between Productised and Claude. **The connector makes them one continuous workflow** — Claude is your design partner, Productised is the platform that ships the product.
+
+<Callout kind="info">
+**Productised works perfectly on its own.** You don't need Claude to build great AI products — the canvas, Brain, and the Create-with-AI flow do everything you need from a browser. The connector is for people who already live in Claude and want their full Productised workspace accessible from there.
+</Callout>
+
+---
+
+## What you can do from Claude
+
+Once connected, Claude has **64 live tools** against your Productised workspace. Anything you can do in the dashboard — and a few things you can only do conversationally — you can do by talking to Claude.
+
+<Columns cols="2">
+  <Card title="Build new products" icon="zap" href="/claude-connector/build-a-product">
+    Describe your product in plain English. Claude plans the structure, creates the product, generates the conversation flow, configures the AI agent, and gives you a live preview URL — in one message.
+  </Card>
+  <Card title="Design custom result pages" icon="code" href="/claude-connector/result-pages">
+    Ask Claude to design the result page. It writes the HTML, the platform stores it, and every respondent gets a personalised version filled with their data, scores, and insights.
+  </Card>
+  <Card title="Edit anything conversationally" icon="edit-2">
+    Change a system prompt, swap a question, tweak the welcome copy, apply a new theme, switch the result template, set a custom domain — without opening the canvas.
+  </Card>
+  <Card title="Manage leads in chat" icon="users" href="/claude-connector/leads">
+    "Show me my hot leads from this week", "tag Sarah as contacted", "what came in across all my products?" — Claude reads, filters, and updates your pipeline.
+  </Card>
+  <Card title="Re-host assets from a URL" icon="image" href="/claude-connector/assets">
+    Scrape a logo or favicon from the user's website (Claude's web fetch), hand the URL to Productised, get a permanent CDN URL back. Use it for branding, SEO, or directly in the page HTML.
+  </Card>
+  <Card title="Ask your Brain" icon="cpu" href="/claude-connector/brain">
+    Strategic questions answered with full context — your existing products, brand voice, audience. Surfaces build-ready ideas you can act on in the same message.
+  </Card>
+</Columns>
+
+---
+
+## How the connector is different from Claude's built-in integrations
+
+Claude's built-in integrations (Google Drive, Notion, GitHub) give Claude **read access** to files. They're great for retrieval — Claude can answer questions about your documents.
+
+The Productised Connector is fundamentally different: it gives Claude **read and write access to your actual product workspace**. Claude can:
+
+- Create new products that go live at a shareable URL
+- Rewrite the AI agent's system prompt
+- Replace the HTML of a result page that customers will see
+- Configure custom domains
+- Publish products to public
+
+Every change is real, persistent, and instantly previewable.
+
+---
+
+## Live Preview — see every change in one click
+
+Every write operation returns a **demo URL** alongside the standard public URL.
+
+The demo URL (`?demo=true`) is a fully functional, publicly accessible preview of the product that bypasses authentication, domain locks, and submission gates. Claude includes it in every response after a change, so you can open the live experience immediately without logging in.
+
+This is the closest thing to a real-time design loop with an LLM: describe → Claude calls the tool → you click the URL → you see the change.
+
+[Learn more about the demo URL flow →](/claude-connector/demo-urls)
+
+---
+
+## What the connector is *not*
+
+- **It's not a replacement for the canvas.** The canvas is still the right tool when you want to drag-and-drop, see connections visually, or work with non-trivial node graphs. The connector is for when you want to talk through changes.
+- **It's not a chatbot built on top of Productised.** It's a full tool API exposed to Claude — Claude does the talking, Productised does the work.
+- **It's not required to use Productised.** Everything works standalone. The connector is purely additive.
+
+---
+
+## Where to start
+
+<Columns cols="3">
+  <Card title="Why use the connector?" href="/claude-connector/why-use-it" icon="compass">
+    The case for connecting Productised to Claude — and who it's not for.
+  </Card>
+  <Card title="Set it up" href="/claude-connector/setup" icon="plug">
+    Connect Claude Desktop or Claude.ai in under 2 minutes.
+  </Card>
+  <Card title="Build your first product" href="/claude-connector/build-a-product" icon="zap">
+    A complete walkthrough — from a sentence to a live, publishable AI product.
+  </Card>
+</Columns>

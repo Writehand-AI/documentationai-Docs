@@ -1,0 +1,87 @@
+---
+title: Ask your Brain
+description: Strategic questions answered with full workspace context — what to build, where the funnel gaps are, how to position a new offer.
+---
+
+[Brain](/brain/what-is-brain) is your workspace-level strategic AI assistant. It knows your existing products, your brand voice, your niche, your previous Ideas, and your Journey Plan. From Claude, you can access Brain conversationally — the strategic layer above the product-building layer.
+
+---
+
+## When to use Brain through Claude
+
+- **Stuck on what to build next.** Ask Brain for funnel-gap-aware recommendations grounded in your existing suite.
+- **Stress-testing an idea.** Brain pushes back with positioning questions, audience fit, market evidence.
+- **Need a build-ready concept.** Brain surfaces specific product ideas (BUILD_THIS cards) with enough detail to feed straight into `plan_product`.
+- **Translate a vague intent into a brief.** "I want to do something with onboarding" → Brain proposes 2–3 specific shapes you could build.
+
+---
+
+## The four Brain tools
+
+<Columns cols="2">
+  <Card title="brain_ask" icon="cpu">
+    The strategic chat. Ask Brain anything — what to build, who for, how to position, where the gap is. Loads your workspace context automatically.
+  </Card>
+  <Card title="save_idea" icon="lightbulb">
+    Save a product idea directly to Brain's Ideas tab. Appears immediately in the dashboard, can be opened straight onto the canvas later.
+  </Card>
+  <Card title="get_latest_plan" icon="map">
+    Fetch your most recently generated Journey Plan — funnel stages, product recommendations, priorities, rationale.
+  </Card>
+  <Card title="search_documentation" icon="book-open">
+    Search the live Productised docs. When Claude isn't sure how a feature works, it can search the docs without you tabbing away.
+  </Card>
+</Columns>
+
+---
+
+## Typical Brain conversations
+
+**Strategic positioning:**
+> *"Based on everything you know about my workspace and brand voice, where's the biggest gap in my funnel right now and what would I build to fill it?"*
+
+`brain_ask` loads your product suite, brand voice, and Journey Plan. Returns a specific recommendation with reasoning.
+
+**Idea → product:**
+> *"That sounds great — save it as an idea and build it."*
+
+`save_idea` saves the concept; then Claude calls `plan_product` → `create_product` → `generate_product` to build it in the same turn.
+
+**Audit your funnel:**
+> *"Look at my products and tell me which funnel stages I'm missing and which products are doing the heavy lifting."*
+
+`brain_ask` cross-references your products against your funnel stages. Returns a gap analysis.
+
+**Reposition a product:**
+> *"My Discovery Call Replacement product isn't converting well. What would Brain change about the positioning?"*
+
+`brain_ask` looks at the product's content, your brand voice, and your audience. Returns positioning tweaks — and Claude can execute them via `update_product` / `update_node` if you say so.
+
+---
+
+## Two layers of intelligence
+
+It helps to think of the connector as exposing two distinct AI layers:
+
+<Columns cols="2">
+  <Card title="Brain (strategic)" icon="cpu">
+    *"What should I build, for whom, and why?"* — Brain answers the strategic questions before any product exists. It knows your whole workspace.
+  </Card>
+  <Card title="Product-building (tactical)" icon="zap">
+    *"Build the thing we just talked about."* — `plan_product` → `create_product` → `generate_product` execute the brief. They build one product at a time.
+  </Card>
+</Columns>
+
+A complete session often runs through both layers: ask Brain what to build → save the idea → build it → preview → iterate. One conversation, one URL at the end.
+
+---
+
+## Privacy
+
+Brain's memory and context are scoped to your workspace. When Claude calls `brain_ask`, the workspace context (brand voice, product list, niche) is loaded as part of the prompt, processed by the Productised side, and returned to Claude. Anthropic sees the question and the answer in your conversation — equivalent to copying the strategic context into a Claude chat manually.
+
+You can review every Brain call in your workspace **Logs**.
+
+[More on Brain →](/brain/what-is-brain)
+[Memory →](/brain/memory)
+[Journey Plan →](/brain/plan)

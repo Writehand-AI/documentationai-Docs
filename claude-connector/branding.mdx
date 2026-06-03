@@ -1,0 +1,135 @@
+---
+title: Branding, themes & domain
+description: Apply themes, logos, fonts, SEO metadata, and a custom domain to any product — all from a Claude conversation.
+---
+
+The connector covers the full brand surface of a product. Themes, fonts, logos, SEO metadata, custom domains, growth settings — every visual lever exposed in the dashboard is also exposed as a tool. Most can be set in a single message.
+
+---
+
+## Themes
+
+Productised ships **20 visual theme presets** — coordinated background, accent colour, font, and gradient. They're designed to look professional out of the box without you picking individual colours.
+
+<Columns cols="2">
+  <Card title="list_themes" icon="palette">
+    See all 20 presets with name, description, primary colour, and font. Returns a swatch gallery so you can browse before picking.
+  </Card>
+  <Card title="apply_theme" icon="paint-bucket">
+    Apply a named theme to a product in one call — sets background, text colour, button colour, font, and gradient all at once.
+  </Card>
+</Columns>
+
+> *"Show me the available themes."*
+> *"Apply the dark serif theme to my AI Readiness Scorecard."*
+
+Themes also influence the result-page templates — when you re-apply a result template, it picks up the product's accent colour automatically.
+
+---
+
+## Fonts
+
+<Columns cols="2">
+  <Card title="update_font" icon="type">
+    Switch the typeface used across a product's chat interface. 15 options including Inter, Poppins, Space Grotesk, Oxanium, IBM Plex, Source Serif 4.
+  </Card>
+  <Card title="Built-in result fonts" icon="book">
+    Inter and Source Serif 4 are always preloaded on result pages and landing pages, so any Claude-designed page can use them without a custom `<link>`.
+  </Card>
+</Columns>
+
+---
+
+## Logo and branding chrome
+
+<Columns cols="2">
+  <Card title="update_branding" icon="image">
+    Set a custom logo URL for a product, plus an optional click-through link. Replaces the default Productised mark in the product header.
+  </Card>
+  <Card title="upload_image" icon="upload" href="/claude-connector/assets">
+    Re-host any image (from a URL or base64) onto the Productised CDN. Returns a permanent URL you can use in `update_branding`, `update_seo`, or inline in HTML.
+  </Card>
+</Columns>
+
+The common pattern — *"use the logo from acme.com as the branding"* — is covered in detail in [Add images, logos & favicons](/claude-connector/assets).
+
+---
+
+## SEO metadata
+
+`update_seo` covers what shows up in search and on social shares:
+
+- **Page title** and **meta description**
+- **Favicon** (the browser tab icon)
+- **Open Graph image** (link previews on Twitter, Slack, LinkedIn, etc.)
+- **Keywords**
+
+> *"Set the SEO for my Scorecard product — title 'AI Readiness Scorecard for B2B Marketing Leaders', description '5-minute diagnostic across six pillars …', og image at https://acme.com/og.jpg, favicon at https://acme.com/favicon.ico, keywords ai, marketing, scorecard, b2b."*
+
+Claude re-hosts the og/favicon URLs through `upload_image` first if they're external, then calls `update_seo` with the CDN URLs.
+
+---
+
+## Custom domains
+
+Take a product live on your own subdomain (e.g. `quiz.yoursite.com`) instead of `app.productised.ai/c/<id>`.
+
+<Columns cols="2">
+  <Card title="set_custom_domain" icon="globe">
+    Configure a custom hostname for a product and get the exact DNS `CNAME` record you need to add at your registrar.
+  </Card>
+  <Card title="get_domain_status" icon="radio">
+    Check whether DNS has propagated — `pending`, `verifying`, or `active` — with setup instructions if still pending.
+  </Card>
+</Columns>
+
+> *"Set quiz.acme.com as the URL for my Scorecard. Show me the CNAME I need to add."*
+
+Claude calls `set_custom_domain`, returns the CNAME (`quiz.acme.com CNAME proxy.productised.ai`), and you add it at your registrar. Run `get_domain_status` later to confirm propagation.
+
+---
+
+## Product-level settings
+
+<Columns cols="2">
+  <Card title="update_product" icon="edit-2">
+    Update name, visibility, welcome message, button text, button colour, system prompt, background, or welcome style. The "everyday" tool for chat-surface tweaks.
+  </Card>
+  <Card title="update_product_settings" icon="settings">
+    Lock submissions after N responses (useful for cohort caps), toggle email notifications when new leads arrive.
+  </Card>
+  <Card title="update_node" icon="sliders">
+    Patch any canvas node's configuration by ID or type — the system prompt of the AI Agent, a label on a Scoring node, anything node-level.
+  </Card>
+  <Card title="publish_product" icon="globe">
+    Flip a product to public and return the live shareable URL. The 'ship it' button as a tool.
+  </Card>
+</Columns>
+
+---
+
+## Workspace variables — write once, reuse everywhere
+
+Workspace variables (set via `set_variable`) are key/value pairs available across all your products as `{{ custom:key }}` tokens.
+
+Useful patterns:
+
+- `business_name` → injected into every product's branding and result pages
+- `cta_url` → your default Calendly link, switched in one place
+- `brand_voice` → a short style guide the AI agent references
+
+Brand voice and tone settings auto-propagate to every product's system prompt — change once, every product reads the new voice.
+
+> *"Set my workspace variable `cta_url` to https://cal.com/me/strategy and `business_name` to 'Acme Strategy Group'."*
+
+Now every product that uses `{{ custom:cta_url }}` or `{{ custom:business_name }}` in its templates picks up the new value on next render. No bulk updates needed.
+
+---
+
+## One-message brand pass
+
+A full brand pass for a fresh product, in a single message:
+
+> *"For my new Scorecard product: apply the dark serif theme, switch the font to Inter, set the logo and favicon from acme.com, set SEO title to 'AI Readiness Scorecard for B2B', description '5-minute diagnostic with personalised insights', og image from acme.com, custom domain quiz.acme.com, and set the welcome button label to 'Start the diagnostic →'. Publish it."*
+
+Claude calls every relevant tool in sequence. You get a single response with the live URL and a demo URL.

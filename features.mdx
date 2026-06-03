@@ -1,9 +1,9 @@
 ---
 title: Platform Features
-description: A complete overview of what Productised can do — from the canvas to Brain to deployment.
+description: A complete overview of what Productised can do — from the canvas to Brain to the Claude Connector.
 ---
 
-Productised is an AI product builder for coaches, consultants, and experts. You build on a visual canvas, chain AI nodes together, and ship products your audience can use — diagnostics, strategy sessions, proposals, and more. Here's everything the platform can do.
+Productised is an AI product builder for coaches, consultants, and experts. You build products that deliver personalised outcomes — diagnostics, scorecards, strategy briefs, live AI advisor sessions, branded results pages. Use it standalone in the browser, or drive your entire workspace from Claude via the [Claude Connector](/claude-connector/overview). Here's everything the platform can do.
 
 <Columns cols="2">
   <Card title="The Canvas" icon="layout" href="#the-canvas">
@@ -24,8 +24,8 @@ Productised is an AI product builder for coaches, consultants, and experts. You 
   <Card title="Brain" icon="brain" href="#brain">
     Your strategic AI assistant for deciding what to build.
   </Card>
-  <Card title="Claude MCP" icon="cpu" href="#claude-mcp">
-    Build, edit, and publish products conversationally from inside Claude.
+  <Card title="Claude Connector" icon="sparkles" href="#claude-connector">
+    Build, design, edit, and publish products conversationally from inside Claude — 64 tools against your live workspace.
   </Card>
   <Card title="Analytics" icon="bar-chart-2" href="#analytics">
     Responses, insights, talking points, and exports.
@@ -116,23 +116,25 @@ Every product produces a unique output for the person who went through it. Perso
 
 [Set up scoring and personas &rarr;](/canvas#scoring-node)
 
-## Claude MCP
+## Claude Connector
 
-Productised ships a native MCP (Model Context Protocol) server at `https://app.productised.ai/api/mcp`. Connect it to Claude Desktop or Claude.ai and you can control your entire workspace from inside a Claude conversation — no dashboard required.
+Productised ships a native MCP (Model Context Protocol) server at `https://mcp.productised.ai/mcp`. Connect it to Claude Desktop or Claude.ai and your entire workspace becomes accessible from inside a Claude conversation — no dashboard required.
 
-With the 16-tool MCP integration, Claude can:
+With **64 live tools**, Claude can:
 
-- **Read** your products, leads, and analytics
-- **Create** a product from a description and return a one-click build link
-- **Edit** the AI prompt, welcome message, and button config without opening the canvas
-- **Replace** the HTML design of an output page with a single message
-- **Publish** a product and return the live URL
+- **Read** your products, leads, analytics, and Brain context
+- **Build** new products end-to-end from a single description — including the conversation flow, system prompts, canvas workflow, and a default themed result page
+- **Design custom result pages** conversationally — Claude writes the HTML, the connector validates it against your AI agent's fields, you get a live preview
+- **Re-host images** from any URL onto Productised's CDN — perfect for branding a product with assets scraped from a customer's site
+- **Apply themes, fonts, logos, SEO metadata, and custom domains** in single-message brand passes
+- **Manage leads conversationally** — morning briefings, hot-lead lists, tagging, status changes, talking points
 - **Ask your Brain** strategic questions with full workspace context
-- **Preview** every change instantly via a demo URL
 
-Every write operation returns a demo URL — a live, publicly accessible preview — so you can see the result without logging in.
+Every write operation returns a **demo URL** — a fully-functional, publicly accessible preview that bypasses authentication, custom domains, and submission gates — so you see every change in one click.
 
-[Set up Claude MCP →](/integrations/mcp)
+The Connector is purely additive. Productised works perfectly standalone in the browser; the Connector is for people who already live in Claude and want their workspace accessible there.
+
+[Set up the Claude Connector →](/claude-connector/setup)
 
 ## Analytics
 

@@ -1,0 +1,163 @@
+---
+title: Example conversations
+description: Real prompts you can copy into Claude — and what each one triggers under the hood.
+---
+
+These are real, runnable prompts. Each one is a single message you can paste into Claude with the connector enabled. The annotation below each prompt describes which tools Claude calls and what comes back.
+
+---
+
+## Build a product end-to-end
+
+> *"Build me a Leadership Readiness Scorecard for first-time executive coaches — six questions scored across leadership presence, team dynamics, strategic thinking, business acumen, emotional intelligence, and growth mindset. Score 0–10 per pillar with a personalised insight, deliver a branded results page using the Radar template, and the CTA should be 'Book a discovery call' linking to https://cal.com/me/discovery."*
+
+**Triggers:** `plan_product` → `create_product` → `generate_product({ outcome: "design" })` → `apply_result_template({ template_id: "radar" })`
+**Returns:** A live demo URL — your product is real, themed, and shareable in ~30 seconds.
+
+---
+
+## Build the AI agent and result page separately
+
+> *"Create a Sales Process Diagnostic with 8 questions for B2B sales managers. Standard streamed report output. Warm, expert tone. Then design the results page in the Deep Insights style — strengths-and-gaps panels plus a 'what your answers reveal' narrative."*
+
+**Triggers:** `plan_product` → `create_product` → `generate_product({ outcome: "design" })` → `apply_result_template({ template_id: "insights" })`
+**Returns:** Demo URL.
+
+---
+
+## Iterate on a result page
+
+> *"Show me the current result page for my Leadership Readiness Scorecard, then move the strengths/gaps row above the radar chart, change the CTA copy to 'Book my coaching call', and make the radar polygon a deeper coral."*
+
+**Triggers:** `get_page` → reads HTML → `update_page` with edits
+**Returns:** New demo URL. Open and confirm.
+
+---
+
+## Brand from a customer site
+
+> *"Brand my Leadership Readiness Scorecard using the assets from acmecoaching.com — pull the logo, favicon, and og image, apply the dark serif theme, and set the system prompt tone to match their site copy."*
+
+**Triggers:** Claude web-fetches acmecoaching.com → `upload_image({ source_url: ... })` × 3 (logo, favicon, og) → `apply_theme({ theme_id: "dark-serif" })` → `update_branding({ logo_url })` → `update_seo({ favicon, og_image })` → `update_node({ system_prompt })`
+**Returns:** Demo URL.
+
+---
+
+## Switch the result design
+
+> *"Switch the result page on my Sales Process Diagnostic from Insights to Dimensions — and keep the existing agent fields where possible."*
+
+**Triggers:** `apply_result_template({ template_id: "dimensions" })`
+**Returns:** Demo URL.
+
+---
+
+## Design a custom landing page
+
+> *"Design a welcome page for my AI Readiness Scorecard. Pill at the top with the product name, bold serif headline 'How AI-ready is your business?', short subhead, two trust-signal bullets, then the platform's auto-CTA. Centred ~640px wide. No JavaScript."*
+
+**Triggers:** `set_welcome_html`
+**Returns:** Demo URL of the landing page.
+
+---
+
+## Daily morning briefing
+
+> *"Morning briefing, please."*
+
+**Triggers:** `get_morning_briefing`
+**Returns:** New leads today vs yesterday, hot prospects, per-product activity.
+
+---
+
+## Find a specific lead
+
+> *"Find Sarah from Acme Corp who took my Readiness Scorecard last week, give me the full detail, and prep talking points for a follow-up call."*
+
+**Triggers:** `search_responses({ q: "Sarah Acme" })` → `get_response` → `get_talking_points`
+**Returns:** Sarah's full submission, AI analysis, plus 3–5 personalised conversation starters.
+
+---
+
+## Move a lead through the pipeline
+
+> *"Tag Sarah at Acme as a hot lead, mark her as contacted, and set a workspace variable `follow_up_sarah` to 'send the leadership playbook on Friday' so I don't forget."*
+
+**Triggers:** `tag_response` → `update_response_status` → `set_variable`
+**Returns:** Updated lead state and confirmation. (Note: `set_variable` here is using a workspace variable as a personal note; for real follow-up scheduling, use a calendar tool.)
+
+---
+
+## Ask Brain what to build next
+
+> *"Look at all my products and tell me what funnel stage I'm weakest at — then propose a specific product I should build to fill the gap. If it makes sense, save it as an idea."*
+
+**Triggers:** `brain_ask` → `save_idea` (if Claude proposes one)
+**Returns:** Strategic recommendation with reasoning, plus a saved idea you can open later.
+
+---
+
+## Brain → build pipeline
+
+> *"Open the latest idea Brain saved, plan it as a product, build it, and apply the Radar template."*
+
+**Triggers:** `get_latest_plan` (or read the idea via `brain_ask`) → `plan_product` → `create_product` → `generate_product` → `apply_result_template`
+**Returns:** A live demo URL for the newly-built product.
+
+---
+
+## Publish a finished product
+
+> *"Publish my Leadership Readiness Scorecard and give me the live shareable URL."*
+
+**Triggers:** `publish_product`
+**Returns:** Live URL + demo URL.
+
+---
+
+## Set up a webhook to your CRM
+
+> *"Send every new lead from my Leadership Readiness Scorecard to https://hooks.zapier.com/hooks/catch/12345/abcde, then confirm the webhook is live."*
+
+**Triggers:** `set_webhook` → `get_webhook` (confirm)
+**Returns:** Webhook config + confirmation.
+
+---
+
+## Set a custom domain
+
+> *"Set readiness.acmecoaching.com as the URL for my Scorecard. Give me the CNAME I need to add, then I'll check propagation in 10 minutes."*
+
+**Triggers:** `set_custom_domain` (later) → `get_domain_status`
+**Returns:** Exact CNAME record to add at the registrar, then a status check.
+
+---
+
+## One-message full brand pass
+
+> *"For my Leadership Readiness Scorecard: apply the dark serif theme, set the logo and favicon from acmecoaching.com, set SEO (title, description, og image, keywords), set custom domain readiness.acmecoaching.com, change the welcome button label to 'Start the diagnostic →', and publish it."*
+
+**Triggers:** Roughly 8 tools in sequence. Claude orchestrates the order.
+**Returns:** Live URL + demo URL.
+
+---
+
+## Get the talking points for a sales call
+
+> *"I have a call with Sarah from Acme in 10 minutes. Give me her full submission summary, the AI's analysis, and the top 3 things I should bring up — based on what she scored low on."*
+
+**Triggers:** `search_responses` → `get_response` → `get_talking_points`
+**Returns:** Ready-to-read briefing card.
+
+---
+
+## Audit a struggling product
+
+> *"My Discovery Call Replacement product has only 4 submissions in 30 days. Look at its current config, the analytics, and tell me what's likely going wrong — then propose 2 changes I can make right now."*
+
+**Triggers:** `get_product` → `get_analytics` → `get_product_insights` → `brain_ask`
+**Returns:** Audit + actionable changes. Ask Claude to execute them and it'll call `update_product`, `update_node`, etc.
+
+---
+
+These examples cover the most common patterns. The full tool surface is broader — see the [tools reference](/claude-connector/tools-reference) for everything available.

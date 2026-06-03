@@ -1,0 +1,79 @@
+---
+title: Your first conversation
+description: Six things to ask Claude in your first 10 minutes to get a feel for what the connector can do.
+---
+
+Once the connector is installed, here are six prompts that take roughly 60 seconds each. Together they cover the full range of what the Claude Connector unlocks — building, editing, design, branding, lead management, and strategy.
+
+---
+
+## 1. Get oriented
+
+> *"What can you do with my Productised workspace?"*
+
+Claude returns a categorised overview of what it can read, what it can change, and what it can't touch. Good baseline to know what's available.
+
+---
+
+## 2. Build a product
+
+> *"Build me an AI Readiness Scorecard for B2B marketing leaders. Six questions across strategy, data, skills, content, tools, and culture. Score each pillar 0–10 with a personalised insight, and deliver a branded results page."*
+
+Claude calls `plan_product → create_product → generate_product → apply_result_template` and gives you a **live demo URL** in 30 seconds. Click it — your product is real and shareable.
+
+[Read the full build flow →](/claude-connector/build-a-product)
+
+---
+
+## 3. Iterate on the result page
+
+> *"Show me the current result page, then make the gauge bigger, add a 'critical gap' callout block in red, and make the CTA say 'Book a strategy call' linking to my Calendly."*
+
+Claude calls `get_page`, reads the HTML, edits it, calls `update_page`, and returns a new demo URL. Click — the page is updated.
+
+[Designing result pages in Claude →](/claude-connector/result-pages)
+
+---
+
+## 4. Brand it
+
+> *"Apply the dark serif theme to that product, swap the logo to the one at acme.com, and set the favicon."*
+
+Claude scrapes acme.com via its own web fetch, hands the logo URL to Productised via `upload_image({ source_url })` so it gets re-hosted on your CDN, then calls `apply_theme` and `update_branding`. Logo + theme applied in one round-trip.
+
+[Branding from Claude →](/claude-connector/branding)
+
+---
+
+## 5. Get a morning briefing
+
+> *"Give me my morning briefing."*
+
+Claude calls `get_morning_briefing` — new leads today vs yesterday, hot prospects, per-product activity, things to follow up on. The kind of dashboard summary you'd otherwise log in for.
+
+[Lead management →](/claude-connector/leads)
+
+---
+
+## 6. Ask your Brain what to build next
+
+> *"Based on everything you know about my workspace and brand voice, what should I build next for middle-of-funnel?"*
+
+Claude calls `brain_ask` — Brain loads your existing products, brand voice, and audience, then returns a build-ready recommendation. Ask Claude to spin it up and you're back to step 2.
+
+[Working with Brain in Claude →](/claude-connector/brain)
+
+---
+
+## After that
+
+You've seen the full surface. Two paths from here:
+
+<Columns cols="2">
+  <Card title="Go deeper on building" href="/claude-connector/build-a-product" icon="zap">
+    Understand the full plan → create → generate flow and how to brief Claude for the best output.
+  </Card>
+  <Card title="Browse the full tool list" href="/claude-connector/tools-reference" icon="list">
+    All 64 tools organised by category — reference for when you want to know "is there a tool for X?"
+  </Card>
+</Columns>

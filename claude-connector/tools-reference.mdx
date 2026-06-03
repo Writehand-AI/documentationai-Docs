@@ -1,0 +1,280 @@
+---
+title: All tools
+description: The full set of 64 tools the Claude Connector exposes, organised by category.
+---
+
+The connector exposes 64 live tools against your Productised workspace. They're grouped here by purpose so you can quickly find the right one. Each tool returns a structured result Claude can reason about, and most write operations return a **demo URL** so you can see the change immediately.
+
+---
+
+## Daily briefing & pipeline
+
+<Columns cols="2">
+  <Card title="get_morning_briefing" icon="sun">
+    Start every session with a full daily briefing — new leads today vs yesterday, hot prospects needing attention, per-product activity breakdown. No parameters needed.
+  </Card>
+  <Card title="get_hot_leads" icon="flame">
+    Return your most promising leads — responses tagged "hot-lead" or with a high AI score — across all products. Optional filters: product, score threshold, lookback period.
+  </Card>
+  <Card title="get_recent_activity" icon="activity">
+    A feed of recent submissions across all products — contact details, product, segment, pipeline status, tags.
+  </Card>
+  <Card title="search_responses" icon="search">
+    Filter responses by date, segment, status, tags, keyword, or contact details. The general-purpose find tool.
+  </Card>
+  <Card title="get_response" icon="user">
+    Full detail on one response — all form answers, AI outputs, tags, status, and contact info.
+  </Card>
+  <Card title="tag_response" icon="tag">
+    Add, remove, or replace tags on a response. Common: hot-lead, booked-call, converted.
+  </Card>
+  <Card title="update_response_status" icon="check-circle">
+    Move a lead through your pipeline: new → contacted → in_progress → converted / lost.
+  </Card>
+  <Card title="get_talking_points" icon="mic">
+    Ready-to-use conversation starters for sales follow-up, generated from a respondent's data.
+  </Card>
+</Columns>
+
+---
+
+## Workspace & analytics (read-only)
+
+<Columns cols="2">
+  <Card title="list_products" icon="layers">
+    All your AI products — names, response counts, visibility, public URLs.
+  </Card>
+  <Card title="get_product" icon="file-text">
+    Full details for a specific product: form questions, workflow structure, node IDs.
+  </Card>
+  <Card title="get_product_structure" icon="git-merge">
+    The product's node graph — what nodes exist, how they're connected, what each one does.
+  </Card>
+  <Card title="get_product_url" icon="link">
+    Shareable link, optionally pre-filled with a contact's name and email — ready to send.
+  </Card>
+  <Card title="get_analytics" icon="bar-chart-2">
+    Response count, last submission, 7-day trend, completion rate for any product.
+  </Card>
+  <Card title="get_workspace_stats" icon="layout-dashboard">
+    High-level workspace totals across your entire account.
+  </Card>
+  <Card title="get_segment_breakdown" icon="pie-chart">
+    How respondents segment by AI-determined persona/tier across products.
+  </Card>
+  <Card title="get_product_insights" icon="lightbulb">
+    AI-generated insights across all submissions for a product — patterns, surprises, opportunities.
+  </Card>
+  <Card title="get_credits" icon="zap">
+    Your current AI generation credit balance and recent usage.
+  </Card>
+  <Card title="get_form_questions" icon="list">
+    The current intake questions for a product — names, labels, required flags.
+  </Card>
+</Columns>
+
+---
+
+## Build new products
+
+<Columns cols="2">
+  <Card title="plan_product" icon="compass">
+    Analyse a product description and recommend outcome type and funnel stage. Renders a Blueprint card and a Build CTA.
+  </Card>
+  <Card title="create_product" icon="plus">
+    Create a new (empty) product record. Conversation flow and prompts remain unpopulated until `generate_product` runs.
+  </Card>
+  <Card title="generate_product" icon="zap">
+    Run AI generation to build the full conversation flow, collection goals, system prompt, and canvas workflow for a newly-created product.
+  </Card>
+  <Card title="generate_plan" icon="map">
+    Generate a full-funnel Journey Plan from Brain — product recommendations across all funnel stages.
+  </Card>
+  <Card title="clone_product" icon="copy">
+    Clone an existing product to use as a template for a new niche or audience.
+  </Card>
+  <Card title="get_started" icon="home">
+    Show the personalised welcome / getting-started panel. Useful on a user's first interaction.
+  </Card>
+</Columns>
+
+---
+
+## Edit conversationally
+
+<Columns cols="2">
+  <Card title="update_product" icon="edit-2">
+    Patch top-level product config — name, visibility, AI chat config (welcome message, button text, button colour, system prompt).
+  </Card>
+  <Card title="update_node" icon="sliders">
+    Patch any canvas node's configuration by ID or type.
+  </Card>
+  <Card title="add_node" icon="plus-circle">
+    Add a node to the canvas (gpt, scoring, dynamic_output_page, advisor_chat, connections, etc.) and wire it into the flow.
+  </Card>
+  <Card title="delete_node" icon="trash-2">
+    Remove a node from the canvas and clean up its edges.
+  </Card>
+  <Card title="update_form_questions" icon="edit">
+    Replace the intake question set for a product.
+  </Card>
+  <Card title="set_agent_fields" icon="hash">
+    Configure the structured output fields an AI Agent node produces. The token-coverage check tells you which fields are missing.
+  </Card>
+  <Card title="update_product_settings" icon="settings">
+    Lock submissions after N responses, toggle email notifications.
+  </Card>
+  <Card title="update_scoring_config" icon="bar-chart">
+    Configure or update a Scoring node's weights, thresholds, and persona segments.
+  </Card>
+  <Card title="get_scoring_config" icon="bar-chart-2">
+    Read the current Scoring node config for a product.
+  </Card>
+</Columns>
+
+---
+
+## Pages — landing & result
+
+<Columns cols="2">
+  <Card title="get_welcome_html" icon="eye">
+    Fetch a product's current custom landing page so Claude can iterate on it.
+  </Card>
+  <Card title="set_welcome_html" icon="globe">
+    Save a custom HTML landing page to a product.
+  </Card>
+  <Card title="get_page" icon="file">
+    Retrieve the current HTML and tokens for a product's Page node output pages.
+  </Card>
+  <Card title="create_page" icon="plus-square">
+    Add a new HTML page to a Design (`dynamic_output_page`) node.
+  </Card>
+  <Card title="update_page" icon="edit-3">
+    Replace the HTML (and optionally CSS) of an existing page.
+  </Card>
+  <Card title="delete_page" icon="x-square">
+    Remove a single output page from a Page node.
+  </Card>
+  <Card title="import_design" icon="upload">
+    Translate HTML pasted from a design tool (Figma, Canva, Webflow, Lovable, v0, Gamma) into Productised-shaped output.
+  </Card>
+  <Card title="list_result_templates" icon="grid">
+    Gallery of result-page designs — preview Score, Dimensions, Radar, Persona, Deep Insights.
+  </Card>
+  <Card title="apply_result_template" icon="layout">
+    Apply a chosen scorecard result design — sets the HTML AND configures the AI agent fields.
+  </Card>
+</Columns>
+
+---
+
+## Branding, theme & domain
+
+<Columns cols="2">
+  <Card title="list_themes" icon="palette">
+    All 20 visual theme presets — name, description, primary colour, font.
+  </Card>
+  <Card title="apply_theme" icon="paint-bucket">
+    Apply a named theme to a product in one call.
+  </Card>
+  <Card title="update_branding" icon="image">
+    Set a custom logo URL and optional click-through link.
+  </Card>
+  <Card title="upload_image" icon="upload">
+    Re-host an image (from a URL or base64) onto Productised's CDN. Returns a permanent CDN URL.
+  </Card>
+  <Card title="update_seo" icon="search">
+    Set page title, meta description, og image, favicon, keywords for output pages.
+  </Card>
+  <Card title="set_custom_domain" icon="globe">
+    Configure a custom hostname and get the exact CNAME to add at your registrar.
+  </Card>
+  <Card title="get_domain_status" icon="radio">
+    Check whether DNS has propagated.
+  </Card>
+  <Card title="apply_theme" icon="droplet">
+    Recolour an existing product to a named brand palette.
+  </Card>
+</Columns>
+
+---
+
+## Workspace variables & webhook
+
+<Columns cols="2">
+  <Card title="get_variables" icon="hash">
+    List every `{{ form:x }}`, `{{ node:x }}`, `{{ object:x }}`, and `{{ custom:x }}` token available in a product — with labels and copy-ready syntax.
+  </Card>
+  <Card title="set_variable" icon="key">
+    Create or update a workspace variable — available as `{{ custom:key }}` across all products.
+  </Card>
+  <Card title="set_webhook" icon="radio">
+    Add or remove an outgoing webhook — Productised POSTs full response data to your URL on each submission.
+  </Card>
+  <Card title="get_webhook" icon="link-2">
+    Read the current webhook URL and status.
+  </Card>
+</Columns>
+
+---
+
+## Brain & strategy
+
+<Columns cols="2">
+  <Card title="brain_ask" icon="cpu">
+    Ask Brain a strategic question. Loads your workspace context automatically.
+  </Card>
+  <Card title="save_idea" icon="lightbulb">
+    Save a product idea directly to Brain's Ideas tab.
+  </Card>
+  <Card title="get_latest_plan" icon="map">
+    Fetch your most recently generated Journey Plan.
+  </Card>
+  <Card title="search_documentation" icon="book-open">
+    Search the live Productised docs from inside Claude.
+  </Card>
+  <Card title="add_brain_memory" icon="database">
+    Add a fact or preference to Brain's long-term memory.
+  </Card>
+  <Card title="add_brain_source" icon="upload">
+    Add a knowledge source (URL or text) to Brain's knowledge base.
+  </Card>
+  <Card title="list_brain_sources" icon="list">
+    See every source Brain currently has in its knowledge base.
+  </Card>
+  <Card title="delete_brain_item" icon="trash-2">
+    Remove a memory or source from Brain.
+  </Card>
+</Columns>
+
+---
+
+## Publishing
+
+<Columns cols="2">
+  <Card title="publish_product" icon="globe">
+    Set a product to public and return the live shareable URL.
+  </Card>
+  <Card title="delete_product" icon="trash">
+    Permanently delete a product AND all of its responses, pages, and digital-card links. Requires `confirm:true`.
+  </Card>
+  <Card title="get_project_instructions" icon="info">
+    The platform-level system prompt your connector loaded with — useful for debugging what behavior Claude was told to follow.
+  </Card>
+</Columns>
+
+---
+
+## What every write tool returns
+
+Every successful write operation returns:
+
+- `success: true`
+- `demo_url` — `?demo=true` URL for instant preview
+- A `message` describing what changed
+- The relevant IDs (`product_id`, `page_id`, `node_id`, etc.) so follow-up calls can chain
+
+If something is wrong (missing field, mismatched token, invalid configuration), the tool returns a structured `warning` and (where useful) a `suggested_*` payload Claude can act on in the same turn. The connector is designed to be **self-correcting** — most errors come back with a fix attached.
+
+[Demo URLs & live preview →](/claude-connector/demo-urls)
+[Token resolution →](/claude-connector/tokens)

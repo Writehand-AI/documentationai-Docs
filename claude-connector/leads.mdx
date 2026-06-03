@@ -1,0 +1,122 @@
+---
+title: Manage leads & responses
+description: Read your pipeline, find specific contacts, and update their status — without leaving the Claude conversation.
+---
+
+The connector exposes your entire lead pipeline as a set of conversational tools. You can review the day's submissions, find specific contacts, drill into their AI-generated analysis, tag them, and move them through your pipeline statuses — all in chat.
+
+If you already start your day in Claude, this turns your Claude window into your sales cockpit.
+
+---
+
+## The daily / weekly views
+
+<Columns cols="2">
+  <Card title="get_morning_briefing" icon="sun">
+    The start-of-day summary. New leads today vs yesterday, hot prospects needing attention, and a per-product breakdown. No parameters needed.
+  </Card>
+  <Card title="get_recent_activity" icon="activity">
+    A feed of recent submissions across all products — contact details, product, segment, pipeline status, tags. Great for a quick scan before a follow-up session.
+  </Card>
+  <Card title="get_hot_leads" icon="flame">
+    Your highest-priority prospects — responses tagged "hot-lead" or with a high AI score — across all products. Optionally filter by product, score threshold, or lookback period.
+  </Card>
+  <Card title="get_workspace_stats" icon="bar-chart">
+    High-level totals — product counts, response counts, top products by activity. The "is the business growing?" view.
+  </Card>
+</Columns>
+
+---
+
+## Finding a specific contact
+
+<Columns cols="2">
+  <Card title="search_responses" icon="search">
+    Filter responses by date range, segment, status, tags, keyword in the answers, or contact details. The general-purpose find tool.
+  </Card>
+  <Card title="get_response" icon="user">
+    Full detail on one response — all form answers, AI-generated outputs, tags, status, contact info. The drill-down view.
+  </Card>
+</Columns>
+
+> *"Find Sarah from Acme Corp — she filled out my Readiness Scorecard last week."*
+
+Claude calls `search_responses` with the name and product filter, returns the match, and you can `get_response` to see her full submission.
+
+---
+
+## Pipeline status & tagging
+
+<Columns cols="2">
+  <Card title="tag_response" icon="tag">
+    Add, remove, or replace tags on a response. Common tags: `hot-lead`, `booked-call`, `converted`, `nurture`, `unqualified`.
+  </Card>
+  <Card title="update_response_status" icon="check-circle">
+    Move a lead through your pipeline statuses: `new` → `contacted` → `in_progress` → `converted` / `lost`.
+  </Card>
+</Columns>
+
+> *"Tag Sarah at Acme as a hot lead and mark her as contacted."*
+
+Claude calls `search_responses` to find Sarah, then `tag_response({ tags: ["hot-lead"] })` and `update_response_status({ status: "contacted" })`. No CRM login needed.
+
+---
+
+## Analytics & segmentation
+
+<Columns cols="2">
+  <Card title="get_analytics" icon="bar-chart-2">
+    Response count, last submission date, 7-day daily trend, completion rate — for a specific product.
+  </Card>
+  <Card title="get_segment_breakdown" icon="pie-chart">
+    How your respondents segment by their AI-determined persona/tier across all products or a specific one. Useful for understanding what kinds of leads each product attracts.
+  </Card>
+  <Card title="get_product_insights" icon="lightbulb">
+    AI-generated insights across all submissions for a product — patterns, surprises, opportunities. The "what is this data telling me?" view.
+  </Card>
+  <Card title="get_talking_points" icon="mic">
+    Ready-to-use conversation starters for sales follow-up, generated from a specific respondent's data. The "what should I say on the call?" tool.
+  </Card>
+</Columns>
+
+---
+
+## A typical daily flow
+
+A pattern many users settle into:
+
+> *"Good morning. Briefing, please."*
+
+`get_morning_briefing` → "3 new leads since yesterday, 1 hot. Sarah at Acme stood out (87/100)."
+
+> *"Show me Sarah."*
+
+`get_response` → full submission, AI analysis, scores.
+
+> *"Talking points for her, please."*
+
+`get_talking_points` → 3–5 personalised conversation hooks based on what she said.
+
+> *"Tag her hot-lead, mark contacted, and remind me to follow up in 3 days."*
+
+`tag_response` + `update_response_status`. (The reminder is in your head — Claude doesn't write to your calendar — but the pipeline state is updated.)
+
+---
+
+## What the connector can't do
+
+- **Delete responses.** Destructive cleanup stays in the dashboard.
+- **Read or send email.** Email follow-up happens in your email tool. (You can forward Claude's talking-points output to an outbound email manually.)
+- **Edit response content.** You can tag and re-status a response but not change its answers or AI output — that data is immutable for audit.
+
+---
+
+## Pair with `set_webhook`
+
+For every product where you want leads to flow into your CRM automatically, set a webhook once:
+
+> *"Send every new lead from my Scorecard to https://hooks.zapier.com/hooks/catch/12345/abcde."*
+
+Claude calls `set_webhook`. From then on, Productised POSTs full response data — contact, answers, AI output — to your URL each time someone completes the product. Pair Zapier or n8n with the webhook to route into HubSpot, Salesforce, etc.
+
+[Webhooks reference →](/integrations/webhooks)

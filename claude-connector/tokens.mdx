@@ -1,0 +1,118 @@
+---
+title: Token resolution
+description: How {{ }} tokens in landing pages, result pages, and prompts resolve per respondent — and which prefix to use where.
+---
+
+Productised uses `{{ token }}` syntax to inject dynamic values at render time. Five prefixes, each backed by a different source. Understanding the difference is the key to designing pages that fill correctly.
+
+---
+
+## The five token prefixes
+
+| Prefix | Source | Where it lives | Example |
+|---|---|---|---|
+| `{{ form:fieldName }}` | An answer from the intake conversation | `Response.userData` | `{{ form:firstName }}` |
+| `{{ node:nodeVar }}` | The full output of an AI node | `Response.result[nodeVar]` | `{{ node:report }}` |
+| `{{ object:fieldName }}` | A structured field from an AI agent | `Response.result[nodeVar].object[fieldName]` | `{{ object:overall_score }}` |
+| `{{ chart:key }}` | A computed visualisation token (or raw passthrough of any agent field) | Computed from `result` at render time | `{{ chart:dim1_pct }}` |
+| `{{ custom:key }}` | A workspace variable | `TenantVariable` | `{{ custom:business_name }}` |
+
+---
+
+## When each prefix resolves
+
+| Surface | Form | Node | Object | Chart | Custom |
+|---|---|---|---|---|---|
+| **Landing page** (`/c/<product>`) | — | — | — | — | ✅ |
+| **AI conversation** | — | — | — | — | ✅ (in system prompts) |
+| **Result page** (`/pages/<page>/<response>`) | ✅ | ✅ | ✅ | ✅ | ✅ |
+| **Standard output (streamed report)** | ✅ | ✅ | ✅ | — | ✅ |
+
+A respondent isn't logged in yet at the landing-page stage, so `form:`, `node:`, `object:`, and `chart:` don't have data to resolve from. Only the workspace-wide `custom:` tokens work there.
+
+---
+
+## `object:` vs `chart:` — the most common confusion
+
+Both pull from the AI agent's structured output. The difference is what the renderer does to the value.
+
+### `object:` — runs through markdown
+
+When you write `{{ object:tier_description }}` in element content like a `<p>` or `<div>`, the renderer:
+
+1. Looks up `tier_description` in the agent's `objectVariables`
+2. Runs the value through a markdown renderer (so `**bold**` and lists work)
+3. Wraps the result in HTML (typically a `<p>` tag)
+4. Inserts it into the element
+
+That's perfect for prose content. But it's a problem inside an **attribute**.
+
+### `chart:` — raw passthrough
+
+When you write `stroke-dasharray="{{ chart:overall_score }} 100"` or `style="width:{{ chart:dim1_pct }}%"`, the renderer:
+
+1. Looks up the value (either the literal field, or a computed token for the special chart keys)
+2. Returns it raw, as a string, with no markdown processing
+3. Inserts it as-is into the attribute
+
+Use `chart:` inside any HTML/SVG attribute. Use `object:` inside element content.
+
+---
+
+## The five computed `chart:` tokens
+
+These keys aren't agent fields — they're derived from the agent's `dimN_score` values at render time. Use them in dimension-bar widths and radar/gauge geometry without asking the AI agent to compute the maths.
+
+| Token | What it returns | Common use |
+|---|---|---|
+| `chart:dimN_pct` | `dimN_score × 10` (0–100) | `style="width:{{ chart:dim1_pct }}%"` for a bar fill |
+| `chart:dimN_color` | Semantic colour (green ≥7, amber ≥4.5, red <4.5) | `background:{{ chart:dim1_color }}` |
+| `chart:dimN_level` | "Strong" / "Developing" / "Opportunity" | `<span class="lvl">{{ chart:dim1_level }}</span>` |
+| `chart:overall_avg` | Mean of dim scores, 1 decimal place | Centre label of a radar chart |
+| `chart:radar` | Six "x,y" polygon points for a 6-axis spider chart | `<polygon points="{{ chart:radar }}" />` |
+
+Any other `chart:<fieldName>` is a raw passthrough of that field from the agent's output. Convenient when you need an `object:` field but inside an attribute (e.g. `chart:overall_score` for the gauge arc).
+
+---
+
+## The coverage guard
+
+When you save a page via `create_page` or `update_page`, the connector cross-checks every `{{ object:fieldName }}` token against the AI agent's configured fields. If any token references a field the agent doesn't produce, the tool returns:
+
+```json
+{
+  "warning": "⚠️ This page uses 3 object tokens the AI Agent does NOT output yet …",
+  "fix": "Call set_agent_fields with the suggested_agent_fields below …",
+  "suggested_agent_fields": [
+    { "name": "sleepScore", "description": "Sleep score from 0 to 10 (one decimal place)." },
+    { "name": "topStrength", "description": "The single strongest area, named, with a brief reason." },
+    …
+  ]
+}
+```
+
+Claude can call `set_agent_fields` with the suggestions in the same turn. The next submission populates the page correctly.
+
+---
+
+## `{{ form:* }}` tolerance
+
+`form:` resolution is tolerant of snake_case ↔ camelCase mismatches. If your template uses `{{ form:first_name }}` but the field is stored as `firstName`, the renderer normalises both sides (lowercased, separators stripped) and finds the match. This handles common templating mistakes silently.
+
+---
+
+## `{{ custom:* }}` — the workspace layer
+
+`custom:` tokens are key/value pairs scoped to your entire workspace. Set them via `set_variable`:
+
+> *"Set my workspace variable `cta_url` to https://cal.com/me/strategy."*
+
+From now on, any product (landing, result, system prompt) that references `{{ custom:cta_url }}` reads the new value automatically. Change once, every product picks it up on next render.
+
+Common variables to set on day one:
+
+- `business_name`
+- `cta_url` (your default booking link)
+- `score_word` (e.g. "Readiness" — appears in result page headlines like "Your Readiness Score")
+- `product_name` (overridable per product but useful as a workspace default)
+- `brand_voice` (a short style guide your AI agent prompts reference)

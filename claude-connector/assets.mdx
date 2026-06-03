@@ -1,0 +1,110 @@
+---
+title: Add images, logos & favicons
+description: Re-host any image from a URL onto the Productised CDN — perfect for scraping a customer's logo from their website and applying it as branding.
+---
+
+The connector includes a powerful image-hosting tool that takes an image **URL** and re-hosts it on Productised's CDN, returning a permanent public URL. Combined with Claude's built-in web fetch, this becomes the canonical pattern for branding products with customer assets.
+
+---
+
+## Why re-host?
+
+You could embed a third-party URL directly (`<img src="https://customer-site.com/logo.png">`), but it's fragile:
+
+- The customer redesigns their site — the URL 404s, your branding breaks
+- The host blocks hotlinking — the image silently stops loading
+- A swapped source could inject something unexpected into your product
+
+Re-hosting **snapshots the asset** onto your CDN: durable, owned, optimisable, served from Productised's domain. The customer's site can change without affecting your product.
+
+---
+
+## The tool: `upload_image`
+
+`upload_image` accepts an image two ways:
+
+<Columns cols="2">
+  <Card title="source_url (preferred)" icon="link">
+    A direct link to an image. The server downloads it (with SSRF guards), re-hosts it, returns a permanent CDN URL. This is what Claude uses for scraped logos.
+  </Card>
+  <Card title="base64_data" icon="file">
+    Raw image bytes encoded as base64. Useful when an image isn't reachable by URL — but uncommon, since Claude works in text/JSON.
+  </Card>
+</Columns>
+
+Supported types: `jpeg`, `png`, `gif`, `webp`, `svg`, `ico`. Max 10 MB.
+
+---
+
+## The canonical "brand my product from a website" flow
+
+> *"Take the logo from acme.com, set it as the branding for my AI Readiness Scorecard, and use the favicon for the page SEO."*
+
+Claude does this:
+
+<Steps>
+  <Step title="Web fetch acme.com">
+    Claude's built-in web fetch reads the homepage, locates the `<img class="logo">` and `<link rel="icon">` URLs.
+  </Step>
+  <Step title="Re-host the logo">
+    Claude calls `upload_image({ source_url: "https://acme.com/logo.png", filename: "acme-logo.png", product_id: "..." })`. The connector downloads, validates, re-hosts. Returns: `https://productised.syd1.digitaloceanspaces.com/<tenant>/product-assets/<product>/<ts>-acme-logo.png`.
+  </Step>
+  <Step title="Re-host the favicon">
+    Same call for the favicon (often `.ico`, also supported).
+  </Step>
+  <Step title="Apply">
+    Claude calls `update_branding({ logo_url: "..." })` and `update_seo({ favicon: "..." })` with the new CDN URLs. Branding applied.
+  </Step>
+</Steps>
+
+All four steps happen in one round-trip. The customer never uploads anything.
+
+---
+
+## Where to use the returned URL
+
+The CDN URL `upload_image` returns can be used anywhere an image URL is accepted:
+
+| Tool | Field | Use case |
+|---|---|---|
+| `update_branding` | `logo_url` | The logo in the chat header |
+| `update_seo` | `favicon` | The browser tab icon |
+| `update_seo` | `og_image` | Social share card image |
+| `update_page` / `set_welcome_html` | `<img src>` in HTML | Inline images in result or landing pages |
+
+---
+
+## Security guards
+
+The connector's image fetch isn't a wide-open proxy. It enforces:
+
+- **HTTPS / HTTP only.** No `file://`, `data:`, or `javascript:` URLs.
+- **No internal addresses.** Loopback (`127.0.0.1`, `localhost`), private ranges (`10.*`, `192.168.*`, `172.16-31.*`), and cloud metadata (`169.254.169.254`) are blocked — a standard SSRF guard.
+- **Size cap.** Anything over 10 MB is rejected.
+- **Content-type validation.** The fetched response must be one of the allowed image types, sniffed from the response header or URL extension.
+- **Timeout.** The fetch aborts after 12s so a slow source can't hang the conversation.
+
+The download and re-host happen on the Productised side (via the app's storage credentials), so the MCP server itself never touches storage directly — single source of truth, one credential set.
+
+---
+
+## Limitations
+
+- **No binary upload from Claude.** You can't paste a binary into Claude and have it arrive at Productised — MCP is a text/JSON protocol. The URL pattern is the workaround, and the right pattern for the "brand from a customer site" use case.
+- **No transformations.** The image is stored as-fetched. If you need a resize, crop, or format conversion, do it before uploading (or ask Claude to fetch a specific size from the source site if it offers multiple).
+- **No deletion via the connector.** Old uploads stay on the CDN until you remove them via the dashboard. They're scoped to your tenant/product folder.
+
+---
+
+## Common asks
+
+**Brand a product from a customer's site:**
+> *"Use the branding from beautifulagency.com — logo, favicon, og image, and pick the brand colour from their site."*
+
+**Pull a single asset:**
+> *"Re-host the image at https://example.com/hero.jpg and use it as the landing page banner."*
+
+**Update branding on every product in my workspace:**
+> *"Apply the logo I just uploaded to all my products."*
+
+Claude calls `list_products`, iterates, calls `update_branding` for each. Done in one message.

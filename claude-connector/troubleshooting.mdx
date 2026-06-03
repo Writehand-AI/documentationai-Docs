@@ -1,0 +1,135 @@
+---
+title: Troubleshooting
+description: Quick fixes for the most common issues with the Claude Connector.
+---
+
+If something isn't working, start here. Most issues are easy to resolve, and the rest can be diagnosed from the API logs in your dashboard.
+
+---
+
+## The connector isn't showing up in Claude
+
+**Claude.ai:**
+- Confirm you added the integration at **Settings → Connectors → Add custom connector**.
+- Confirm the URL is exactly `https://mcp.productised.ai/mcp?apiKey=YOUR_API_KEY` (with your real key replacing `YOUR_API_KEY`).
+- Start a **new conversation** — existing conversations don't pick up new connectors automatically.
+
+**Claude Desktop:**
+- Confirm the JSON in **Settings → Developer → Edit Config** is valid (no trailing commas, properly closed braces). Paste it into a JSON linter if unsure.
+- **Restart Claude Desktop completely** (quit, not just close) — the config is only read at startup.
+- Look for the 🔌 icon in the chat input bar — that confirms the server is connected.
+
+---
+
+## Claude returns "Session expired" or "Tool execution failed"
+
+The MCP server keeps sessions in memory. When the server restarts (during a deploy, for example), older sessions become invalid.
+
+**Fix:** Start a new Claude conversation. The next message creates a fresh session and the connector re-initialises.
+
+This was a frequent issue before v1.38 when multi-machine deploys could route follow-up requests to the wrong machine. With session affinity in place, mid-conversation drops are very rare. If you're seeing them often, it's worth checking the API logs for the actual error.
+
+---
+
+## "Unauthorized" / 401 errors
+
+The most common causes:
+
+- **Wrong API key.** Double-check the key in your Claude config matches a key listed in **Settings → API → Keys**.
+- **Key was revoked.** If you (or a team member) clicked Revoke on the key, all requests using it fail until you generate a new one.
+- **Key not in URL/header correctly.** For Claude.ai it must be in the URL (`?apiKey=...`). For Claude Desktop it must be in the `Authorization: Bearer ...` header.
+
+---
+
+## A tool call returns a warning instead of doing what I asked
+
+The connector is **self-correcting**. Many tools return a structured warning + a fix payload rather than silently doing the wrong thing.
+
+The most common one is the **token coverage warning** from `create_page` / `update_page` / `import_design`:
+
+> *⚠️ This page uses 3 object tokens the AI Agent does NOT output yet — they will render blank: `{{ object:sleepScore }}`, `{{ object:topStrength }}`, `{{ object:nextStep1 }}`. Call `set_agent_fields` with the suggested_agent_fields below …*
+
+Claude reads the warning, calls `set_agent_fields` with the suggested fields, then the next submission populates the page.
+
+If you ever see a warning without Claude acting on it, just say: *"do what the warning suggests"* — Claude will pick it up.
+
+---
+
+## A result page renders literal `{{ object:* }}` tokens
+
+This means the tokens in the page don't match the fields the AI agent produces. The page was likely created without the coverage check, or the agent fields were changed afterwards.
+
+**Fix:** Ask Claude to align them:
+
+> *"My result page is rendering literal `{{ object:foo }}` tokens. Pull the current page, check it against the agent fields, and call set_agent_fields with anything missing."*
+
+Claude calls `get_page` → reads tokens → `set_agent_fields` with the missing ones. The next submission renders correctly.
+
+For existing responses created **before** the fix, the new fields won't backfill — you'll need a fresh submission to see a fully-populated render.
+
+---
+
+## The result page renders but the score gauge / bars are blank
+
+Two common causes:
+
+1. **The page contains `<script>` tags.** The HTML is injected via `innerHTML` which never executes scripts. Build score visuals as pure CSS/SVG. If you're using `apply_result_template`, this is already the case. If you wrote custom HTML, ask Claude: *"my gauge is blank — rebuild it as a CSS/SVG ring instead of JS."*
+2. **You used `{{ object:* }}` inside an SVG/HTML attribute.** Object tokens get wrapped in `<p>` by the markdown renderer, corrupting attributes. Use `{{ chart:fieldName }}` instead for any value inside an attribute. See the [tokens reference](/claude-connector/tokens).
+
+---
+
+## The result page renders but is off-centre or sprawls full-width
+
+The result-page surface renders inside a centred ~720px card. If your design isn't self-centring, ask Claude:
+
+> *"My result page is rendering flush-left. Update the page so the content is centred — wrap in a max-width container with margin auto."*
+
+Claude calls `get_page` → wraps the content → `update_page`.
+
+---
+
+## Claude says the tool returned an error
+
+Open **Settings → API → Logs** in your Productised workspace. Find the call by timestamp. The log will show:
+
+- Exactly what was called
+- The full error message
+- The full response
+
+The most common errors:
+
+- **Missing required parameter** — Claude didn't include `product_id` or similar. Re-prompt with the explicit value.
+- **Product not found** — Check the `product_id` Claude was given (or ask Claude to call `list_products` to confirm).
+- **Rate limited (429)** — Wait a minute. You're hitting the per-key or per-IP cap.
+- **Internal server error (500)** — Email `support@productised.ai` with the timestamp.
+
+---
+
+## Demo URLs return 404
+
+Two causes:
+
+- **The product was deleted.** Demo URLs are tied to live products; deleting the product 404s the URL.
+- **The page was deleted.** Result-page demo URLs are tied to a specific Page record. If you re-applied a template or deleted the page, the old URL 404s. Run `get_page` to find the new page ID.
+
+---
+
+## The connector seems slow
+
+Most tool calls should complete in 1–3 seconds. If you're consistently seeing slower responses, factors to check:
+
+- **Heavy `generate_product` calls** legitimately take 20–30 seconds because of the AI generation pipeline behind them. Expected.
+- **`brain_ask` with large context** can take 5–10 seconds — Brain loads your workspace context, which scales with how much you have.
+- **Image upload through `upload_image({ source_url })`** depends on the source server's speed and the image size. Up to 10–15 seconds is normal.
+
+If `list_products`, `get_product`, or other read tools are slow, that's worth reporting — they should be under 1 second normally.
+
+---
+
+## Help
+
+If you're stuck on something this page doesn't cover, you have three options:
+
+1. **Ask Claude.** *"How do I do X with the connector?"* — Claude has access to `search_documentation` and can look up the answer in the live docs.
+2. **Check your logs.** **Settings → API → Logs** in your workspace — every call is recorded with full detail.
+3. **Email us.** `support@productised.ai` — include the timestamp of the issue and your workspace name.

@@ -1,0 +1,115 @@
+---
+title: Build a product end-to-end
+description: From a sentence to a live, branded, publishable AI product — what to say, what Claude does, what you get.
+---
+
+The connector makes building a Productised product a one-conversation activity. You describe what you want; Claude plans, builds, generates, themes, and previews. Here's exactly how the flow works under the hood — and how to brief Claude for the best output.
+
+---
+
+## The four-call build flow
+
+Every product Claude builds goes through the same canonical sequence. You don't have to know about it — Claude orchestrates the calls. But knowing the shape helps you brief Claude better and intervene at the right point.
+
+<Steps>
+  <Step title="plan_product — Claude analyses your brief">
+    Claude calls `plan_product` with your description. The tool returns a recommendation: **outcome type** (standard, advisor, design, collect_only), **funnel stage** (tofu, mofu, bofu), the right product flow, and a rationale.
+
+    You'll see this as a visual *Blueprint* card in chat — outcome, funnel, flow, and reasoning. If anything looks off, you correct it in the same message.
+  </Step>
+
+  <Step title="create_product — empty shell created">
+    Claude calls `create_product` to reserve a `product_id` in your workspace. The product exists but has no conversation flow, no system prompt, no questions, no canvas yet. This is the step where you appear in the dashboard.
+  </Step>
+
+  <Step title="generate_product — the AI build">
+    Claude calls `generate_product` with the enriched brief. Behind the scenes Productised's generation pipeline runs: collection goals (your intake questions), system prompts, decision logic, the canvas workflow, and a default theme — all tuned to the outcome type and funnel stage you chose.
+
+    This is the heaviest step (~30 seconds). You'll see a build-progress card with each phase completing.
+  </Step>
+
+  <Step title="apply_result_template — design output">
+    For **design** outcomes, Claude calls `apply_result_template` with one of five branded presets (Score, Dimensions, Radar, Persona, Deep Insights). This sets the page HTML *and* configures the AI agent to output the exact field names the page expects.
+
+    For **standard** outcomes the agent streams a personalised document. For **advisor**, the AI continues chatting after collection. No extra step needed.
+  </Step>
+</Steps>
+
+The result: a complete product with a live demo URL, in one Claude turn.
+
+---
+
+## What to put in your brief
+
+The richer the brief, the better the output. Good descriptions usually contain four things:
+
+<Columns cols="2">
+  <Card title="1. Audience" icon="users">
+    Who is this for? *"B2B marketing leaders at 50–500 person companies"* beats *"marketers"*. Specificity guides the AI agent's tone and the questions it asks.
+  </Card>
+  <Card title="2. Goal" icon="target">
+    What should they learn, decide, or get? *"Understand whether they're ready to scale content"* tells Claude what to evaluate and what to recommend.
+  </Card>
+  <Card title="3. Outcome shape" icon="layout">
+    What do they receive? *"A scorecard across six dimensions with a personalised report"* directly maps to outcome type. *"A live AI advisor afterwards"* maps to advisor.
+  </Card>
+  <Card title="4. CTA" icon="link">
+    What should they do next? *"Book a strategy call"*, *"download the playbook"*, *"apply to the cohort"* — Claude wires this into the result page CTA.
+  </Card>
+</Columns>
+
+### A good brief
+
+> *"AI Readiness Scorecard for B2B marketing leaders at growth-stage SaaS companies. Six questions across strategy, data, skills, content, tools, and culture. Score each pillar 0–10 with a personalised insight per pillar, then a top strength and critical gap. Deliver a branded results page with the score gauge, dimension breakdown, and a CTA to book a 30-min strategy call."*
+
+This gets you a complete product with no follow-ups needed.
+
+### A weaker brief
+
+> *"Build me an AI readiness quiz"*
+
+Claude will ask follow-up questions to fill in the missing pieces — audience, scoring shape, CTA — which is fine, but you'll spend a few back-and-forths getting there.
+
+---
+
+## Outcome types — picking the right one
+
+Every product has one of four outcome types. Claude infers it from your brief, but if you want a specific shape, name it.
+
+<Columns cols="2">
+  <Card title="standard — streamed report" icon="file-text">
+    A personalised written report that streams into the chat. Best for diagnostics, audits, scorecards, and analyses where the deliverable is text. The Standard Output node handles streaming; the AI agent produces a structured analysis first, then the doc writer expands it.
+  </Card>
+  <Card title="advisor — live AI advisor" icon="message-circle">
+    After collection, the chat continues with an AI advisor that has full context. Best for coaching intake, discovery calls, consultation-style products where the user keeps interacting after the data is gathered.
+  </Card>
+  <Card title="design — custom HTML page" icon="code">
+    A branded HTML results page generated per submission at a public URL. Best for visual scorecards, certificates, multi-slot reports, anything where the output should look like a designed deliverable.
+  </Card>
+  <Card title="collect_only — lead capture" icon="user-plus">
+    Saves the lead with no AI output. Best for waitlists, applications, simple intake forms where the result is the contact record, not a deliverable.
+  </Card>
+</Columns>
+
+---
+
+## After the build
+
+Every successful build returns:
+
+- A **`product_id`** Claude can use in follow-up calls
+- A **demo URL** (`?demo=true`) — bypasses gates and visibility so you can preview immediately
+- A **live URL** — your public, shareable product link
+- A summary of what was created — question count, node types, outcome type
+
+From here, you keep iterating in the same conversation. Common follow-ups:
+
+- *"Open the conversation flow and change question 3 to a 1–10 scale instead of multiple choice"*
+- *"Make the system prompt more direct and outcome-focused"*
+- *"Apply the dark serif theme and set the CTA to my Calendly"*
+- *"Switch the result template from Dimensions to Radar"*
+
+Each one is a real, persistent change. The demo URL refreshes immediately.
+
+[Designing result pages in Claude →](/claude-connector/result-pages)
+[Branding and themes →](/claude-connector/branding)

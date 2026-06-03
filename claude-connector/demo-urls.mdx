@@ -1,0 +1,113 @@
+---
+title: Demo URLs & live preview
+description: How the connector closes the design loop — every change comes back with a clickable preview that bypasses gates and auth.
+---
+
+The single most important feature of the Claude Connector isn't a tool. It's the **demo URL** that comes back with every write operation.
+
+When you ask Claude to change something — a system prompt, a page design, a theme, a question — the tool returns a URL that looks like:
+
+```
+https://app.productised.ai/c/<product_id>?demo=true
+```
+
+(For result pages, it's `https://app.productised.ai/pages/<page_id>/<response_id>` — Claude knows which to use.)
+
+Click it. You see the change. Instantly.
+
+---
+
+## What `?demo=true` does
+
+The demo URL is a fully functional, publicly accessible preview of the product. It bypasses three things the live URL doesn't:
+
+<Columns cols="2">
+  <Card title="No authentication" icon="unlock">
+    No login required to view, even if the product is private. You and anyone you share it with can open it immediately — useful for sharing a preview with a client before going public.
+  </Card>
+  <Card title="No domain lock" icon="globe">
+    If you've set a custom domain, the live URL goes there. The demo URL stays on `app.productised.ai`, so it works during DNS propagation or when the custom domain is being configured.
+  </Card>
+  <Card title="No submission gates" icon="shield">
+    Even if you've capped submissions or locked the product after a cohort fills, the demo URL still renders the experience for preview.
+  </Card>
+  <Card title="No tracking writes" icon="eye-off">
+    Demo views are flagged in analytics so they don't pollute your real respondent metrics. Your dashboard stays clean.
+  </Card>
+</Columns>
+
+The demo URL is the canonical "show, don't tell" affordance — Claude doesn't *describe* what it did, it links you to the result.
+
+---
+
+## Why this matters
+
+The bottleneck in iterative AI building isn't the AI. It's the **feedback loop**. The slower it is to see whether what the AI just did was good, the harder it is to make confident calls about what to change next.
+
+Most AI-tool integrations either don't let you see the result at all (you trust the AI), or force you to switch tabs, log in, and navigate to find it. The demo URL collapses that to one click.
+
+A typical iteration:
+
+> *"Make the gauge bigger and change the CTA copy to 'Get my plan'."*
+
+Claude: *"Done — view it: [demo URL]"*
+
+You click. You see it. You either say *"perfect"* and move on, or *"actually make the gauge red"* and Claude iterates. **Each round-trip is one message and one click.**
+
+---
+
+## Result pages need a response
+
+The demo URL for a **result page** (`/pages/<page>/<response>`) needs an existing response to render against — otherwise there's no data to fill the `{{ object:* }}` and `{{ form:* }}` tokens.
+
+Claude handles this transparently:
+
+- If your product has at least one response, the demo URL renders against the latest one.
+- If there are no responses yet, the page renders with tokens visible (so you can see the layout) and Claude tells you to run a test submission.
+
+For landing pages (`/c/<product>?demo=true`) and the AI conversation surface, no response is needed — they're respondent-agnostic.
+
+---
+
+## The "Live Preview" pattern in design conversations
+
+The demo URL fundamentally changes how you talk to Claude about design. Without it, you describe what you want, Claude describes what it did, and you guess whether they line up. With it, you describe, Claude does, you see.
+
+A real session looks like:
+
+> *"Design my result page."*
+> Claude designs it. Demo URL.
+> *(click)* — *"the headline is too tight on mobile, give it more line-height. and the gauge should be coral, not orange."*
+> Claude edits. Demo URL.
+> *(click)* — *"perfect. publish it."*
+> Claude publishes. Live URL.
+
+Three messages, three clicks, fully designed result page. The demo URL is what makes that possible.
+
+---
+
+## Sharing demo URLs
+
+The demo URL is **publicly accessible** — you can share it with anyone without them needing a Productised account. Common patterns:
+
+- **Show a client a draft.** Build their result page in Claude, copy the demo URL, send. They open it directly, see their personalised result, send feedback. You iterate in Claude.
+- **Get internal review before launch.** Share with your team to check copy, design, flow — without changing the live URL.
+- **Preview without polluting metrics.** Demo views don't count toward your response analytics — your conversion-rate dashboard stays honest.
+
+The demo URL is stable as long as the product exists. If you delete the product, the URL 404s.
+
+---
+
+## Common questions
+
+**Is the demo URL secure?**
+It's a long, opaque URL — not enumerable. Anyone with the URL can view it. If you need locked-down preview (truly private), use the live URL with a private visibility setting and log in.
+
+**Can a respondent submit through the demo URL?**
+Yes — but their submission is flagged as a demo response so it doesn't affect analytics.
+
+**Does it work for result pages without a response?**
+The result-page demo URL renders against the latest real response. If no responses exist, ask Claude to run a test submission first.
+
+**Can I disable demo URLs?**
+Not currently — they're a core debugging/preview affordance. You can revoke an API key to stop Claude from generating new ones, but existing URLs stay live as long as the product exists.

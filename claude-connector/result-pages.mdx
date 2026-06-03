@@ -1,0 +1,102 @@
+---
+title: Design custom result pages
+description: Turn Claude into your result-page designer — HTML written conversationally, validated against your agent's fields, rendered per respondent.
+---
+
+The Page node (`dynamic_output_page`) is where Productised products shine — a branded, personalised HTML page generated for every respondent. The Claude Connector makes designing and editing that page a conversation.
+
+You don't write CSS by hand. You don't switch tabs. You don't paste between tools. You describe what you want, Claude writes the HTML, the connector validates it against your AI agent's output fields, and you get a live preview URL.
+
+---
+
+## The four page tools
+
+<Columns cols="2">
+  <Card title="get_page" icon="eye">
+    Fetch the current HTML of a product's Page node. Returns the design, the tokens it uses, and a live preview rendered against the latest response. Use before any edit so Claude has the current state.
+  </Card>
+  <Card title="create_page" icon="plus-circle">
+    Add a new HTML page to a Design node. Used after `generate_product` with outcome=`design`, or to add additional pages to an existing Page node.
+  </Card>
+  <Card title="update_page" icon="edit">
+    Replace the HTML (and optionally CSS) of an existing page. The fast iteration tool — for copy changes, layout tweaks, restyling, anything.
+  </Card>
+  <Card title="import_design" icon="upload">
+    Translate HTML pasted from a design tool (Figma, Canva, Webflow, Lovable, Cursor, Gamma, etc.) into Productised-shaped output. Strips scripts, container-breaking positioning, and surfaces token candidates.
+  </Card>
+</Columns>
+
+---
+
+## Token system — how pages render per respondent
+
+A page is HTML with `{{ tokens }}` that get filled per respondent at render time:
+
+| Token | Resolves to | Example |
+|---|---|---|
+| `{{ form:fieldName }}` | An answer the respondent gave | `{{ form:firstName }}` → "Sarah" |
+| `{{ object:fieldName }}` | A structured field your AI agent produced | `{{ object:overall_score }}` → 78 |
+| `{{ chart:overall_score }}` | A raw passthrough of any agent field — use inside SVG/HTML attributes | `stroke-dasharray="{{ chart:overall_score }} 100"` |
+| `{{ chart:dimN_pct }}` | A computed percentage from `dimN_score × 10` | `style="width:{{ chart:dim1_pct }}%"` |
+| `{{ custom:key }}` | A workspace variable | `{{ custom:product_name }}` |
+
+**Why `object:` and `chart:` differ:** `object:` runs values through markdown (so `**bold**` works in text content), which wraps them in `<p>` tags — fine inside element content, but corrupts HTML attributes. `chart:` is a raw passthrough — use it wherever you need the raw value in an attribute, computed bar widths, gauge arcs, etc.
+
+[Full token reference →](/claude-connector/tokens)
+
+---
+
+## The coverage check — no more silently-blank pages
+
+When you call `create_page` or `update_page`, the connector cross-checks every `{{ object:* }}` token in your HTML against the AI agent's configured output fields. If any token doesn't match, the tool returns:
+
+- A `warning` listing the unmatched tokens
+- A ready-to-run `suggested_agent_fields` array — name + inferred description for each missing field
+- A `fix` instruction telling Claude to call `set_agent_fields`
+
+Claude can then call `set_agent_fields` with the suggestions in the same conversation. No more shipping pages that render literal `{{ object:sleepScore }}` tokens because the agent doesn't produce that field.
+
+The same coverage check applies to `import_design` when you pass a `product_id`.
+
+---
+
+## Constraints you should know about
+
+Every page renders inside a centred ~720px card. Two implications:
+
+1. **Self-centre your designs.** Wrap your content in `<div style="max-width:640px;margin:0 auto">…</div>` so it sits centred, not flush-left.
+2. **No JavaScript.** The HTML is injected via `innerHTML`, which doesn't execute `<script>` tags. Build score visuals as pure CSS/SVG:
+   - Bar fills: `<i style="width:{{ chart:dim1_pct }}%;background:#3f7d5f"></i>`
+   - Ring gauge: `<circle pathLength="100" stroke-dasharray="{{ chart:overall_score }} 100" />`
+   - Numbers: the plain token (`{{ object:overall_score }}`), not a JS counter
+
+`create_page` and `update_page` flag pages that contain `<script>` and give Claude the SVG/CSS recipes to replace them.
+
+**Preloaded fonts:** `Inter` and `Source Serif 4` are preloaded on every render surface (the live page, the live welcome, the Claude in-chat preview). Use them freely; for any other webfont, include a `@import` or `<link>` inline.
+
+---
+
+## Typical design conversations
+
+**Ask Claude to design from scratch:**
+> *"Design a results page for my AI Readiness Scorecard. Score gauge at the top, a strength + critical gap pair, a 6-row dimension breakdown with bars and insights, three priority actions, then a CTA to book a strategy call."*
+
+**Iterate on what's there:**
+> *"Show me the current page. Move the strength/gap row above the score gauge, make the gauge ring orange, and tighten up the dimension breakdown spacing."*
+
+**Paste in a design from elsewhere:**
+> *"I exported this from Figma — import it and tell me what tokens I need to set up."*
+> (paste the HTML)
+
+**Switch templates:**
+> *"Swap to the Radar template — keep the same agent fields if possible."*
+
+[Result page templates →](/claude-connector/result-templates)
+
+---
+
+## Editing pages from the canvas, using Claude
+
+In the Productised app, when you select a Page node in the canvas, the right-side panel shows a **"Copy HTML for Claude"** button. Click it — the page's HTML + CSS is copied to your clipboard. Paste it into a Claude conversation, ask for changes, and save the new version back via `update_page`.
+
+That round-trip works either way: design in Claude, save through the connector; or design in the dashboard, copy to Claude, iterate, save back.

@@ -1,0 +1,136 @@
+---
+title: Setup
+description: Connect your Productised workspace to Claude Desktop or Claude.ai in under two minutes.
+---
+
+The Claude Connector is hosted at `https://mcp.productised.ai/mcp` and uses Productised's own API keys for authentication. Setup takes one minute and is identical whether you sign in to Claude with an Anthropic, Google, or work email.
+
+<Callout kind="info">
+**Two install paths** — pick the one that matches how you use Claude. Both connect to the same server and have access to the same 64 tools.
+</Callout>
+
+---
+
+## Step 1 — Get your API key
+
+You authenticate Claude with an API key from your Productised workspace.
+
+<Steps>
+  <Step title="Open your API settings">
+    In Productised, go to **Settings → API → Keys**.
+  </Step>
+  <Step title="Create a new key">
+    Click **Create new key**, give it a recognisable name (e.g. *"Claude Desktop"*), and copy the key immediately.
+
+    <Callout kind="warning">The key is only shown once. If you lose it, generate a new one — old keys can be revoked at any time from the same page.</Callout>
+  </Step>
+</Steps>
+
+---
+
+## Step 2 — Connect
+
+<Tabs>
+  <Tab title="Claude.ai (browser)" icon="globe">
+    Claude.ai uses a built-in custom connector flow.
+
+    <Steps>
+      <Step title="Open Integrations">
+        Go to **claude.ai → Settings → Connectors → Add custom connector**.
+      </Step>
+      <Step title="Enter the connection details">
+        Fill in:
+        - **Name:** `Productised`
+        - **URL:** `https://mcp.productised.ai/mcp?apiKey=YOUR_API_KEY`
+
+        Replace `YOUR_API_KEY` with the key you just copied. The key goes in the URL — no separate auth header field is needed.
+
+        <Callout kind="info">Claude.ai's custom connector form doesn't support custom auth headers in the UI. Embedding your key in the URL is the supported workaround. The URL is sent over HTTPS and never exposed to other users.</Callout>
+      </Step>
+      <Step title="Save and start a chat">
+        Click **Save**. Start a new conversation — Claude now has access to your Productised tools.
+      </Step>
+    </Steps>
+  </Tab>
+
+  <Tab title="Claude Desktop" icon="monitor">
+    Claude Desktop reads MCP servers from a JSON config file.
+
+    <Steps>
+      <Step title="Open the config file">
+        In Claude Desktop, go to **Settings (⌘,) → Developer → Edit Config**. This opens a JSON file in your editor.
+      </Step>
+      <Step title="Add the Productised server">
+        Paste the following, replacing `YOUR_API_KEY` with the key you copied:
+
+        ```json
+        {
+          "mcpServers": {
+            "productised": {
+              "url": "https://mcp.productised.ai/mcp",
+              "headers": {
+                "Authorization": "Bearer YOUR_API_KEY"
+              }
+            }
+          }
+        }
+        ```
+
+        If you already have other MCP servers in the file, add the `"productised"` block inside the existing `"mcpServers"` object.
+      </Step>
+      <Step title="Restart Claude Desktop">
+        Save the file and restart the app. A 🔌 icon in the chat input bar confirms the connection is live.
+      </Step>
+    </Steps>
+  </Tab>
+
+  <Tab title="Claude Code / API" icon="terminal">
+    The same MCP endpoint works with the Anthropic API, Claude Code, and any MCP-compatible client.
+
+    Add to your client's MCP config:
+
+    ```json
+    {
+      "mcpServers": {
+        "productised": {
+          "url": "https://mcp.productised.ai/mcp",
+          "headers": {
+            "Authorization": "Bearer YOUR_API_KEY"
+          }
+        }
+      }
+    }
+    ```
+
+    The connector implements the Streamable HTTP transport (the current MCP standard). It's fully compatible with the Anthropic SDK's MCP support.
+  </Tab>
+</Tabs>
+
+---
+
+## Step 3 — Test the connection
+
+In a new Claude conversation, type:
+
+> *"List my Productised products"*
+
+Claude calls the `list_products` tool and returns a live view of your workspace — names, response counts, visibility, and public URLs. You'll see a 🔧 tool icon each time Claude makes a connector call.
+
+<Callout kind="tip">
+If you have no products yet, ask Claude: *"What can you do?"* — it'll explain its full set of capabilities and offer to build your first product right there.
+</Callout>
+
+---
+
+## Next: build something
+
+You're connected. Now spend two minutes building a real product.
+
+<Columns cols="2">
+  <Card title="Your first conversation" href="/claude-connector/first-conversation" icon="message-square">
+    A short script of things to ask Claude to get a feel for what's possible.
+  </Card>
+  <Card title="Build a product end-to-end" href="/claude-connector/build-a-product" icon="zap">
+    From a sentence to a live AI product — what to say, what Claude does, and what you get back.
+  </Card>
+</Columns>

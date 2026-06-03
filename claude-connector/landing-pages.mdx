@@ -1,0 +1,91 @@
+---
+title: Landing pages
+description: Design and iterate the welcome / landing screen of any product directly in Claude.
+---
+
+Every Productised product has a **welcome screen** — the first thing a respondent sees before the AI conversation starts. By default it's a clean title-page style with your product name. You can replace it with a fully custom HTML landing page designed in Claude.
+
+---
+
+## The two landing-page tools
+
+<Columns cols="2">
+  <Card title="set_welcome_html" icon="edit">
+    Save a custom HTML landing page to a product. Sets the welcome style to "Claude Page" and renders an inline preview in the chat so you see exactly what respondents will see.
+  </Card>
+  <Card title="get_welcome_html" icon="eye">
+    Fetch the current landing page HTML so Claude can iterate on it (edit copy, change layout, swap an image) rather than rewriting from scratch. The mirror of `get_page` for the welcome screen.
+  </Card>
+</Columns>
+
+---
+
+## How it differs from result pages
+
+| | Landing page | Result page |
+|---|---|---|
+| **Where it lives** | The welcome screen at `/c/<product>` | The output page at `/pages/<page>/<response>` |
+| **Tools** | `set_welcome_html`, `get_welcome_html` | `create_page`, `update_page`, `get_page` |
+| **Stored on** | AI Chat node (`customWelcomeHtml`) | Page node (Pages DB record) |
+| **Renders variables?** | Only `{{ custom:* }}` (workspace variables) | All four: form / object / chart / custom |
+| **CTA button** | Auto-appended by the platform | Part of your HTML |
+
+The landing page is essentially **static marketing HTML** with optional workspace variables — no respondent-specific data, because the respondent hasn't started yet.
+
+---
+
+## Build flow
+
+> *"Design a welcome page for my AI Readiness Scorecard. Bold serif headline, a pill above with the product name, a short subhead, and a couple of trust-signal bullets. Centred, ~640px wide. Don't include a CTA button — the platform appends 'Get Started' automatically."*
+
+Claude writes the HTML and calls `set_welcome_html`. The connector returns:
+- A live demo URL (`?demo=true`)
+- A list of `{{ custom:* }}` workspace variables you can reference
+- An inline preview rendered in the chat
+
+Open the demo URL and you see the page as a respondent would — full-width on the chat surface, with the auto-appended "Get Started →" button at the bottom.
+
+---
+
+## Iterating
+
+To change copy, restyle, or swap a section:
+
+> *"Get the current landing page and switch the headline to 'How AI-ready is your business?' — keep everything else."*
+
+Claude calls `get_welcome_html`, reads the current HTML, applies the change, saves via `set_welcome_html`. You get a new demo URL.
+
+---
+
+## Constraints
+
+- **No respondent variables.** Only `{{ custom:* }}` workspace vars resolve here (because there's no respondent yet). Don't put `{{ form:* }}` or `{{ object:* }}` in a landing page — they won't fill.
+- **Centre your content.** The chat surface renders the welcome HTML full-width. Wrap content in `<div style="max-width:640px;margin:0 auto">...</div>` to centre it.
+- **Don't include a CTA.** The platform auto-appends the brand-coloured "Get Started" button. You can change its label via `set_welcome_html({ button_text: "..." })`.
+- **Brand fonts preloaded.** `Inter` and `Source Serif 4` are loaded on the welcome render surface — use them freely.
+
+---
+
+## Reverting to default
+
+To go back to the default title-page welcome:
+
+> *"Revert the welcome to the default title page."*
+
+Claude calls `set_welcome_html({ html: "" })`. The product reverts to the auto-generated welcome with your product name, ICP-aware subhead, and starter prompt chips.
+
+---
+
+## Together with the result page
+
+The landing page and the result page together form the **wrapper** of your product. Most well-branded products design both:
+
+1. **Landing** — sets the tone and pitches the value of going through
+2. **AI conversation** — collects data, branded with your theme
+3. **Result page** — the personalised deliverable
+
+You can ask Claude to design both in one session, with a shared brand language:
+
+> *"Design a matching landing and result page for my AI Readiness Scorecard. Same brand accent (orange), same serif headline style, same CTA copy ('Book a strategy call'). Landing should be a clean pitch with three trust signals; result should use the Dimensions template restyled to match."*
+
+Claude does the lot — `set_welcome_html` for the landing, `apply_result_template` then `update_page` for the result. Two demo URLs back.
