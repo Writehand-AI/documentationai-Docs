@@ -65,11 +65,19 @@ These keys aren't agent fields — they're derived from the agent's `dimN_score`
 
 | Token | What it returns | Common use |
 |---|---|---|
-| `chart:dimN_pct` | `dimN_score × 10` (0–100) | `style="width:{{ chart:dim1_pct }}%"` for a bar fill |
-| `chart:dimN_color` | Semantic colour (green ≥7, amber ≥4.5, red <4.5) | `background:{{ chart:dim1_color }}` |
-| `chart:dimN_level` | "Strong" / "Developing" / "Opportunity" | `<span class="lvl">{{ chart:dim1_level }}</span>` |
+| `chart:dimN_pct` | dimN\_score × 10 (0–100) | Bar fill width style |
+| `chart:dimN_color` | Semantic colour (green ≥7, amber ≥4.5, red below 4.5) | Background colour for a dimension |
+| `chart:dimN_level` | "Strong" / "Developing" / "Opportunity" | Label inside a dimension badge |
 | `chart:overall_avg` | Mean of dim scores, 1 decimal place | Centre label of a radar chart |
-| `chart:radar` | Six "x,y" polygon points for a 6-axis spider chart | `<polygon points="{{ chart:radar }}" />` |
+| `chart:radar` | Six "x,y" polygon points for a 6-axis spider chart | SVG polygon points attribute |
+
+```html
+<!-- Example usage in HTML/SVG attributes -->
+<div style="width:{{ chart:dim1_pct }}%"></div>
+<div style="background:{{ chart:dim1_color }}"></div>
+<span class="lvl">{{ chart:dim1_level }}</span>
+<polygon points="{{ chart:radar }}" />
+```
 
 Any other `chart:<fieldName>` is a raw passthrough of that field from the agent's output. Convenient when you need an `object:` field but inside an attribute (e.g. `chart:overall_score` for the gauge arc).
 
