@@ -358,6 +358,11 @@
                 "icon": "users"
               },
               {
+                "title": "Plans",
+                "path": "workspace/plans",
+                "icon": "layers"
+              },
+              {
                 "title": "Subscription",
                 "path": "workspace/subscription",
                 "icon": "credit-card"
