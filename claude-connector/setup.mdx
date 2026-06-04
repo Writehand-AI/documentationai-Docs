@@ -1,67 +1,92 @@
 ---
 title: Setup
-description: Connect your Productised workspace to Claude Desktop or Claude.ai in under two minutes.
+description: Connect your Productised workspace to Claude in under two minutes — sign in once, no keys to manage.
 ---
 
-The Claude Connector is hosted at `https://mcp.productised.ai/mcp` and uses Productised's own API keys for authentication. Setup takes one minute and is identical whether you sign in to Claude with an Anthropic, Google, or work email.
+The Claude Connector is hosted at `https://mcp.productised.ai/mcp`. Setup uses **OAuth 2.0** — the same one-click sign-in flow Claude uses for Google Drive, Notion, and GitHub. You sign in to Productised once in a popup, click Authorise, and you're connected. No keys to copy, no config files to edit.
 
 <Callout kind="info">
-**Two install paths** — pick the one that matches how you use Claude. Both connect to the same server and have access to the same 64 tools.
+**Don't have a Productised account yet?** Sign up first at <https://app.productised.ai/signup>. It takes 30 seconds — you just need an email. Then come back here to connect Claude.
 </Callout>
 
 ---
 
-## Step 1 — Get your API key
+## Connect Claude.ai (browser)
 
-You authenticate Claude with an API key from your Productised workspace.
+This is the path for most users.
 
 <Steps>
-  <Step title="Open your API settings">
-    In Productised, go to **Settings → API → Keys**.
+  <Step title="Open Claude.ai → Settings → Connectors">
+    Click **Settings** in the sidebar, then **Connectors**, then **Add custom connector**.
   </Step>
-  <Step title="Create a new key">
-    Click **Create new key**, give it a recognisable name (e.g. *"Claude Desktop"*), and copy the key immediately.
 
-    <Callout kind="warning">The key is only shown once. If you lose it, generate a new one — old keys can be revoked at any time from the same page.</Callout>
+  <Step title="Enter the connection details">
+    Fill in:
+    - **Name:** `Productised`
+    - **URL:** `https://mcp.productised.ai/mcp`
+
+    Leave any API-key field blank. Click **Connect**.
+  </Step>
+
+  <Step title="Sign in to Productised in the popup">
+    Claude opens a Productised sign-in popup. If you're already signed in to <app.productised.ai> in another tab, it'll recognise you and skip straight to the authorise step. Otherwise, enter your Productised email and password.
+  </Step>
+
+  <Step title="Authorise Claude">
+    Productised shows what Claude is requesting access to (your workspace — read products, leads, brand, write changes). Click **Authorise**. The popup closes.
+  </Step>
+
+  <Step title="Start a new Claude chat">
+    Open a new conversation. Claude now has access to your 64 Productised tools. Try:
+
+    > *"List my Productised products"*
+
+    You'll see a 🔧 icon next to the tool call and a structured response. You're connected.
   </Step>
 </Steps>
 
+<Callout kind="tip">
+The OAuth token Claude received is automatically refreshed and revocable at any time — see [Security & privacy](/claude-connector/security#revoking-access).
+</Callout>
+
 ---
 
-## Step 2 — Connect
+## Connect Claude Desktop
+
+Claude Desktop uses a JSON config file rather than the in-app connector UI, so the setup is slightly different. **Two options** — OAuth (recommended) or an API key.
 
 <Tabs>
-  <Tab title="Claude.ai (browser)" icon="globe">
-    Claude.ai uses a built-in custom connector flow.
+  <Tab title="OAuth (recommended)" icon="shield">
+    Claude Desktop now supports OAuth-flow MCP servers via its connector picker — exactly like Claude.ai.
 
     <Steps>
-      <Step title="Open Integrations">
-        Go to **claude.ai → Settings → Connectors → Add custom connector**.
+      <Step title="Open Claude Desktop → Settings → Connectors">
+        ⌘ + `,` to open Settings, then **Connectors** in the sidebar, then **Add custom connector**.
       </Step>
-      <Step title="Enter the connection details">
-        Fill in:
+      <Step title="Enter the URL">
         - **Name:** `Productised`
-        - **URL:** `https://mcp.productised.ai/mcp?apiKey=YOUR_API_KEY`
+        - **URL:** `https://mcp.productised.ai/mcp`
 
-        Replace `YOUR_API_KEY` with the key you just copied. The key goes in the URL — no separate auth header field is needed.
-
-        <Callout kind="info">Claude.ai's custom connector form doesn't support custom auth headers in the UI. Embedding your key in the URL is the supported workaround. The URL is sent over HTTPS and never exposed to other users.</Callout>
+        Click **Connect**.
       </Step>
-      <Step title="Save and start a chat">
-        Click **Save**. Start a new conversation — Claude now has access to your Productised tools.
+      <Step title="Sign in and authorise">
+        A browser window opens for Productised sign-in and authorise. Then it redirects back to Claude Desktop, which confirms the connection.
+      </Step>
+      <Step title="Start chatting">
+        A 🔌 icon in the chat input bar confirms the connection. Open a new conversation — your tools are live.
       </Step>
     </Steps>
   </Tab>
 
-  <Tab title="Claude Desktop" icon="monitor">
-    Claude Desktop reads MCP servers from a JSON config file.
+  <Tab title="API key (manual JSON config)" icon="key">
+    If you prefer the manual route (older Claude Desktop, scripted setup, headless environments), use an API key in the config file.
 
     <Steps>
-      <Step title="Open the config file">
-        In Claude Desktop, go to **Settings (⌘,) → Developer → Edit Config**. This opens a JSON file in your editor.
+      <Step title="Get your API key">
+        In Productised: **Settings → API → Keys → Create new key**. Name it (e.g. *"Claude Desktop"*) and copy it immediately — it's only shown once.
       </Step>
-      <Step title="Add the Productised server">
-        Paste the following, replacing `YOUR_API_KEY` with the key you copied:
+      <Step title="Edit the config file">
+        In Claude Desktop, **Settings (⌘,) → Developer → Edit Config**. Paste:
 
         ```json
         {
@@ -76,61 +101,83 @@ You authenticate Claude with an API key from your Productised workspace.
         }
         ```
 
-        If you already have other MCP servers in the file, add the `"productised"` block inside the existing `"mcpServers"` object.
+        Replace `YOUR_API_KEY` with the key you copied. If you already have other MCP servers in the file, add the `"productised"` block inside the existing `"mcpServers"` object.
       </Step>
       <Step title="Restart Claude Desktop">
-        Save the file and restart the app. A 🔌 icon in the chat input bar confirms the connection is live.
+        Save the file and fully quit Claude Desktop (⌘+Q, not just close the window). Reopen it. The 🔌 icon confirms the connection.
       </Step>
     </Steps>
-  </Tab>
-
-  <Tab title="Claude Code / API" icon="terminal">
-    The same MCP endpoint works with the Anthropic API, Claude Code, and any MCP-compatible client.
-
-    Add to your client's MCP config:
-
-    ```json
-    {
-      "mcpServers": {
-        "productised": {
-          "url": "https://mcp.productised.ai/mcp",
-          "headers": {
-            "Authorization": "Bearer YOUR_API_KEY"
-          }
-        }
-      }
-    }
-    ```
-
-    The connector implements the Streamable HTTP transport (the current MCP standard). It's fully compatible with the Anthropic SDK's MCP support.
   </Tab>
 </Tabs>
 
 ---
 
-## Step 3 — Test the connection
+## Connect Claude Code / Anthropic API
 
-In a new Claude conversation, type:
+The same MCP endpoint works with the Anthropic SDK, Claude Code, and any MCP-compatible client. Add to your client's MCP config:
 
-> *"List my Productised products"*
+```json
+{
+  "mcpServers": {
+    "productised": {
+      "url": "https://mcp.productised.ai/mcp",
+      "headers": {
+        "Authorization": "Bearer YOUR_API_KEY"
+      }
+    }
+  }
+}
+```
 
-Claude calls the `list_products` tool and returns a live view of your workspace — names, response counts, visibility, and public URLs. You'll see a 🔧 tool icon each time Claude makes a connector call.
+Get your API key from **Productised → Settings → API → Keys**. The connector implements the Streamable HTTP transport (the current MCP standard) and is fully compatible with the Anthropic SDK's MCP support.
 
-<Callout kind="tip">
-If you have no products yet, ask Claude: *"What can you do?"* — it'll explain its full set of capabilities and offer to build your first product right there.
-</Callout>
+---
+
+## How the OAuth flow works (background)
+
+You don't need to understand this to use the connector, but if you're curious:
+
+1. Claude sends an unauthenticated request to `https://mcp.productised.ai/mcp`
+2. The server responds with `401 Unauthorized` and a `WWW-Authenticate` header pointing to the connector's OAuth metadata
+3. Claude reads the metadata and discovers the Productised authorisation server at `https://app.productised.ai/oauth/authorize`
+4. Claude opens the authorise URL in a popup, you sign in (if needed) and click Authorise
+5. Productised redirects back to Claude with an authorisation code (PKCE-protected)
+6. Claude exchanges the code for an access token at `https://app.productised.ai/oauth/token`
+7. Claude uses the access token for every subsequent tool call
+
+Tokens are scoped to your workspace, refreshable, and revocable at any time from [Productised Settings → API → Connected apps](https://app.productised.ai/settings/api).
 
 ---
 
 ## Next: build something
 
-You're connected. Now spend two minutes building a real product.
+You're connected. Spend two minutes building a real product.
 
 <Columns cols="2">
   <Card title="Your first conversation" href="/claude-connector/first-conversation" icon="message-square">
-    A short script of things to ask Claude to get a feel for what's possible.
+    Six prompts that take roughly 60 seconds each to get a feel for what the connector can do.
   </Card>
   <Card title="Build a product end-to-end" href="/claude-connector/build-a-product" icon="zap">
-    From a sentence to a live AI product — what to say, what Claude does, and what you get back.
+    From a sentence to a live AI product — what to say, what Claude does, what you get back.
   </Card>
 </Columns>
+
+---
+
+## Troubleshooting setup
+
+**The OAuth popup didn't appear / Claude says "couldn't authenticate"**
+
+Usually the popup blocker. Allow popups for `claude.ai`, then click **Connect** again. If you're still stuck, see [Troubleshooting](/claude-connector/troubleshooting).
+
+**I'm signed in to Productised but the connector still asks me to log in**
+
+You may be signed in to a different account than the one you want to connect. Sign out of <app.productised.ai>, sign back in as the right account, then retry the connector flow.
+
+**I want to use a different account on the same Claude**
+
+Open **Settings → Connectors**, click **⋯ → Remove** on the existing Productised connector, then add it again — the sign-in popup gives you a chance to pick the right account.
+
+**My organisation blocks third-party connectors in Claude.ai**
+
+If Claude.ai's custom connectors are blocked by your admin, use the [Claude Desktop API-key route](#connect-claude-desktop) instead — it doesn't require enabling browser custom connectors.

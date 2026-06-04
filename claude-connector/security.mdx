@@ -9,14 +9,34 @@ The Claude Connector is a deliberately scoped, auditable, fully revocable connec
 
 ## Authentication
 
-The connector authenticates only via an **API key** you generate in **Settings → API → Keys**. The key:
+The connector supports two authentication methods. Both authenticate against your existing Productised account — **Claude never sees your password**.
 
-- Is unique to your workspace
-- Is shown once at creation and never displayed again
-- Can be **revoked at any time** from the same page
-- Can be **rotated** by generating a new one and deleting the old
+### OAuth 2.0 (primary — used by Claude.ai and Claude Desktop)
 
-Claude never sees your password. You can have multiple API keys (e.g. one for Claude Desktop, one for Claude.ai, one for an automated agent) and revoke any of them independently.
+When you add the connector in Claude, Claude opens a Productised sign-in popup. You sign in (or are recognised if already signed in to <https://app.productised.ai>), click **Authorise**, and Claude receives a scoped access token.
+
+The OAuth implementation:
+- Uses **PKCE (S256)** to prevent code interception
+- Supports **dynamic client registration** (Claude registers itself automatically)
+- Issues both **access tokens** and **refresh tokens** (with the `offline_access` scope) so connections stay live
+- Tokens are **scoped to your workspace** — they cannot read or modify any other account
+- Tokens are **revocable at any time** from **Productised → Settings → API → Connected apps**
+- Discovery metadata lives at `/.well-known/oauth-protected-resource` and `/.well-known/oauth-authorization-server`
+
+### API keys (alternative — for Claude Code, scripts, headless)
+
+For programmatic use or older Claude clients without the OAuth picker, you can generate a long-lived API key at **Settings → API → Keys**:
+
+- Unique to your workspace
+- Shown once at creation, never displayed again
+- Revocable at any time
+- Rotatable — generate a new one, delete the old
+
+You can have multiple API keys (one per client or environment) and revoke them independently.
+
+### Both methods authenticate the same way server-side
+
+Whichever method you use, every request to `mcp.productised.ai/mcp` carries a bearer token. The server resolves the token to your workspace, runs the requested tool with your permissions, and returns the result.
 
 ---
 
@@ -120,14 +140,21 @@ The `upload_image` tool fetches images from arbitrary URLs. This is a common SSR
 
 ## Revoking access
 
-To stop Claude from making any further calls:
+You have three ways to disconnect Claude.
 
-1. Go to **Settings → API → Keys** in Productised
-2. Click **Revoke** on the relevant key
+**If you connected via OAuth** (Claude.ai or Claude Desktop's connector picker):
+1. **In Productised**, go to **Settings → API → Connected apps**. Find Claude in the list and click **Revoke**.
+2. **Or in Claude**, go to **Settings → Connectors**, click **⋯ → Remove** on the Productised connector.
 
-The revocation is immediate. Any subsequent tool call from Claude using that key returns a `401 Unauthorized`. The Claude conversation continues — Claude just can't execute connector tools any more.
+Either action invalidates the access token immediately. Any subsequent tool call returns `401 Unauthorized`.
 
-You can also **delete the connector** from Claude.ai or Claude Desktop entirely. This removes the tool list from Claude's context immediately.
+**If you connected via an API key** (Claude Code, scripted setup, headless):
+1. Go to **Productised → Settings → API → Keys**.
+2. Click **Revoke** on the relevant key.
+
+The revocation is immediate. The Claude conversation continues — Claude just can't execute connector tools any more.
+
+You can also revoke individually rather than wholesale — e.g. revoke one of three API keys, or remove the Claude.ai OAuth grant while leaving the Claude Desktop one in place.
 
 ---
 

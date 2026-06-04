@@ -9,15 +9,33 @@ If something isn't working, start here. Most issues are easy to resolve, and the
 
 ## The connector isn't showing up in Claude
 
-**Claude.ai:**
-- Confirm you added the integration at **Settings → Connectors → Add custom connector**.
-- Confirm the URL is exactly `https://mcp.productised.ai/mcp?apiKey=YOUR_API_KEY` (with your real key replacing `YOUR_API_KEY`).
-- Start a **new conversation** — existing conversations don't pick up new connectors automatically.
+**Claude.ai (OAuth flow):**
+- Confirm you added the integration at **Settings → Connectors → Add custom connector** with URL `https://mcp.productised.ai/mcp` (no `?apiKey=...` suffix).
+- Allow popups for `claude.ai` — the Productised sign-in opens in a popup.
+- Start a **new conversation** after connecting — existing conversations don't pick up new connectors automatically.
 
-**Claude Desktop:**
-- Confirm the JSON in **Settings → Developer → Edit Config** is valid (no trailing commas, properly closed braces). Paste it into a JSON linter if unsure.
-- **Restart Claude Desktop completely** (quit, not just close) — the config is only read at startup.
-- Look for the 🔌 icon in the chat input bar — that confirms the server is connected.
+**Claude Desktop (OAuth via connector picker):**
+- Use **Settings → Connectors → Add custom connector** with the URL `https://mcp.productised.ai/mcp`. A browser window opens for sign-in.
+- After authorising, return to Claude Desktop — the 🔌 icon in the chat input bar confirms the connection.
+
+**Claude Desktop (manual JSON / API key):**
+- Confirm the JSON in **Settings → Developer → Edit Config** is valid (no trailing commas, properly closed braces). Paste into a JSON linter if unsure.
+- **Restart Claude Desktop completely** (⌘+Q, not just close) — the config is only read at startup.
+- The `Authorization: Bearer YOUR_API_KEY` header must be inside the `headers` block — not in the URL.
+
+---
+
+## The OAuth popup doesn't open / "Authentication failed"
+
+Almost always a popup blocker.
+
+1. Click the address bar icon (or browser settings) and **allow popups for `claude.ai`**.
+2. Click **Connect** on the Productised connector again.
+3. The sign-in popup should appear.
+
+If the popup opens but the sign-in fails:
+- You may be signed in to a different Productised account than the one you want. Sign out of <https://app.productised.ai>, sign back in as the right account, then retry.
+- Your organisation may block third-party OAuth grants. Check with your admin, or use the [API-key route in Claude Desktop](/claude-connector/setup#connect-claude-desktop) as a fallback.
 
 ---
 
@@ -25,19 +43,22 @@ If something isn't working, start here. Most issues are easy to resolve, and the
 
 The MCP server keeps sessions in memory. When the server restarts (during a deploy, for example), older sessions become invalid.
 
-**Fix:** Start a new Claude conversation. The next message creates a fresh session and the connector re-initialises.
+**Fix:** Start a new Claude conversation. The next message creates a fresh session and the connector re-initialises. Your OAuth token (or API key) is still valid — the session is just a per-conversation construct.
 
-This was a frequent issue before v1.38 when multi-machine deploys could route follow-up requests to the wrong machine. With session affinity in place, mid-conversation drops are very rare. If you're seeing them often, it's worth checking the API logs for the actual error.
+This was a frequent issue before v1.38 when multi-machine deploys could route follow-up requests to the wrong machine. With session affinity in place, mid-conversation drops are very rare.
 
 ---
 
 ## "Unauthorized" / 401 errors
 
-The most common causes:
+**If you connected via OAuth:**
+- Your access token may have expired and refresh failed. Remove the Productised connector from **Settings → Connectors**, then add it again to re-run the OAuth flow.
+- Your account may have been revoked from inside Productised — check **Settings → API → Connected apps**.
 
-- **Wrong API key.** Double-check the key in your Claude config matches a key listed in **Settings → API → Keys**.
-- **Key was revoked.** If you (or a team member) clicked Revoke on the key, all requests using it fail until you generate a new one.
-- **Key not in URL/header correctly.** For Claude.ai it must be in the URL (`?apiKey=...`). For Claude Desktop it must be in the `Authorization: Bearer ...` header.
+**If you connected via API key:**
+- Double-check the key in your Claude config matches a key listed in **Productised → Settings → API → Keys**.
+- The key may have been revoked. Generate a new one and update your config.
+- Key in the wrong place: Claude.ai expects it in the URL query (`?apiKey=...`), Claude Desktop's manual config expects it in the `Authorization: Bearer ...` header.
 
 ---
 
