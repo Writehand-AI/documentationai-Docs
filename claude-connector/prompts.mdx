@@ -1,0 +1,113 @@
+---
+title: Slash-pickable prompts
+description: 12 pre-canned prompts in Claude's prompt picker — type slash, pick, fill in any arguments, and the right Productised tool chain runs.
+---
+
+The connector ships **12 MCP Prompts** — pre-canned templates and widget viewers users can pick from Claude's prompt menu instead of typing a sentence from scratch.
+
+There are two kinds:
+
+- **Parameterised templates** (7) — pick the prompt, fill in arguments, and a formed message drops into the chat for Claude to act on
+- **Widget viewers** (5) — pick the prompt and the corresponding visual widget surfaces inline. No sentence needed, no `sendMessage` caution banner
+
+Prompts are an additional access surface alongside the [64 tools](/claude-connector/tools-reference) — they don't replace anything, they just make common flows easier to discover and faster to invoke.
+
+---
+
+## How users see them
+
+In Claude.ai, click the **`+`** button in the chat input (or type `/`) and pick **Productised** to see the prompt list. Each prompt has a title, a description, and (if it takes arguments) an inline form to fill in.
+
+In Claude Desktop, it's the same picker UI.
+
+---
+
+## Parameterised templates (7)
+
+These insert a formed prompt into the chat — like a slash command that becomes a real message.
+
+<Columns cols="2">
+  <Card title="build_product" icon="zap">
+    **Build a new AI product**
+    Args: `product_type`, `audience`, `outcome?`
+    Triggers the full plan → create → generate → preview chain.
+  </Card>
+  <Card title="brand_from_website" icon="image">
+    **Brand a product from a website**
+    Args: `website_url`, `product_id`
+    Scrapes the logo and favicon, re-hosts them on the CDN, applies branding, publishes.
+  </Card>
+  <Card title="morning_briefing" icon="sun">
+    **Morning briefing**
+    No args. Returns the daily workspace briefing card.
+  </Card>
+  <Card title="find_hot_leads" icon="flame">
+    **Find hot leads with talking points**
+    Args: `since?` (default: this week)
+    Surfaces hot prospects and drafts per-lead talking points for follow-up calls.
+  </Card>
+  <Card title="design_result_page" icon="layout">
+    **Design a result page**
+    Args: `product_id`, `style?`
+    Walks through the result-page designs and applies the best fit.
+  </Card>
+  <Card title="apply_theme" icon="palette">
+    **Browse and apply a theme**
+    Args: `product_id`
+    Recommends a theme based on the product's audience and brand voice, then applies it.
+  </Card>
+  <Card title="productise_my_expertise" icon="compass">
+    **Recommend what to build next**
+    Args: `niche?`
+    Brain looks at your workspace, brand voice, ideas, and journey plan to recommend the next product worth building.
+  </Card>
+</Columns>
+
+---
+
+## Widget viewers (5)
+
+These return an embedded resource link pointing to an existing visual widget. The Claude client renders the widget inline — no tool call, no `sendMessage`, no "external content" warning.
+
+<Columns cols="2">
+  <Card title="view_welcome" icon="home">
+    **Show the welcome card**
+    Personalised orientation card — what Productised can do, your workspace state, suggested first actions.
+  </Card>
+  <Card title="view_themes" icon="palette">
+    **Show the theme gallery**
+    All 20 theme presets as a visual swatch gallery — tap one to apply.
+  </Card>
+  <Card title="view_result_designs" icon="grid">
+    **Show the result-page designs**
+    Gallery of the 5 scorecard result designs (Score, Dimensions, Radar, Persona, Deep Insights) with previews.
+  </Card>
+  <Card title="view_briefing" icon="sun">
+    **Show today's briefing**
+    Daily workspace briefing card — new leads, hot prospects, per-product activity.
+  </Card>
+  <Card title="view_hot_leads" icon="flame">
+    **Show the hot leads board**
+    Visual leads board — score rings, status, per-lead actions for your best prospects across all products.
+  </Card>
+</Columns>
+
+---
+
+## Why we ship both tools AND prompts
+
+**Tools** are Claude-invoked. When the user says *"build me a scorecard"*, Claude reads the request, picks the right tool, and runs it. Great for natural language; requires the user to phrase their intent clearly.
+
+**Prompts** are user-invoked. The user picks from a menu. Great for discoverability (you don't have to know the right phrasing); requires us to anticipate the common flows.
+
+The two complement each other. New users discover what's possible via the prompts menu; experienced users skip the menu and just talk to Claude.
+
+---
+
+## A note on the "caution" banner
+
+When a widget button in chat uses `sendMessage` to insert text into Claude's input, Claude shows a security warning: *"Use caution before running this prompt. Malicious conversation content could trick Claude…"*. That's appropriate — it's protecting users from untrusted external content.
+
+**Widget viewers (the 5 `view_*` prompts) bypass that warning** because the user explicitly picked the prompt from the official picker. Claude treats the invocation as deliberate user intent, not external content trying to send a message.
+
+If you want a particular widget without the caution banner, use its viewer prompt instead of clicking a widget button that uses `sendMessage`.

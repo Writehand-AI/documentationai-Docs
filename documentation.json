@@ -492,6 +492,11 @@
                 "icon": "list"
               },
               {
+                "title": "Slash-pickable prompts",
+                "path": "claude-connector/prompts",
+                "icon": "command"
+              },
+              {
                 "title": "Demo URLs & live preview",
                 "path": "claude-connector/demo-urls",
                 "icon": "eye"
