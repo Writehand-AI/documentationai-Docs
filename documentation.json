@@ -353,11 +353,6 @@
                 "icon": "user"
               },
               {
-                "title": "Members",
-                "path": "workspace/members",
-                "icon": "users"
-              },
-              {
                 "title": "Plans",
                 "path": "workspace/plans",
                 "icon": "layers"
