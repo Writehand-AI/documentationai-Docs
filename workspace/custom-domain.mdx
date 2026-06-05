@@ -1,0 +1,97 @@
+---
+title: Custom Domain
+description: Serve every product in your workspace under your own domain with one DNS record and one cert.
+---
+
+The Custom Domain page lets you set a **workspace-wide** custom domain. When configured, every product in your workspace is automatically served at `https://<your-domain>/<product-slug>` — no per-product setup needed for each one.
+
+<Callout kind="info">📸 **Screenshot needed:** The Workspace Custom Domain settings page showing an active domain, DNS records table, and the list of products being served under it.</Callout>
+
+If you already have a per-product custom domain set on a specific product, that **always wins** — the product keeps its own dedicated hostname. The workspace domain is the default for everything else.
+
+## How it works
+
+1. You enter a hostname you own — e.g. `tools.acme.com`.
+2. Productised provisions a Let's Encrypt TLS certificate via Fly.io.
+3. You add one DNS record at your registrar (CNAME for a subdomain, A for an apex).
+4. Once DNS propagates, every product in your workspace is reachable at `https://tools.acme.com/<product-slug>`.
+
+The same Fly infrastructure that handles per-product domains is reused — only one cert per workspace is needed.
+
+## Setting it up
+
+### Step 1 — Pick your hostname
+
+You can use either:
+
+- **A subdomain** like `tools.acme.com` or `quizzes.yoursite.com` — recommended. Uses a simple CNAME record. Most users go this route.
+- **An apex domain** like `acme.com` directly — uses A/AAAA records and means the apex won't be available for anything else (no website at `https://acme.com`). Only choose this if you're running Productised as your *whole* business.
+
+### Step 2 — Register it
+
+Open **Workspace → Settings → Custom Domain** and enter the hostname. Click **Register**. Productised provisions the cert with Fly and shows you the DNS record to add.
+
+You can also do this from Claude:
+
+> "Set my workspace domain to tools.acme.com"
+
+Claude calls `set_workspace_domain` and returns the same DNS instructions inline.
+
+### Step 3 — Add the DNS record
+
+At your registrar (Cloudflare, Namecheap, GoDaddy, etc.), add the record exactly as shown. For a subdomain, this is a single CNAME:
+
+| Type  | Name    | Value                    | TTL  |
+|-------|---------|--------------------------|------|
+| CNAME | tools   | productisedai.fly.dev    | 3600 |
+
+For an apex domain, you'll add A and AAAA records pointing at Fly's IPs.
+
+DNS propagation usually takes **5–30 minutes**, though some providers can take up to 24 hours.
+
+### Step 4 — Verify
+
+Back in settings, click **Check status**. Once the cert is active, the page shows `Status: Active ✓` and your products are live at their workspace-domain URLs.
+
+You can also check from Claude:
+
+> "Check my workspace domain"
+
+## Setting product slugs
+
+Each product needs a slug to get a clean URL under your workspace domain. The slug is the last segment — e.g. `leadership-readiness` in `https://tools.acme.com/leadership-readiness`.
+
+Products without a slug fall back to `https://tools.acme.com/c/<product-id>` — still works, just uglier.
+
+The fastest way to set slugs is via Claude:
+
+> "Set the slug for my Leadership Readiness product to 'leadership-readiness'"
+
+This calls `set_product_slug`. Slugs are unique within your workspace — if you try to use one that's taken, the tool auto-deduplicates with `-2`, `-3` suffixes.
+
+## Per-product domain overrides
+
+If a specific product needs its own hostname (e.g. a high-profile diagnostic at `pricing-check.acme.com`), you can still set a per-product domain on that product in its own deployment settings. The per-product domain always wins over the workspace-wide one for that product — every other product keeps inheriting the workspace domain.
+
+The Workspace Custom Domain page shows you which of your products have their own override.
+
+## Removing the workspace domain
+
+If you decide to stop using a workspace-wide domain, click **Remove** on the settings page (or ask Claude: *"remove my workspace domain"*). Products fall back to their default URLs — per-product custom domain if set, otherwise `https://app.productised.ai/c/<product-id>`. Nothing about the products themselves changes; just the hostname they're reachable under.
+
+## URLs at a glance
+
+| Where the product lives | URL pattern |
+|---|---|
+| Default (no domain set) | `https://app.productised.ai/c/<product-id>` |
+| Workspace domain set + product has slug | `https://<workspace-domain>/<product-slug>` |
+| Workspace domain set + product has no slug | `https://<workspace-domain>/c/<product-id>` |
+| Per-product domain set (always wins) | `https://<per-product-domain>/c/<product-id>` |
+
+## Related tools
+
+- [`set_workspace_domain`](/claude-connector/tools-reference) — set the workspace-wide domain via Claude
+- [`check_workspace_domain`](/claude-connector/tools-reference) — see current status from Claude
+- [`remove_workspace_domain`](/claude-connector/tools-reference) — unlink the domain from Claude
+- [`set_product_slug`](/claude-connector/tools-reference) — set a product's URL slug from Claude
+- [`set_custom_domain`](/claude-connector/tools-reference) — set a per-product domain (overrides the workspace one)

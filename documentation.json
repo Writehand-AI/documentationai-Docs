@@ -353,6 +353,11 @@
                 "icon": "user"
               },
               {
+                "title": "Custom Domain",
+                "path": "workspace/custom-domain",
+                "icon": "globe"
+              },
+              {
                 "title": "Plans",
                 "path": "workspace/plans",
                 "icon": "layers"
