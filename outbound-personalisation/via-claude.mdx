@@ -1,0 +1,104 @@
+---
+title: Set it up via Claude
+description: The conversation flow Claude follows when you ask for outbound personalisation — and what to expect at each step.
+---
+
+The easy way to enable outbound personalisation is to ask Claude. The connector includes a six-step flow specifically designed to keep non-coders from misconfiguring the feature.
+
+## What to ask for
+
+Any of these phrasings will trigger the flow:
+
+- *"Set up outbound personalisation on my [product name]."*
+- *"I want to send unique links to my list of prospects."*
+- *"Help me set up a cold email campaign with my [product]."*
+- *"Generate personalised links for my CSV."*
+- *"Set up mail merge for my pricing diagnostic."*
+
+Claude won't auto-personalise; it'll walk you through the steps below.
+
+## The six steps
+
+### Step 1 — Mental model check
+
+Claude explains in plain words how outbound personalisation actually works — *one link per prospect, the bare link shows fallback text*. This step is non-negotiable. Even technical users sometimes assume *"I'll put one link on my website and it'll auto-personalise"*, which isn't how it works.
+
+### Step 2 — Read the current product
+
+Claude calls `get_product` to see what your welcome message currently says, what conversation starters you have, and what your AI agent's system prompt is. This is the baseline.
+
+### Step 3 — Ask what your CSV will have
+
+Claude asks: *"What info will your CSV have for each prospect? Name? Company? Industry?"* This is where you tell Claude which fields to wire in.
+
+### Step 4 — Preview both versions
+
+Claude drafts the new welcome message / starters / system prompt with `\{\{ url:* \}\}` tokens in them, then calls `preview_outbound_personalisation` to render two versions side-by-side:
+
+- **With sample params** (e.g. firstName=Sarah, company=Bloom Advisory)
+- **Without any params** (the bare-link fallback)
+
+Claude shows both versions in chat so you can see exactly what each variant will read like.
+
+<Callout kind="warning">**Always look at the "without params" version.** It proves your bare link still works as a public share. If the fallback reads wrong, ask Claude to tighten the fallback text before applying.</Callout>
+
+### Step 5 — Apply
+
+When you say *"looks good, apply it"*, Claude calls `enable_outbound_personalisation` with the patches and the declared fields. The product's welcome message, starters, and system prompt are updated in one atomic call.
+
+The call returns two URLs Claude drops in chat: a sample URL with params, and the bare URL without. Click both to verify behaviour in your own browser.
+
+### Step 6 — Generate the links
+
+Claude asks: *"Now — upload your CSV with one row per prospect and I'll generate a unique link for each one."* You paste or attach the CSV. Claude calls `generate_outbound_urls_from_csv`, which returns an enriched CSV with a new `outbound_url` column.
+
+From there:
+
+- **Hand the CSV to your mail-merge tool** (Smartlead, Apollo, Instantly, Smartlead, etc.)
+- **Drop it into Google Sheets** via the Connections node (`set_webhook`)
+- **Send via Gmail** directly through your workspace's Gmail Connection
+
+## Example conversation
+
+> **You:** Set up outbound personalisation on my pricing diagnostic.
+>
+> **Claude:** Before I change anything, quick mental model check: personalisation works by baking each prospect's details into their own unique link. So you'd have (say) 50 different links for 50 prospects, each one already knowing who's opening it.
+>
+> Sharing the same link with two people won't auto-detect them — they'd both see the same content. If you share a generic link on your website, it falls back to the default text you set.
+>
+> Make sense? Then let's pick what to personalise.
+>
+> **You:** Yes makes sense.
+>
+> **Claude:** Reading your pricing diagnostic... your current welcome is *"Your 5-Minute Pricing Health Check"* with starters *"Start my pricing check"* / *"What does the check cover?"*. What info will your CSV have for each contact? Name and company? Industry too?
+>
+> **You:** Name and company.
+>
+> **Claude:** Here's what I'll change. Let me show you both versions:
+>
+> **With params (firstName=Sarah, company=Bloom Advisory):**
+> Welcome: *"Your 5-Minute Pricing Health Check, Sarah"*
+> Starter: *"Start Bloom Advisory's pricing check"*
+>
+> **Without params (bare share):**
+> Welcome: *"Your 5-Minute Pricing Health Check"*
+> Starter: *"Start your pricing check"*
+>
+> The bare-link version still reads clean as a public share. Apply?
+>
+> **You:** Yes.
+>
+> **Claude:** Done. Sample URLs to test:
+>
+> - With params: `https://app.productised.ai/c/<id>?firstName=Sarah&company=Bloom%20Advisory`
+> - Without params: `https://app.productised.ai/c/<id>`
+>
+> Click both to verify. Then upload your CSV and I'll generate the links.
+
+## To revert
+
+Ask: *"Disable outbound personalisation on my pricing diagnostic."*
+
+Claude calls `disable_outbound_personalisation`. Every `\{\{ url:* \}\}` token is replaced with its own fallback value — so the welcome message that read *"Your 5-Minute Pricing Health Check, \{\{ url:firstName | Sarah \}\}"* becomes *"Your 5-Minute Pricing Health Check, Sarah"* permanently (and the tokens are gone, so URL parameters no longer have any effect).
+
+If you want to keep some fields but drop others, ask: *"Disable outbound personalisation for the company field only."*

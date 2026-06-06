@@ -1,0 +1,71 @@
+---
+title: What is Outbound Personalisation?
+description: Send one unique link per prospect, with their name and details baked into the URL. The product greets them by name and skips questions you already know.
+---
+
+Outbound Personalisation lets you generate a unique URL for every prospect in your contact list. When they click their link, the product greets them by name, references their company, and the AI agent skips any questions whose answers were already in the URL.
+
+The same product still works perfectly as a generic public link — if anyone clicks the bare URL with no parameters, they see the default text you configured. Two shapes of experience, one product, no duplication.
+
+## The 90-second mental model
+
+Personalisation works by **baking each prospect's details into their own unique link.** One prospect = one link. The link IS the personalisation.
+
+A URL like:
+
+```
+https://yourdomain.com/c/<your-product>?firstName=Sarah&company=Bloom%20Advisory
+```
+
+…tells the product *"this person is Sarah from Bloom Advisory"* the moment they arrive — before they've answered a single question. So the welcome reads *"Hi Sarah, ready to find out where Bloom Advisory's pricing is leaving money on the table?"* and the AI agent never asks for Sarah's name or company.
+
+If they share their link with a colleague, the colleague sees Sarah's version. That's expected — the link IS Sarah's.
+
+If you share the bare link (no parameters) on LinkedIn, on your website, or anywhere public, every visitor sees the **default fallback text**. The product doesn't break. The fallback is what you set during configuration — typically *"Hi there"*, *"your business"*, etc.
+
+<Callout kind="warning">**The single most common misconception:** *"If I put one link on my website, it'll auto-personalise to each visitor."* No. URL parameters are per-link. One person, one link. The bare link always shows the fallback.</Callout>
+
+## What you can personalise
+
+Every user-authored surface on the welcome screen and the AI conversation can use URL tokens:
+
+- **Welcome heading** — the big hero title
+- **Welcome subtitle** — the line under the hero
+- **Conversation starter pills** — the suggested first messages
+- **Custom welcome HTML** — full Claude Page landing pages
+- **AI Agent system prompt** — the AI's hidden instructions, so it knows who it's talking to
+- **Pre-populated form fields** — any URL parameter whose name matches a collection goal is filled in automatically, so the AI doesn't re-ask
+
+## How a respondent experiences it
+
+**Scenario 1: They click a personalised link.**
+
+They land on `yourdomain.com/c/<product>?firstName=Sarah&company=Bloom%20Advisory`. The welcome reads *"Hi Sarah, ready to find out where Bloom Advisory's pricing is leaving money on the table?"*. They tap *"Get Started"*. The AI agent says *"Great — let's start with your current MRR…"* (it skipped *"What's your name?"* because it already knows). The diagnostic feels personally addressed.
+
+**Scenario 2: They click a bare share link.**
+
+They land on `yourdomain.com/c/<product>` (no parameters). The welcome reads *"Hi there, ready to find out where your business's pricing is leaving money on the table?"*. They tap *"Get Started"*. The AI agent asks for their name and company normally. The diagnostic still works — it just doesn't pre-personalise.
+
+**Scenario 3: They share a personalised link by accident.**
+
+They forward Sarah's link to their colleague Tom. Tom sees Sarah's version. Tom's name and company aren't substituted. This is expected behaviour and matches how every other personalised email link on the internet works.
+
+## When to use it
+
+- **Cold email sequences** — Smartlead, Apollo, Instantly, manual. Each prospect gets a unique link.
+- **LinkedIn outreach** — DMs to specific people with a tailored diagnostic link.
+- **Agency client onboarding** — every client gets a link with their company already filled in.
+- **Event follow-up** — generate a link per attendee after a conference.
+- **Mail merge from your CRM** — upload a contact CSV and get back the enriched CSV with one URL per row.
+
+## When NOT to use it
+
+- **Public lead magnets on your website.** Set the fallback text and share the bare link. The personalisation feature is for outbound; for inbound, the fallback IS the experience.
+- **Social media bios.** Same as above — use the bare link.
+- **Sensitive personal data.** URLs are visible in browser history, server logs, and referrer headers. Don't put dates of birth, account numbers, or anything you wouldn't write in an email subject line.
+
+## What to read next
+
+- **[Set it up via Claude →](/outbound-personalisation/via-claude)** — the easy path. Claude walks you through it.
+- **[The URL token syntax →](/outbound-personalisation/url-tokens)** — for power users editing the welcome message directly.
+- **[Common patterns →](/outbound-personalisation/examples)** — copy-paste examples for the most common outbound use cases.

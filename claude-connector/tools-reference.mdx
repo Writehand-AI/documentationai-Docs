@@ -1,9 +1,9 @@
 ---
 title: All tools
-description: The full set of 64 tools the Claude Connector exposes, organised by category.
+description: The full set of 76 tools the Claude Connector exposes, organised by category.
 ---
 
-The connector exposes 64 live tools against your Productised workspace. They're grouped here by purpose so you can quickly find the right one. Each tool returns a structured result Claude can reason about, and most write operations return a **demo URL** so you can see the change immediately.
+The connector exposes 76 live tools against your Productised workspace. They're grouped here by purpose so you can quickly find the right one. Each tool returns a structured result Claude can reason about, and most write operations return a **demo URL** so you can see the change immediately.
 
 ---
 
@@ -51,7 +51,7 @@ The connector exposes 64 live tools against your Productised workspace. They're 
     The product's node graph — what nodes exist, how they're connected, what each one does.
   </Card>
   <Card title="get_product_url" icon="link">
-    Shareable link, optionally pre-filled with a contact's name and email — ready to send.
+    Shareable link, optionally pre-filled with a contact's name and email — ready to send. For outbound campaigns with arbitrary fields, prefer `generate_outbound_url`.
   </Card>
   <Card title="get_analytics" icon="bar-chart-2">
     Response count, last submission, 7-day trend, completion rate for any product.
@@ -86,6 +86,9 @@ The connector exposes 64 live tools against your Productised workspace. They're 
   </Card>
   <Card title="generate_product" icon="zap">
     Run AI generation to build the full conversation flow, collection goals, system prompt, and canvas workflow for a newly-created product.
+  </Card>
+  <Card title="revise_product" icon="refresh-cw">
+    Re-run generation on an existing product with a revised prompt. Lossy — replaces the whole workflow. For surgical edits, prefer `update_node`.
   </Card>
   <Card title="generate_plan" icon="map">
     Generate a full-funnel Journey Plan from Brain — product recommendations across all funnel stages.
@@ -123,6 +126,12 @@ The connector exposes 64 live tools against your Productised workspace. They're 
   </Card>
   <Card title="update_product_settings" icon="settings">
     Lock submissions after N responses, toggle email notifications.
+  </Card>
+  <Card title="set_submission_cap" icon="hash">
+    Cap the number of submissions a product accepts. New sessions are blocked once the cap is reached; in-flight conversations always finish.
+  </Card>
+  <Card title="get_submission_cap" icon="eye">
+    Read the current cap, count, and remaining spots for a product.
   </Card>
   <Card title="update_scoring_config" icon="bar-chart">
     Configure or update a Scoring node's weights, thresholds, and persona segments.
@@ -168,6 +177,30 @@ The connector exposes 64 live tools against your Productised workspace. They're 
 
 ---
 
+## Outbound Personalisation
+
+Send one unique link per prospect with their details baked into the URL. See the [Outbound Personalisation overview](/outbound-personalisation/overview) for the conceptual model.
+
+<Columns cols="2">
+  <Card title="enable_outbound_personalisation" icon="send">
+    Wire URL-parameter personalisation into a product. Takes explicit content patches with `\{\{ url:* | fallback \}\}` tokens. Records the declared fields on `personalisationConfig`. Always preview first.
+  </Card>
+  <Card title="preview_outbound_personalisation" icon="eye">
+    Render the welcome, subtitle, custom HTML, and starters with two sample sets (with params + empty) so the user sees both versions before saving. Critical safety net for non-coders.
+  </Card>
+  <Card title="generate_outbound_url" icon="link">
+    Single URL with arbitrary `{key:value}` params. Replaces the older `get_product_url` for outbound use. Warns on params not wired into the product.
+  </Card>
+  <Card title="generate_outbound_urls_from_csv" icon="file-text">
+    Bulk. Accepts CSV text, returns enriched CSV with a new `outbound_url` column appended. Optional `key_mapping` renames headers (e.g. "First Name" → `firstName`).
+  </Card>
+  <Card title="disable_outbound_personalisation" icon="trash-2">
+    Strip `\{\{ url:* \}\}` tokens — each becomes its fallback value. Pass `fields` to revert specific tokens only; omit to strip all.
+  </Card>
+</Columns>
+
+---
+
 ## Branding, theme & domain
 
 <Columns cols="2">
@@ -187,13 +220,22 @@ The connector exposes 64 live tools against your Productised workspace. They're 
     Set page title, meta description, og image, favicon, keywords for output pages.
   </Card>
   <Card title="set_custom_domain" icon="globe">
-    Configure a custom hostname and get the exact CNAME to add at your registrar.
+    Configure a per-product custom hostname and get the exact CNAME to add at your registrar.
   </Card>
   <Card title="get_domain_status" icon="radio">
-    Check whether DNS has propagated.
+    Check whether DNS has propagated for a per-product custom domain.
   </Card>
-  <Card title="apply_theme" icon="droplet">
-    Recolour an existing product to a named brand palette.
+  <Card title="set_workspace_domain" icon="globe">
+    Configure a workspace-wide hostname — every product is served under it unless they have their own per-product override.
+  </Card>
+  <Card title="check_workspace_domain" icon="radio">
+    Check the current status of the workspace-wide custom domain.
+  </Card>
+  <Card title="remove_workspace_domain" icon="x">
+    Unlink the workspace-wide custom domain.
+  </Card>
+  <Card title="set_product_slug" icon="hash">
+    Name a product's URL slug under the workspace domain (e.g. /leadership-readiness).
   </Card>
 </Columns>
 
@@ -278,3 +320,4 @@ If something is wrong (missing field, mismatched token, invalid configuration), 
 
 [Demo URLs & live preview →](/claude-connector/demo-urls)
 [Token resolution →](/claude-connector/tokens)
+[Outbound Personalisation →](/outbound-personalisation/overview)

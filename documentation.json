@@ -241,6 +241,32 @@
             ]
           },
           {
+            "group": "Outbound Personalisation",
+            "icon": "send",
+            "pages": [
+              {
+                "title": "What is Outbound Personalisation?",
+                "path": "outbound-personalisation/overview",
+                "icon": "send"
+              },
+              {
+                "title": "The URL token syntax",
+                "path": "outbound-personalisation/url-tokens",
+                "icon": "hash"
+              },
+              {
+                "title": "Set it up via Claude",
+                "path": "outbound-personalisation/via-claude",
+                "icon": "sparkles"
+              },
+              {
+                "title": "Common patterns",
+                "path": "outbound-personalisation/examples",
+                "icon": "copy"
+              }
+            ]
+          },
+          {
             "group": "Product Settings",
             "icon": "settings",
             "pages": [

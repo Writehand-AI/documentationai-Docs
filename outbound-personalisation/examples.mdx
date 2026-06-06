@@ -1,0 +1,173 @@
+---
+title: Common patterns
+description: Ready-to-copy outbound personalisation setups for the most common use cases.
+---
+
+These are template-style setups you can either paste into your welcome message manually OR show to Claude as the desired outcome.
+
+## Pattern 1: Name + company greeting
+
+The most common shape. Used for cold email, LinkedIn outreach, conference follow-up.
+
+### Welcome heading
+
+```
+Hi \{\{ url:firstName | there \}\}, ready to find out where \{\{ url:company | your business \}\}'s [topic] stands?
+```
+
+### Conversation starters
+
+```
+Start \{\{ url:firstName | my \}\} assessment
+What does the \{\{ url:company | check \}\} cover?
+```
+
+### System prompt addition
+
+```
+The respondent is \{\{ url:firstName | a prospect \}\} from \{\{ url:company | their business \}\}.
+Reference them by name once at the start. Don't ask for their name or company — you already have both.
+```
+
+### CSV columns required
+
+- `firstName`
+- `company`
+
+---
+
+## Pattern 2: Industry-aware diagnostic
+
+For when you want the AI to reference the prospect's industry in its analysis but they didn't pick from a dropdown.
+
+### Welcome heading
+
+```
+A tailored \{\{ url:industry | business \}\} diagnostic for \{\{ url:firstName | you \}\}
+```
+
+### System prompt addition
+
+```
+The respondent is in the \{\{ url:industry | small business \}\} space.
+Use industry-specific examples where possible. Avoid generic "in your industry" phrasing — name it directly.
+```
+
+### CSV columns required
+
+- `firstName`
+- `industry`
+
+---
+
+## Pattern 3: Agency / consultant client check-in
+
+For agencies sending the same diagnostic to multiple client accounts. The client's account manager wants the welcome to read like an internal product.
+
+### Welcome heading
+
+```
+\{\{ url:company | Your business \}\} Quarterly Review
+```
+
+### Welcome subtitle
+
+```
+A 5-minute pulse from \{\{ url:accountManager | your team \}\} at \{\{ url:agency | the agency \}\}.
+```
+
+### System prompt addition
+
+```
+This review is being run by \{\{ url:accountManager | the account team \}\} for the client \{\{ url:company | the business \}\}.
+Address the respondent as a representative of \{\{ url:company | their company \}\}, not as an individual lead.
+```
+
+### CSV columns required
+
+- `company`
+- `accountManager`
+- `agency`
+
+---
+
+## Pattern 4: Event / conference follow-up
+
+For sending a personalised diagnostic to every attendee post-event.
+
+### Welcome heading
+
+```
+\{\{ url:firstName | Welcome \}\}, your post-\{\{ url:event | event \}\} action plan
+```
+
+### System prompt addition
+
+```
+The respondent attended \{\{ url:event | the event \}\} and is following up afterwards.
+Reference one specific theme or session from \{\{ url:event | the event \}\} in your first message if you can.
+```
+
+### CSV columns required
+
+- `firstName`
+- `event` (e.g. "SaaStock 2026")
+
+---
+
+## Pattern 5: Re-engagement of dormant leads
+
+For warming up cold leads who've gone quiet. Reference their last interaction.
+
+### Welcome heading
+
+```
+\{\{ url:firstName | Hey \}\}, picking up from \{\{ url:lastInteraction | last time \}\}
+```
+
+### Conversation starters
+
+```
+What's changed since \{\{ url:lastInteraction | we last spoke \}\}?
+Where are you stuck now?
+What's the priority this quarter?
+```
+
+### System prompt addition
+
+```
+The respondent had a previous touchpoint with us: \{\{ url:lastInteraction | a previous conversation \}\}.
+Acknowledge that context warmly in your opening message. Don't ask what they remember — assume the context is fresh enough.
+```
+
+### CSV columns required
+
+- `firstName`
+- `lastInteraction` (e.g. "the Q3 strategy call")
+
+---
+
+## How to apply these
+
+### Via Claude
+
+Paste the pattern into the chat and say *"Set this up on my [product name]."* Claude will work through the [six-step flow](/outbound-personalisation/via-claude) and confirm before saving.
+
+### Manually in Productised
+
+Open your product → Canvas → AI Product node → Welcome Message field. Paste the heading text. Repeat for subtitle and conversation starters. Save. The tokens are live as soon as the product re-renders.
+
+To verify, append `?firstName=Test&company=Acme` to your product's URL and open it in an incognito tab.
+
+## Building your CSV
+
+Keep the headers simple and match the token names exactly (case-sensitive):
+
+```csv
+firstName,company,email
+Sarah,Bloom Advisory,sarah@bloom.example
+Marcus,Triton Partners,marcus@triton.example
+Lena,Quill & Quail,lena@quillquail.example
+```
+
+Upload to Claude with *"Generate outbound URLs from this CSV."* Claude returns an enriched CSV with the original columns plus a new `outbound_url` column. From there, paste into Smartlead, Apollo, your mail merge tool of choice, or hand back to your sales team via Sheets.
