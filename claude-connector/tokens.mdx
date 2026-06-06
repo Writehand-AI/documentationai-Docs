@@ -3,11 +3,11 @@ title: Token resolution
 description: How double-curly-brace tokens in landing pages, result pages, and prompts resolve per respondent — and which prefix to use where.
 ---
 
-Productised uses `\{\{ token \}\}` syntax to inject dynamic values at render time. Five prefixes, each backed by a different source. Understanding the difference is the key to designing pages that fill correctly.
+Productised uses `\{\{ token \}\}` syntax to inject dynamic values at render time. Six prefixes, each backed by a different source. Five of them resolve from the respondent's collected data (form answers, AI agent output, computed visualisations, workspace variables); the sixth — `url:` — resolves from the request URL itself, for outbound personalisation.
 
 ---
 
-## The five token prefixes
+## The six token prefixes
 
 | Prefix | Source | Where it lives | Example |
 |---|---|---|---|
@@ -16,19 +16,22 @@ Productised uses `\{\{ token \}\}` syntax to inject dynamic values at render tim
 | `\{\{ object:fieldName \}\}` | A structured field from an AI agent | `Response.result[nodeVar].object[fieldName]` | `\{\{ object:overall_score \}\}` |
 | `\{\{ chart:key \}\}` | A computed visualisation token (or raw passthrough of any agent field) | Computed from `result` at render time | `\{\{ chart:dim1_pct \}\}` |
 | `\{\{ custom:key \}\}` | A workspace variable | `TenantVariable` | `\{\{ custom:business_name \}\}` |
+| `\{\{ url:fieldName | fallback \}\}` | A URL query parameter (outbound personalisation) | The request URL | `\{\{ url:firstName | there \}\}` |
 
 ---
 
 ## When each prefix resolves
 
-| Surface | Form | Node | Object | Chart | Custom |
-|---|---|---|---|---|---|
-| **Landing page** (`/c/<product>`) | — | — | — | — | ✅ |
-| **AI conversation** | — | — | — | — | ✅ (in system prompts) |
-| **Result page** (`/pages/<page>/<response>`) | ✅ | ✅ | ✅ | ✅ | ✅ |
-| **Standard output (streamed report)** | ✅ | ✅ | ✅ | — | ✅ |
+| Surface | Form | Node | Object | Chart | Custom | URL |
+|---|---|---|---|---|---|---|
+| **Landing page** (`/c/<product>`) | — | — | — | — | ✅ | ✅ |
+| **AI conversation** | — | — | — | — | ✅ (in system prompts) | ✅ (in system prompts) |
+| **Result page** (`/pages/<page>/<response>`) | ✅ | ✅ | ✅ | ✅ | ✅ | — (use `form:` instead) |
+| **Standard output (streamed report)** | ✅ | ✅ | ✅ | — | ✅ | — (use `form:` instead) |
 
-A respondent isn't logged in yet at the landing-page stage, so `form:`, `node:`, `object:`, and `chart:` don't have data to resolve from. Only the workspace-wide `custom:` tokens work there.
+A respondent isn't logged in yet at the landing-page stage, so `form:`, `node:`, `object:`, and `chart:` don't have data to resolve from. Only the workspace-wide `custom:` tokens and the request-URL `url:` tokens work there.
+
+By the time the result page or standard output renders, the URL params (if any) have been captured into the response's userData. Reference them via `\{\{ form:fieldName \}\}` instead of `\{\{ url:fieldName \}\}` for consistency.
 
 ---
 
@@ -124,3 +127,16 @@ Common variables to set on day one:
 - `score_word` (e.g. "Readiness" — appears in result page headlines like "Your Readiness Score")
 - `product_name` (overridable per product but useful as a workspace default)
 - `brand_voice` (a short style guide your AI agent prompts reference)
+
+---
+
+## `\{\{ url:* | fallback \}\}` — the request layer
+
+`url:` tokens resolve from the request URL's query parameters — not from any Productised data structure. They're the foundation of **Outbound Personalisation**: send a unique URL per prospect with their details baked in, and the welcome screen + AI agent's hidden system prompt substitute the values at render time.
+
+Two things make `url:` distinct from the other prefixes:
+
+1. **Fallback syntax.** Always include a fallback after the pipe: `\{\{ url:firstName | there \}\}`. If the URL parameter is missing or empty, the fallback renders — so the bare share link still reads cleanly.
+2. **Reserved keys.** Platform-owned parameters (`preview`, `demo`, `utm_*`, `fbclid`, `gclid`, `lng`) are stripped before tokens resolve. You can't accidentally read or write them.
+
+For the full picture — the conceptual model, security posture, length limits, and the dedicated MCP tools that wire it up — see the [Outbound Personalisation docs](/outbound-personalisation/overview).
