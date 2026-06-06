@@ -1,0 +1,102 @@
+---
+title: The URL token syntax
+description: \{\{ url:fieldName | fallback \}\} — how URL parameters resolve into welcome messages, starter pills, and the AI agent system prompt.
+---
+
+Outbound Personalisation runs on a simple template syntax. Drop a `\{\{ url:fieldName | fallback \}\}` token anywhere in your product's user-facing text and the renderer substitutes the URL parameter's value at the moment a respondent loads the page.
+
+If you're using the [Claude flow](/outbound-personalisation/via-claude), Claude writes these tokens for you. If you're editing the welcome message or system prompt manually in Productised, this page is the reference.
+
+## The grammar
+
+```
+\{\{ url:<fieldName> | <fallback> \}\}
+```
+
+- **`fieldName`** — must match the URL parameter key exactly. Letters, digits, underscores only. Max 50 characters. Case-sensitive (`firstName` ≠ `firstname`).
+- **`fallback`** — text that renders if the URL parameter is missing OR empty. Optional, but always include one for safety.
+
+### Examples
+
+| Token | URL param | Renders as |
+|---|---|---|
+| `\{\{ url:firstName | there \}\}` | `?firstName=Sarah` | `Sarah` |
+| `\{\{ url:firstName | there \}\}` | (none) | `there` |
+| `\{\{ url:company | your business \}\}` | `?company=Bloom%20Advisory` | `Bloom Advisory` |
+| `\{\{ url:company | your business \}\}` | (none) | `your business` |
+| `\{\{ url:industry \}\}` | (none) | `` (empty string) |
+
+<Callout kind="warning">**Always include a fallback.** A token with no fallback collapses to an empty string when the parameter's missing, which produces weird gaps in your sentences. Even a one-word fallback like `"there"` makes the bare link readable.</Callout>
+
+## Where tokens work
+
+| Surface | Tokens resolve here | Use for |
+|---|---|---|
+| **Welcome heading (Title Page mode)** | ✅ | The big hero text on the landing page |
+| **Welcome subtitle** | ✅ | The smaller line under the hero |
+| **Conversation starters / pills** | ✅ | First-message suggestions |
+| **Custom Welcome HTML (Claude Page mode)** | ✅ | Full custom landing pages |
+| **AI Agent system prompt** | ✅ | The AI's hidden instructions — see [respondent_context block](#the-respondent_context-block) below |
+| **Result page templates** | ❌ | Use `\{\{ form:* \}\}` instead — by the time the result page renders, the values are in the response data |
+
+## The respondent_context block
+
+When a respondent opens a personalised link, Productised automatically injects a hidden block into the AI Agent's system prompt:
+
+```
+<respondent_context>
+This respondent opened the link with the following details already provided.
+Do NOT ask for any of these — use them naturally where relevant:
+
+- firstName: Sarah
+- company: Bloom Advisory
+</respondent_context>
+```
+
+You don't have to write this — it's added automatically based on whatever URL params are present. But it's worth knowing it exists, because it's how the AI "knows" to skip questions whose answers arrived via URL.
+
+If a URL parameter's name matches a collection goal's `fieldName` exactly, that goal is pre-populated and marked complete before the conversation starts. So `?firstName=Sarah` not only renders the welcome with Sarah's name, it also stops the AI from asking *"What's your name?"* — the field is already filled.
+
+## Security: what's HTML-escaped
+
+All URL parameter values are HTML-escaped before being substituted into welcome HTML. A URL like:
+
+```
+?firstName=%3Cscript%3Ealert(1)%3C/script%3E
+```
+
+…renders as the literal text `<script>alert(1)</script>` in the welcome screen. No script execution. No popup.
+
+In plain-text contexts (the conversation starters, the AI system prompt), no escaping is applied — there's no HTML to attack — but the values still flow through React's text rendering, which renders them as text not markup.
+
+## Reserved parameter names
+
+These URL parameters are owned by the platform for analytics, preview, and feature flagging. They're **never** treated as personalisation params, even if you reference them in a token:
+
+- `preview` — preview-mode flag
+- `demo` — demo-mode flag
+- `utm_source`, `utm_medium`, `utm_campaign`, `utm_term`, `utm_content` — analytics
+- `fbclid`, `gclid` — ad click tracking
+- `lng` — i18n language override
+
+Writing `\{\{ url:utm_source | direct \}\}` in your welcome message will not resolve to the UTM value — it'll fall through to the fallback `"direct"` because `utm_source` is filtered out before tokens are processed.
+
+## Privacy caveats
+
+URL parameters are visible in:
+
+- Browser history
+- Server access logs (yours and any analytics provider you use)
+- Referrer headers when the respondent clicks an outgoing link
+- Email previews if the URL appears in an email body
+
+Don't put anything sensitive in a URL parameter. Names, companies, industries — fine. Dates of birth, payment info, account numbers — not fine.
+
+## Length limit
+
+Individual parameter values are capped at 500 characters. URLs longer than that get truncated. Use short, marketing-friendly values — `"Bloom Advisory"` not `"Bloom Advisory LLC, a wholly-owned subsidiary of Acme Holdings Inc."`.
+
+## What to read next
+
+- **[Set it up via Claude →](/outbound-personalisation/via-claude)** — the easy path
+- **[Common patterns →](/outbound-personalisation/examples)** — ready-to-copy snippets
