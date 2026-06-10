@@ -641,5 +641,13 @@
       "claude",
       "mcp"
     ]
+  },
+  "navbar": {
+    "actions": {
+      "primary": {
+        "title": "Get Started",
+        "link": "https://app.productised.ai/register"
+      }
+    }
   }
 }
