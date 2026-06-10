@@ -58,6 +58,17 @@ To remove a product from the Marketplace, disable the **List on Marketplace** to
 
 ---
 
+## Sharing and installing via Claude
+
+If you've connected the [Productised Claude connector](/claude-connector/overview), you can do both flows directly from a Claude conversation.
+
+* **Get a share link for your own product** — *"Give me a share link for my Pricing Health Check product"* → Claude calls `get_template_share_link` and hands you the marketplace install URL. Anyone you forward it to lands on the marketplace install page and clicks Copy to Workspace.
+* **Browse the public marketplace** — *"Show me marketplace templates for coaches"* or *"What lead-generation templates exist?"* → Claude calls `list_marketplace_templates` and renders a visual gallery. Each card has Install (opens the marketplace install URL) and Preview (opens the live demo). Filters: industry, GROW stage (G/R/O/W), keyword search.
+
+Install always happens on the web — the marketplace install page handles the plan-limit check and creates the workspace copy. Claude only hands you the URL.
+
+---
+
 ## The Marketplace as a distribution channel
 
 For consultants and educators who build high-quality products, the Marketplace is a passive distribution channel. A well-built lead generation template, a client onboarding product, or a diagnostic tool listed publicly becomes a way for other practitioners to discover your work — and, through it, you.

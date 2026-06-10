@@ -201,6 +201,44 @@ Send one unique link per prospect with their details baked into the URL. See the
 
 ---
 
+## Marketplace & template sharing
+
+Two tools that let users share their own products as installable templates, or browse and install templates other users have shared. Install happens entirely on the web — Claude hands the user the marketplace URL and they click "Copy to Workspace" from there (the existing plan-limit check applies).
+
+<Columns cols="2">
+  <Card title="get_template_share_link" icon="share-2">
+    Returns a shareable marketplace URL for one of the user's own products. Anyone with the link clicks → marketplace install page → "Copy to Workspace" → the product lands in their workspace. The original stays untouched.
+  </Card>
+  <Card title="list_marketplace_templates" icon="grid">
+    Browse public marketplace templates inside Claude. Renders a visual gallery widget with filter chips (industry, GROW stage, search). Each card has Install and Preview buttons that open the marketplace page in a new tab.
+  </Card>
+</Columns>
+
+---
+
+## Plan, credits & billing
+
+Transparency tools so users can see exactly where they stand against their plan — and a deterministic billing URL when they want to change it.
+
+<Columns cols="2">
+  <Card title="get_plan_status" icon="gauge">
+    Returns the user's current plan, usage for every gated feature (live products, AI credits), BYOK status, and the upgrade + BYOK URLs. Read-only. Claude calls this before answering "what plan am I on" or "am I close to my limit".
+  </Card>
+  <Card title="get_credits" icon="zap">
+    Visual credit gauge — plan title, balance, usage this period, all-time usage, per-product breakdown, BYOK status. Use whenever the user asks about credits, usage, or cost impact.
+  </Card>
+  <Card title="get_subscription_url" icon="credit-card">
+    Returns the URL to the user's subscription management page (change plan, view invoices, update payment method, cancel). Called whenever the user mentions upgrading, downgrading, cancelling, refunds, billing, or invoices.
+  </Card>
+  <Card title="get_workspace_stats" icon="bar-chart-2">
+    Account-wide totals — products created, live products, responses, leads. Pairs with `get_plan_status` to show value alongside usage.
+  </Card>
+</Columns>
+
+When a write tool (e.g. `create_product`, `publish_product`, `generate_product`) is blocked by a plan limit, the response is a structured `limit_reached` payload with the upgrade URL and a list of next-step options — Claude surfaces these verbatim. BYOK on `ai-credits` bypasses the cap entirely.
+
+---
+
 ## Branding, theme & domain
 
 <Columns cols="2">

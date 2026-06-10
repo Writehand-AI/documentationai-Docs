@@ -40,6 +40,29 @@ The area chart plots completed sessions over time — useful for seeing the impa
 
 <Callout kind="info">📸 **Screenshot needed:** The Charts tab showing the metrics row and the area chart with a visible trend over several weeks</Callout>
 
+### Cost & Credits
+
+At the top of the Charts tab, the **Cost & Credits** card shows exactly what this product has used — broken into the four numbers that matter:
+
+| Tile | What it means |
+|---|---|
+| **Credits this month** | Plan credits this product has consumed in the current billing period. Pairs with the run count so you can see cost-per-run. |
+| **Credits all-time** | Lifetime credit usage. Pairs with a credits-per-response ratio if any responses have been captured. |
+| **Real $ this month** | Real Anthropic dollar cost — what this product would cost in the current month if you were paying Anthropic directly via BYOK. |
+| **Real $ all-time** | Lifetime equivalent. |
+
+Below the tiles:
+
+* A **14-day sparkline** of daily credit usage — useful for spotting spikes after a campaign or a config change.
+* **Top cost drivers** — which nodes in your workflow consumed the most credits this month (e.g. *AI Advisor 77%*, *Standard Output 21%*). If one node dominates and feels too expensive, tighten its prompt or move it to a smaller model.
+* **Powered by** — the models that ran this product (e.g. `claude-sonnet-4-6`, `claude-haiku-4-5`). Productised routes calls automatically based on phase.
+
+If you have BYOK active (your own Anthropic key plugged in at **Settings → Secrets**), the card switches to "**BYOK is on**" and the real-$ tiles show your actual Anthropic spend — not an equivalent. Plan credits are not consumed.
+
+If you don't have BYOK, the footer suggests it: *"this product would cost you ~$0.84 this month direct to Anthropic"* — a real number from your own usage, not an estimate. Click through to **Settings → Secrets** to add a key.
+
+<Callout kind="tip">The "real $" figure is what you would pay Anthropic directly for the same tokens. Productised's plan-credit pricing includes platform infrastructure and support; the gap between the two is your platform fee.</Callout>
+
 ---
 
 ## All Results
