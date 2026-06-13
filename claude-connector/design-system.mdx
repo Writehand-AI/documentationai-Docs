@@ -1,0 +1,126 @@
+---
+title: Workspace design system
+description: Link your brand's colours, fonts, and visual style to Productised once — every product, result page, and landing page inherits them automatically.
+---
+
+A workspace design system is a single token set — your brand's primary colour, background, fonts, shape radius, and more — that lives at workspace level and cascades to every surface Productised generates. Set it once and every new product you build starts with your brand already applied.
+
+---
+
+## How it works
+
+Design tokens are stored on your workspace (not on individual products). Whenever Productised generates or themes a surface — a result page, a landing page, a conversation theme — it loads the workspace tokens first, then layers any product-specific overrides on top.
+
+**Precedence on every surface:**
+
+```
+product accent colour → workspace design system → platform default (coral)
+```
+
+This means:
+- A product where you've set a specific button colour keeps that colour.
+- A product where you haven't set anything picks up your workspace brand.
+- Workspaces without a design system use the Productised coral default.
+
+---
+
+## Setting your design system
+
+Ask Claude to run `set_design_system` with your brand tokens:
+
+> *"Set my workspace design system: primary colour #1a56db, background #f8fafc, heading font 'Inter', body font 'Inter', border radius 8px."*
+
+> *"Update the design system — change the primary colour to #7c3aed and the heading font to 'Bricolage Grotesque'."*
+
+`set_design_system` does a **partial merge** — you only need to pass the tokens you want to change. Existing tokens you don't mention are preserved.
+
+### Tokens available
+
+| Token | What it controls |
+|---|---|
+| `brand_primary` | CTAs, score rings, badges, buttons |
+| `brand_ink` | Hover states, ink overlays (auto-derived from primary if not set) |
+| `brand_bg` | Page background on result and landing pages |
+| `brand_surface` | Card and panel backgrounds |
+| `brand_text` | Primary text colour |
+| `brand_muted` | Secondary / helper text |
+| `brand_dark_panel` | Dark CTA panel base (e.g. closing section on landing pages) |
+| `heading_font` | CSS font-family stack for headings |
+| `body_font` | CSS font-family stack for body copy |
+| `radius` | Border-radius for cards and buttons (e.g. `8px`, `16px`) |
+| `logo_url` | Optional brand logo URL |
+
+---
+
+## Reading what's set
+
+> *"What's my current design system?"*
+
+Claude calls `get_design_system` and returns the stored tokens alongside which surfaces they affect and which tokens are still using platform defaults.
+
+---
+
+## What surfaces inherit the design system
+
+Once set, the tokens flow through automatically:
+
+<Columns cols="2">
+  <Card title="Result pages" icon="layout">
+    All six scorecard templates — Dimensions, Radar, Persona, Deep Insights, Grid, Narrative Report — pick up your accent colour, ink, background, dark panel, and fonts on every `apply_result_template` call.
+  </Card>
+  <Card title="Landing pages" icon="globe">
+    `get_landing_page_template` applies your brand accent, background, dark panel, and body font to the landing page before returning it to you to edit.
+  </Card>
+  <Card title="Conversation themes" icon="message-circle">
+    When a product has no preset theme set, the AI Chat node picks up your `brand_primary` as the button colour and `brand_bg` as the chat background.
+  </Card>
+  <Card title="Custom colour theme" icon="paint-bucket">
+    When the workspace default theme is set to "Brand Colour", your `brand_primary` is used directly as the custom colour across all new products.
+  </Card>
+</Columns>
+
+---
+
+## Viewing it in the dashboard
+
+Your design system is always visible — read-only — on the **Brand Voice** page in your workspace settings (Settings → Brand Voice). The card shows:
+
+- Colour swatches for primary, ink, background, dark panel, and surface
+- Font names for headings and body
+- The source label (e.g. "From Claude Design", "Manual")
+- When it was last updated
+
+The dashboard view is read-only. All changes go through Claude — ask it to `set_design_system` or `get_design_system`.
+
+A **Clear** button on the card removes the design system from your workspace. After clearing, all surfaces fall back to platform defaults until you set a new one.
+
+---
+
+## Clearing the design system
+
+> *"Clear my workspace design system."*
+
+Or use the Clear button on the Brand Voice page. Products that had their own theme set are unaffected — only the workspace-level fallback is removed.
+
+---
+
+## Where does it come from?
+
+The `source` field records how the tokens were set:
+
+| Source | Meaning |
+|---|---|
+| `manual` | Set directly via `set_design_system` in a Claude conversation |
+| `claude-design` | Imported from a Claude Design project |
+| `website` | Extracted from a website URL |
+| `import` | Loaded from a design token file |
+
+Currently, Claude can set the design system in any conversation — just describe your brand colours and fonts and it writes the tokens. Deeper integrations (Claude Design sync, website scraping) are on the roadmap.
+
+---
+
+## One-message brand setup
+
+> *"Set my workspace design system: primary #1a56db, background #f8fafc, heading font Bricolage Grotesque, body font Inter, radius 10px. Then show me the result-page gallery for my Scorecard product so I can see it themed."*
+
+Claude calls `set_design_system`, then `list_result_templates` (or `apply_result_template`). Every template you see is already wearing your brand.
