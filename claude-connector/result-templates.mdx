@@ -1,31 +1,34 @@
 ---
 title: Result page templates
-description: Five branded, dynamic templates ready to apply to any design-outcome product — Score, Dimensions, Radar, Persona, and Deep Insights.
+description: Six branded, dynamic templates ready to apply to any design-outcome product — Dimensions, Radar, Persona, Deep Insights, Grid, and Narrative Report.
 ---
 
-Productised ships five canonical result-page designs. Each is **dynamic** — the AI agent's structured output fills the page automatically, so every respondent sees a personalised version. You don't have to design anything; you just pick the right one.
+Productised ships six canonical result-page designs. Each is **dynamic** — the AI agent's structured output fills the page automatically, so every respondent sees a personalised version. You don't have to design anything; you just pick the right one.
 
-From Claude, you can browse them with `list_result_templates` and apply one with `apply_result_template`.
+From Claude, you can browse them with `list_result_templates` (a visual gallery with live previews) and apply one with `apply_result_template`.
 
 ---
 
-## The five templates
+## The six templates
 
 <Columns cols="2">
-  <Card title="Score" icon="circle">
-    A single headline score with a tier badge, tier description, and one clear next step. Best when you want a clean, focused outcome — *"Here's your number, here's what it means, here's what to do."*
-  </Card>
   <Card title="Dimensions" icon="bar-chart-2">
-    The overall score gauge plus a colour-coded breakdown bar per dimension and an insight under each. The most informative design — best for scorecards across multiple pillars (4–8 dimensions).
+    The overall score gauge plus a colour-coded breakdown bar per dimension and an insight under each. The most informative design — best for scorecards across multiple pillars. **This is the default applied by `generate_product`.**
   </Card>
   <Card title="Radar Profile" icon="hexagon">
     A spider chart across all dimensions with axis labels. Best when *balance* matters more than absolute scores — readiness, fit, or capability assessments where the shape of the profile is the insight.
   </Card>
   <Card title="Persona" icon="user">
-    A named outcome ("The Momentum Founder") with a tagline and short description. No number, no breakdown. Best for tofu lead magnets where the deliverable is identity, not measurement.
+    A named outcome ("The Momentum Founder") with a tagline, three defining traits, and next steps. No numbers anywhere. Best for tofu lead magnets where the deliverable is identity, not measurement.
   </Card>
   <Card title="Deep Insights" icon="layers">
-    Side-by-side strengths / improve panels plus a "what we learned about you" narrative. Best when you want a qualitative, advisor-style read on the respondent rather than a score.
+    Side-by-side strengths / improve panels plus a "what we learned about you" narrative. Best when you want a qualitative, advisor-style read on the respondent rather than a score breakdown.
+  </Card>
+  <Card title="Grid Scorecard" icon="grid">
+    A framed, ruled layout with a segmented donut and stat cells. Pairs with the grid landing-page style. Best when you want a more technical, editorial-report feel.
+  </Card>
+  <Card title="Narrative Report" icon="file-text">
+    Longer-form advice: executive summary, three narrative sections with pull-quotes, a key insight, and next steps. No score required. Best for consultative products where the value is the analysis, not a number.
   </Card>
 </Columns>
 
@@ -33,14 +36,19 @@ From Claude, you can browse them with `list_result_templates` and apply one with
 
 ## What `apply_result_template` does
 
-Applying a template does **two things** in one call:
+Applying a template does **three things** in one call:
 
 1. **Sets the page HTML** to the chosen branded design (centred, responsive, brand-fonts loaded).
-2. **Configures the AI agent's `objectVariables`** with exactly the fields that design needs (e.g. `overall_score`, `tier_label`, `dim1_score`, `dim1_insight`, …).
+2. **Configures the AI agent's `objectVariables`** with exactly the fields that design needs (e.g. `overall_score`, `tier_label`, `dim1_score`, `dim1_insight`, …) — and wires the agent to the AI Chat node if it isn't already connected.
+3. **Bakes in safe values for unset workspace variables.** Templates reference `custom:product_name`, `custom:score_word`, `custom:business_name`, and `custom:cta_url`. If you haven't set one of those, the connector bakes a concrete value into the page (the product's name, a score word derived from it, your workspace name) so nothing renders blank. If the variable *is* set, the token is kept and resolves live on every view.
 
-That second step is the magic — without it, the page renders literal `{{ object:* }}` tokens. With it, every new submission produces an agent output that fills the page automatically.
+Without step two, the page would render literal `{{ object:* }}` tokens. With it, every new submission produces an agent output that fills the page automatically.
 
-The CTA section at the bottom of every template ships with a polished default ("Ready to act on your results? / Book a quick call …"). You can change it via `update_page` or `set_variable` for the workspace-wide CTA copy.
+The report date is stamped by the renderer from the response's creation date (`{{ chart:report_date }}`) — the AI is never asked to output a date.
+
+The CTA section at the bottom of every template ships with polished default copy and links to your `custom:cta_url` workspace variable. Set it once and every result page's button works:
+
+> *"Set my workspace variable `cta_url` to https://cal.com/me/strategy."*
 
 ---
 
@@ -53,14 +61,16 @@ You can switch templates at any time:
 Claude calls `apply_result_template({ template_id: "radar" })`. It overwrites the page HTML and updates the agent fields. New submissions get the new design.
 
 <Callout kind="warning">
-Existing responses created with the old template's field set won't fully populate the new template if the templates have different fields. Re-submit a test response to see a fully-populated version. Most templates share the base field set (score, tier, top strength, critical gap, three actions), so partial overlap is common.
+Existing responses created with the old template's field set won't fully populate the new template if the templates have different fields. Re-submit a test response to see a fully-populated version. The score-based templates (Dimensions, Radar, Grid) share the same field set, so switching between them is lossless; Persona, Deep Insights, and Narrative Report each add their own fields.
 </Callout>
 
 ---
 
 ## Theming
 
-Every template uses your product's brand accent (`buttonColor` on the AI Chat node). When you call `apply_result_template`, the connector automatically re-skins the template's coral accent to your accent — chrome (ring, CTA button, badges) takes your brand colour; dimension-bar colours stay semantic (green / amber / red by score threshold) so they remain legible on any theme.
+Every template uses your product's brand accent (`buttonColor` on the AI Chat node). When you call `apply_result_template`, the connector automatically re-skins the template's coral accent to your accent — chrome (CTA button, badges, section markers) takes your brand colour.
+
+**Score colours stay semantic.** Dimension bars, the hero score ring, and the tier badge are coloured by the score itself (green ≥ 70, amber ≥ 45, red below — and per-dimension green ≥ 7, amber ≥ 4.5, red below). A low score never renders in celebratory brand colour, on any theme.
 
 Combine with `apply_theme` to also restyle the conversation surface — the result page picks up the same accent so the whole experience reads as one brand.
 
