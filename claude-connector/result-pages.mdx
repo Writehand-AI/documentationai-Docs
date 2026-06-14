@@ -60,19 +60,52 @@ The same coverage check applies to `import_design` when you pass a `product_id`.
 
 ---
 
-## Constraints you should know about
+## Two render modes: fragment vs. document
 
-Every page renders inside a centred ~720px card. Two implications:
+Productised detects which mode to use automatically based on what you save.
 
-1. **Self-centre your designs.** Wrap your content in `<div style="max-width:640px;margin:0 auto">…</div>` so it sits centred, not flush-left.
-2. **No JavaScript.** The HTML is injected via `innerHTML`, which doesn't execute `<script>` tags. Build score visuals as pure CSS/SVG:
-   - Bar fills: `<i style="width:{{ chart:dim1_pct }}%;background:#3f7d5f"></i>`
-   - Ring gauge: `<circle pathLength="100" stroke-dasharray="{{ chart:overall_score }} 100" />`
-   - Numbers: the plain token (`{{ object:overall_score }}`), not a JS counter
+**Fragment mode** (default — all existing pages and templates)
+HTML is injected via `innerHTML` into a centred ~720px card on the page. Scripts do not execute — build score visuals as pure CSS/SVG:
+- Bar fills: `<i style="width:{{ chart:dim1_pct }}%;background:#3f7d5f"></i>`
+- Ring gauge: `<circle pathLength="100" stroke-dasharray="{{ chart:overall_score }} 100" />`
+- Numbers: plain tokens (`{{ object:overall_score }}`), not JS counters
 
-`create_page` and `update_page` flag pages that contain `<script>` and give Claude the SVG/CSS recipes to replace them.
+Wrap content in `<div style="max-width:640px;margin:0 auto">…</div>` to self-centre it.
 
-**Preloaded fonts:** `Inter` and `Source Serif 4` are preloaded on every render surface (the live page, the live welcome, the Claude in-chat preview). Use them freely; for any other webfont, include a `@import` or `<link>` inline.
+**Document mode** (Claude Design output, and any `<!DOCTYPE html>` page)
+When the HTML you save starts with `<!DOCTYPE html>` or `<html`, Productised switches to document mode automatically — the page is served in an iframe. Scripts execute, custom fonts load from `<link>` tags, and animations run. This is what enables Claude Design pages to render exactly as they look in Claude Design's own preview panel.
+
+Tokens are still resolved server-side before the iframe loads — `{{ object:* }}`, `{{ form:* }}`, `{{ chart:* }}` all work identically. JavaScript on the page can also access personalisation data via `window.PRODUCTISED_DATA` (same values, as a JSON object).
+
+**Preloaded fonts:** `Inter` and `Source Serif 4` are preloaded on every render surface. For any other webfont, include a `@import` or `<link>` inline in your page's `<head>`.
+
+---
+
+## Designing in Claude Design
+
+Claude Design is the native path for full-document pages. The connector knows your brand (via the Design System), your token schema, and your agent's output fields — so you can have a full design conversation without leaving Claude.
+
+When Claude Design saves a page via the connector, Productised auto-detects the `<!DOCTYPE html>` output and stores it in document mode. The preview in Claude Design's right panel shows exactly what respondents will see.
+
+---
+
+## Porting designs from Lovable, v0, or Cursor
+
+You can bring in HTML from any design tool using `import_design`. The tool cleans and validates the HTML before saving, detects placeholder text like "Maya" or "[Name]", and suggests the right tokens.
+
+**How each tool's output translates:**
+
+| Tool | Output type | Works in Productised? | How |
+|------|-------------|----------------------|-----|
+| Claude Design | Full HTML document | ✅ Natively | Connector saves it directly; auto document mode |
+| Cursor / any AI that writes HTML | Full HTML or fragment | ✅ Directly | Paste into Claude, `import_design` → `update_page` |
+| Lovable | React app (default) | ⚠️ Ask for plain HTML | Prompt: *"Give me a single standalone HTML file with no React, no imports, no build step"* |
+| v0 | React components (default) | ⚠️ Ask for plain HTML | Prompt: *"Output as a plain HTML file using only inline CSS and vanilla JS"* |
+| Figma / Webflow / Framer | Varies | ⚠️ Export HTML first | Export as HTML, paste into `import_design` |
+
+**For Lovable and v0:** these tools default to React output that requires a build environment. Explicitly ask them for a "standalone single-file HTML" and they'll produce something that works. Once you have that HTML, paste it into a Claude conversation and say *"import this design to my product"* — the connector handles the rest.
+
+**Asking Claude to translate for you:** If you have a Lovable or v0 design you like but can't get a plain HTML export, paste the design's component code into Claude and say *"convert this to a self-contained HTML page using inline CSS and vanilla JS, then import it to my [product name] result page."* Claude will translate it and save it in one go.
 
 ---
 
