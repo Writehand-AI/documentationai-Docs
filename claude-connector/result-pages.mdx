@@ -83,9 +83,17 @@ Tokens are still resolved server-side before the iframe loads — `{{ object:* }
 
 ## Designing in Claude Design
 
-Claude Design is the native path for full-document pages. The connector knows your brand (via the Design System), your token schema, and your agent's output fields — so you can have a full design conversation without leaving Claude.
+Most people build in a normal Claude chat. Claude Design is the **power-user path** when you want finer control over the visual design — but it has a gotcha worth knowing.
 
-When Claude Design saves a page via the connector, Productised auto-detects the `<!DOCTYPE html>` output and stores it in document mode. The preview in Claude Design's right panel shows exactly what respondents will see.
+**Attach the Productised connector and give it the product.** Claude Design's default instinct is to build a **React app** (its native artifact format), which Productised *cannot* use as an output page. With the connector attached and your product in context, it knows the real deliverable instead. Start your message with something like: *"Use my Productised connector. Design the output page for product `<id>` — read the existing pages and tokens first."*
+
+**The deliverable is one self-contained, zero-JS HTML document with `{{ tokens }}` — not React.** If Claude Design prototypes in components, ask it to *"render this down to a single static HTML file with the Productised tokens baked in, no React"* before saving.
+
+**It must be saved through the connector.** A design that lives only as a Claude Design artifact or a spec file does not exist in Productised. The handoff is `update_page` (or `create_page`) — that's what puts it on your live page. Full `<!DOCTYPE html>` output is auto-detected and stored in document mode (scripts and fonts work in the iframe).
+
+<Callout kind="warning">
+**Keep multi-page outputs cohesive.** If you ask for "two pages," Claude Design may build two *different* designs. For one product they share a nav bar and must read as one product — same header, accent, cards, and CTA. Tell it to *"match the existing page's design"* (the connector returns your other pages so it can), and vary only the content, not the visual language.
+</Callout>
 
 ---
 
