@@ -97,6 +97,50 @@ Most people build in a normal Claude chat. Claude Design is the **power-user pat
 
 ---
 
+## Set up a Claude Design system that's Productised-ready
+
+If you build a **custom design system** inside Claude Design, configure it so its output is Productised-compatible *by default* — then every page it produces is the right shape, and you never have to correct it mid-conversation. Paste the block below into your Claude Design design-system's guidelines:
+
+```text
+PRODUCTISED OUTPUT PAGES — house rules
+
+Deliverable: every result page is ONE self-contained HTML file with ZERO JavaScript.
+Never a React/JSX app, never multiple files, never a separate spec doc. If you prototype
+in components, render down to a single static HTML file before handing off.
+
+Personalisation: pages fill per respondent via {{ tokens }}, never hard-coded values.
+  • {{ object:fieldName }} — AI Agent output (scores, insights, tier labels, prose)
+  • {{ form:fieldName }}   — the respondent's intake answers (e.g. their name)
+  • {{ chart:overall_score }}, {{ chart:dimN_pct }}, {{ chart:dimN_color }} — computed
+    visual values; use these INSIDE HTML/SVG attributes (object: tokens corrupt attributes)
+  • {{ custom:key }}       — workspace variables (booking links, brand text)
+Call get_design_brief(product_id) to read the product's REAL token names. Never invent them —
+an unknown token renders blank.
+
+Score visuals are pure CSS/SVG (no JS):
+  • bar fill:  <i style="width:{{ chart:dim1_pct }}%;background:{{ chart:dim1_color }}"></i>
+  • ring:      <circle pathLength="100" stroke-dasharray="{{ chart:overall_score }} 100" />
+  • numbers:   the plain token, e.g. {{ object:overall_score }}
+
+Layout: self-centre at ~640px (max-width:640px;margin:0 auto) — or output a full
+<!DOCTYPE html> document if you need fonts/scripts (it renders in an iframe).
+Fonts 'Inter' and 'Source Serif 4' are preloaded.
+
+Semantic score colours are SEPARATE from the brand accent: green #3f7d5f (strong),
+amber #b5772f (developing), red #c0452f (focus). Use these for scores; use the brand
+accent for chrome and the CTA.
+
+Multi-page: all pages of one product share a nav bar. Reuse the same header, accent,
+cards, and CTA across them — vary content, never the visual language.
+
+Handoff: SAVE the page into the product with update_page (existing) or create_page (new).
+A design that isn't saved through the connector does not exist in Productised.
+```
+
+With that in place, ask Claude Design to *"use my Productised connector, call `get_design_brief` for product `<id>`, then design and save the output page."* It will pull your real tokens and existing pages, design a single-file HTML page that matches, and save it live — no React detour, no manual port.
+
+---
+
 ## Porting designs from Lovable, v0, or Cursor
 
 You can bring in HTML from any design tool using `import_design`. The tool cleans and validates the HTML before saving, detects placeholder text like "Maya" or "[Name]", and suggests the right tokens.
