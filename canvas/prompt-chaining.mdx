@@ -26,7 +26,7 @@ When you ask one AI node to collect information, evaluate fit, and write a perso
 When you chain three nodes with a clear single objective each:
 
 - The **AI Product** node is entirely focused on having a great conversation — asking the right questions, adapting to responses, gathering everything it needs
-- The **Scoring Node** is entirely focused on evaluation — reading what was collected and making a precise judgement about this person's profile
+- The **AI Agent** is entirely focused on evaluation — reading what was collected and making a precise judgement about this person's profile
 - The **Report node** is entirely focused on writing — it receives both the raw data and the scoring result, and writes for a specific profile rather than an average of all possible people
 
 Each step is excellent at its specific job. The final output reflects that.
@@ -39,7 +39,7 @@ Each step is excellent at its specific job. The final output reflects that.
 
 The most common chain on Productised. Used by consultants, coaches, and service businesses to qualify and convert leads.
 
-**AI Product** (collect context and situation) → **Scoring Node** (assign a profile: Strong Fit, Needs More Foundation, Not the Right Fit) → **Report** (a personalised diagnostic report written to that profile, with a profile-matched CTA)
+**AI Product** (collect context and situation) → **AI Agent** (assign a profile: Strong Fit, Needs More Foundation, Not the Right Fit) → **Report** (a personalised diagnostic report written to that profile, with a profile-matched CTA)
 
 The person who's a strong fit receives a report that mirrors their ambition and moves them toward a sales conversation. The person who isn't ready yet receives something that meets them where they are — building trust rather than pushing prematurely.
 
@@ -57,10 +57,10 @@ The intermediate AI Node step means the Document doesn't have to "think" — it 
 
 <Steps>
   <Step title="Add your nodes">
-    Drag each node you need from the toolbar onto the canvas. For a three-step chain, you'll have your AI Product node (already there), plus two additional nodes — for example, a Scoring Node and a Report Outcome.
+    Drag each node you need from the toolbar onto the canvas. For a three-step chain, you'll have your AI Product node (already there), plus two additional nodes — for example, a AI Agent and a Report Outcome.
   </Step>
   <Step title="Connect them in sequence">
-    Draw connections in order: AI Product → Scoring Node → Report. Each node passes its output downstream. The flow direction is left to right or top to bottom — whichever makes the canvas easier to read.
+    Draw connections in order: AI Product → AI Agent → Report. Each node passes its output downstream. The flow direction is left to right or top to bottom — whichever makes the canvas easier to read.
   </Step>
   <Step title="Configure each node's prompt">
     Click each node and configure its settings. The power of chaining comes from how you write the prompts at each stage.
@@ -82,7 +82,7 @@ The canvas uses a variable syntax to pass data between nodes. Any node output ca
 {{ node:varName }}
 ```
 
-Where `varName` is the output variable name you've set on the upstream node. For example, if your Scoring Node has an output called `persona`, your Report prompt can reference `{{ node:persona }}` to write specifically to that profile.
+Where `varName` is the output variable name you've set on the upstream node. For example, if your AI Agent has an output called `persona`, your Report prompt can reference `{{ node:persona }}` to write specifically to that profile.
 
 The **Available Variables** section in each node's sidebar shows all upstream outputs that are accessible at that point in the chain — so you don't need to remember variable names manually.
 
@@ -96,7 +96,7 @@ Most products don't need chaining. A single AI Product node connected to a Repor
 
 Add chaining when:
 
-- **You need a separate evaluation step.** If who the person is should determine what they receive — not just the details of their situation — a Scoring Node in the chain makes that separation clean and deliberate.
+- **You need a separate evaluation step.** If who the person is should determine what they receive — not just the details of their situation — a AI Agent in the chain makes that separation clean and deliberate.
 - **Your output needs to be dramatically different based on profile.** A chain lets the writing step know exactly who it's writing for, not just infer it from raw inputs.
 - **You're doing multi-stage processing.** When one pass of AI reasoning isn't enough — you need one step to analyse, another to synthesise, another to format — chaining is the natural structure.
 - **You want auditability.** Chains produce intermediate outputs that you can inspect in the response data. You can see exactly what the scoring step decided before the report was written.

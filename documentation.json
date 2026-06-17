@@ -136,7 +136,7 @@
                 "icon": "git-merge"
               },
               {
-                "title": "Scoring Node",
+                "title": "How scoring works",
                 "path": "canvas/scoring-node",
                 "icon": "bar-chart-2"
               },
