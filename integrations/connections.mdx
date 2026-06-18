@@ -1,26 +1,30 @@
 ---
-title: Connections
-description: Connect your AI product directly to your CRM, email platform, and business tools — from the canvas.
+title: Integrations overview
+description: How to connect your AI product to your CRM, email tools, and business systems.
 ---
 
-<Callout kind="info">📸 **Screenshot needed:** The Connections node on the canvas, with the settings panel open showing available integrations (Gmail, HubSpot, Slack, Google Sheets, Airtable)</Callout>
+## How integrations work
 
-The Connections Power is the canvas-native way to bridge your AI product with your existing business tools. Rather than setting up external middleware, you connect directly from the canvas — and the integration runs as part of your product's workflow.
+When someone completes your product, you can push all of the collected data and AI outputs to any external system automatically using a **webhook**.
 
-For a full guide to setting up and configuring the Connections Power, see the [Connections Power documentation](/powers/connections).
+Webhooks are the primary integration mechanism: Productised sends a real-time POST request to a URL you configure the moment a response is completed. You connect that URL to whichever tool you use — your CRM, Zapier, Make, or your own server.
 
-## Connections vs Webhooks vs Zapier
+[Set up a webhook →](/integrations/webhooks)
+
+## Connecting to specific tools
 
 <Columns cols="3">
-  <Card title="Connections (Power)" icon="share-2">
-    Canvas-native. Configured visually on the canvas. Best for direct integrations with supported platforms (HubSpot, Gmail, Slack, Google Sheets, Airtable). No external accounts needed beyond the platform itself.
+  <Card title="Webhooks" href="/integrations/webhooks" icon="radio">
+    Send raw response data to any URL the moment a conversation completes. Works with any tool that accepts HTTP — your own server, Zapier, Make, or any CRM with a webhook endpoint.
   </Card>
-  <Card title="Webhooks" icon="radio">
-    Send raw data to any URL. Best when you have a custom server, or when the tool you're connecting to isn't in the Connections library.
+  <Card title="Zapier" href="/integrations/zapier" icon="zap">
+    Visual middleware connecting Productised to 6,000+ apps. Best when you need field mapping, filters, or multi-step automation without writing code.
   </Card>
-  <Card title="Zapier" icon="zap">
-    Visual middleware connecting Productised to 6,000+ apps. Best when you need field mapping, filters, or multi-step automation without code.
+  <Card title="MCP node" href="/powers/connections" icon="share-2">
+    Two-way, conversational integration. Add an MCP node to your canvas and Claude can read from and write to your tools during and after conversations — not just push data when complete.
   </Card>
 </Columns>
 
-<Callout kind="tip">For most coaches and consultants, Connections handles the essentials directly. Use Zapier when you need to connect to something not yet in the Connections library, or when your automation has multiple steps.</Callout>
+<Callout kind="tip">
+  For most use cases — routing leads to a CRM, logging to a sheet, notifying a Slack channel — the webhook + Zapier combination is the quickest setup. Use the MCP node when you need Claude to read data or take actions during the conversation itself, not just at the end.
+</Callout>

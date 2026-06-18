@@ -1,81 +1,80 @@
 ---
-title: Knowledge
+title: Reference Material
 description: >-
-  Ground your AI Product in your own frameworks, methodology, and expertise — so
-  every outcome reflects your IP, not generic AI thinking.
+  Give Claude permanent access to your methodology, pricing, FAQs, and
+  background context — directly from the AI Chat node settings.
 ---
-<Callout kind="info">
-**Knowledge Power vs Brain Knowledge Base** — there are two places knowledge lives in Productised and they serve different purposes. The Knowledge Power (this page) is attached to a specific product on the canvas — it grounds that product's AI conversations and outputs in your documents. [Brain's Knowledge Base](/brain/knowledge-bases) is workspace-wide — it feeds Brain's strategic conversations across all sessions. Use the Knowledge Power when a specific product needs to draw on your documents. Use Brain's KB when you want Brain to have long-term context about your business and methodology.
-</Callout>
 
 ## What it does
 
-The Knowledge Power lets you upload your own documents — frameworks, methodology guides, client case studies, positioning documents, pricing guides, anything that represents how you think and work. Your AI Product actively retrieves from this knowledge during the conversation and when generating outcomes.
+Reference Material is a plain-text field in your AI Chat node settings. Whatever you paste in — your pricing, your methodology, your onboarding process, your frequently asked questions — Claude has it available for every single conversation that product runs.
 
-The operative word is actively. When a relevant moment arises in the conversation — a question that touches your methodology, a situation your framework addresses, a topic your case studies speak to — the Knowledge Power searches your documents and surfaces the most relevant content. The AI uses it. Not as a pasted blob of text at the start, but as a live resource it draws on as the conversation unfolds.
+It is prepended to the system prompt before every message. Claude treats it as foundational context. It does not need to decide when to use it — it is simply always there.
 
-📸 **Screenshot needed:** The canvas showing a Knowledge node connected to an AI Product node, with the sidebar open showing uploaded documents
+## How much can you put in it?
 
-## Why it's a connected node, not a file upload in settings
+A lot more than you might expect.
 
-This distinction matters, and it is worth understanding.
+Claude Sonnet 4.6 (the default model on Productised) has a 200,000 token context window. In practice, Reference Material can hold **several hundred pages of text** before you approach any limit. A full methodology guide, pricing tiers, your FAQ, client types, process steps, and company context combined will almost certainly fit with room to spare.
 
-A static file upload — the kind that pastes your document into the AI's context at the start of every conversation — has a fixed, finite limit. It works for small documents. It breaks down for large ones. And it applies the same content to every product you build, regardless of whether that content is relevant to what a particular product is doing.
+For comparison: platforms that use RAG (retrieval-augmented generation) store large document libraries but only surface 3–5 text chunks per query — meaning the AI sees a few paragraphs at a time, not the whole document. Reference Material gives Claude the entire thing, so it can reason across all of it rather than guessing which fragment to retrieve.
 
-The Knowledge Power uses live semantic retrieval. The AI actively searches your uploaded documents for content that is relevant to the current conversation, in context, as it unfolds. The result is smarter, more accurate, and more specifically yours — because the AI is finding what it needs rather than ingesting everything at once.
+## How to set it up
 
-It is also modular. If you build ten products, each one can draw on a different knowledge base, or share the same one. A settings upload ties every product to the same configuration. Nodes give you independence — a coaching product draws on your coaching framework, a consulting product draws on your consulting methodology. Each product gets what it needs.
+1. Open your AI Chat node on the canvas and click to open its settings
+2. Scroll down to the **Reference Material** section
+3. Paste in your background context
+4. Save — it takes effect immediately for all future conversations
 
-## Why this matters
+## Converting a PDF or document
 
-Generic AI gives generic answers. When your Knowledge Power contains your signature framework, your proprietary methodology, your client-tested process — the output is no longer generic. It sounds like you. It recommends your approach. It references your thinking.
+If your methodology, pricing guide, or playbook lives in a PDF or Google Doc, the best approach is to have Claude convert it first rather than extracting raw text:
 
-Your AI product becomes an extension of your expertise, not a replacement for it. The difference between a product that gives sensible general advice and one that says "based on your situation, Phase 2 of the approach would be to..." is the Knowledge Power. One is a tool. The other is you, at scale.
+1. Go to [claude.ai](https://claude.ai) and start a new conversation
+2. Upload your PDF, document, or paste your URL
+3. Send this prompt:
 
-## Sidebar settings
+```
+I'm adding my expertise as Reference Material for an AI product. Please read the attached document and restructure all the key information into a concise reference guide.
 
-When you click the Knowledge node on the canvas, the sidebar opens with three tabs: **Documents**, **Query**, and **Info**.
+Keep:
+- All specific frameworks, methodologies, and process steps
+- Exact terminology and how you define it
+- Pricing, packages, and what's included
+- Who you work with and the problems you solve
+- Important nuances, exceptions, and caveats
 
-**Documents tab**
+Remove: narrative, stories, examples, and redundant explanation.
 
-- **File upload area** — drag and drop files or click to upload. Multiple files can be added. Each file is automatically indexed for semantic search once uploaded. An upload progress indicator appears during processing.
+Format with clear headers and bullet points. The goal is a dense, accurate reference that an AI assistant can use when having conversations on my behalf.
+```
 
-- **Add a URL** — paste a web page URL and click Add. The page is fetched, parsed, and indexed automatically. Useful for adding a web-based resource, a public page, or a web version of your methodology.
+4. Paste Claude's response into the Reference Material field in Productised
 
-- **Document list** — all uploaded files and URLs are shown here with their file type and date added. Each entry can be removed individually. The knowledge base is scoped to this product — removing a document from one product does not affect others.
+**Why this produces better results than raw text extraction:** A PDF extracted to plain text is full of headers, footers, page numbers, repeated boilerplate, and filler narrative. Claude's compacted version removes all of that and keeps only what an AI needs — dense, structured, and purpose-built for a system prompt. The AI reading it during conversations gets better signal per token.
 
-**Query tab**
+<Callout kind="info">
+  The compact prompt is also available directly in the Reference Material section of your AI Chat settings — click "Have a PDF, doc, or website?" to expand it and copy the prompt with one click.
+</Callout>
 
-- **Search Query** — the query sent to your knowledge base when this node fires. Defaults to `{input}`, which passes the relevant upstream context automatically. Supports variable syntax (e.g. `{fieldName}`, `{industry}`) for more targeted retrieval.
+## What to put in it
 
-- **Result Limit** — a slider (1–10) controlling how many relevant document chunks are returned. 3–5 is recommended for most products. More chunks mean richer context for your AI, but may include less relevant passages.
+**Your methodology or framework** — the specific way you approach your work. Every outcome Claude generates references your process, not generic AI advice.
 
-- **Available Variables** — connected form fields and upstream node outputs are shown here for reference when writing the search query.
+**Pricing and packages** — what you offer, at what price, what's included. Claude handles pricing questions accurately mid-conversation.
 
-📸 **Screenshot needed:** The Documents tab showing the upload area and a list of indexed files
+**FAQs** — the questions your prospects always ask. Claude handles them correctly without the conversation going off-track.
 
-📸 **Screenshot needed:** The Query tab showing the search query field with variable syntax
+**Company or service context** — who you work with, what problems you solve, what makes your approach different.
 
-## Supported file types
+**Terminology** — if your methodology uses specific terms or frameworks, define them here. Claude uses your language.
 
-The Knowledge Power accepts: PDF, DOCX, XLSX, PPTX, CSV, JSON, TXT, MD, JPG, JPEG, PNG, GIF, WEBP, SVG. Maximum file size is 10MB per file.
+## File uploads during conversations
 
-## When to use Knowledge
+If you want the **person using your product** to provide their own context — uploading their CV, brief, or website URL — that is handled separately via the **file upload** or **URL** question types in Collection Goals. The respondent uploads the file mid-conversation and Claude reviews it as part of that session.
 
-- Any product where your proprietary methodology should shape the AI's recommendations — so the output references your framework rather than general best practice
+This is different from Reference Material: Reference Material is your knowledge (always present), file uploads are the respondent's content (session-specific).
 
-- Products where you want the AI to cite specific models, processes, or approaches that are yours
-
-- Lead generation products where the output should reflect your positioning and philosophy, not a generic point of view
-
-- Client-facing products where your IP is the point — where the value is your thinking, not the AI's
-
-## Ideas to get you started
-
-Upload your signature framework as a PDF. Now every report your product generates is grounded in your methodology — not general AI advice, but your specific approach applied to their specific situation.
-
-Upload your client case studies. Now the AI can surface relevant proof points in the offer it generates — real examples that match the prospect's industry, size, or challenge.
-
-Upload your pricing guide. Now the AI knows what to recommend and at what level, without you having to spell it out in every product prompt.
-
-Upload your content — your best articles, your talks, your frameworks. Now your AI product sounds like you wrote every word of the output yourself.
+<Callout kind="info">
+  Reference Material is per-product. Each product on your canvas has its own — a coaching product can reference your coaching framework, a consulting product your consulting methodology. They are fully independent.
+</Callout>

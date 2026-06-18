@@ -18,7 +18,7 @@ The canvas has three main areas:
 
 **The canvas itself** — the large open area where your product takes shape. You can zoom in and out, pan around freely, and arrange nodes however makes sense to you. Use the zoom controls in the top-right corner, or scroll to zoom.
 
-**The floating toolbar** — a slim bar that floats along the bottom of the canvas. This is where you find everything you can add to your product. It's split into two tabs: **Powers** (on the left) and **Outcomes** (on the right). The sparkle button on the far left opens the AI Assistant.
+**The floating toolbar** — a slim bar that floats along the bottom of the canvas. This is where you find every node type you can add to your product. The sparkle button on the far left opens the AI Assistant.
 
 **The settings panel** — when you click any node on the canvas, a panel slides in from the right showing all its settings. This is where you configure what each part of your product does.
 
@@ -36,33 +36,19 @@ Everything on the canvas is a **node** — a block that represents one part of y
 
 ## The toolbar
 
-The toolbar at the bottom of the canvas is organised into two tabs:
+The toolbar at the bottom of the canvas contains every node type you can add to your product:
 
-<Tabs>
-  <Tab title="Powers">
-    Powers extend your AI Product with extra capabilities:
+**AI Agent** — a specialist AI that runs after the conversation. Use it to score inputs, run structured analysis, or produce a precise structured result before generating the outcome.
 
-    - **Knowledge** — upload your own documents, PDFs, or written content. The AI references this material when having conversations and generating outcomes, keeping responses grounded in your expertise.
+**Standard** — streams a personalised document directly in your product. Clean, readable, easy to copy or download. Best for action plans, strategy briefs, and written deliverables.
 
-    - **Research** — gives the AI the ability to search the web for real-time information relevant to each person's situation.
+**Page** — a custom HTML result page you design and edit with Claude. Uses live `{{ }}` tokens to pull in the respondent's answers and AI outputs.
 
-    - **Scoring** — evaluates the collected conversation data and assigns a persona profile (e.g. "Growth-Ready", "Needs Foundation"). The scored profile shapes the Outcome each person receives — different content, different CTA, different redirect — without manual routing rules.
+**Advisor** — a follow-up conversational advisor. The AI speaks first using everything collected in the conversation, then opens the floor for questions. Best for high-touch, consultative experiences.
 
-    - **Connect** — sends data to other tools (Gmail, Google Sheets, HubSpot, Slack, Airtable) after the product is completed. Use this to route leads, trigger follow-ups, or log responses.
-  </Tab>
-
-  <Tab title="Outcomes">
-    Outcomes are what your audience receives at the end:
-
-    - **Report** — the AI generates a personalised, visual diagnostic report instantly after the conversation. Includes sections, scores, insights, and a call to action.
-
-    - **Document** — the AI writes a full personalised document — an action plan, strategy brief, proposal, or guide — that the person can view and download.
-
-    - **Advisor Chat** — delivers a full-screen, personalised advisory session. The AI speaks first using everything collected during the conversation, then opens the floor for follow-up questions. Unlike a report, this is a live exchange — the closest a Productised product gets to a real advisory conversation.
-
-    - **Redirect** — routes the person to a specific URL when the conversation completes. Useful for sending different leads to different pages based on their result.
-  </Tab>
-</Tabs>
+<Callout kind="info">
+  **Giving your AI more context** — extra capabilities like reference material (your methodology, pricing, FAQs), web search, file uploads, and integrations are configured inside the AI Chat node settings and in Product Settings → Webhook, not as separate toolbar nodes. See [Giving your AI more context](/powers/what-are-powers).
+</Callout>
 
 ## How to add a node to the canvas
 

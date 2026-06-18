@@ -1,40 +1,40 @@
 ---
-title: What are Powers?
+title: Giving your AI more context
 description: >-
-  Powers extend your AI Product with live intelligence — research, knowledge,
-  visuals, and connections to your business tools.
+  How to ground your AI product in your knowledge, give it live web access,
+  and connect it to your business tools.
 ---
-Your AI Product is intelligent by default. Powers make it exceptional.
 
-The AI Product node at the heart of your canvas already reasons, asks the right questions, and evaluates the person going through your product. Powers extend what it can see, know, and do — turning a capable AI into one that feels genuinely researched, specifically yours, and connected to your business.
+Your AI Product is capable by default. These features make it specifically yours — grounded in your expertise, connected to live data, and wired into your business tools.
 
-## Why nodes, not a settings panel
+## Three ways to extend your AI
 
-Other platforms hide these capabilities inside configuration menus — a toggle here, a file upload there. Productised puts them on the canvas as visible, connected nodes. There is a reason for this.
-
-When you add a Research Power, you can see that your AI product is drawing on live web data. When you add a Knowledge Power, you can see exactly which documents your AI is grounding itself in. When you remove a Power, you know precisely what that means for the output.
-
-This modularity gives you transparency, control, and composability. You build exactly the product you need — no more, no less. And because each Power is a separate node, you can build ten different products that share the same Knowledge base, or each draw on different ones. A settings upload ties you to one configuration for everything. Nodes give you independence.
-
-Think of Powers as specialist capabilities you attach to your AI Product — each one transforms what it can see, know, and do.
-
-## The Powers library
-
-<Columns cols="2">
-  <Card title="Research" href="/powers/research" icon="search" horizontal="false">
-    Connect your AI Product to the live web. Search for current data, extract content from specific pages, and weave real-world intelligence into every outcome.
+<Columns cols="3">
+  <Card title="Reference Material" href="/powers/knowledge" icon="book-open" horizontal="false">
+    Paste your pricing, methodology, FAQs, or any background context directly into the AI Chat settings. Claude has it available for every conversation — free, private, always on.
   </Card>
 
-  <Card title="Knowledge" href="/powers/knowledge" icon="book-open" horizontal="false">
-    Upload your frameworks, methodology guides, case studies, and positioning documents. Your AI product actively retrieves from this knowledge as it works.
+  <Card title="Web Search" href="/powers/research" icon="search" horizontal="false">
+    Claude can search the web natively, without any additional nodes or configuration. It activates automatically when a conversation needs current data.
   </Card>
 
-  <Card title="Connections" href="/powers/connections" icon="arrows-right-left" horizontal="false">
-    Bridge your AI product to your CRM, email tools, spreadsheets, and team notifications. Every lead and response flows into the tools your business already runs on.
+  <Card title="Integrations" href="/integrations/connections" icon="arrows-right-left" horizontal="false">
+    Use webhooks to send completed response data to any CRM, email platform, or tool. For deeper two-way connections, add an MCP node to give Claude live access to your tools during conversations.
   </Card>
 </Columns>
 
-<Callout kind="info" collapsed="false">
-  You don't need every Power. Start with none and add them when your product needs them. Most products are powerful enough with just the AI Product node and an Outcome. Powers are there when the situation calls for them — not before.
-</Callout>
+## File uploads during conversations
 
+If your product needs to analyse content the respondent brings — a CV, a brief, a website URL — you can add a **file upload** or **URL** question type in your AI Chat node's Collection Goals. The respondent uploads their file mid-conversation, and Claude reviews it as part of the session.
+
+This is different from Reference Material: Reference Material is the builder's knowledge (always present), file uploads are the respondent's content (session-specific).
+
+## The MCP node
+
+The **MCP node** connects your product to any MCP-compatible server. Claude can call that server's tools during a conversation — looking up live CRM data, checking availability, writing back records — or after, based on instructions in the system prompt.
+
+[Read the full MCP node guide →](/powers/connections)
+
+<Callout kind="info" collapsed="false">
+  Most products work well with just the AI Chat node and an outcome. Add Reference Material when you want Claude to know your specific methodology and pricing. Use the webhook when you want leads routed automatically after completion.
+</Callout>

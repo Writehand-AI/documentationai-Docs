@@ -1,71 +1,39 @@
 ---
-title: Research
+title: Web Search
 description: >-
-  Give your AI Product the ability to search the web and extract current,
-  relevant information as part of your product experience.
+  Claude can search the web natively — no additional nodes or configuration
+  needed.
 ---
-## What it does
 
-The Research Power connects your AI Product to the live web. During the conversation and when generating outcomes, your AI can search for current information, extract content from specific websites, and weave that intelligence into the output — so the result feels researched, not just reasoned.
+## How it works
 
-Research runs in real time. It is not a background setting or a static knowledge base. When your product runs, the Research Power actively queries the web and surfaces relevant excerpts that your AI can draw on — live data, not stale training information.
+Claude (Sonnet 4.6 and later) has native web search capability built in. When a conversation reaches a point where current, real-world data would improve the response — market benchmarks, recent news, a company's public information, live pricing — Claude searches the web and uses what it finds.
 
-📸 **Screenshot needed:** The canvas showing a Research node connected to an AI Product node, with the sidebar panel open
+This happens automatically, as part of the conversation. You do not need to configure it, add a node, or write any special instructions.
 
-## Why this matters for coaches and consultants
+## What Claude uses it for
 
-Your clients expect expertise that is current. A diagnostic that references live industry data, a strategy report that names real benchmarks, a market analysis that reflects conditions today rather than eighteen months ago — this is what separates a premium product from a generic one.
+- Checking real-time data a prospect mentions (their company, their market)
+- Surfacing current benchmarks or industry statistics when relevant
+- Verifying or enriching information the respondent provides
+- Finding publicly available context about a prospect's situation before making a recommendation
 
-Research makes your AI product feel like it has a team behind it. Not because it invents facts, but because it finds them — from real sources, in real time, verified across multiple results before your AI draws any conclusions.
+## What you can do in the system prompt
 
-## Why it's a connected node, not a settings toggle
+If you want to direct Claude's web search behaviour, you can mention it in your system prompt:
 
-Research is active intelligence, not a background configuration. By making it a visible Power on the canvas, you always know when your product is drawing on external data — and you can configure exactly what it searches for, which domains it focuses on, and how many results it considers.
+> "If the user mentions a company name, search for recent news about them before giving recommendations."
 
-That level of control matters when your reputation is attached to the output. You can restrict Research to reputable domains like industry publications, academic sources, or recognised business media. You can exclude sources you don't trust. You can define the objective in plain language and let the research engine interpret it, or write specific search queries if you know exactly what you need.
+> "When the user describes their market, search for current benchmarks in that sector to make the output more specific."
 
-## Two modes
+This is optional — Claude will use web search on its own judgment when it is useful. The system prompt just gives you control over when it prioritises it.
 
-**Search mode** is the default. You describe your research objective in plain language — the AI forms search queries, retrieves results from across the web, and extracts relevant excerpts. You can optionally provide additional keyword-based queries to supplement the objective. Results are cross-referenced for accuracy before being passed to your AI Product.
+## Limitations
 
-**Extract mode** lets you target specific URLs. Instead of searching the open web, the Research Power fetches and parses the pages you specify, pulling structured content from those exact sources. Use this when you want to draw from a known publication, a competitor's website, a pricing page, or any other specific resource.
+- Web search is available on Claude Sonnet 4.6 (the default model) and above. Haiku does not use web search.
+- Search results are used by Claude as context, not surfaced directly to the user unless you instruct it to.
+- For retrieving content from a specific, authenticated data source (your CRM, your internal docs), use Reference Material or the MCP node (coming soon) rather than web search.
 
-## Sidebar settings
-
-When you click the Research node on the canvas, the sidebar opens with three tabs: **Content**, **Filters**, and **Info**.
-
-**Content tab**
-
-- **Research Objective** — describe what you want to find in natural language. The research engine will search and cross-reference results to satisfy this objective. You can reference upstream data using `{input}` or specific field values using `{fieldName}` syntax.
-
-- **Additional Search Queries** — optional keyword queries to supplement the objective. One per line. Supports the same variable syntax.
-
-- **Available Variables** — when previous nodes or form fields are connected, their variable names are shown here for reference.
-
-**Filters tab**
-
-- **Result Limit** — a slider (1–15) controlling how many web results are returned per search. 3–5 results is the recommended range for most products. More results means richer data, but may include less relevant sources.
-
-- **Only Use These Domains** — restrict search results to specific sources. Enter comma-separated domains (e.g. `hbr.org, mckinsey.com, forbes.com`). Leave blank for unrestricted search.
-
-- **Exclude These Domains** — block specific sources from appearing in results. Useful for filtering out low-quality or irrelevant sites.
-
-📸 **Screenshot needed:** The Research node sidebar showing the Content tab with an objective entered and variables visible
-
-📸 **Screenshot needed:** The Filters tab showing the result limit slider and domain filter fields
-
-## When to use Research
-
-- Market analysis products that should reflect current conditions rather than general AI knowledge
-
-- Competitive landscape tools that pull in live information about an industry or sector
-
-- Industry diagnostic tools where sector benchmarks, statistics, or trends matter
-
-- Lead generation products where the output should feel like it was genuinely researched for that person
-
-- Any product where current data is part of the value — not just good reasoning on its own
-
-## An idea to get you started
-
-Use Research to power a free market snapshot tool. Someone enters their business type and target audience. Your AI researches current market conditions, pulls in relevant industry data, and generates a personalised market brief. That is a lead magnet that actually earns attention — because it tells people something real about their situation, not something a generic AI could have written without knowing anything about them.
+<Callout kind="info">
+  Claude's web search is native to the model — there is no cost to you beyond normal usage. It is included in every product that uses Sonnet 4.6 or Opus 4.8.
+</Callout>
