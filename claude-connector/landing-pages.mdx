@@ -3,7 +3,7 @@ title: Landing pages
 description: Design and iterate the welcome / landing screen of any product directly in Claude.
 ---
 
-Every Productised product has a **welcome screen** — the first thing a respondent sees before the AI conversation starts. By default it's a clean title-page style with your product name. You can replace it with a fully custom HTML landing page designed in Claude.
+Every Productised product has a **welcome screen** — the first thing your end user sees before the AI conversation starts. By default it's a clean title-page style with your product name. You can replace it with a fully custom HTML landing page designed in Claude.
 
 ---
 
@@ -11,7 +11,7 @@ Every Productised product has a **welcome screen** — the first thing a respond
 
 <Columns cols="2">
   <Card title="set_welcome_html" icon="edit">
-    Save a custom HTML landing page to a product. Sets the welcome style to "Claude Page" and renders an inline preview in the chat so you see exactly what respondents will see.
+    Save a custom HTML landing page to a product. Sets the welcome style to "Claude Page" and renders an inline preview in the chat so you see exactly what your end users will see.
   </Card>
   <Card title="get_welcome_html" icon="eye">
     Fetch the current landing page HTML so Claude can iterate on it (edit copy, change layout, swap an image) rather than rewriting from scratch. The mirror of `get_page` for the welcome screen.
@@ -30,7 +30,7 @@ Every Productised product has a **welcome screen** — the first thing a respond
 | **Renders variables?** | Only `{{ custom:* }}` (workspace variables) | All four: form / object / chart / custom |
 | **CTA button** | Auto-appended by the platform | Part of your HTML |
 
-The landing page is essentially **static marketing HTML** with optional workspace variables — no respondent-specific data, because the respondent hasn't started yet.
+The landing page is essentially **static marketing HTML** with optional workspace variables — no end-user-specific data, because the conversation hasn't started yet.
 
 ---
 
@@ -43,7 +43,7 @@ Claude writes the HTML and calls `set_welcome_html`. The connector returns:
 - A list of `{{ custom:* }}` workspace variables you can reference
 - An inline preview rendered in the chat
 
-Open the demo URL and you see the page as a respondent would — full-width on the chat surface, with the auto-appended "Get Started →" button at the bottom.
+Open the demo URL and you see the page as your end user would — full-width on the chat surface, with the auto-appended "Get Started →" button at the bottom.
 
 ---
 
@@ -59,7 +59,7 @@ Claude calls `get_welcome_html`, reads the current HTML, applies the change, sav
 
 ## Constraints
 
-- **No respondent variables.** Only `{{ custom:* }}` workspace vars resolve here (because there's no respondent yet). Don't put `{{ form:* }}` or `{{ object:* }}` in a landing page — they won't fill.
+- **No end-user variables.** Only `{{ custom:* }}` workspace vars resolve here (because the conversation hasn't started yet). Don't put `{{ form:* }}` or `{{ object:* }}` in a landing page — they won't fill.
 - **Centre your content.** The chat surface renders the welcome HTML full-width. Wrap content in `<div style="max-width:640px;margin:0 auto">...</div>` to centre it.
 - **Don't include a CTA.** The platform auto-appends the brand-coloured "Get Started" button. You can change its label via `set_welcome_html({ button_text: "..." })`.
 - **Brand fonts preloaded.** `Inter` and `Source Serif 4` are loaded on the welcome render surface — use them freely.

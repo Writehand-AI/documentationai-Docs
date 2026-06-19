@@ -3,7 +3,7 @@ title: The URL token syntax
 description: \{\{ url:fieldName | fallback \}\} — how URL parameters resolve into welcome messages, starter pills, and the AI agent system prompt.
 ---
 
-Outbound Personalisation runs on a simple template syntax. Drop a `\{\{ url:fieldName | fallback \}\}` token anywhere in your product's user-facing text and the renderer substitutes the URL parameter's value at the moment a respondent loads the page.
+Outbound Personalisation runs on a simple template syntax. Drop a `\{\{ url:fieldName | fallback \}\}` token anywhere in your product's user-facing text and the renderer substitutes the URL parameter's value at the moment your end user loads the page.
 
 If you're using the [Claude flow](/outbound-personalisation/via-claude), Claude writes these tokens for you. If you're editing the welcome message or system prompt manually in Productised, this page is the reference.
 
@@ -87,7 +87,7 @@ URL parameters are visible in:
 
 - Browser history
 - Server access logs (yours and any analytics provider you use)
-- Referrer headers when the respondent clicks an outgoing link
+- Referrer headers when your end user clicks an outgoing link
 - Email previews if the URL appears in an email body
 
 Don't put anything sensitive in a URL parameter. Names, companies, industries — fine. Dates of birth, payment info, account numbers — not fine.

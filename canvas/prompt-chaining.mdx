@@ -27,7 +27,7 @@ When you chain three nodes with a clear single objective each:
 
 - The **AI Product** node is entirely focused on having a great conversation — asking the right questions, adapting to responses, gathering everything it needs
 - The **AI Agent** is entirely focused on evaluation — reading what was collected and making a precise judgement about this person's profile
-- The **Report node** is entirely focused on writing — it receives both the raw data and the scoring result, and writes for a specific profile rather than an average of all possible people
+- The **Standard node** is entirely focused on writing — it receives both the raw data and the scoring result, and writes for a specific profile rather than an average of all possible people
 
 Each step is excellent at its specific job. The final output reflects that.
 
@@ -65,7 +65,7 @@ The intermediate AI Node step means the Document doesn't have to "think" — it 
   <Step title="Configure each node's prompt">
     Click each node and configure its settings. The power of chaining comes from how you write the prompts at each stage.
 
-    For downstream nodes, reference the previous node's output using the `{{ node:varName }}` variable syntax. For example, in your Report node's prompt, you might reference `{{ node:scoringResult }}` to have the AI write in response to the scoring judgement, or `{{ node:recommendations }}` to format an intermediate step's output.
+    For downstream nodes, reference the previous node's output using the `{{ node:varName }}` variable syntax. For example, in your Standard node's Custom Instructions, you might reference `{{ node:scoringResult }}` to have the AI write in response to the scoring judgement, or `{{ node:recommendations }}` to format an intermediate step's output.
   </Step>
   <Step title="Preview the full chain">
     Use the Preview button to run through the product as a user. After completing the conversation, you'll see the full chain execute and receive the final output — so you can evaluate the end result before publishing.

@@ -1,9 +1,9 @@
 ---
 title: Token resolution
-description: How double-curly-brace tokens in landing pages, result pages, and prompts resolve per respondent — and which prefix to use where.
+description: How double-curly-brace tokens in landing pages, result pages, and prompts resolve per end user — and which prefix to use where.
 ---
 
-Productised uses `\{\{ token \}\}` syntax to inject dynamic values at render time. Six prefixes, each backed by a different source. Five of them resolve from the respondent's collected data (form answers, AI agent output, computed visualisations, workspace variables); the sixth — `url:` — resolves from the request URL itself, for outbound personalisation.
+Productised uses `\{\{ token \}\}` syntax to inject dynamic values at render time. Six prefixes, each backed by a different source. Five of them resolve from your end user's collected data (form answers, AI agent output, computed visualisations, workspace variables); the sixth — `url:` — resolves from the request URL itself, for outbound personalisation.
 
 ---
 
@@ -29,7 +29,7 @@ Productised uses `\{\{ token \}\}` syntax to inject dynamic values at render tim
 | **Result page** (`/pages/<page>/<response>`) | ✅ | ✅ | ✅ | ✅ | ✅ | — (use `form:` instead) |
 | **Standard output (streamed report)** | ✅ | ✅ | ✅ | — | ✅ | — (use `form:` instead) |
 
-A respondent isn't logged in yet at the landing-page stage, so `form:`, `node:`, `object:`, and `chart:` don't have data to resolve from. Only the workspace-wide `custom:` tokens and the request-URL `url:` tokens work there.
+Your end user hasn't started yet at the landing-page stage, so `form:`, `node:`, `object:`, and `chart:` don't have data to resolve from. Only the workspace-wide `custom:` tokens and the request-URL `url:` tokens work there.
 
 By the time the result page or standard output renders, the URL params (if any) have been captured into the response's userData. Reference them via `\{\{ form:fieldName \}\}` instead of `\{\{ url:fieldName \}\}` for consistency.
 

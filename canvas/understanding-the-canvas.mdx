@@ -8,7 +8,7 @@ The canvas is where you build. It's a visual, drag-and-drop workspace — think 
 
 You don't need to understand any underlying technology to use the canvas. If you can arrange things visually and understand roughly how they connect, you have everything you need.
 
-🎥 **Video:** A 45-second walkthrough showing someone dragging a Power from the toolbar onto the canvas, connecting it to the AI Product node, then dragging an Outcome and connecting that — finishing with a complete, connected product structure.
+🎥 **Video:** A 45-second walkthrough showing a complete canvas — the AI Product node in the centre, an output node connected below it, with the settings panel open on the right.
 
 ## What you'll see when you open the canvas
 
@@ -28,39 +28,39 @@ Everything on the canvas is a **node** — a block that represents one part of y
 
 **Your AI Product** is the central node that's already on your canvas when you start. It's the conversational experience your audience goes through — the AI that asks questions, adapts to responses, and prepares for the outcome delivery. Most products have one AI Product node.
 
-**Powers** are optional nodes you add to give your AI Product extra capabilities. You drag them from the toolbar and connect them to your AI Product. They extend what the AI can do — for example, giving it access to your documents, enabling it to pull real-time research, or adding visual charts to the outcome.
+**Output nodes** are the delivery nodes — what your end user receives at the end of the conversation. You connect one to your AI Product, and that's what they see when the conversation is complete.
 
-**Outcomes** are the delivery nodes — what your audience receives at the end of the conversation. You connect one Outcome to your AI Product, and that's what the person sees when the conversation is complete.
-
-📸 **Screenshot needed:** Close-up of a node on the canvas — showing the category label at the top (e.g. "Power"), the node title, and the connection handles (dots) at the top and bottom edges
+📸 **Screenshot needed:** Close-up of a node on the canvas — showing the node title and the connection handles (dots) at the top and bottom edges
 
 ## The toolbar
 
 The toolbar at the bottom of the canvas contains every node type you can add to your product:
 
-**AI Agent** — a specialist AI that runs after the conversation. Use it to score inputs, run structured analysis, or produce a precise structured result before generating the outcome.
+**AI Agent** — a specialist AI that runs after the conversation. Use it to score inputs, run structured analysis, or produce structured output fields before generating the outcome.
 
-**Standard** — streams a personalised document directly in your product. Clean, readable, easy to copy or download. Best for action plans, strategy briefs, and written deliverables.
+**Standard** — streams a personalised result directly in your product. Clean, readable, and instant. The default output for most products.
 
-**Page** — a custom HTML result page you design and edit with Claude. Uses live `{{ }}` tokens to pull in the respondent's answers and AI outputs.
+**Page** — a custom HTML result page you design and edit with Claude. Uses live `{{ }}` tokens to pull in your end user's answers and AI outputs.
 
-**Advisor** — a follow-up conversational advisor. The AI speaks first using everything collected in the conversation, then opens the floor for questions. Best for high-touch, consultative experiences.
+**Advisor** — a follow-up conversational advisor. The AI speaks first using everything collected, then opens the floor for questions. Best for high-touch, consultative experiences.
+
+**MCP** — connects any MCP-compatible server so Claude can call its tools live during conversations.
 
 <Callout kind="info">
-  **Giving your AI more context** — extra capabilities like reference material (your methodology, pricing, FAQs), web search, file uploads, and integrations are configured inside the AI Chat node settings and in Product Settings → Webhook, not as separate toolbar nodes. See [Giving your AI more context](/powers/what-are-powers).
+  **Giving your AI more context** — reference material (your methodology, pricing, FAQs), web search, file uploads, and integrations are configured inside the AI Chat node settings and in Product Settings → Webhook, not as separate toolbar nodes. See [Giving your AI more context](/powers/what-are-powers).
 </Callout>
 
 ## How to add a node to the canvas
 
-1. Click the **Powers** or **Outcomes** tab in the floating toolbar to find the node you want
+1. Find the node you want in the floating toolbar at the bottom of the canvas
 
 2. Click and drag it from the toolbar onto the canvas
 
 3. Drop it near your AI Product node — it doesn't need to be in a precise location
 
-4. A connection line will appear once you link the two nodes together (see [Connecting Powers and Outcomes](/canvas/connecting-powers-and-outcomes))
+4. Click the connection handle on your AI Product node and drag to the new node to link them (see [Building your canvas](/canvas/connecting-powers-and-outcomes))
 
-📸 **Screenshot needed:** Someone mid-drag pulling a "Report" node from the Outcomes toolbar tab onto the canvas, with the cursor visible
+📸 **Screenshot needed:** Someone mid-drag pulling a node from the toolbar onto the canvas, with the cursor visible
 
 ## Zoom and navigation
 

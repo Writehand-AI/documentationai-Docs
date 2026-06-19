@@ -3,7 +3,7 @@ title: "How scoring works"
 description: "Scoring in Productised isn't a decision tree or a separate node — your AI Agent reads the whole conversation and produces the score, tier and analysis live, for each respondent."
 ---
 
-There is no separate "scoring node" in Productised. Scoring is done by the **AI Agent** — the same node that writes your result. It reads the full pattern of answers and produces the score, the tier label, the per-dimension breakdown and the written analysis, generated for each respondent in the moment.
+There is no separate "scoring node" in Productised. Scoring is done by the **AI Agent** — the same node that writes your result. It reads the full pattern of answers and produces the score, the tier label, the per-dimension breakdown and the written analysis, generated for each end user in the moment.
 
 This is the core of what makes a Productised assessment different from a quiz builder: the outcome is *reasoned*, not *selected from a shelf of pre-written results*.
 
@@ -17,12 +17,12 @@ At completion, the agent:
 
 1. Reads every answer — including free text, tone and the tension between responses.
 2. Applies your scoring objective and framing.
-3. Writes each field — the score, the tier, the insights and the next steps — specifically for that respondent.
+3. Writes each field — the score, the tier, the insights and the next steps — specifically for that end user.
 
 Those fields then populate your result page through `{{ object:* }}` tokens (e.g. `{{ object:overall_score }}`, `{{ object:tier_label }}`).
 
 <Callout kind="note">
-Because the score is reasoned, two nearly identical respondents can receive meaningfully different results when one detail changes the picture — something a fixed decision tree can't do.
+Because the score is reasoned, two nearly identical end users can receive meaningfully different results when one detail changes the picture — something a fixed decision tree can't do.
 </Callout>
 
 ---
@@ -39,9 +39,9 @@ You can use either, or both together — the deterministic numbers anchor the he
 
 ## Tiers and segments
 
-The agent's `tier_label` (e.g. "Ready", "Stabilising", "Not yet") *is* the respondent's segment. It shows on the result page, and it powers your **segment breakdown** analytics — so you can see how leads are distributed without configuring anything separately.
+The agent's `tier_label` (e.g. "Ready", "Stabilising", "Not yet") *is* your end user's segment. It shows on the result page, and it powers your **segment breakdown** analytics — so you can see how leads are distributed without configuring anything separately.
 
-To tailor the outcome by tier, give the agent guidance on how each tier's result and call-to-action should differ. The single result page then adapts its message and CTA to the tier the respondent lands in.
+To tailor the outcome by tier, give the agent guidance on how each tier's result and call-to-action should differ. The single result page then adapts its message and CTA to the tier your end user lands in.
 
 ---
 

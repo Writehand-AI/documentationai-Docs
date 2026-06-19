@@ -3,7 +3,7 @@ title: Design node
 description: Deliver a fully custom HTML output page — paste any design, embed live variable tokens, and render a personalised experience for every client.
 ---
 
-The **Design node** is a multi-page output node that lets you deliver a completely custom HTML experience at the end of a product. Unlike Report and Document nodes — which use the Productised page builder — the Design node accepts raw HTML. You paste any layout, embed variable tokens, and the platform resolves them live when a client views the page.
+The **Page node** is a multi-page output node that lets you deliver a completely custom HTML experience at the end of a product. You paste any layout, embed variable tokens, and the platform resolves them live when your end user views the page.
 
 This is the output node to reach for when you want complete visual control: a premium branded report layout you generated with Claude, a design from Gamma or another AI design tool, or a custom-built experience you've coded yourself.
 
@@ -97,17 +97,17 @@ Apply additional CSS to the page. This is applied alongside the page's HTML — 
 
 ---
 
-## Design node vs Report node
+## Page vs Standard
 
-| | Design node | Report node |
+| | Page | Standard |
 |---|---|---|
-| **How you design it** | Raw HTML + CSS | Productised page builder (drag-and-drop sections) |
-| **Visual control** | Complete — any layout you can write | Section-based — confined to the builder's blocks |
-| **Best for** | Premium branded layouts, AI-generated designs, custom-coded experiences | Standard reports where the builder's sections are sufficient |
-| **Variable tokens** | Same `{{ }}` syntax | Same `{{ }}` syntax |
-| **Multi-page** | Yes — multiple pages per node | Yes — multiple sections per page |
+| **How you design it** | Raw HTML + CSS — write it in Claude | AI writes the output directly, guided by your Custom Instructions |
+| **Visual control** | Complete — any layout you can write | Text-based — the AI writes and formats the content |
+| **Best for** | Premium branded layouts, scored result pages, custom-coded experiences | Most products — fast to set up, instant, personalised |
+| **Variable tokens** | `{{ }}` tokens resolved per end user | Not applicable — AI writes the content directly |
+| **Multi-page** | Yes — multiple pages per node | Single streamed output |
 
-Both nodes can be used in the same product. You can have a Report node for one output and a Design node for another.
+Use **Page** when visual control matters. Use **Standard** when you want the AI to write and deliver the result without a custom design.
 
 ---
 

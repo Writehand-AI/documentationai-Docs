@@ -34,7 +34,7 @@ A page is HTML with `{{ tokens }}` that get filled per respondent at render time
 
 | Token | Resolves to | Example |
 |---|---|---|
-| `{{ form:fieldName }}` | An answer the respondent gave | `{{ form:firstName }}` → "Sarah" |
+| `{{ form:fieldName }}` | An answer your end user gave | `{{ form:firstName }}` → "Sarah" |
 | `{{ object:fieldName }}` | A structured field your AI agent produced | `{{ object:overall_score }}` → 78 |
 | `{{ chart:overall_score }}` | A raw passthrough of any agent field — use inside SVG/HTML attributes | `stroke-dasharray="{{ chart:overall_score }} 100"` |
 | `{{ chart:dimN_pct }}` | A computed percentage from `dimN_score × 10` | `style="width:{{ chart:dim1_pct }}%"` |
@@ -110,7 +110,7 @@ in components, render down to a single static HTML file before handing off.
 
 Personalisation: pages fill per respondent via {{ tokens }}, never hard-coded values.
   • {{ object:fieldName }} — AI Agent output (scores, insights, tier labels, prose)
-  • {{ form:fieldName }}   — the respondent's intake answers (e.g. their name)
+  • {{ form:fieldName }}   — your end user's intake answers (e.g. their name)
   • {{ chart:overall_score }}, {{ chart:dimN_pct }}, {{ chart:dimN_color }} — computed
     visual values; use these INSIDE HTML/SVG attributes (object: tokens corrupt attributes)
   • {{ custom:key }}       — workspace variables (booking links, brand text)

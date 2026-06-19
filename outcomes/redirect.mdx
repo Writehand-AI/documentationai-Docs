@@ -47,6 +47,6 @@ A lead qualification product does not need to generate a document. It just needs
 That is a Redirect product. Someone answers three to five questions, the AI evaluates their fit, and they land in the right place — before you have looked at a single notification. The qualification happened automatically. The routing happened automatically. The only thing left for you is the conversation you actually want to have.
 
 <Callout kind="info" collapsed="false">
-  For decision-based routing (different URLs for different fit levels), use the Connections node to send data to your CRM or email platform, and configure your routing logic there. The Redirect Outcome sends everyone to the same URL — use it when the destination is the same regardless of outcome, or when the product's AI evaluation is handled at the destination side.
+  The Redirect sends everyone to the same URL. For decision-based routing — sending high-fit leads to your calendar and lower-fit leads elsewhere — use a webhook or MCP connection to pass the tier result to your CRM, and configure routing logic there.
 </Callout>
 
