@@ -48,53 +48,54 @@ Node types fall into three categories: **AI Product** (the conversational core),
 
 <Image src="https://blob-cdn.documentation.ai/org-708d97b3-a195-4b0f-8911-093c012c99d6/doc-8283fb6b-099f-47ea-b32b-34e7f582103c/1781833250217-q4suv4jbh7r-Blank-Canvas.png?fm=auto&auto=compress%2Cformat" width="2930" height="1834" alt="" />
 
-[Build on the canvas →](/canvas)
-
-## AI Products
+## AI Product Node
 
 The AI Product node is the conversational engine inside every product. It collects inputs from your audience through a structured flow — text fields, choice questions, scales, yes/no prompts, image selections, and more — then processes those inputs through your configured AI model to produce a personalised result.
 
 Each AI Product has a **collection goal** (what you're trying to learn), a **decision model** (how the AI evaluates responses — AI Judgement or AI Scorecard), and optional scoring to segment your audience into persona profiles. This is where you set up your prompts, configure your Brand Voice guardrails, and define what gets passed downstream.
 
-[Configure AI Products →](/canvas#ai-product-node)
+<Image src="https://blob-cdn.documentation.ai/org-708d97b3-a195-4b0f-8911-093c012c99d6/doc-8283fb6b-099f-47ea-b32b-34e7f582103c/1781833694340-8avdtmhxitb-AI-Product-Node.png?fm=auto&auto=compress%2Cformat" width="2928" height="1830" alt="" />
 
-## Powers
+## Powers (Reference Material)&#x20;
 
-Powers extend what your AI Product can do. Attach them to an AI Product node on the canvas to give it new capabilities:
+Powers extend what your AI Product can do. Add them to an AI Product node on the canvas to give it more capabilities:
 
-- **Knowledge** — upload your own documents (PDFs, text files, spreadsheets) or index URLs. The AI draws on your content when generating responses, so outputs reflect your methodology, not just the model's defaults.
+- **Knowledge** — upload your own documents (PDFs, text files, spreadsheets) or index URLs direct to Claude, then allow it to provide productised additional context. The AI draws on your content when generating responses, so outputs reflect your methodology, not just the model's defaults.
 
-- **Research** — give your AI Product live web search. Useful for products that need up-to-date market data, news, or competitor context.
+**Research** — give your AI Product live web search via Claude. Useful for products that need up-to-date market data, news, or competitor context. Simply add the urls in the reference material input area.&#x20;
 
-- **Connections** — send collected data to your other tools after a product is completed. Supports Gmail, Google Sheets, HubSpot, Slack, Airtable, and Zapier.
+<Image src="https://blob-cdn.documentation.ai/org-708d97b3-a195-4b0f-8911-093c012c99d6/doc-8283fb6b-099f-47ea-b32b-34e7f582103c/1781834032327-knfcdtkhejl-Reference-Material.png?fm=auto&auto=compress%2Cformat" width="2924" height="1826" alt="" />
 
-[Set up Powers →](/powers)
+
+
+## Connections&#x20;
+
+\
+**Connections (MCP)** — send collected data to your other tools after a product is completed. Supports Gmail, Google Sheets, HubSpot, Slack, Airtable, and Zapier.
+
+<Image src="https://blob-cdn.documentation.ai/org-708d97b3-a195-4b0f-8911-093c012c99d6/doc-8283fb6b-099f-47ea-b32b-34e7f582103c/1781834265780-xz2ek2jqrh-MCP-Node.png?fm=auto&auto=compress%2Cformat" width="2932" height="1826" alt="" />
 
 ## Outcomes
 
 Outcomes are what your audience receives after completing a product. Connect an Outcome node to your AI Product on the canvas to define the deliverable:
 
-- **Report** — a visual, page-built diagnostic. Sections pull in AI-generated content and collected data via variables. Best for lead magnets and diagnostics.
-
 - **Document** — a written deliverable: strategy brief, action plan, proposal. Structured, text-forward, and fully personalised.
 
-- **Design** — a fully custom HTML output page. Paste any layout — from Claude, Gamma, or your own code — embed `{{ variable }}` tokens, and the platform renders a personalised version for every client. Full visual control.
+- **Pages/Assessments**— Pages made Claude create fully custom HTML pages. Simply leverage the productised connector inside of Claude to create custom pages you can port to your productised product. Works for both landing pages AND outcome pages.&#x20;
 
 - **Advisor Chat** — a full-screen, personalised advisory session. The AI speaks first using everything it collected — no prompting required — then opens the floor for follow-up questions. The closest a Productised product gets to a real-time advisor conversation.
 
-- **Redirect** — routes the audience to a specific URL when the product completes. Useful for routing different personas to different pages based on their result.
+- **Redirect** — routes the audience to a specific URL when the product completes. Useful for simple lead collection.
 
-Every outcome is unique to the person who completed the product — no two outputs are the same.
-
-[Design Outcomes →](/outcomes)
+<Image src="https://blob-cdn.documentation.ai/org-708d97b3-a195-4b0f-8911-093c012c99d6/doc-8283fb6b-099f-47ea-b32b-34e7f582103c/1781834518561-krny2zots98-Outcomes.png?fm=auto&auto=compress%2Cformat" width="2932" height="1834" alt="" />
 
 ## Prompt Chaining
 
-You're not limited to a single AI node. Add multiple AI Product nodes to the canvas and connect them in sequence — the output of one becomes the input of the next. Reference outputs using `{{ node:varName }}` syntax anywhere downstream.
+You're not limited to a single AI Agent node. Add multiple AI Agent nodes to the canvas and connect them in sequence — the output of one becomes the input of the next. Reference outputs using `{{ node:varName }}` syntax anywhere downstream.
 
 This lets you build sophisticated multi-step products: collect information in the first node, run a scoring pass in the second, generate a detailed report in the third. Each step can have its own prompt, model, and configuration.
 
-[Chain nodes together →](/canvas#prompt-chaining)
+<Image src="https://blob-cdn.documentation.ai/org-708d97b3-a195-4b0f-8911-093c012c99d6/doc-8283fb6b-099f-47ea-b32b-34e7f582103c/1781834682799-gyyhip6vff9-Prompt-Chaining.png?fm=auto&auto=compress%2Cformat" width="2926" height="1828" alt="" />
 
 ## Brain
 
@@ -112,7 +113,7 @@ Brain has five sections:
 
 - **Journey Plan** — generate a full-funnel product roadmap across all five stages of your client journey (ToFU, MoFU, BoFU, Delivery, Community). Brain synthesises everything it knows about your practice into a prioritised, niche-specific plan — showing what to build, in what order, and why.
 
-[Use Brain →](/brain)
+<Image src="https://blob-cdn.documentation.ai/org-708d97b3-a195-4b0f-8911-093c012c99d6/doc-8283fb6b-099f-47ea-b32b-34e7f582103c/1781834728363-gktxywdv285-The-Brain2.png?fm=auto&auto=compress%2Cformat" width="2928" height="1832" alt="" />
 
 ## Funnel View
 
@@ -126,7 +127,7 @@ Your products gallery includes a funnel view so you can see your product suite t
 
 Filter by funnel tier, switch between compact and visual view modes, and use colour labels to organise your product library at a glance.
 
-[Manage your gallery →](/products)
+<Image src="https://blob-cdn.documentation.ai/org-708d97b3-a195-4b0f-8911-093c012c99d6/doc-8283fb6b-099f-47ea-b32b-34e7f582103c/1781835012170-u3rl095e0s-Products-view.png?fm=auto&auto=compress%2Cformat" width="2930" height="1832" alt="" />
 
 ## Product Personalisation
 
@@ -137,8 +138,6 @@ Every product produces a unique output for the person who went through it. Perso
 - **Scoring** — the AI Agent evaluates the answers and produces the score, tier and analysis live. You set the objective and fields; optional per-question points give a deterministic score where you need one.
 
 - **Tiers** — the agent assigns a named tier (e.g. "Strong fit", "Not yet"), and the result page adapts its content and CTA to that tier — a high-scoring respondent sees a different message and call-to-action than a low-scoring one.
-
-[Set up scoring and personas →](/canvas#scoring-node)
 
 ## Claude Connector
 
@@ -164,8 +163,6 @@ Every write operation returns a **demo URL** — a fully-functional, publicly ac
 
 The Connector is purely additive. Productised works perfectly standalone in the browser; the Connector is for people who already live in Claude and want their workspace accessible there.
 
-[Set up the Claude Connector →](/claude-connector/setup)
-
 ## Analytics
 
 Every response is stored and accessible in your product's analytics view. From there you can:
@@ -178,7 +175,7 @@ Every response is stored and accessible in your product's analytics view. From t
 
 - Export response data to CSV
 
-[View analytics →](/analytics)
+<Image src="https://blob-cdn.documentation.ai/org-708d97b3-a195-4b0f-8911-093c012c99d6/doc-8283fb6b-099f-47ea-b32b-34e7f582103c/1781834867671-dmoxvtgf76n-Analytics1.png?fm=auto&auto=compress%2Cformat" width="2940" height="4482" alt="" />
 
 ## Deployment
 
@@ -192,4 +189,5 @@ When your product is ready, deploy it in seconds. Options include:
 
 - **Product settings** — control visibility, collect email, set redirect behaviour after completion
 
-[Deploy your product →](/deployment)
+<Image src="https://blob-cdn.documentation.ai/org-708d97b3-a195-4b0f-8911-093c012c99d6/doc-8283fb6b-099f-47ea-b32b-34e7f582103c/1781834926615-sv3l17ewb7-Deploy.png?fm=auto&auto=compress%2Cformat" width="2922" height="1836" alt="" />
+
