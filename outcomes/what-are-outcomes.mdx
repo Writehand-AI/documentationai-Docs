@@ -7,25 +7,27 @@ An Outcome is the deliverable at the end of every AI product. Once the conversat
 
 This is what separates Productised from a lead form or a quiz. Your end user does not receive a generic results page. They receive something that reflects their situation.
 
-## The Outcome types
+## The three Outcome types
 
 <Columns cols="3">
+  <Card title="Assessments" href="/outcomes/assessments" icon="layout" horizontal="false">
+    A fully custom HTML result page you design in Claude. Uses live tokens to pull in AI outputs, scores, and form answers. Best for branded, visual deliverables — scorecards, diagnostics, reports.
+  </Card>
+
+  <Card title="Advisor" href="/outcomes/advisor" icon="message-circle" horizontal="false">
+    After collection ends, the AI shifts into a live advisory session — speaking first with full context from the conversation, then opening the floor for follow-up questions.
+  </Card>
+
   <Card title="Standard" href="/outcomes/standard" icon="file-text" horizontal="false">
-    The AI streams a personalised report or document directly in the product. Clean, readable, and instant. The default output for most products.
-  </Card>
-
-  <Card title="Page" href="/canvas/design-node" icon="layout" horizontal="false">
-    A fully custom HTML result page you design with Claude. Uses live tokens to pull in AI outputs and form answers. Best for branded, visual experiences.
-  </Card>
-
-  <Card title="Advisor" href="/canvas/advisor-chat-node" icon="message-circle" horizontal="false">
-    After collection ends, the AI shifts into a live advisory session — speaking first with everything it learned, then opening the floor for follow-up questions.
+    The AI streams a personalised written output directly in the product — instant, readable, and built from what your end user shared. The fastest way to deliver a personalised result.
   </Card>
 </Columns>
 
 ## How Outcomes connect to your AI Product
 
-Every Outcome is a node on the canvas. You drag it from the toolbar, drop it below your AI Product node, and draw a connection between them. The Outcome you choose must match the **After collection** setting in your AI Product's Behaviour tab.
+Every Outcome is a node on the canvas. You drag it from the toolbar, drop it below your AI Product node, and draw a connection between them.
+
+In most cases your AI Product connects first to an **AI Agent** node, which processes the collected data and produces the structured outputs the Outcome needs — then the AI Agent connects to the Outcome node.
 
 See [Building your canvas](/canvas/connecting-powers-and-outcomes) for the step-by-step.
 
