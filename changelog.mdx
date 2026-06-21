@@ -5,6 +5,22 @@ description: Every update, improvement, and new feature — newest first.
 
 We ship continuously. This page logs every meaningful release — new features, improvements, and the occasional breaking change.
 
+<Update label="June 2026" description="Claude Design support + connector reliability" tags={["feature", "improvement", "fix"]}>
+
+### New
+- **Design in Claude Design** — bring pages designed in Claude's visual canvas into Productised. Keep the connector in the same chat and just say *"use this as my output page"* — Claude produces the right format, wires your product's tokens, and saves it. The connector now reads your product's blanks up front (`get_design_brief`) and offers to design with you or take a Claude Design frame. [Read the guide →](/claude-connector/claude-design)
+- **Productised vs Claude Artifacts** — a new explainer on why a hosted, data-capturing Productised product is the right tool for lead-gen funnels, where a one-off Artifact isn't. [Compare →](/claude-connector/products-vs-artifacts)
+
+### Improved
+- **MCP connection test** — connecting an external server (HubSpot, Notion, Linear, Slack, etc.) now performs a full handshake, so valid credentials are verified correctly against modern stateful servers instead of failing the check.
+- **Documentation search** in the connector now reaches the live docs reliably.
+
+### Fixed
+- **Claude Design offline export guidance** — the "Export → Standalone HTML (offline)" file is a React bundle, not static HTML; importing it produced a blank page. The connector now flattens designs to static HTML automatically and warns against the raw offline file.
+- **Plan generation** no longer hangs when the AI service is busy — it returns a clear "try again shortly" message.
+
+</Update>
+
 <Update label="April 2026" description="Brain knowledge bases + prompt chaining" tags={["feature", "improvement"]}>
 
 ### New

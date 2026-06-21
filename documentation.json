@@ -456,6 +456,11 @@
                 "icon": "compass"
               },
               {
+                "title": "Productised vs Claude Artifacts",
+                "path": "claude-connector/products-vs-artifacts",
+                "icon": "git-compare"
+              },
+              {
                 "title": "Setup",
                 "path": "claude-connector/setup",
                 "icon": "plug"
