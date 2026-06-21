@@ -83,7 +83,11 @@ Tokens are still resolved server-side before the iframe loads — `{{ object:* }
 
 ## Designing in Claude Design
 
-Most people build in a normal Claude chat. Claude Design is the **power-user path** when you want finer control over the visual design — but it has a gotcha worth knowing.
+Most people build in a normal Claude chat. Claude Design is the **power-user path** when you want finer control over the visual design — but it has a gotcha worth knowing. For the full walkthrough see [Design in Claude Design](/claude-connector/claude-design).
+
+<Callout kind="warning">
+**Never use Claude Design's "Export → Standalone HTML (offline)" button for a Productised page.** That file is a self-contained React app (bundled JavaScript), not static HTML — Productised strips scripts on save, so it imports as a blank page. Instead, keep the connector in the same chat and say *"use this as my output page"* (Claude saves clean HTML for you), or — if you only have the offline file — ask in the design chat for *"a single static HTML file, no JavaScript"* and bring that.
+</Callout>
 
 **Attach the Productised connector and give it the product.** Claude Design's default instinct is to build a **React app** (its native artifact format), which Productised *cannot* use as an output page. With the connector attached and your product in context, it knows the real deliverable instead. Start your message with something like: *"Use my Productised connector. Design the output page for product `<id>` — read the existing pages and tokens first."*
 
@@ -149,7 +153,8 @@ You can bring in HTML from any design tool using `import_design`. The tool clean
 
 | Tool | Output type | Works in Productised? | How |
 |------|-------------|----------------------|-----|
-| Claude Design | Full HTML document | ✅ Natively | Connector saves it directly; auto document mode |
+| Claude Design (connector in the chat) | Clean HTML saved via the connector | ✅ Yes | Say *"use this as my output page"* — Claude saves it. [Details →](/claude-connector/claude-design) |
+| Claude Design — "Export → Standalone HTML (offline)" file | React app bundle | ❌ No — imports blank | Don't use it. Ask for *"a single static HTML file, no JavaScript"* instead |
 | Cursor / any AI that writes HTML | Full HTML or fragment | ✅ Directly | Paste into Claude, `import_design` → `update_page` |
 | Lovable | React app (default) | ⚠️ Ask for plain HTML | Prompt: *"Give me a single standalone HTML file with no React, no imports, no build step"* |
 | v0 | React components (default) | ⚠️ Ask for plain HTML | Prompt: *"Output as a plain HTML file using only inline CSS and vanilla JS"* |

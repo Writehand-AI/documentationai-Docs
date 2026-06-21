@@ -492,6 +492,11 @@
                 "icon": "globe"
               },
               {
+                "title": "Design in Claude Design",
+                "path": "claude-connector/claude-design",
+                "icon": "pen-tool"
+              },
+              {
                 "title": "Add images, logos & favicons",
                 "path": "claude-connector/assets",
                 "icon": "image"

@@ -1,0 +1,92 @@
+---
+title: Design in Claude Design
+description: Use Claude Design's visual canvas to build Productised landing and result pages — and the one export gotcha to avoid.
+---
+
+[Claude Design](https://claude.com/blog/claude-design-stays-on-brand-for-daily-work) is Claude's visual design canvas — drag-and-resize layout, reusable design systems, and brand controls. It's the **power-user path** for designing Productised pages when you want finer visual control.
+
+You don't need it. Designing a page in a normal Claude conversation already produces clean, tokenised HTML that drops straight into a product. Claude Design is for when you want the visual canvas — and this page covers how to bring its work into Productised cleanly, plus the one export option to never use.
+
+---
+
+## The golden rule: keep the connector in the same chat
+
+When the Productised connector is attached in the **same conversation** where you're designing, the whole thing is effortless. You just say:
+
+> *"Use this as the output page for my product."* (or *"…as my landing page"*)
+
+Claude already sees the design and your product. It does the rest itself — produces the right file format, reads your product's blanks, wires the tokens, and saves the page. **You never pick a file format, never click a download button, never type a token name.**
+
+You can even start from the product side:
+
+> *"I want to design an output page for my [product]."*
+
+The connector reads the product first (via `get_design_brief`), learns every blank it produces, then offers to design it with you or take a frame you made in Claude Design.
+
+<Callout kind="info">
+**You never need to ask for "plain HTML."** Because Claude can see the design in the conversation, it produces the correct static, zero-JS HTML on its own when you say "use this as my Productised page." The format is handled for you.
+</Callout>
+
+---
+
+## ⚠️ The one export that does not work
+
+Claude Design has a **Share → Export → Standalone HTML (offline)** button. **Do not use that file for a Productised page.**
+
+That "offline HTML" is not a normal web page — it's a self-contained **React application**. The visible design is built at runtime by bundled JavaScript, and the file is often several megabytes of that bundle. Productised pages run with **no JavaScript** (so they render reliably for every visitor and so personalisation resolves on the server), and the platform strips `<script>` tags when a page is saved. The result: if you import the offline file, you get a **blank loading shell**.
+
+You don't need that button at all. Use one of these instead:
+
+| Situation | What to do |
+|---|---|
+| The connector is in the same chat as your design | Just say *"use this as my output / landing page."* Claude saves it for you. |
+| You only have the downloaded offline `.html` file | Open the design in Claude and ask: *"give me this as a single static HTML file — no React, no JavaScript."* Bring **that** to Productised. |
+| You want to refactor the design yourself | Use **Send to → Claude Code**, flatten the component to one zero-JS HTML file there, then import it. |
+
+---
+
+## What Productised adds: the page fills itself per person
+
+This is the part Claude Design can't do on its own, and it's the whole point of Productised.
+
+Claude Design gives you a beautiful page with **sample data** — a sample score, a sample name. Productised turns that into a **living template**: every place that holds sample data becomes a `{{ token }}`, and when a real person completes your product, the AI fills *their* numbers and words into the blanks.
+
+- Score numbers / gauges → `{{ object:overall_score }}` (and `{{ chart:overall_score }}` inside SVG attributes)
+- Tier / segment labels → `{{ object:tier_label }}`
+- The visitor's own answers → `{{ form:firstName }}`
+- Brand / booking values → `{{ custom:booking_url }}`
+
+You design the **frame** once; the AI only **fills the blanks** — which is why Productised result pages look designed, not AI-generated. The connector wires these tokens for you from `get_design_brief`, so you never invent or type a token name.
+
+[Full token reference →](/claude-connector/tokens) · [Designing result pages →](/claude-connector/result-pages)
+
+---
+
+## Both page types work
+
+| Surface | Tool | Data available | Claude Design fit |
+|---|---|---|---|
+| **Landing / welcome page** | `set_welcome_html` | `{{ custom:* }}` only (no visitor yet) | Strong — static hero/landing content |
+| **Result / output page** | `create_page` / `update_page` | `{{ form:* }}`, `{{ object:* }}`, `{{ chart:* }}`, `{{ custom:* }}` | The shell is yours; the per-visitor wiring is Productised's |
+
+A full `<!DOCTYPE html>` page is auto-detected and rendered in document mode (an iframe where fonts and scripts work); a body fragment renders in a centred ~640px card. Either way, tokens resolve server-side before the page loads. [More on render modes →](/claude-connector/result-pages)
+
+---
+
+## Stay on brand across both tools
+
+Claude Design "stays on brand" by importing a design system and checking its output against it. Productised has the matching concept — `set_design_system`, a workspace brand kit (accent colour, fonts, radius, dark panel) that every new product, result template, and landing page inherits.
+
+Mirror the same brand in both, and Claude Design output already matches the Productised house style — nothing to correct on import. To make a Claude Design design system produce Productised-ready pages by default, paste the house-rules block from [Design custom result pages](/claude-connector/result-pages#set-up-a-claude-design-system-thats-productised-ready) into your design system's guidelines.
+
+---
+
+## HTML vs Claude Code — which handoff?
+
+| You want… | Use |
+|---|---|
+| A page **inside a Productised product** | Keep the connector in the chat and say *"use this as my page."* (Never the offline HTML export.) |
+| To **refactor** a Claude Design design into static HTML yourself | **Send to → Claude Code**, flatten there, import the result |
+| A **standalone site or app** (no Productised lead capture) | **Send to → Claude Code / Vercel** — a separate codebase you host yourself |
+
+**Bottom line:** for Productised pages, never use the offline HTML download. Keep the connector in the same chat and let Claude save the page for you — or, if you only have the offline file, ask for a single static HTML file first.
