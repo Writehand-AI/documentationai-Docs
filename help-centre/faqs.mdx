@@ -52,3 +52,30 @@ Credits are consumed when your products are used — each AI conversation, gener
 
 **Can I use my own AI API key?**
 Yes. On Pro plans and above, you can connect your own Anthropic API key under Product Settings → Secrets. This reduces credit consumption for core AI runs.
+
+---
+
+## AI reliability and failures
+
+**What happens if the AI fails while someone is using my product?**
+Their answers are saved regardless. As soon as a visitor starts your product a response is recorded, so if the AI can't respond, everything they've told you up to that point — including their contact details — is kept and appears in your Analytics. A failed generation never costs you the lead. The visitor simply sees a friendly "the AI service is temporarily unavailable, please try again in a moment" message, never a technical error.
+
+**Will I know if my product stops working?**
+Yes. If AI generation fails for a visitor, you receive a notification telling you which product failed and why in plain terms — for example, that the AI provider rejected your API key, or reported that the account is out of credits. To avoid flooding you, you'll get at most one alert per product per hour, even if many visitors are affected.
+
+**How can I tell which submissions were affected?**
+Each response records a generation status you can see in Analytics: **Completed** (everything generated normally), **Partial** (the conversation worked but some output couldn't be generated), or **Failed** (the AI couldn't respond, but the visitor's answers were still saved). After a bad spell — say an expired key over a weekend — you can find the affected leads and follow up manually.
+
+**I use my own API key. What happens if it runs out of credits or gets revoked?**
+Your product doesn't silently break. Visitors' answers are still captured, you're alerted within the hour that your key was rejected or reported a billing problem, and the visitor sees a polite "try again shortly" message. To fix it, top up or replace your key in Product Settings → Secrets — new sessions pick up the working key immediately, with no need to republish. Productised never quietly switches to platform credits when your own key fails: your key means your billing, so we alert you instead of moving the cost.
+
+**Does a brief provider outage break my product?**
+Usually not. Temporary problems — rate limits, provider hiccups, network blips — are retried automatically before anything is treated as a failure, and most resolve on the first retry without the visitor noticing. Problems that retrying can't fix, such as an invalid key or an out-of-credits account, fail fast, save the lead, and alert you — because waiting wouldn't help.
+
+**If I pick a specific Claude model with my own key, is that the model that runs?**
+Yes. The model you select on the AI Product node is the model that runs on your key. If you don't select one, a sensible default is used.
+
+**Do visitors ever see technical error details?**
+No. Visitors only see a friendly, generic message. Technical details stay in your owner notification and our internal logs — they're never shown to your audience.
+
+<Callout kind="tip">If a product's alerts point to a key or billing problem, check Product Settings → Secrets and your [credit balance](/workspace/credits) first — those are the two most common causes.</Callout>
