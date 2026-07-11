@@ -659,5 +659,10 @@
         "link": "https://app.productised.ai/register"
       }
     }
-  }
+  },
+  "customCss": [
+    {
+      "src": "styles/productised-double-border.css"
+    }
+  ]
 }
