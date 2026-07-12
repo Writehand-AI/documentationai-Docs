@@ -10,12 +10,12 @@ If something isn't working, start here. Most issues are easy to resolve, and the
 ## The connector isn't showing up in Claude
 
 **Claude.ai (OAuth flow):**
-- Confirm you added the integration at **Settings → Connectors → Add custom connector** with URL `https://mcp.productised.ai/mcp` (no `?apiKey=...` suffix).
+- The easiest path: connect from the [Claude directory listing](https://claude.ai/directory/connectors/productised). If you added it manually instead, confirm the URL is `https://mcp.productised.ai/mcp` (no `?apiKey=...` suffix).
 - Allow popups for `claude.ai` — the Productised sign-in opens in a popup.
 - Start a **new conversation** after connecting — existing conversations don't pick up new connectors automatically.
 
 **Claude Desktop (OAuth via connector picker):**
-- Use **Settings → Connectors → Add custom connector** with the URL `https://mcp.productised.ai/mcp`. A browser window opens for sign-in.
+- Search the directory for **"Productised"** in **Settings → Connectors** (or add it manually with the URL `https://mcp.productised.ai/mcp`). A browser window opens for sign-in.
 - After authorising, return to Claude Desktop — the 🔌 icon in the chat input bar confirms the connection.
 
 **Claude Desktop (manual JSON / API key):**

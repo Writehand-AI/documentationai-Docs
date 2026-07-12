@@ -1,48 +1,61 @@
 ---
-title: Page SEO
-description: Control how your product's public page appears in search results and when shared as a link.
+title: Page SEO & share cards
+description: Control how your product looks in Google and when its link is shared on LinkedIn, Facebook, WhatsApp, Slack, or X — including automatic branded share cards and per-recipient personalisation.
 ---
 
-The Page SEO tab is where you configure the metadata for your product's public page — the title, description, and images that search engines index and social platforms display when your link is shared. Available on Starter plan and above.
+The Page SEO tab controls how your product's public page appears in two places: **search results** (Google, browser tab) and **link previews** (the card platforms show when your link is shared). Available on Starter plan and above.
 
-<Callout kind="info">📸 **Screenshot needed:** The Page SEO tab showing the metadata form fields on the left and the search engine preview panel on the right</Callout>
+<Callout kind="tip">
+**You're covered by default.** Every published product automatically gets a branded 1200 × 630 share card — generated on the fly with your product's title and description. Share your link on LinkedIn with zero setup and it unfurls with a proper card. Everything below is optional customisation.
+</Callout>
 
-## Why page metadata matters
+## The three sections
 
-When someone shares your product link in an email, on LinkedIn, or in a message, the platform fetches the Open Graph tags from your page and constructs a preview card. A well-configured SEO tab means the preview card shows a compelling title, a clear description, and your product image — not a blank card or a technical URL.
+The tab is organised by outcome, not by protocol:
 
-For products distributed as lead capture tools, a well-configured social preview can meaningfully increase click-through rates.
+**1. Share card** — how your link appears when shared on **LinkedIn, Facebook, WhatsApp and Slack**. These platforms all read the same underlying tags (Open Graph), so you configure the card once and it works everywhere. Fields: share title, share description, and image.
+
+**2. Search result** — how the page appears in Google and the browser tab: page title (50–60 characters) and meta description (120–160 characters). Rarely-used fields (keywords, author, canonical URL, favicon upload) live under **Advanced**.
+
+**3. X (Twitter)** — X reads its own tag set but falls back to your Share card automatically. Only expand this section if you want X-specific overrides (card type, title, description, image).
+
+## The share image: auto-generated or custom
+
+Under **Share card → Image** you choose:
+
+- **Auto-generated card (recommended)** — Productised renders a branded 1200 × 630 card with your share title and description. It updates automatically whenever you change the text, and it personalises per recipient (see below). This is the default — an empty image field means "use the generated card".
+- **Custom image** — upload your own (JPG, PNG, WEBP or GIF — 1200 × 630px recommended) or paste a URL. Uploads are saved immediately.
+
+## Personalised share previews
+
+Share title and share description support **personalisation tokens** — the same `{{ url:… }}` tokens used by [outbound personalisation](/outbound-personalisation):
+
+```
+{{ url:firstName | there }}, your Pricing Health Check
+```
+
+The part after `url:` is the **parameter name**; the part after `|` is the fallback. When someone opens (or a platform previews) a link like `…/c/your-product?firstName=Sarah`, the card reads **"Sarah, your Pricing Health Check"** — in both the text and the generated card image. A bare link shows the fallback ("there, your Pricing Health Check").
+
+Use the **"+ First name"** and **"+ Company"** chips under each field to insert correctly-formed tokens, and the **"Test a personalised link"** box in the preview panel to type a sample name, watch the card update live, and copy a ready-made personalised link.
+
+<Callout kind="info">
+Combined with the [CSV outbound link generator](/outbound-personalisation), every prospect in your list gets a share link whose LinkedIn/Slack preview greets them by name — no per-link setup.
+</Callout>
+
+## Platform previews
+
+The preview panel shows your card rendered in each platform's real frame — switch between **LinkedIn**, **Google**, **Facebook** and **X** tabs. Previews update as you type, and the LinkedIn/Facebook previews show the actual generated card image, not a mock-up.
 
 ## Page tabs
 
-If your product has a landing page and/or an output page, the Page SEO tab shows separate configuration for each. Select the tab for the page you want to configure.
+If your product has a landing page and/or an output page, the tab shows separate configuration per page. Products that use only an AI Chat node have a single "AI Chat" set of fields for the chat's public page — this is the one that controls your `/c/…` share link.
 
-Products that use only an AI Chat node have a single "AI Chat" tab for the chat's public page metadata.
+## Setting share metadata in bulk
 
-## Metadata fields
+Connected to Claude? The connector's `update_seo` tool sets page title, meta description, share title/description (tokens supported), share image, favicon and keywords per product — so you can ask Claude to apply a share-title pattern across every product in your workspace in one conversation.
 
-**Title** — The page title shown in browser tabs and in search engine results. Defaults to your product name if left blank. Aim for 50–60 characters.
+## Tips for LinkedIn
 
-**Description** — The meta description shown below your title in search engine results. Write this as a human-readable summary of what the product offers. Aim for 120–160 characters.
-
-**OG Title** — The title shown in social sharing cards (LinkedIn, Slack, iMessage, etc.). Defaults to the page title if left blank.
-
-**OG Description** — The description shown in social sharing cards. Defaults to the meta description if left blank.
-
-**OG Image** — The image shown in social sharing cards. Recommended size: 1200 × 630px. Defaults to the product thumbnail if left blank.
-
-**Twitter Card** — Defaults to `summary_large_image`, which shows a large image card. Most appropriate for AI products.
-
-**Twitter Title / Twitter Description / Twitter Image** — Overrides specifically for Twitter/X card display. Leave blank to use the OG values.
-
-**Keywords** — Comma-separated keywords for search indexing. Less important for SEO than title and description, but useful for clarity.
-
-**Author** — Optional author name included in the page metadata.
-
-**Canonical URL** — Set if you want to specify a canonical URL different from the product's public URL (for example, if you are embedding the product on your own domain and want the canonical to point there).
-
-**Favicon** — Upload a custom favicon for the product page. Shown in browser tabs.
-
-## Live preview
-
-As you fill in the metadata fields, a live preview shows how your page will appear in search results and in social sharing cards. The search engine preview shows the title and description in standard Google result format. The social media preview shows the OG card with image, title, and description.
+- After changing your card, run your link through the [LinkedIn Post Inspector](https://www.linkedin.com/post-inspector/) — LinkedIn caches previews for about 7 days, and the Inspector forces a fresh scrape.
+- In LinkedIn **messages**, paste the link into an empty message box and wait a few seconds for the card to attach before sending (you can then delete the raw URL text — the card stays).
+- Each distinct personalised URL (`?firstName=Sarah` vs `?firstName=Jordan`) is scraped separately, so personalised links don't fight each other's cache.
