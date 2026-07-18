@@ -103,6 +103,6 @@ From there:
 
 Ask: *"Disable outbound personalisation on my pricing diagnostic."*
 
-Claude calls `disable_outbound_personalisation`. Every `\{\{ url:* \}\}` token is replaced with its own fallback value — so the welcome message that read *"Your 5-Minute Pricing Health Check, \{\{ url:firstName | Sarah \}\}"* becomes *"Your 5-Minute Pricing Health Check, Sarah"* permanently (and the tokens are gone, so URL parameters no longer have any effect).
+Claude fetches the personalised content and re-saves it with every `\{\{ url:* \}\}` token replaced by its own fallback value — so the welcome message that read *"Your 5-Minute Pricing Health Check, \{\{ url:firstName | Sarah \}\}"* becomes *"Your 5-Minute Pricing Health Check, Sarah"* permanently (and the tokens are gone, so URL parameters no longer have any effect).
 
 If you want to keep some fields but drop others, ask: *"Disable outbound personalisation for the company field only."*

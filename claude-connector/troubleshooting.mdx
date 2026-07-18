@@ -66,7 +66,7 @@ This was a frequent issue before v1.38 when multi-machine deploys could route fo
 
 The connector is **self-correcting**. Many tools return a structured warning + a fix payload rather than silently doing the wrong thing.
 
-The most common one is the **token coverage warning** from `create_page` / `update_page` / `import_design`:
+The most common one is the **token coverage warning** from `create_page` / `update_page`:
 
 > *⚠️ This page uses 3 object tokens the AI Agent does NOT output yet — they will render blank: `{{ object:sleepScore }}`, `{{ object:topStrength }}`, `{{ object:nextStep1 }}`. Call `set_agent_fields` with the suggested_agent_fields below …*
 
@@ -94,7 +94,7 @@ For existing responses created **before** the fix, the new fields won't backfill
 
 Two common causes:
 
-1. **The page contains `<script>` tags.** The HTML is injected via `innerHTML` which never executes scripts. Build score visuals as pure CSS/SVG. If you're using `apply_result_template`, this is already the case. If you wrote custom HTML, ask Claude: *"my gauge is blank — rebuild it as a CSS/SVG ring instead of JS."*
+1. **The page contains `<script>` tags.** The HTML is injected via `innerHTML` which never executes scripts. Build score visuals as pure CSS/SVG. The built-in result designs already work this way. If you wrote custom HTML, ask Claude: *"my gauge is blank — rebuild it as a CSS/SVG ring instead of JS."*
 2. **You used `{{ object:* }}` inside an SVG/HTML attribute.** Object tokens get wrapped in `<p>` by the markdown renderer, corrupting attributes. Use `{{ chart:fieldName }}` instead for any value inside an attribute. See the [tokens reference](/claude-connector/tokens).
 
 ---
@@ -151,6 +151,6 @@ If `list_products`, `get_product`, or other read tools are slow, that's worth re
 
 If you're stuck on something this page doesn't cover, you have three options:
 
-1. **Ask Claude.** *"How do I do X with the connector?"* — Claude has access to `search_documentation` and can look up the answer in the live docs.
+1. **Ask Claude.** *"How do I do X with the connector?"* — Claude knows its full tool list and will point you at the right tool or the right page in these docs.
 2. **Check your logs.** **Settings → API → Logs** in your workspace — every call is recorded with full detail.
 3. **Email us.** `support@productised.ai` — include the timestamp of the issue and your workspace name.

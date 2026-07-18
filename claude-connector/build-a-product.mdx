@@ -7,7 +7,7 @@ The connector makes building a Productised product a one-conversation activity. 
 
 ---
 
-## The four-call build flow
+## The three-call build flow
 
 Every product Claude builds goes through the same canonical sequence. You don't have to know about it — Claude orchestrates the calls. But knowing the shape helps you brief Claude better and intervene at the right point.
 
@@ -28,8 +28,8 @@ Every product Claude builds goes through the same canonical sequence. You don't 
     This is the heaviest step (~30 seconds). You'll see a build-progress card with each phase completing.
   </Step>
 
-  <Step title="apply_result_template — design output">
-    For **design** outcomes, Claude calls `apply_result_template` with one of six branded presets (Dimensions, Radar, Persona, Deep Insights, Grid, Narrative Report). This sets the page HTML *and* configures the AI agent to output the exact field names the page expects.
+  <Step title="A branded result design, applied automatically">
+    For **design** outcomes, the build automatically applies the **Dimensions** result design — a branded results page with a working score ring, tier badge, strengths/gaps and CTA — and configures the AI agent to output the exact field names the page expects. Want to see the other five designs (Radar, Persona, Deep Insights, Grid, Narrative Report)? Ask Claude to *"show me the result designs"* — `list_result_templates` renders a live, brand-themed gallery. If you prefer another look, Claude restyles your page toward it while keeping all the data wiring intact.
 
     For **standard** outcomes the agent streams a personalised document. For **advisor**, the AI continues chatting after collection. No extra step needed.
   </Step>

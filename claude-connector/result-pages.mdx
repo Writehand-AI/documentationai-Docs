@@ -21,8 +21,8 @@ You don't write CSS by hand. You don't switch tabs. You don't paste between tool
   <Card title="update_page" icon="edit">
     Replace the HTML (and optionally CSS) of an existing page. The fast iteration tool — for copy changes, layout tweaks, restyling, anything.
   </Card>
-  <Card title="import_design" icon="upload">
-    Translate HTML pasted from a design tool (Figma, Canva, Webflow, Lovable, Cursor, Gamma, etc.) into Productised-shaped output. Strips scripts, container-breaking positioning, and surfaces token candidates.
+  <Card title="Paste any HTML" icon="upload">
+    Bringing a design from another tool (Figma export, Webflow, Lovable, Cursor, Gamma, etc.)? Paste the HTML straight into the chat — Claude strips scripts and container-breaking positioning, proposes which text should become tokens, and saves it with `create_page` or `update_page`.
   </Card>
 </Columns>
 
@@ -56,7 +56,7 @@ When you call `create_page` or `update_page`, the connector cross-checks every `
 
 Claude can then call `set_agent_fields` with the suggestions in the same conversation. No more shipping pages that render literal `{{ object:sleepScore }}` tokens because the agent doesn't produce that field.
 
-The same coverage check applies to `import_design` when you pass a `product_id`.
+The same coverage check applies when Claude saves a design you pasted in from another tool.
 
 ---
 
@@ -118,7 +118,8 @@ Personalisation: pages fill per respondent via {{ tokens }}, never hard-coded va
   • {{ chart:overall_score }}, {{ chart:dimN_pct }}, {{ chart:dimN_color }} — computed
     visual values; use these INSIDE HTML/SVG attributes (object: tokens corrupt attributes)
   • {{ custom:key }}       — workspace variables (booking links, brand text)
-Call get_design_brief(product_id) to read the product's REAL token names. Never invent them —
+Call get_variables(product_id) for the product's REAL token names, get_design_system() for the
+saved brand colours/fonts, and get_page for existing pages to match. Never invent token names —
 an unknown token renders blank.
 
 Score visuals are pure CSS/SVG (no JS):
@@ -141,13 +142,13 @@ Handoff: SAVE the page into the product with update_page (existing) or create_pa
 A design that isn't saved through the connector does not exist in Productised.
 ```
 
-With that in place, ask Claude Design to *"use my Productised connector, call `get_design_brief` for product `<id>`, then design and save the output page."* It will pull your real tokens and existing pages, design a single-file HTML page that matches, and save it live — no React detour, no manual port.
+With that in place, ask Claude Design to *"use my Productised connector, read the real tokens and design system for product `<id>`, then design and save the output page."* It will pull your real tokens (`get_variables`), brand colours (`get_design_system`) and existing pages, design a single-file HTML page that matches, and save it live — no React detour, no manual port.
 
 ---
 
 ## Porting designs from Lovable, v0, or Cursor
 
-You can bring in HTML from any design tool using `import_design`. The tool cleans and validates the HTML before saving, detects placeholder text like "Maya" or "[Name]", and suggests the right tokens.
+You can bring in HTML from any design tool by pasting it into the chat. Claude cleans and validates the HTML before saving — strips scripts and external stylesheets, fixes container-breaking layout, detects placeholder text like "Maya" or "[Name]", and suggests the right tokens.
 
 **How each tool's output translates:**
 
@@ -155,10 +156,10 @@ You can bring in HTML from any design tool using `import_design`. The tool clean
 |------|-------------|----------------------|-----|
 | Claude Design (connector in the chat) | Clean HTML saved via the connector | ✅ Yes | Say *"use this as my output page"* — Claude saves it. [Details →](/claude-connector/claude-design) |
 | Claude Design — "Export → Standalone HTML (offline)" file | React app bundle | ❌ No — imports blank | Don't use it. Ask for *"a single static HTML file, no JavaScript"* instead |
-| Cursor / any AI that writes HTML | Full HTML or fragment | ✅ Directly | Paste into Claude, `import_design` → `update_page` |
+| Cursor / any AI that writes HTML | Full HTML or fragment | ✅ Directly | Paste into Claude — it cleans it and saves via `update_page` |
 | Lovable | React app (default) | ⚠️ Ask for plain HTML | Prompt: *"Give me a single standalone HTML file with no React, no imports, no build step"* |
 | v0 | React components (default) | ⚠️ Ask for plain HTML | Prompt: *"Output as a plain HTML file using only inline CSS and vanilla JS"* |
-| Figma / Webflow / Framer | Varies | ⚠️ Export HTML first | Export as HTML, paste into `import_design` |
+| Figma / Webflow / Framer | Varies | ⚠️ Export HTML first | Export as HTML, paste it into the chat |
 
 **For Lovable and v0:** these tools default to React output that requires a build environment. Explicitly ask them for a "standalone single-file HTML" and they'll produce something that works. Once you have that HTML, paste it into a Claude conversation and say *"import this design to my product"* — the connector handles the rest.
 

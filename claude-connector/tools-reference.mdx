@@ -1,9 +1,9 @@
 ---
 title: All tools
-description: The full set of 76 tools the Claude Connector exposes, organised by category.
+description: The full set of 73 tools the Claude Connector exposes, organised by category.
 ---
 
-The connector exposes 76 live tools against your Productised workspace. They're grouped here by purpose so you can quickly find the right one. Each tool returns a structured result Claude can reason about, and most write operations return a **demo URL** so you can see the change immediately.
+The connector exposes 73 live tools against your Productised workspace. They're grouped here by purpose so you can quickly find the right one. Each tool returns a structured result Claude can reason about, and most write operations return a **demo URL** so you can see the change immediately.
 
 ---
 
@@ -54,19 +54,13 @@ The connector exposes 76 live tools against your Productised workspace. They're 
     Shareable link, optionally pre-filled with a contact's name and email — ready to send. For outbound campaigns with arbitrary fields, prefer `generate_outbound_url`.
   </Card>
   <Card title="get_analytics" icon="bar-chart-2">
-    Response count, last submission, 7-day trend, completion rate for any product.
-  </Card>
-  <Card title="get_workspace_stats" icon="layout-dashboard">
-    High-level workspace totals across your entire account.
+    Response count, last submission, 14-day trend, completion rate for any product.
   </Card>
   <Card title="get_segment_breakdown" icon="pie-chart">
     How respondents segment by AI-determined persona/tier across products.
   </Card>
   <Card title="get_product_insights" icon="lightbulb">
     AI-generated insights across all submissions for a product — patterns, surprises, opportunities.
-  </Card>
-  <Card title="get_credits" icon="zap">
-    Your current AI generation credit balance and recent usage.
   </Card>
   <Card title="get_form_questions" icon="list">
     The current intake questions for a product — names, labels, required flags.
@@ -113,7 +107,13 @@ The connector exposes 76 live tools against your Productised workspace. They're 
     Patch any canvas node's configuration by ID or type.
   </Card>
   <Card title="add_node" icon="plus-circle">
-    Add a node to the canvas (gpt, scoring, dynamic_output_page, advisor_chat, connections, etc.) and wire it into the flow.
+    Add a node to the canvas (gpt, doc_builder, dynamic_output_page, research, knowledge, advisor_chat, connections) and wire it into the flow.
+  </Card>
+  <Card title="add_mcp_connection" icon="plug">
+    Connect a product to an external MCP server (HubSpot, Notion, Slack, Linear, or any custom server) so the AI can use its tools live during conversations. Credentials are encrypted, or added securely in the app.
+  </Card>
+  <Card title="update_mcp_connection" icon="refresh-cw">
+    Update an existing MCP connection node — change the server URL, replace the token, or enable/disable specific tools.
   </Card>
   <Card title="delete_node" icon="trash-2">
     Remove a node from the canvas and clean up its edges.
@@ -121,17 +121,11 @@ The connector exposes 76 live tools against your Productised workspace. They're 
   <Card title="update_form_questions" icon="edit">
     Replace the intake question set for a product.
   </Card>
-  <Card title="set_agent_fields" icon="hash">
-    Configure the structured output fields an AI Agent node produces. The token-coverage check tells you which fields are missing.
-  </Card>
   <Card title="update_product_settings" icon="settings">
     Lock submissions after N responses, toggle email notifications.
   </Card>
   <Card title="set_submission_cap" icon="hash">
     Cap the number of submissions a product accepts. New sessions are blocked once the cap is reached; in-flight conversations always finish.
-  </Card>
-  <Card title="get_submission_cap" icon="eye">
-    Read the current cap, count, and remaining spots for a product.
   </Card>
   <Card title="set_agent_fields" icon="bar-chart">
     Configure the AI Agent's structured output fields — the score, tier, dimensions and insights it produces per respondent. This is how scoring is set up.
@@ -161,16 +155,15 @@ The connector exposes 76 live tools against your Productised workspace. They're 
   <Card title="delete_page" icon="x-square">
     Remove a single output page from a Page node.
   </Card>
-  <Card title="import_design" icon="upload">
-    Translate HTML pasted from a design tool (Figma, Canva, Webflow, Lovable, v0, Gamma) into Productised-shaped output.
+  <Card title="get_landing_page_template" icon="layout">
+    Fetch the designer-built default landing-page template (grid or signature style), auto-themed to your product's brand colour — the starting point for `set_welcome_html`.
   </Card>
   <Card title="list_result_templates" icon="grid">
-    Gallery of result-page designs — preview Dimensions, Radar, Persona, Deep Insights, Grid, and Narrative Report.
-  </Card>
-  <Card title="apply_result_template" icon="layout">
-    Apply a chosen scorecard result design — sets the HTML AND configures the AI agent fields.
+    Gallery of result-page designs — preview Dimensions, Radar, Persona, Deep Insights, Grid, and Narrative Report. Design products get Dimensions applied automatically at build time.
   </Card>
 </Columns>
+
+Pasting a design from another tool (Figma export, v0, Lovable, plain HTML)? Just paste it into the chat — Claude cleans it up (strips scripts and external CSS, fixes layout), proposes which text should become `{{ tokens }}`, and saves it with `create_page` or `update_page`.
 
 ---
 
@@ -191,10 +184,9 @@ Send one unique link per prospect with their details baked into the URL. See the
   <Card title="generate_outbound_urls_from_csv" icon="file-text">
     Bulk. Accepts CSV text, returns enriched CSV with a new `outbound_url` column appended. Optional `key_mapping` renames headers (e.g. "First Name" → `firstName`).
   </Card>
-  <Card title="disable_outbound_personalisation" icon="trash-2">
-    Strip `\{\{ url:* \}\}` tokens — each becomes its fallback value. Pass `fields` to revert specific tokens only; omit to strip all.
-  </Card>
 </Columns>
+
+To remove personalisation later, ask Claude to re-save the affected content without the `\{\{ url:* \}\}` tokens (each token's fallback text takes its place).
 
 ---
 
@@ -215,7 +207,7 @@ Two tools that let users share their own products as installable templates, or b
 
 ## Plan, credits & billing
 
-Transparency tools so users can see exactly where they stand against their plan — and a deterministic billing URL when they want to change it.
+Transparency tools so users can see exactly where they stand against their plan.
 
 <Columns cols="2">
   <Card title="get_plan_status" icon="gauge">
@@ -224,11 +216,8 @@ Transparency tools so users can see exactly where they stand against their plan 
   <Card title="get_credits" icon="zap">
     Visual credit gauge — plan title, balance, usage this period, all-time usage, per-product breakdown, BYOK status. Use whenever the user asks about credits, usage, or cost impact.
   </Card>
-  <Card title="get_subscription_url" icon="credit-card">
-    Returns the URL to the user's subscription management page (change plan, view invoices, update payment method, cancel). Called whenever the user mentions upgrading, downgrading, cancelling, refunds, billing, or invoices.
-  </Card>
   <Card title="get_workspace_stats" icon="bar-chart-2">
-    Account-wide totals — products created, live products, responses, leads. Pairs with `get_plan_status` to show value alongside usage.
+    Account-wide totals — products created, live products, responses, leads — plus ready-made workspace URLs (settings, billing/subscription management, members, variables). Pairs with `get_plan_status` to show value alongside usage.
   </Card>
 </Columns>
 
@@ -261,16 +250,19 @@ When a write tool (e.g. `create_product`, `publish_product`, `generate_product`)
     Check whether DNS has propagated for a per-product custom domain.
   </Card>
   <Card title="set_workspace_domain" icon="globe">
-    Configure a workspace-wide hostname — every product is served under it unless they have their own per-product override.
-  </Card>
-  <Card title="check_workspace_domain" icon="radio">
-    Check the current status of the workspace-wide custom domain.
-  </Card>
-  <Card title="remove_workspace_domain" icon="x">
-    Unlink the workspace-wide custom domain.
+    Configure a workspace-wide hostname — every product is served under it unless they have their own per-product override. Status checks and unlinking happen in the app under Settings → Custom domain.
   </Card>
   <Card title="set_product_slug" icon="hash">
     Name a product's URL slug under the workspace domain (e.g. /leadership-readiness).
+  </Card>
+  <Card title="set_custom_branding" icon="badge">
+    Replace the "made by Productised" footer badge with your own logo and click-through URL (distinct from the chat-header logo set by `update_branding`).
+  </Card>
+  <Card title="get_design_system" icon="eye">
+    Read the workspace design-system tokens (brand colours, fonts, radius), with platform defaults filled in for anything unset.
+  </Card>
+  <Card title="set_design_system" icon="droplet">
+    Save workspace-wide design tokens that every brand-aware surface inherits — new product themes, result-page chrome, landing-page accents. Pass `clear:true` to remove.
   </Card>
 </Columns>
 
@@ -286,10 +278,7 @@ When a write tool (e.g. `create_product`, `publish_product`, `generate_product`)
     Create or update a workspace variable — available as `{{ custom:key }}` across all products.
   </Card>
   <Card title="set_webhook" icon="radio">
-    Add or remove an outgoing webhook — Productised POSTs full response data to your URL on each submission.
-  </Card>
-  <Card title="get_webhook" icon="link-2">
-    Read the current webhook URL and status.
+    Add, replace, or remove an outgoing webhook — Productised POSTs full response data to your URL on each submission. (There's no separate getter — the current webhook shows in the product's settings in the app.)
   </Card>
 </Columns>
 
@@ -303,12 +292,6 @@ When a write tool (e.g. `create_product`, `publish_product`, `generate_product`)
   </Card>
   <Card title="save_idea" icon="lightbulb">
     Save a product idea directly to Brain's Ideas tab.
-  </Card>
-  <Card title="get_latest_plan" icon="map">
-    Fetch your most recently generated Journey Plan.
-  </Card>
-  <Card title="search_documentation" icon="book-open">
-    Search the live Productised docs from inside Claude.
   </Card>
   <Card title="add_brain_memory" icon="database">
     Add a fact or preference to Brain's long-term memory.
@@ -334,9 +317,6 @@ When a write tool (e.g. `create_product`, `publish_product`, `generate_product`)
   </Card>
   <Card title="delete_product" icon="trash">
     Permanently delete a product AND all of its responses, pages, and digital-card links. Requires `confirm:true`.
-  </Card>
-  <Card title="get_project_instructions" icon="info">
-    The platform-level system prompt your connector loaded with — useful for debugging what behavior Claude was told to follow.
   </Card>
 </Columns>
 

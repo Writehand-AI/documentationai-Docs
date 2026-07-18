@@ -5,7 +5,7 @@ description: Six branded, dynamic templates ready to apply to any design-outcome
 
 Productised ships six canonical result-page designs. Each is **dynamic** — the AI agent's structured output fills the page automatically, so every end user sees a personalised version. You don't have to design anything; you just pick the right one.
 
-From Claude, you can browse them with `list_result_templates` (a visual gallery with live previews) and apply one with `apply_result_template`.
+From Claude, you can browse them with `list_result_templates` — a visual gallery with live previews, themed to your brand. When you build a design-outcome product, the **Dimensions** design is applied automatically, so your product never ships with an empty result page.
 
 ---
 
@@ -34,9 +34,9 @@ From Claude, you can browse them with `list_result_templates` (a visual gallery 
 
 ---
 
-## What `apply_result_template` does
+## What applying a design does
 
-Applying a template does **three things** in one call:
+When the build applies a design, **three things** happen in one step:
 
 1. **Sets the page HTML** to the chosen branded design (centred, responsive, brand-fonts loaded).
 2. **Configures the AI agent's `objectVariables`** with exactly the fields that design needs (e.g. `overall_score`, `tier_label`, `dim1_score`, `dim1_insight`, …) — and wires the agent to the AI Chat node if it isn't already connected.
@@ -52,23 +52,23 @@ The CTA section at the bottom of every template ships with polished default copy
 
 ---
 
-## Switching templates
+## Changing the look
 
-You can switch templates at any time:
+Browse the gallery first:
 
-> *"Switch the result page to the Radar template."*
+> *"Show me the other result designs."*
 
-Claude calls `apply_result_template({ template_id: "radar" })`. It overwrites the page HTML and updates the agent fields. New submissions get the new design.
+Claude renders all six with live previews via `list_result_templates`. One-click preset switching from chat isn't available yet — if you pick a different design, Claude restyles your current page toward it instead: it fetches the live HTML (`get_page`), reworks the layout and visuals in the chosen style while keeping every `{{ token }}` and chart intact, and saves with `update_page`. Your data wiring never breaks.
 
-<Callout kind="warning">
-Existing responses created with the old template's field set won't fully populate the new template if the templates have different fields. Re-submit a test response to see a fully-populated version. The score-based templates (Dimensions, Radar, Grid) share the same field set, so switching between them is lossless; Persona, Deep Insights, and Narrative Report each add their own fields.
+<Callout kind="info">
+Because the restyle keeps your existing field set, every past and future submission keeps populating the page — no re-configuration needed.
 </Callout>
 
 ---
 
 ## Theming
 
-Every template uses your product's brand accent (`buttonColor` on the AI Chat node). When you call `apply_result_template`, the connector automatically re-skins the template's coral accent to your accent — chrome (CTA button, badges, section markers) takes your brand colour.
+Every template uses your product's brand accent (`buttonColor` on the AI Chat node). When the design is applied at build time, the connector automatically re-skins the template's coral accent to your accent — chrome (CTA button, badges, section markers) takes your brand colour.
 
 **Score colours stay semantic.** Dimension bars, the hero score ring, and the tier badge are coloured by the score itself (green ≥ 70, amber ≥ 45, red below — and per-dimension green ≥ 7, amber ≥ 4.5, red below). A low score never renders in celebratory brand colour, on any theme.
 
@@ -80,8 +80,8 @@ Combine with `apply_theme` to also restyle the conversation surface — the resu
 
 Templates are the fastest path to a polished result page. But you can also:
 
-- **Edit a template after applying it** — `apply_result_template` then `update_page` to tweak copy, swap sections, change layout. You keep the template's compatible field set.
+- **Edit the applied design** — ask Claude to tweak copy, swap sections, or change the layout (`update_page`). You keep the template's compatible field set.
 - **Design from scratch in Claude** — skip the template and ask Claude to design the whole HTML. The coverage check ensures the tokens match the agent.
-- **Paste in a design from Figma/Canva** — use `import_design` to clean it up and surface tokens.
+- **Paste in a design from Figma/Canva** — paste the HTML straight into the chat; Claude cleans it up and wires in your tokens.
 
 [Designing custom result pages →](/claude-connector/result-pages)

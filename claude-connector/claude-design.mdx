@@ -21,7 +21,7 @@ You can even start from the product side:
 
 > *"I want to design an output page for my [product]."*
 
-The connector reads the product first (via `get_design_brief`), learns every blank it produces, then offers to design it with you or take a frame you made in Claude Design.
+The connector reads the product first (via `get_variables` and `get_design_system`), learns every blank it produces, then offers to design it with you or take a frame you made in Claude Design.
 
 <Callout kind="info">
 **You never need to ask for "plain HTML."** Because Claude can see the design in the conversation, it produces the correct static, zero-JS HTML on its own when you say "use this as my Productised page." The format is handled for you.
@@ -56,7 +56,7 @@ Claude Design gives you a beautiful page with **sample data** — a sample score
 - The visitor's own answers → `{{ form:firstName }}`
 - Brand / booking values → `{{ custom:booking_url }}`
 
-You design the **frame** once; the AI only **fills the blanks** — which is why Productised result pages look designed, not AI-generated. The connector wires these tokens for you from `get_design_brief`, so you never invent or type a token name.
+You design the **frame** once; the AI only **fills the blanks** — which is why Productised result pages look designed, not AI-generated. The connector reads these tokens for you (`get_variables`), so you never invent or type a token name.
 
 [Full token reference →](/claude-connector/tokens) · [Designing result pages →](/claude-connector/result-pages)
 

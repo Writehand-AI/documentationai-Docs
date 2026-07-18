@@ -7,19 +7,23 @@ An Outcome is the deliverable at the end of every AI product. Once the conversat
 
 This is what separates Productised from a lead form or a quiz. Your end user does not receive a generic results page. They receive something that reflects their situation.
 
-## The three Outcome types
+## The four Outcome types
 
-<Columns cols="3">
-  <Card title="Assessments" href="/outcomes/assessments" icon="layout" horizontal="false">
-    A fully custom HTML result page you design in Claude. Uses live tokens to pull in AI outputs, scores, and form answers. Best for branded, visual deliverables — scorecards, diagnostics, reports.
+<Columns cols="2">
+  <Card title="Standard" href="/outcomes/standard" icon="file-text" horizontal="false">
+    The AI streams a personalised written output directly in the product — instant, readable, and built from what your end user shared. The fastest way to deliver a personalised result, and the default for most products.
   </Card>
 
   <Card title="Advisor" href="/outcomes/advisor" icon="message-circle" horizontal="false">
     After collection ends, the AI shifts into a live advisory session — speaking first with full context from the conversation, then opening the floor for follow-up questions.
   </Card>
 
-  <Card title="Standard" href="/outcomes/standard" icon="file-text" horizontal="false">
-    The AI streams a personalised written output directly in the product — instant, readable, and built from what your end user shared. The fastest way to deliver a personalised result.
+  <Card title="Page" href="/outcomes/assessments" icon="layout" horizontal="false">
+    A fully custom HTML result page, generated per respondent at a shareable URL. Uses live tokens to pull in AI outputs, scores, and form answers. Best for branded, visual deliverables — scorecards, diagnostics, reports. (Previously called "Assessments"; when building via the Claude connector this is the `design` outcome.)
+  </Card>
+
+  <Card title="Collect only" icon="inbox" horizontal="false">
+    The lead's answers are saved with no AI output at the end — for waitlists, applications, and simple intake forms. When building via the Claude connector this is the `collect_only` outcome.
   </Card>
 </Columns>
 

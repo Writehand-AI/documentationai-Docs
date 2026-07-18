@@ -11,7 +11,7 @@ These are real, runnable prompts. Each one is a single message you can paste int
 
 > *"Build me a Leadership Readiness Scorecard for first-time executive coaches — six questions scored across leadership presence, team dynamics, strategic thinking, business acumen, emotional intelligence, and growth mindset. Score 0–10 per pillar with a personalised insight, deliver a branded results page using the Radar template, and the CTA should be 'Book a discovery call' linking to https://cal.com/me/discovery."*
 
-**Triggers:** `plan_product` → `create_product` → `generate_product({ outcome: "design" })` → `apply_result_template({ template_id: "radar" })`
+**Triggers:** `plan_product` → `create_product` → `generate_product({ outcome: "design" })` (the Dimensions design is applied automatically) → `get_page` → `update_page` (restyled to the Radar look)
 **Returns:** A live demo URL — your product is real, themed, and shareable in ~30 seconds.
 
 ---
@@ -20,7 +20,7 @@ These are real, runnable prompts. Each one is a single message you can paste int
 
 > *"Create a Sales Process Diagnostic with 8 questions for B2B sales managers. Standard streamed report output. Warm, expert tone. Then design the results page in the Deep Insights style — strengths-and-gaps panels plus a 'what your answers reveal' narrative."*
 
-**Triggers:** `plan_product` → `create_product` → `generate_product({ outcome: "design" })` → `apply_result_template({ template_id: "insights" })`
+**Triggers:** `plan_product` → `create_product` → `generate_product({ outcome: "design" })` → `get_page` → `update_page` (restyled to the Deep Insights look)
 **Returns:** Demo URL.
 
 ---
@@ -47,7 +47,7 @@ These are real, runnable prompts. Each one is a single message you can paste int
 
 > *"Switch the result page on my Sales Process Diagnostic from Insights to Dimensions — and keep the existing agent fields where possible."*
 
-**Triggers:** `apply_result_template({ template_id: "dimensions" })`
+**Triggers:** `get_page` → `update_page` — Claude reworks the page HTML into the Dimensions layout while keeping every `{{ object:* }}` token and the existing agent fields intact.
 **Returns:** Demo URL.
 
 ---
@@ -99,9 +99,9 @@ These are real, runnable prompts. Each one is a single message you can paste int
 
 ## Brain → build pipeline
 
-> *"Open the latest idea Brain saved, plan it as a product, build it, and apply the Radar template."*
+> *"Open the latest idea Brain saved, plan it as a product, and build it with a Radar-style results page."*
 
-**Triggers:** `get_latest_plan` (or read the idea via `brain_ask`) → `plan_product` → `create_product` → `generate_product` → `apply_result_template`
+**Triggers:** `brain_ask` (reads the saved idea) → `plan_product` → `create_product` → `generate_product` → `get_page` → `update_page` (Radar restyle)
 **Returns:** A live demo URL for the newly-built product.
 
 ---
@@ -119,7 +119,7 @@ These are real, runnable prompts. Each one is a single message you can paste int
 
 > *"Send every new lead from my Leadership Readiness Scorecard to https://hooks.zapier.com/hooks/catch/12345/abcde, then confirm the webhook is live."*
 
-**Triggers:** `set_webhook` → `get_webhook` (confirm)
+**Triggers:** `set_webhook` (its response confirms the active webhook)
 **Returns:** Webhook config + confirmation.
 
 ---

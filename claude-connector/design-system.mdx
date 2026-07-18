@@ -66,7 +66,7 @@ Once set, the tokens flow through automatically:
 
 <Columns cols="2">
   <Card title="Result pages" icon="layout">
-    All six scorecard templates — Dimensions, Radar, Persona, Deep Insights, Grid, Narrative Report — pick up your accent colour, ink, background, dark panel, and fonts on every `apply_result_template` call.
+    All six scorecard templates — Dimensions, Radar, Persona, Deep Insights, Grid, Narrative Report — pick up your accent colour, ink, background, dark panel, and fonts whenever a result design is applied at build time.
   </Card>
   <Card title="Landing pages" icon="globe">
     `get_landing_page_template` applies your brand accent, background, dark panel, and body font to the landing page before returning it to you to edit.
@@ -123,4 +123,4 @@ Currently, Claude can set the design system in any conversation — just describ
 
 > *"Set my workspace design system: primary #1a56db, background #f8fafc, heading font Bricolage Grotesque, body font Inter, radius 10px. Then show me the result-page gallery for my Scorecard product so I can see it themed."*
 
-Claude calls `set_design_system`, then `list_result_templates` (or `apply_result_template`). Every template you see is already wearing your brand.
+Claude calls `set_design_system`, then `list_result_templates`. Every template you see is already wearing your brand.
