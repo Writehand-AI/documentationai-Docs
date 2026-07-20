@@ -32,7 +32,7 @@ Re-hosting **snapshots the asset** onto your CDN: durable, owned, optimisable, s
   </Card>
 </Columns>
 
-Supported types: `jpeg`, `png`, `gif`, `webp`, `svg`, `ico`. Max 10 MB.
+Supported types: `jpeg`, `png`, `gif`, `webp`, `svg`, `ico`. Max **10 MB** via the connector (the in-app uploader caps at 5 MB). For a **logo**, a square PNG or SVG at least **256×256px** renders crisply everywhere it's used — chat header, footer badge, and social share cards.
 
 ---
 
@@ -47,7 +47,7 @@ Claude does this:
     Claude's built-in web fetch reads the homepage, locates the `<img class="logo">` and `<link rel="icon">` URLs.
   </Step>
   <Step title="Re-host the logo">
-    Claude calls `upload_image({ source_url: "https://acme.com/logo.png", filename: "acme-logo.png", product_id: "..." })`. The connector downloads, validates, re-hosts. Returns: `https://productised.syd1.digitaloceanspaces.com/<tenant>/product-assets/<product>/<ts>-acme-logo.png`.
+    Claude calls `upload_image({ source_url: "https://acme.com/logo.png", filename: "acme-logo.png", product_id: "..." })`. The connector downloads, validates, re-hosts. Returns: `https://assets.productised.ai/<tenant>/product-assets/<product>/<ts>-acme-logo.png`.
   </Step>
   <Step title="Re-host the favicon">
     Same call for the favicon (often `.ico`, also supported).
