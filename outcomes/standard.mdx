@@ -1,41 +1,31 @@
 ---
 title: Standard
-description: >-
-  The AI streams a personalised report directly in the product — instant, readable, and built from what your end user shared.
+description: The AI streams a personalised written result straight into the product — instant, readable, and built from what your end user shared.
 ---
 
-## What Standard does
+The **Standard** outcome (the *Standard* / doc_builder node) has the AI write a personalised written result and stream it directly into the product the moment collection finishes. It's the fastest outcome to set up and the right default for most products.
 
-The Standard outcome streams a fully AI-generated, personalised output at the end of the conversation. The moment the collection phase ends, the AI begins writing — and your end user watches their personalised result appear in real time.
+Think reports, plans, diagnoses, summaries, action lists — anything where a well-written, personalised piece of text is the deliverable.
 
-No two outputs are the same, because no two conversations are the same. The AI uses everything it collected to produce something that reflects that specific person's situation.
+## How it works
 
-🎥 **Video needed:** 30 seconds — showing a Standard output streaming in after a conversation ends, with sections appearing in real time
+1. Add a **Standard** node to the canvas and connect it below your AI Product node.
+2. In its settings, give the AI **custom instructions** — what the result should cover, its structure, and its tone.
+3. Publish. Every respondent gets their own version, written live from their answers.
 
-## When to use Standard
+The AI writes and formats the content itself, guided by your instructions and the full conversation context. There's no HTML to design — that's what makes it fast.
 
-Standard is the right outcome for most products:
+## Standard vs Page
 
-- Lead qualification and diagnostic products where the output is a personalised analysis
-- Scorecard products where the result breaks down their situation across multiple dimensions
-- Any product where you want the output delivered instantly, without a separate designed page
-- First-impression products where the streamed result itself is part of the value
+| | Standard | [Page](/outcomes/assessments) |
+|---|---|---|
+| **How it's produced** | AI writes and formats the text directly | You design custom HTML in Claude; tokens fill it per respondent |
+| **Visual control** | Text-based | Complete — any layout, charts, branding |
+| **Best for** | Most products — fast, instant, personalised | Premium scorecards and branded visual results |
+| **Setup** | Custom instructions only | Design the page in Claude |
 
-Use **Page** instead when you need a fully branded, custom HTML layout. Use **Advisor** when you want the AI to continue the conversation interactively after collection.
+Use **Standard** when you want the AI to write and deliver the result without a custom design. Use **Page** when visual control matters.
 
-## How to configure it
+## Editing via Claude
 
-Click the Standard node on the canvas to open its settings in the right panel.
-
-- **Custom Instructions** — the most important setting. Tell the AI how to write this specific output: what structure to follow, what to emphasise, what tone to use, what call to action to include. The more specific, the better.
-- **Tone** — a default tone preset the AI follows when generating content.
-
-The AI's system prompt, the collection goals, and the Custom Instructions all combine to shape what gets written. Custom Instructions is where you direct the output format and intent.
-
-📸 **Screenshot needed:** The Standard node sidebar showing the Custom Instructions field
-
-## An idea to get you started
-
-A lead qualification product with Standard output: someone answers six questions about their business situation. Your Standard node has Custom Instructions telling the AI to structure the output as: a one-paragraph summary of their situation, three priority gaps identified, and a specific next step. The AI writes all of it, personalised, in under ten seconds.
-
-That output is the thing that makes your end user think: "this person really understands my situation." Done well, it replaces the discovery call.
+With the [Claude connector](/claude-connector/overview), you can tune a Standard outcome conversationally — *"make my report shorter and add a section on next steps"* — and Claude updates the node's instructions for you.

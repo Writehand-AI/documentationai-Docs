@@ -1,93 +1,32 @@
 ---
-title: Assessments
-description: Custom HTML result pages you design in Claude — personalised with live tokens from the AI Agent's structured output and your end user's form answers.
+title: Page (custom HTML)
+description: A fully custom HTML results page, generated per respondent — scores, charts, branded layout. Designed in Claude via the connector.
 ---
 
-The **Assessment** outcome is a custom HTML result page delivered to your end user at the end of the conversation. Unlike the Standard output — which streams written content directly in the product interface — an Assessment renders at its own URL as a fully designed, branded page.
+The **Page** outcome (the *Page* / dynamic_output_page node, sometimes called an Assessment) delivers a completely custom HTML result page at the end of a product. You design the page in Claude using the connector, embed `{{ }}` tokens, and the platform resolves them live for every end user.
 
-You design the page entirely in Claude using the [Claude Connector](/claude-connector/overview). Claude writes the HTML, and you use `{{ }}` tokens to pull in the AI Agent's structured outputs, your end user's form answers, and workspace variables — so every page is personalised to that specific person.
+Reach for **Page** when you want a premium, branded, visual deliverable: a scorecard with dimension bars and a score ring, a personalised report with sections and a CTA, or any result that should feel built just for that person.
 
----
-
-## What Assessments are for
-
-Assessments are the right outcome when the result needs to feel like a premium, designed deliverable:
-
-- **Scorecards and diagnostics** — a page that displays dimension scores, a radar chart, and colour-coded breakdown bars. The AI Agent produces the numbers; the page renders them visually.
-- **Personalised reports** — a multi-section branded report with the end user's name, their situation summary, key findings, and a specific next step.
-- **Offer or recommendation pages** — a page that presents a personalised recommendation, tier result, or commercial next step based on what was collected.
-- **Assessment results with CTAs** — any deliverable where you want the end user to land on a page that looks and feels like it was built just for them, with a clear action to take next.
-
-Use **Standard** instead when you want to deliver a written output inside the product interface without a separate designed page. Use **Advisor** when you want the AI to continue the conversation interactively after collection.
-
----
+<Callout kind="info">Pages are designed and edited **entirely in Claude** using the [Productised connector](/claude-connector/overview) — there is no in-app page editor. See [Design custom result pages](/claude-connector/result-pages) for the full workflow, and the [Design node](/canvas/design-node) for the canvas-side details.</Callout>
 
 ## How it works
 
-<Steps>
-  <Step title="AI Product collects the data" title-type="p">
-    Your end user goes through the AI conversation. The AI Product node collects everything it needs — answers, context, nuance.
-  </Step>
+1. Add a **Page** node to the canvas and connect it below your AI Agent.
+2. In Claude, ask for the page you want — e.g. *"design a scorecard results page for my Leadership product."* Claude writes the HTML and applies it with `update_page`.
+3. The HTML contains `{{ }}` tokens (form answers, AI outputs, your brand images). They're resolved **per respondent, at view time**.
+4. Publish. Every client who completes the product gets their own personalised page at a shareable URL.
 
-  <Step title="AI Agent processes and structures it" title-type="p">
-    An AI Agent node analyses the collected data and produces structured fields — scores, tier labels, dimension insights, summaries — that the result page will display. You define which fields the agent should output.
-  </Step>
+## Variable tokens
 
-  <Step title="The Assessment page renders at a unique URL" title-type="p">
-    Each submission generates a unique URL. When your end user lands on it, the `{{ }}` tokens in the page resolve to that person's specific data — their name, their scores, their personalised insights.
-  </Step>
-</Steps>
-
----
-
-## Designing your Assessment page
-
-Assessment pages are designed in Claude via the [Claude Connector](/claude-connector/overview). Tell Claude what kind of page you want and it will write the HTML and wire up the tokens:
-
-> *"Design a scorecard result page for my AI Readiness Assessment. Show an overall score ring, a breakdown bar for each of the five dimensions, and a personalised next-step CTA that links to my strategy call booking page."*
-
-Claude writes the HTML, configures the AI Agent's output fields to match the tokens it used, and saves both with a single call.
-
-### Token syntax
-
-Tokens in Assessment pages use `{{ }}` syntax:
-
-| Token | What it resolves to |
+| Token | Source |
 |---|---|
-| `{{ object:fieldName }}` | A structured field from the AI Agent (e.g. `{{ object:overall_score }}`) |
-| `{{ form:fieldName }}` | A form answer from the conversation (e.g. `{{ form:firstName }}`) |
-| `{{ chart:dim1_pct }}` | A computed chart value derived from the agent's dimension scores |
-| `{{ custom:key }}` | A workspace variable (e.g. `{{ custom:cta_url }}`) |
+| `{{ form:fieldName }}` | A field from the product's intake |
+| `{{ node:varName }}` | Full text output from an AI node |
+| `{{ object:varName }}` | A named field inside a structured AI output |
+| `{{ custom:key }}` | A [workspace variable or brand image](/workspace/variables) |
 
-See [Token resolution](/claude-connector/tokens) for the full reference.
+<Callout kind="tip">Not sure what tokens exist? Ask Claude *"list the variable tokens for my [product] product"* — it calls `get_variables` and returns every token ready to copy. See [Token resolution](/claude-connector/tokens).</Callout>
 
-### Pre-built templates
+## Page vs Standard
 
-Productised ships six ready-to-use Assessment templates you can apply in one Claude message:
-
-- **Dimensions** — overall score gauge plus colour-coded bars per dimension
-- **Radar Profile** — spider chart across all dimensions
-- **Persona** — a named outcome type with defining traits and next steps
-- **Deep Insights** — side-by-side strengths and improvement panels
-- **Grid Scorecard** — framed layout with a segmented donut and stat cells
-- **Narrative Report** — long-form advice with executive summary and pull quotes
-
-> *"Apply the Dimensions template to my Growth Readiness product."*
-
-See [Result page templates](/claude-connector/result-templates) for full descriptions.
-
----
-
-## The canvas setup
-
-On the canvas, the Assessment outcome uses the **Page** node (labelled "Page" in the toolbar). A typical Assessment workflow looks like this:
-
-```
-AI Product → AI Agent → Page
-```
-
-The AI Agent node sits between the AI Product and the Page node because the Agent needs to run first — it analyses the conversation and produces the structured outputs the page tokens reference.
-
-<Callout kind="tip">
-  Once the Page node is on your canvas, open the Claude Connector and say "Design a result page for [your product name]." Claude will create the page HTML, configure the AI Agent fields, and link everything together automatically.
-</Callout>
+Use **Page** when visual control matters (custom layout, charts, branding). Use [Standard](/outcomes/standard) when you just want the AI to write and deliver the result — faster, no design step.

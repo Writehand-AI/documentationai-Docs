@@ -1,48 +1,35 @@
 ---
 title: What are Outcomes?
-description: Outcomes are what your end users receive at the end of your AI product — personalised, and built from what they told you.
+description: An Outcome is what your end user receives at the end of a product — personalised, and built from what they told you.
 ---
 
-An Outcome is the deliverable at the end of every AI product. Once the conversation is complete and the AI has collected everything it needs, it generates the Outcome — something specific to that person, built from what they shared.
+An **Outcome** is the deliverable at the end of every AI product. Once the conversation is complete and the AI has what it needs, it produces the Outcome — something specific to that person, built from their answers.
 
-This is what separates Productised from a lead form or a quiz. Your end user does not receive a generic results page. They receive something that reflects their situation.
+This is what separates Productised from a lead form or a quiz: your end user doesn't get a generic results page, they get something that reflects their situation.
 
 ## The four Outcome types
 
 <Columns cols="2">
   <Card title="Standard" href="/outcomes/standard" icon="file-text" horizontal="false">
-    The AI streams a personalised written output directly in the product — instant, readable, and built from what your end user shared. The fastest way to deliver a personalised result, and the default for most products.
+    The AI streams a personalised written result straight into the product — a report, plan, or analysis. The fastest way to deliver a personalised result, and the default for most products.
   </Card>
-
   <Card title="Advisor" href="/outcomes/advisor" icon="message-circle" horizontal="false">
-    After collection ends, the AI shifts into a live advisory session — speaking first with full context from the conversation, then opening the floor for follow-up questions.
+    After collecting answers, the AI continues as a live personalised advisor in the same chat — great for coaching intake and consultation-style products.
   </Card>
-
-  <Card title="Page" href="/outcomes/assessments" icon="layout" horizontal="false">
-    A fully custom HTML result page, generated per respondent at a shareable URL. Uses live tokens to pull in AI outputs, scores, and form answers. Best for branded, visual deliverables — scorecards, diagnostics, reports. (Previously called "Assessments"; when building via the Claude connector this is the `design` outcome.)
+  <Card title="Page" href="/outcomes/assessments" icon="code" horizontal="false">
+    A fully custom HTML results page, generated per respondent at a shareable URL — scores, charts, branded layout. Designed in Claude via the connector. Best for premium, visual deliverables like scorecards.
   </Card>
-
-  <Card title="Collect only" icon="inbox" horizontal="false">
-    The lead's answers are saved with no AI output at the end — for waitlists, applications, and simple intake forms. When building via the Claude connector this is the `collect_only` outcome.
+  <Card title="Collect only" href="/outcomes/collect-only" icon="inbox" horizontal="false">
+    The answers are saved with no AI output at the end — for waitlists, applications, and simple intake. Add an Outcome later to turn it into a full experience.
   </Card>
 </Columns>
 
-## How Outcomes connect to your AI Product
+## How Outcomes connect on the canvas
 
-Every Outcome is a node on the canvas. You drag it from the toolbar, drop it below your AI Product node, and draw a connection between them.
-
-In most cases your AI Product connects first to an **AI Agent** node, which processes the collected data and produces the structured outputs the Outcome needs — then the AI Agent connects to the Outcome node.
-
-See [Building your canvas](/canvas/connecting-powers-and-outcomes) for the step-by-step.
+Each Outcome is a node you add from the canvas toolbar and connect below your **AI Product** node. Most products route through an **AI Agent** node first — it analyses the collected answers and produces the structured outputs (scores, tiers, insights) that the Outcome then presents. See [Connecting Powers and Outcomes](/canvas/connecting-powers-and-outcomes).
 
 ## What makes an Outcome personalised
 
-The AI has the full conversation in context when it generates the Outcome — every answer, every nuance of what the person shared. It uses this to make the output specific.
+The AI has the full conversation in context when it produces the Outcome — every answer, every nuance. A Standard result for a founder who said they're pre-revenue reads differently from one for a founder with an established product. Not because you wrote two versions, but because the AI understood the difference.
 
-A Standard output generated for a founder who said they're pre-revenue looks different from one generated for a founder with an established product. Not because you wrote two versions — because the AI understood the difference and responded to it.
-
-This is the core of what Productised does: every Outcome is different because every conversation is different.
-
-<Callout kind="tip">
-  Your AI Agent assigns each user a named tier (e.g. "Growth-Ready", "Not Yet Ready") as it scores them. Give the agent guidance on how each tier's result should differ, and the Outcome adapts its content and CTA to that tier — no manual routing rules needed.
-</Callout>
+<Callout kind="tip">Your AI Agent assigns each user a named tier (e.g. "Growth-Ready", "Not Yet Ready") as it scores them. Give the agent guidance on how each tier's result should differ, and the Outcome adapts its content and CTA to that tier — no manual routing rules needed.</Callout>

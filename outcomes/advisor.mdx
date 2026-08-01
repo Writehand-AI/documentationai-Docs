@@ -1,96 +1,26 @@
 ---
 title: Advisor
-description: After collection ends, the AI shifts into a live advisory session — speaking first with everything it learned, then opening the floor for follow-up questions.
+description: After collecting answers, the AI keeps talking — becoming a live, personalised advisor in the same conversation.
 ---
 
-The **Advisor** outcome turns a Productised product into a two-phase experience: first it collects, then it advises. When the collection phase is complete, the AI shifts modes — it synthesises everything the person shared, speaks first with a personalised opening statement, then opens a live back-and-forth for follow-up questions.
+The **Advisor** outcome (the *Advisor* / advisor_chat node) turns the product into a two-phase experience. First the AI collects what it needs; then, instead of ending with a static result, it **continues the conversation as a live advisor** — speaking first with full context from everything the person shared, then answering their follow-up questions.
 
-This is the closest a Productised product can get to a real advisory conversation. Your end user has already handed over their context. The Advisor uses it to make the opening feel like a practitioner actually read their answers and prepared for them — not like a chatbot giving generic tips.
+It's the closest thing to a personalised consultation that runs itself.
 
----
+## When to use it
 
-## When to use Advisor
+- **Coaching or consultation intake** — collect the situation, then advise on it live.
+- **Discovery-style products** — qualify and guide a prospect toward booking.
+- **Any product where the value is the back-and-forth**, not a fixed deliverable.
 
-Advisor is the right outcome when the value is in the conversation, not just a delivered document:
+## How it works
 
-- **Coaching and mentoring products** — someone shares their goals, blockers, and situation; the Advisor opens with a personalised read and then they explore it together.
-- **Consultation-style intake products** — a prospect answers your intake questions; the Advisor summarises the fit and discusses next steps, replacing (or qualifying for) a live discovery call.
-- **Strategic advisory experiences** — the end user goes through a diagnostic conversation, and instead of receiving a static result, they get to ask follow-up questions about their situation with an AI that already has full context.
-- **High-touch service previews** — position yourself as the obvious expert by giving a prospect 15 minutes of genuinely personalised AI advisory before they book.
+1. Add an **Advisor** node to the canvas and connect it below your AI Product node.
+2. Give it a **persona / system prompt** — who the advisor is, how it should behave, and what it should steer toward (e.g. booking a call).
+3. Publish. After collection, the AI opens the advisory phase automatically, grounded in the respondent's answers.
 
-Use **Standard** when you want to deliver a written output without a live conversation. Use **Assessments** when you want a branded, visual page result instead of an interactive session.
+<Callout kind="tip">Pair the Advisor with a clear CTA in its instructions — e.g. guide the conversation toward *"book a strategy call"* — so the live advice leads somewhere.</Callout>
 
----
+## Advisor vs the other outcomes
 
-## How the Advisor outcome works
-
-<Steps>
-  <Step title="AI Product collects the data" title-type="p">
-    Your end user goes through the conversational intake. The AI Product node collects everything — their goals, their situation, their challenges — through a natural one-on-one chat.
-  </Step>
-
-  <Step title="AI Agent analyses and briefs" title-type="p">
-    An AI Agent node processes the collected data and produces a structured briefing — the key insights, gaps, and recommended angle that the Advisor should lead with. This briefing is passed as context to the Advisor session.
-  </Step>
-
-  <Step title="Advisor session opens" title-type="p">
-    The Advisor node opens in full screen. The AI speaks first — using the briefing to deliver a personalised opening statement that references what the person told you. Then the session opens for follow-up questions, additional context, and a genuine back-and-forth.
-  </Step>
-</Steps>
-
----
-
-## What the Advisor session looks like
-
-Your end user sees a full-screen advisor interface after the collection phase ends. The AI opens with a statement — not a generic greeting, but a specific response to what they shared. From there:
-
-- They can ask follow-up questions
-- The AI answers with full context from the collection phase
-- The session has a configurable message cap to keep it focused
-
-The advisor interface can be branded with your accent colour, an advisor avatar (your photo or a role illustration), an advisor name, and a short description beneath it.
-
----
-
-## The canvas setup
-
-The Advisor outcome requires two connected nodes after your AI Product:
-
-```
-AI Product → AI Agent → Advisor
-```
-
-The **AI Agent** sits in the middle because it needs to run first — it reads the collected data, produces a structured briefing, and passes that as context to the Advisor session. Without the agent, the Advisor would have raw conversation data but no synthesised read on the situation.
-
-The **Advisor Chat node** is the output node. Click it on the canvas to configure:
-
-- **Advisor identity** — name, description, and avatar image
-- **System prompt** — how the advisor should think, what expertise to draw on, what to emphasise
-- **Tone** — Advisory, Casual, Formal, or Informative
-- **Message cap** — how many advisor replies per session (1–20)
-
-See [Advisor Chat node](/canvas/advisor-chat-node) for the full settings reference.
-
----
-
-## Making the Advisor feel personal
-
-The quality of the Advisor opening depends on two things: how the AI Agent is prompted, and the Advisor's system prompt.
-
-**In the AI Agent prompt**, ask it to produce:
-- The single most important insight about this person's situation
-- Their key strengths and critical gaps
-- The recommended angle to lead with
-
-**In the Advisor system prompt**, tell it to:
-- Reference specific answers from the conversation
-- Lead with the recommended angle from the agent's briefing
-- Give direct, specific advice — not generic guidance
-
-> *"You are now in advisor mode. You have collected detailed information about this person's situation. Use everything they shared. Reference their specific answers. Be direct. Speak as someone who has prepared for this session, not someone encountering them cold."*
-
-The AI already has context. Your job is to tell it how to use it.
-
-<Callout kind="tip">
-  When you create an Advisor product using the Quick Create flow, the AI Agent prompt and Advisor system prompt are pre-generated from your brief. You can refine both by clicking each node on the canvas.
-</Callout>
+Where [Standard](/outcomes/standard) and [Page](/outcomes/assessments) deliver a *result*, the Advisor delivers a *conversation*. Choose it when the ongoing dialogue is the product.
