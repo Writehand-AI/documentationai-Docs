@@ -1,44 +1,41 @@
 ---
-title: Assessment pages (Page node)
+title: Design node (Page)
 description: Deliver a fully custom HTML result page — designed in Claude, with live tokens that pull in AI outputs and form answers for every end user.
 ---
 
-The **Page node** (also called an Assessment) lets you deliver a completely custom HTML result page at the end of a product. You design the page in Claude using the connector, embed `{{ }}` tokens, and the platform resolves them live when your end user views their result.
+The **Design node** delivers the **[Page](/outcomes/assessments)** outcome: a completely custom HTML result page at the end of a product. You design the page in Claude using the [connector](/claude-connector/overview), embed `{{ }}` tokens, and the platform resolves them live when your end user views their result.
 
-This is the output node to reach for when you want a premium, branded, visual deliverable: a scorecard with dimension bars and a score ring, a personalised report with sections and a CTA, or any result that needs to feel like it was built just for that person.
+Reach for it when you want a premium, branded, visual deliverable: a scorecard with dimension bars and a score ring, a personalised report with sections and a CTA, or any result that should feel built just for that person.
 
-For a higher-level overview of the Assessment outcome and when to use it, see [Assessments](/outcomes/assessments).
+<Callout kind="info">Pages are designed and edited **entirely in Claude** — there is no in-app HTML editor. Add the Design node here on the canvas; do the actual design work in your Claude chat.</Callout>
 
 ---
 
 ## How it works
 
-1. Add a **Design node** to your canvas and connect it to your AI Product node as an output.
-2. Open the node's settings panel and add one or more pages.
-3. For each page, paste your HTML (and optionally CSS) into the editor.
-4. Embed `{{ variable }}` tokens anywhere in the HTML — they are resolved live when a client views the page.
-5. Publish your product. Every client who completes it receives their own personalised version of the design.
+1. Add a **Page** node to the canvas and connect it below your AI Product (usually via an **AI Agent** node that produces the structured scores/fields).
+2. In Claude, ask for the page — e.g. *"design a scorecard results page for my Leadership product."* Claude writes the HTML and applies it with `update_page`.
+3. Embed `{{ variable }}` tokens anywhere in the HTML — they're resolved live when a client views the page.
+4. Publish. Every client who completes the product receives their own personalised version.
 
-<Callout kind="info">Variable tokens are resolved server-side at view time — not at generation time. This means you can update the HTML of a live product and all future views will use the new design, without re-running the AI workflow.</Callout>
+<Callout kind="info">Variable tokens are resolved server-side **at view time**, not at generation time. You can update a live product's page and all future views use the new design, without re-running the AI workflow.</Callout>
 
 ---
 
 ## Variable tokens
 
-The Design node supports four variable categories, all using the same `{{ category:key }}` syntax:
+The Page supports these variable categories, all using the same `{{ category:key }}` syntax:
 
 | Token | Source | Example |
 |---|---|---|
-| `{{ form:fieldName }}` | A field from the product's form | `{{ form:company }}` |
-| `{{ node:varName }}` | Full text output from an AI node | `{{ node:reportOutput }}` |
+| `{{ form:fieldName }}` | A field from the product's intake | `{{ form:company }}` |
+| `{{ node:varName }}` | Full text output from an AI node | `{{ node:report }}` |
 | `{{ object:varName }}` | A named field inside a structured AI output | `{{ object:score }}` |
-| `{{ custom:key }}` | A workspace-level custom variable | `{{ custom:bookingUrl }}` |
+| `{{ custom:key }}` | A [workspace variable or brand image](/workspace/variables) | `{{ custom:booking_url }}` |
 
-<Callout kind="tip">Not sure what tokens are available in your product? Ask Claude: *"List the variable tokens for my [product name] product"* — Claude calls `get_variables` and returns every form field and AI node output with their exact `{{ }}` syntax ready to copy.</Callout>
+<Callout kind="tip">Not sure what tokens are available? Ask Claude: *"list the variable tokens for my [product] product"* — Claude calls `get_variables` and returns every token ready to copy. See [Token resolution](/claude-connector/tokens).</Callout>
 
 ### Example
-
-If your AI Product node has `nodeVar` set to `report` and your form has a field named `firstName`, your HTML could include:
 
 ```html
 <h1>Hi {{ form:firstName }}, here's your report</h1>
@@ -47,79 +44,63 @@ If your AI Product node has `nodeVar` set to `report` and your form has a field 
 </div>
 ```
 
-When a client named "Sarah" views the page, they see their name and their specific AI-generated report — no one else's.
+When a client named "Sarah" views the page, she sees her name and her specific AI-generated report — no one else's.
 
 ---
 
 ## Multi-page output
 
-A single Design node can have multiple pages. Use pages to structure a longer deliverable:
+A single product can have multiple Page nodes, each a page in the respondent's nav bar — use them to structure a longer deliverable:
 
 - **Page 1** — Executive summary or score overview
 - **Page 2** — Detailed analysis or recommendations
 - **Page 3** — Next steps and call to action
 
-Each page has its own HTML and can reference any variable in the product. Clients navigate between pages sequentially.
+Each page has its own HTML and can reference any variable in the product. Give each a nav title (in the node's settings panel) and they appear as a nav bar for respondents.
 
 ---
 
-## Building your HTML
+## Building your HTML in Claude
 
-You can write HTML by hand or generate it with an AI tool and paste it in. A few approaches that work well:
+Ask Claude to generate the layout and apply it in one step:
 
-**With Claude (via MCP)**
-Ask Claude to generate a premium HTML layout for your report, then apply it directly:
 > *"Generate a dark-themed premium HTML layout for a leadership readiness report. Use {{ node:report }} for the main content and {{ form:firstName }} in the header. Then apply it to my Leadership Assessment product."*
 
-Claude calls `get_variables` to know what tokens are available, writes the HTML, and calls `update_page` to apply it. Returns a demo URL so you can preview the result.
+Claude calls `get_variables` to know what tokens are available, writes the HTML, and calls `update_page` to apply it — returning a demo URL so you can preview immediately.
 
-**From Gamma or another AI design tool**
-Export as HTML, paste into the Design node's HTML editor, then manually replace the placeholder content with `{{ variable }}` tokens.
-
-**Hand-coded**
-Write your own HTML and CSS for complete control. Use the Variable picker button in the settings panel to browse and insert available tokens.
+**Bringing a design from another tool** (Figma export, v0, Gamma, hand-coded HTML)? Paste it into the Claude chat — Claude cleans it (strips scripts and external CSS, fixes layout), proposes which text should become `{{ }}` tokens, and saves it. See [Design custom result pages](/claude-connector/result-pages).
 
 ---
 
-## Settings panel
+## Nav & ordering (the canvas panel)
 
-Click the Design node on the canvas to open its settings panel. It contains:
+Clicking the Page node on the canvas opens a small settings panel. It does **not** contain an HTML editor — the design lives in Claude. The panel lets you:
 
-**Pages list**
-Add, reorder, and delete pages. Each page has a name for your reference (not shown to clients).
-
-**HTML editor**
-Paste or type the full HTML for the selected page. The Variable picker button (top right) lists all available `{{ }}` tokens from the connected workflow.
-
-**Custom HTML field**
-A quick-entry field for simpler layouts. If this is populated, it takes priority over the full page builder template for this page.
-
-**CSS (optional)**
-Apply additional CSS to the page. This is applied alongside the page's HTML — useful for adding fonts, overriding link colours, or fine-tuning spacing.
+- **Set the nav title and order** for this page in the respondent nav bar (leave the title blank to hide it).
+- See a link to open Claude to create or edit the page.
 
 ---
 
-## Assessment vs Standard
+## Page vs Standard
 
-| | Assessment (Page) | Standard |
+| | Page | [Standard](/outcomes/standard) |
 |---|---|---|
-| **How you design it** | Raw HTML + CSS — write it in Claude | AI writes the output directly, guided by your Custom Instructions |
-| **Visual control** | Complete — any layout you can write | Text-based — the AI writes and formats the content |
-| **Best for** | Premium branded layouts, scored result pages, custom-coded experiences | Most products — fast to set up, instant, personalised |
-| **Variable tokens** | `{{ }}` tokens resolved per end user | Not applicable — AI writes the content directly |
-| **Multi-page** | Yes — multiple pages per node | Single streamed output |
+| **How you design it** | Custom HTML + tokens — written in Claude | AI writes the output directly, guided by your instructions |
+| **Visual control** | Complete — any layout, charts, branding | Text-based |
+| **Best for** | Premium branded layouts, scored result pages | Most products — fast, instant, personalised |
+| **Multi-page** | Yes | Single streamed output |
 
 Use **Page** when visual control matters. Use **Standard** when you want the AI to write and deliver the result without a custom design.
 
 ---
 
-## Using the MCP to edit output pages
+## Editing output pages via Claude
 
-Once a product is live, you can update its Design node output pages directly from Claude without opening the canvas:
+Once a product is live, update its Page output from Claude without opening the canvas:
 
 1. **`get_page`** — lists all pages with their IDs and a preview of the current HTML
 2. **`get_variables`** — lists every `{{ }}` token available in the product
 3. **`update_page`** — replaces the HTML (and optionally CSS) of a specific page
 4. **`get_product`** — returns the demo URL so you can preview the change immediately
 
-This is the full conversational editing loop described in the [Claude MCP integration](/integrations/mcp).
+This is the full conversational editing loop — see [Design custom result pages](/claude-connector/result-pages).

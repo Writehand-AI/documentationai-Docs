@@ -193,24 +193,24 @@
                 "icon": "target"
               },
               {
-                "title": "Report",
-                "path": "outcomes/report",
+                "title": "Standard",
+                "path": "outcomes/standard",
                 "icon": "file-text"
               },
               {
-                "title": "Document",
-                "path": "outcomes/document",
-                "icon": "file"
+                "title": "Advisor",
+                "path": "outcomes/advisor",
+                "icon": "message-circle"
               },
               {
-                "title": "Redirect",
-                "path": "outcomes/redirect",
-                "icon": "external-link"
-              },
-              {
-                "title": "Design (custom HTML)",
-                "path": "canvas/design-node",
+                "title": "Page (custom HTML)",
+                "path": "outcomes/assessments",
                 "icon": "code"
+              },
+              {
+                "title": "Collect only",
+                "path": "outcomes/collect-only",
+                "icon": "inbox"
               }
             ]
           },
