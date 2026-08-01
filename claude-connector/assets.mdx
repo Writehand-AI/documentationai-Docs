@@ -1,9 +1,9 @@
 ---
 title: Add images, logos & favicons
-description: Re-host any image from a URL onto the Productised CDN — perfect for scraping a customer's logo from their website and applying it as branding.
+description: Re-host any image from a URL onto the Productised CDN, or upload reusable brand images as variables to drop into any page.
 ---
 
-The connector includes a powerful image-hosting tool that takes an image **URL** and re-hosts it on Productised's CDN, returning a permanent public URL. Combined with Claude's built-in web fetch, this becomes the canonical pattern for branding products with customer assets.
+There are two ways to get images into your products: **`upload_image`** (re-host an image from a URL, great for scraping a customer's logo) and **image variables** (upload reusable brand assets in the app and reference them anywhere as `{{ custom:key }}`). This page covers both.
 
 ---
 
@@ -61,6 +61,24 @@ All four steps happen in one round-trip. The customer never uploads anything.
 
 ---
 
+## Reusable brand images (image variables)
+
+For images you'll use across **many** pages — your logo, headshot, product photos — upload them once as **image variables** in the app (**Settings → Variables**, switch the type to *Image*). Each becomes a named `{{ custom:key }}` token. See [Variables](/workspace/variables) for the full walkthrough.
+
+When you build a page in Claude, the connector **sees your uploaded images** (via `get_variables`, which returns an `images` list) and offers them — you don't have to recall the key:
+
+> *"Design my results page and put my logo in the header."*
+
+Claude drops the token straight into the tag:
+
+```html
+<img src="{{ custom:brand_logo }}" alt="Logo" />
+```
+
+Because the page uses the **token** (not a baked-in URL), swapping the image in Settings updates every page at once. This is the recommended way to put *your own* files on a page — see the limitation below.
+
+---
+
 ## Where to use the returned URL
 
 The CDN URL `upload_image` returns can be used anywhere an image URL is accepted:
@@ -90,9 +108,9 @@ The download and re-host happen on the Productised side (via the app's storage c
 
 ## Limitations
 
-- **No binary upload from Claude.** You can't paste a binary into Claude and have it arrive at Productised — MCP is a text/JSON protocol. The URL pattern is the workaround, and the right pattern for the "brand from a customer site" use case.
+- **No binary upload from the Claude chat.** You can't drag a file into Claude and have it arrive at Productised — MCP is a text/JSON protocol. To use *your own* image on a page, either upload it as an [image variable](/workspace/variables) in the app and reference `{{ custom:key }}`, or give Claude a public URL for `upload_image`.
 - **No transformations.** The image is stored as-fetched. If you need a resize, crop, or format conversion, do it before uploading (or ask Claude to fetch a specific size from the source site if it offers multiple).
-- **No deletion via the connector.** Old uploads stay on the CDN until you remove them via the dashboard. They're scoped to your tenant/product folder.
+- **No deletion via the connector.** Old uploads stay on the CDN until you remove them via the app. They're scoped to your tenant/product folder.
 
 ---
 
@@ -103,6 +121,9 @@ The download and re-host happen on the Productised side (via the app's storage c
 
 **Pull a single asset:**
 > *"Re-host the image at https://example.com/hero.jpg and use it as the landing page banner."*
+
+**Use your own uploaded logo on a page:**
+> *"Use my logo from Settings in the result page header."*
 
 **Update branding on every product in my workspace:**
 > *"Apply the logo I just uploaded to all my products."*
