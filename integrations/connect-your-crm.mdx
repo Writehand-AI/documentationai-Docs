@@ -1,0 +1,54 @@
+---
+title: Connect your CRM
+description: Yes — Productised feeds the CRM you already use. Four ways to get qualified leads out of Productised and into HubSpot, Salesforce, Pipedrive, GoHighLevel, or anything else.
+---
+
+**Short answer: yes.** Productised isn't a CRM and doesn't try to be — it's the capture-and-qualification front end that feeds the CRM you already run. Every completed product produces a lead with all their answers, the AI result, and a score; from there you push it wherever your pipeline lives.
+
+There's no lock-in and no "native-only" list to check against. Because everything routes through a **webhook** or **Zapier/Make**, Productised reaches essentially any CRM on the market.
+
+## Pick your path
+
+<Columns cols="2">
+  <Card title="Real-time webhook" href="/integrations/webhooks" icon="radio">
+    The moment someone completes a product, Productised POSTs the lead to a URL you choose — your CRM's inbound webhook, or Zapier/Make. Best for *"new lead → create the contact instantly."*
+  </Card>
+  <Card title="Zapier / Make" href="/integrations/zapier" icon="zap">
+    No-code, 6,000+ apps — HubSpot, Salesforce, Pipedrive, GoHighLevel, Airtable, and more. Map fields once and let it run.
+  </Card>
+  <Card title="CSV / JSON export" href="/product-analytics/exporting-data" icon="download">
+    Grab your leads on demand from the results view and import them yourself. Best for occasional, manual syncs.
+  </Card>
+  <Card title="Live MCP node (on the canvas)" href="/powers/connections" icon="share-2">
+    Connect your CRM's MCP server to a product so the AI can read and write your CRM **during** the conversation — look up an existing contact, enrich, or write straight back.
+  </Card>
+</Columns>
+
+<Callout kind="tip">
+**Managing leads yourself, in Claude?** You can add your CRM's own connector *alongside* the Productised connector in one Claude chat and have Claude move leads between them — no Zapier in the middle. See [Use your CRM in Claude](/claude-connector/your-crm-in-claude).
+</Callout>
+
+## What flows out with each lead
+
+Whichever path you choose, the payload carries the full lead — not just an email:
+
+- **Contact details** — whatever the product collected (name, email, company, phone…)
+- **All answers** — every field from the conversation
+- **The AI result** — the generated report/output for that person
+- **Score & tags** — the qualification the AI assigned, so your CRM can route or prioritise
+- **Timestamp & product** — which product produced the lead, and when
+
+This is the difference that matters: your CRM receives a **qualified, scored** lead with context, not a raw form dump. See [Manage leads & responses](/claude-connector/leads) and [Token resolution](/claude-connector/tokens) for the exact shape.
+
+## Real-time vs manual
+
+| | Fires when | Best for |
+|---|---|---|
+| **Webhook** | Instantly on completion | Speed-to-lead — get the contact into the CRM before they cool off |
+| **Zapier / Make** | Instantly on completion | Same, plus no-code branching and multi-step routing |
+| **MCP node** | During the conversation | Looking up or enriching against your CRM *while* the person is answering |
+| **CSV / JSON export** | When you export | Occasional bulk moves, audits, one-off imports |
+
+<Callout kind="info">
+Outgoing webhooks are configured per product — see [Webhook settings](/product-settings/webhook). If a webhook endpoint fails repeatedly, Productised disables it automatically and notifies you, so a broken CRM endpoint never silently drops leads.
+</Callout>

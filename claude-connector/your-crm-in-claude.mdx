@@ -1,0 +1,50 @@
+---
+title: Use your CRM in Claude
+description: Add your CRM's own connector alongside the Productised connector in one Claude chat, and let Claude move qualified leads between them — no Zapier, no field mapping to maintain.
+---
+
+You already manage Productised through the [Claude connector](/claude-connector/overview). Here's the part most people miss: **Claude can run more than one connector in the same chat.** Add your CRM's connector next to Productised's, and Claude becomes the bridge — it reads qualified leads out of Productised and creates or updates records in your CRM, in plain English, in one conversation.
+
+No Zapier in the middle. No field mappings to keep in sync. Just ask.
+
+<Callout kind="info">
+This is different from the [MCP node on the canvas](/powers/connections), which wires a CRM into a **product** so the AI can look things up *while an end user is answering*. This page is about **your** Claude workspace — managing and moving leads after they come in.
+</Callout>
+
+## What you need
+
+1. **The Productised connector** — already set up ([how](/claude-connector/setup)). It exposes your leads: hot leads, recent responses, scores, and tags.
+2. **A connector for your CRM.** Two common ways to get one:
+   - Many CRMs now offer their **own MCP server** you can add directly in Claude.
+   - If yours doesn't, a bridge like **Zapier's MCP** or **Composio** exposes thousands of apps (HubSpot, Salesforce, Pipedrive, GoHighLevel, Airtable…) as MCP tools Claude can call.
+
+Add both under **Claude → Settings → Connectors**, then start a chat with both enabled.
+
+## What you can ask
+
+Once both are live in the same chat, you're moving qualified leads with a sentence:
+
+- *"Take today's hot leads from Productised and create them as contacts in HubSpot, tagging the source with the product name."*
+- *"For every lead who scored above 8 this week, create a deal in my CRM and draft a follow-up email using their result."*
+- *"Check if this new lead already exists in my CRM — if so, update their score; if not, create them."*
+- *"Pull this week's responses from my Readiness assessment and add the ones marked 'qualified' to my Pipedrive pipeline."*
+
+Claude reads from Productised (score, persona, the personalised result), decides what to write, and calls your CRM's tools to write it — carrying the full context across.
+
+## Why this is better than a raw sync
+
+A webhook or Zapier moves *fields*. Claude moves a *judgement*.
+
+- **Productised does the qualification** — the score, the persona, the personalised outcome.
+- **Your CRM owns the pipeline** — contacts, deals, stages, follow-up.
+- **Claude joins them with context** — "this lead scored 9, is a Growth-Ready persona, and here's the summary" — so what lands in your CRM is decision-ready, not a form dump.
+
+And because it's conversational, you adjust on the fly — change the threshold, the tags, the routing — without touching a Zap.
+
+<Callout kind="tip">
+Prefer it fully automated and hands-off? Use a [webhook](/integrations/webhooks) or [Zapier](/integrations/zapier) instead — those fire on every completion with no chat involved. The Claude approach shines when you want judgement and flexibility in the loop. See [Connect your CRM](/integrations/connect-your-crm) for the full comparison.
+</Callout>
+
+## A note on security
+
+Each connector authenticates separately with its own permissions — adding your CRM connector gives Claude access to your CRM only within that chat, under the scopes you granted it. Productised never sees your CRM credentials, and vice versa. See [Privacy & security](/claude-connector/security).

@@ -419,6 +419,11 @@
                 "icon": "code"
               },
               {
+                "title": "Notifications",
+                "path": "workspace/notifications",
+                "icon": "bell"
+              },
+              {
                 "title": "Prompts",
                 "path": "workspace/prompts",
                 "icon": "message-circle"
@@ -517,6 +522,11 @@
                 "icon": "users"
               },
               {
+                "title": "Use your CRM in Claude",
+                "path": "claude-connector/your-crm-in-claude",
+                "icon": "database"
+              },
+              {
                 "title": "Ask your Brain",
                 "path": "claude-connector/brain",
                 "icon": "cpu"
@@ -573,6 +583,11 @@
           {
             "group": "Automation",
             "pages": [
+              {
+                "title": "Connect your CRM",
+                "path": "integrations/connect-your-crm",
+                "icon": "database"
+              },
               {
                 "title": "Webhooks",
                 "path": "integrations/webhooks",
