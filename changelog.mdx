@@ -5,6 +5,21 @@ description: Every update, improvement, and new feature — newest first.
 
 We ship continuously. This page logs every meaningful release — new features, improvements, and the occasional breaking change.
 
+<Update label="August 2026" description="Image variables + reusable brand assets" tags={["feature", "improvement", "fix"]}>
+
+### New
+- **Image variables** — variables can now hold an **image**, not just text. Upload your logo, headshot, or product photo once in **Settings → Variables**, and reuse it on every result and landing page with a single `{{ custom:key }}` token. It drops straight into an image tag — `<img src="{{ custom:brand_logo }}">` — and swapping the image in Settings updates every page that references it, with no rebuild. [Read the guide →](/workspace/variables)
+- **Variable palette on the canvas** — open a **Page** node and its settings panel now lists every variable you can use — custom values, brand images, and the product's form fields — each as a click-to-copy token. No more remembering keys.
+- **Claude sees your variables** — ask the connector *"list my custom variables"* at any time and it returns every token and image, ready to place. Say *"use my logo in the header"* and Claude wires it into the page for you (`get_variables` now returns your custom values and images).
+
+### Improved
+- **Redesigned Variables settings page** — a clearer, beginner-friendly walkthrough of what variables are, the difference between text and image variables, and the three ways to use them (copy a token, pick one on the canvas, or ask Claude).
+
+### Fixed
+- **Workspace image upload** — uploading an image variable from Settings → Variables no longer fails with a "Product ID is required" error; workspace-level assets now save correctly (and `.svg` logos are accepted).
+
+</Update>
+
 <Update label="June 2026" description="Claude Design support + connector reliability" tags={["feature", "improvement", "fix"]}>
 
 ### New

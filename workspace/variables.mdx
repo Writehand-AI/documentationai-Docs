@@ -34,7 +34,7 @@ For a text variable with key `booking_url` and value `https://calendly.com/yourn
 
 This syntax works in:
 - Landing pages and output/result pages (built in Claude via the [connector](/claude-connector/overview))
-- Report and Document prompt fields
+- AI node prompt fields on the canvas (e.g. an AI Agent's instructions)
 - Any text field in a product that renders output
 
 <Callout kind="tip">Because Productised pages are real HTML, an image token works **directly** in an `<img src>` — no workaround needed. Change the image in Settings once and every page using `{{ custom:key }}` shows the new one.</Callout>
@@ -57,9 +57,17 @@ This syntax works in:
 
 Now reference it anywhere as `{{ custom:brand_logo }}`. To change the image later, click **Replace** on the variable — every page updates automatically.
 
+## Three ways to grab a token
+
+You never have to memorise a key. There are three places to get the exact token to use:
+
+1. **The Variables page** — every variable has a click-to-copy token chip next to it. Copy `{{ custom:key }}` and paste it wherever you need it.
+2. **The canvas** — open a **Page** node and its settings panel lists every variable you can use — custom values, brand images, and the product's form fields — each as a click-to-copy token.
+3. **Ask Claude** — in a connector chat, say *"list my custom variables"* and Claude returns every token and image. It sees them through the `get_variables` tool.
+
 ## Using your images in Claude-built pages
 
-Productised pages are designed in Claude via the connector. When you ask Claude to build or edit a page, it can **see your uploaded images** (through the `get_variables` tool) and offer them — you don't have to remember the key. Just say *"use my logo in the header"* and Claude drops `{{ custom:brand_logo }}` into the right place. You can also copy the `{{ custom:key }}` token from the Variables page and paste it into your instruction.
+Productised pages are designed in Claude via the connector. When you ask Claude to build or edit a page, it can **see your uploaded images** (through the `get_variables` tool) and offer them — you don't have to remember the key. Just say *"use my logo in the header"* and Claude drops `{{ custom:brand_logo }}` into the right place.
 
 <Callout kind="note">The connector can't accept a raw file dragged into the Claude chat. To use your own image on a page, upload it here as an image variable first, then reference it — or give Claude a public image URL.</Callout>
 
@@ -73,7 +81,7 @@ Edit a variable's value (or replace its image) any time — the key can't change
 |---|---|---|---|
 | `brand_logo` | Image | *(uploaded PNG/SVG)* | Header/footer logo across every page |
 | `founder_headshot` | Image | *(uploaded photo)* | "About" / trust sections on result pages |
-| `booking_url` | Text | `https://calendly.com/yourname/30min` | CTA links in reports and offers |
-| `offer_price` | Text | `£4,500` | Pricing shown in offer outcomes |
+| `booking_url` | Text | `https://calendly.com/yourname/30min` | CTA links on result pages |
+| `offer_price` | Text | `£4,500` | Pricing shown on result pages |
 | `current_cohort` | Text | `May 2026` | Programme cohort name in onboarding products |
 | `standard_disclaimer` | Text | `Results may vary…` | Legal text in commercial outputs |
