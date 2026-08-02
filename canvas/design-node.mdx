@@ -33,7 +33,9 @@ The Page supports these variable categories, all using the same `{{ category:key
 | `{{ object:varName }}` | A named field inside a structured AI output | `{{ object:score }}` |
 | `{{ custom:key }}` | A [workspace variable or brand image](/workspace/variables) | `{{ custom:booking_url }}` |
 
-<Callout kind="tip">Not sure what tokens are available? Ask Claude: *"list the variable tokens for my [product] product"* — Claude calls `get_variables` and returns every token ready to copy. See [Token resolution](/claude-connector/tokens).</Callout>
+<Callout kind="tip">Not sure what tokens are available? You don't have to guess — the Page node's canvas panel lists every one (see [The canvas panel](#the-canvas-panel) below), and Claude sees the same set via `get_variables`. See [Token resolution](/claude-connector/tokens).</Callout>
+
+<Callout kind="note">`{{ object:field }}` is **global** — if two chained AI Agent nodes both produce a structured field with the same name (e.g. two `score` fields), it resolves to whichever runs first. To target a specific node's field unambiguously, use the node-qualified form `{{ node:advisor_agent.score }}`. The canvas panel does this for you automatically when it spots a name collision.</Callout>
 
 ### Example
 
@@ -72,12 +74,31 @@ Claude calls `get_variables` to know what tokens are available, writes the HTML,
 
 ---
 
-## Nav & ordering (the canvas panel)
+## The canvas panel
 
-Clicking the Page node on the canvas opens a small settings panel. It does **not** contain an HTML editor — the design lives in Claude. The panel lets you:
+Clicking the Page node on the canvas opens its settings panel. It does **not** contain an HTML editor — the design lives in Claude — but it gives you three things:
 
-- **Set the nav title and order** for this page in the respondent nav bar (leave the title blank to hide it).
-- See a link to open Claude to create or edit the page.
+### Variables you can use
+
+The panel lists **every token this product can put on the page**, enumerated automatically from your workflow — the same set Claude sees via `get_variables`:
+
+- **AI outputs**, grouped per node — each producing node's full output (`{{ node:advisor_agent }}`) plus every structured field on it (`{{ object:score }}`).
+- **Form answers** (`{{ form:… }}`) and **Custom values & brand images** (`{{ custom:… }}`).
+
+Two ways to use it:
+
+- **Tick** the variables you want featured. Your selection is written straight into the Claude starter prompt as an explicit list — so when you paste it, Claude uses *exactly* those tokens and doesn't guess or invent one.
+- **Click** any token to copy it on its own.
+
+When the same structured field name appears on two chained agents, the panel automatically offers the safe node-qualified form (`{{ node:var.field }}`) so there's no ambiguity.
+
+### Nav title & order
+
+Set this page's title and position in the respondent nav bar (leave the title blank to hide it). See [Multi-page output](#multi-page-output).
+
+### Create / edit in Claude
+
+A ready-to-paste starter prompt — carrying the product context and any variables you ticked — plus a link to open Claude.
 
 ---
 

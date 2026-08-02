@@ -62,6 +62,22 @@ Use `chart:` inside any HTML/SVG attribute. Use `object:` inside element content
 
 ---
 
+## `object:` is global — disambiguating chained agents
+
+`\{\{ object:fieldName \}\}` is **not** scoped to a single node. At render time the platform searches **all** AI nodes' structured output and uses the **first** match it finds. That's fine when a field name is unique across your workflow — but if you chain two AI Agent nodes that both produce a field called `score`, `\{\{ object:score \}\}` is ambiguous and resolves to whichever node runs first.
+
+To target a specific node's field unambiguously, use the **node-qualified** form — `node:` with a dot path:
+
+```html
+{{ node:advisor_agent.score }}
+```
+
+This walks into that exact node's output (`Response.result.advisor_agent.object.score`), so it can never collide with a same-named field on another node.
+
+<Callout kind="tip">You rarely have to think about this by hand: the Page node's canvas panel detects same-named fields across nodes and offers the node-qualified token for you automatically. See [The canvas panel](/canvas/design-node#the-canvas-panel).</Callout>
+
+---
+
 ## The five computed `chart:` tokens
 
 These keys aren't agent fields — they're derived from the agent's `dimN_score` values at render time. Use them in dimension-bar widths and radar/gauge geometry without asking the AI agent to compute the maths.
