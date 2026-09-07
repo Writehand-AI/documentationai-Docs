@@ -2,28 +2,27 @@
 title: Building your canvas
 description: How to add nodes to your canvas and connect them to your AI Product.
 ---
-
 Your AI Product node sits at the centre of your canvas. Additional nodes extend it — giving Claude different tools, output formats, or live integrations. They only work once they're connected.
-
-<Callout kind="info">📸 **Screenshot needed:** A complete canvas showing an AI Product node in the centre, an MCP node connected at the top-right, and a Page outcome node connected at the bottom — with visible connection lines between them</Callout>
 
 ## Adding a node to the canvas
 
 Available nodes live in the floating toolbar at the bottom of the canvas.
 
 <Steps>
-  <Step title="Find the node you want">
+  <Step title="Find the node you want" title-type="p">
     Hover over each item in the toolbar to see a tooltip explaining what it does.
   </Step>
-  <Step title="Drag it onto the canvas">
+
+  <Step title="Drag it onto the canvas" title-type="p">
     Click and hold on the node item, then drag it onto the canvas. Drop it somewhere near your AI Product node — the positioning is flexible.
   </Step>
-  <Step title="Configure it">
+
+  <Step title="Configure it" title-type="p">
     Once dropped, the node appears on the canvas. Click it to open its settings in the right panel.
+
+
   </Step>
 </Steps>
-
-<Callout kind="info">📸 **Screenshot needed:** A node mid-drag from the toolbar onto the canvas — cursor visible, node ghosted, canvas below</Callout>
 
 ## Drawing a connection
 
@@ -32,31 +31,35 @@ Once a node is on the canvas, you connect it to your AI Product by drawing a lin
 Every node has **connection handles** — small dots that appear on the edges of the node. Your AI Product has handles at the bottom. Other nodes have handles at the top.
 
 <Steps>
-  <Step title="Hover over the source node">
+  <Step title="Hover over the source node" title-type="p">
     Hover your cursor over the AI Product node. The connection handles (small dots) will become visible.
   </Step>
-  <Step title="Click and drag from a handle">
+
+  <Step title="Click and drag from a handle" title-type="p">
     Click on one of the handles and drag toward the node you want to connect. A line will follow your cursor.
   </Step>
-  <Step title="Drop onto the target node">
+
+  <Step title="Drop onto the target node" title-type="p">
     Release the cursor over the target node — you'll see it highlight as you approach. The connection snaps into place.
+
+
   </Step>
 </Steps>
-
-<Callout kind="info">📸 **Screenshot needed:** Close-up of a connection line being drawn between two nodes</Callout>
 
 ## Available nodes
 
 **Output nodes** — what your end user receives at the end of the conversation:
+
 - **Standard** — a personalised streamed report, inline in the product
 - **Page** — a custom HTML output page you design in the page builder
 - **Advisor** — the AI continues as a live advisor after collection is complete
 
 **Integration nodes** — extend what Claude can do:
+
 - **AI Agent** — a specialist AI step that produces structured analysis (scores, tiers, fields) between collection and output. Required for Page-type products.
 - **MCP** — connects any MCP-compatible server so Claude can read from and write to your tools during conversations
 
-<Callout kind="tip">
+<Callout kind="tip" collapsed="false">
   Reference Material (background knowledge), web search, and webhooks are not canvas nodes — they're configured in the AI Chat settings, natively available in Claude, and in the product's Webhook settings respectively.
 </Callout>
 
@@ -74,7 +77,5 @@ A complete, functional product typically has:
 - **One output node** — Standard, Page, or Advisor, connected below the AI Product
 - **Optionally: an AI Agent node** — sits between the AI Product and a Page output, required for scored/structured design products
 - **Optionally: one or more MCP nodes** — for live tool access during conversations
-
-<Callout kind="info">📸 **Screenshot needed:** A clean, minimal example of a finished canvas — AI Product in the centre, one output node below it, with labelled callouts</Callout>
 
 The canvas auto-saves as you work, so you can build incrementally without ever losing progress.

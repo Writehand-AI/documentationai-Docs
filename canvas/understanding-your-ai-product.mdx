@@ -1,13 +1,12 @@
 ---
 title: Understanding your AI Product
-description: The AI Product node is the heart of every product on Productised — here's what every setting actually does.
+description: >-
+  The AI Product node is the heart of every product on Productised — here's what
+  every setting actually does.
 ---
-
 The **AI Product** node is the centrepiece of your canvas. It's the conversational AI that your audience interacts with — asking questions, listening to responses, and preparing to deliver a personalised outcome. Everything else on the canvas (Powers and Outcomes) connects to it.
 
 When you click the AI Product node on your canvas, the settings panel opens on the right. It's organised into three tabs: **Content**, **Design**, and **Behaviour**. Here's what each section controls.
-
-<Callout kind="info">📸 **Screenshot needed:** The AI Product node selected on the canvas with the settings panel open — showing the three tabs (Content, Design, Behaviour) at the top, and the Content tab active with the system prompt and welcome message visible</Callout>
 
 ## Content tab
 
@@ -26,12 +25,11 @@ The system prompt is the instruction set you give the AI. It shapes how the AI t
 You don't need to write a system prompt from scratch — Productised includes quick-start templates for common use cases (lead capture, assessment, consultation booking, customer feedback) that you can select and customise. Or you can write your own from the "Custom" option.
 
 A strong system prompt includes:
+
 - Who the AI is (the expert it's playing the role of)
 - Who the audience is (and how to speak to them)
 - The tone and style the conversation should have
 - Any domain-specific context that makes responses more relevant
-
-<Callout kind="info">📸 **Screenshot needed:** The system prompt text area with a filled-in example, and the quick-prompt template selector above it showing options like "Lead Capture", "Assessment", "Consultation Booking"</Callout>
 
 ### Conversation starters
 
@@ -49,20 +47,22 @@ Collection goals are the specific pieces of information the AI needs to gather f
 
 The AI uses these goals to guide the conversation — it works through them naturally, one at a time, making the exchange feel like a real discussion rather than a form.
 
-<Callout kind="tip">You can enable **scoring** on individual collection goals (for choice, yes/no, and scale fields). This gives the AI a point value to assign per answer, which feeds into the decision model and allows you to route different people to different outcomes based on their total score.</Callout>
+You can enable **scoring** on individual collection goals (for choice, yes/no, and scale fields). This gives the AI a point value to assign per answer, which feeds into the decision model and allows you to route different people to different outcomes based on their total score.
 
 ### Decision model
 
 The decision model is how your AI Product determines what outcome — and what version of that outcome — is right for each person. There are three modes:
 
 <Columns cols="3">
-  <Card title="AI Judgement" icon="cpu">
+  <Card title="AI Judgement" icon="cpu" horizontal="false">
     The AI makes a holistic decision based on the full conversation. No structured scoring — it weighs everything it collected and makes a call. Best for nuanced, qualitative products.
   </Card>
-  <Card title="AI Scorecard" icon="bar-chart-2">
+
+  <Card title="AI Scorecard" icon="bar-chart-2" horizontal="false">
     The AI uses light structured scoring behind the scenes for more consistent results. Good when you want rough categories (low/medium/high fit) without manual configuration.
   </Card>
-  <Card title="Advanced Manual" icon="sliders">
+
+  <Card title="Advanced Manual" icon="sliders" horizontal="false">
     Full control over scoring thresholds, labels, and per-field score overrides. Designed for power users who want precise segmentation.
   </Card>
 </Columns>
@@ -107,8 +107,6 @@ Optionally add a background image or video, or choose from a set of animated bac
 
 If you're using the title page layout, you can enable social proof — three customisable metrics displayed beneath your CTA button (e.g. "500+ users", "4.9★ rated", "2 min avg"). These are free-text fields you fill in yourself.
 
-<Callout kind="info">📸 **Screenshot needed:** The Design tab of the AI Product settings — showing the theme presets row, the background colour picker, and the welcome style toggle</Callout>
-
 ---
 
 ## Behaviour tab
@@ -135,5 +133,3 @@ Set the maximum number of messages in the collection phase and, if advisor mode 
 ### Completion redirect
 
 Optionally redirect your audience to a specific URL after the outcome is delivered. Add a button label and destination URL. Useful for sending people to your booking page, website, or a community after they've received their result.
-
-<Callout kind="info">📸 **Screenshot needed:** The Behaviour tab showing the "After collection" options with "Generate report" selected, and the completion redirect section below with a URL and button label filled in</Callout>

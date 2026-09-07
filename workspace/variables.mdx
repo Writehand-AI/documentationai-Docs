@@ -1,16 +1,15 @@
 ---
 title: Variables
-description: Workspace-level custom values and reusable brand images, referenced anywhere with the {{ custom:key }} syntax.
+description: >-
+  Workspace-level custom values and reusable brand images, referenced anywhere
+  with the {{ custom:key }} syntax.
 ---
-
 Variables let you define workspace-level values — **text** or **images** — that you can reference anywhere in your products with the `{{ custom:key }}` syntax. Change the value once, and it updates everywhere it is used.
 
 There are two kinds:
 
 - **Text variables** — reusable values like your booking link, pricing, tagline, or disclaimer.
 - **Image variables** — reusable brand assets (logo, headshot, product photos) you upload once and drop into any page. Swap the image here and every page that references it updates automatically.
-
-<Callout kind="info">📸 **Screenshot needed:** The Variables settings page — the Text/Image toggle on the Add Variable form, an image variable showing its thumbnail, and the copy-token chip next to each variable.</Callout>
 
 ## What variables are for
 
@@ -22,7 +21,7 @@ They're also useful for content that should stay consistent across products — 
 
 Reference a variable by wrapping its key in the double-curly-brace syntax:
 
-```
+```typescript
 {{ custom:your_variable_key }}
 ```
 
@@ -33,11 +32,12 @@ For a text variable with key `booking_url` and value `https://calendly.com/yourn
 ```
 
 This syntax works in:
+
 - Landing pages and output/result pages (built in Claude via the [connector](/claude-connector/overview))
 - AI node prompt fields on the canvas (e.g. an AI Agent's instructions)
 - Any text field in a product that renders output
 
-<Callout kind="tip">Because Productised pages are real HTML, an image token works **directly** in an `<img src>` — no workaround needed. Change the image in Settings once and every page using `{{ custom:key }}` shows the new one.</Callout>
+Because Productised pages are real HTML, an image token works **directly** in an `<img src>` — no workaround needed. Change the image in Settings once and every page using `{{ custom:key }}` shows the new one.
 
 ## Adding a text variable
 
@@ -63,13 +63,13 @@ You never have to memorise a key. There are three places to get the exact token 
 
 1. **The Variables page** — every variable has a click-to-copy token chip next to it. Copy `{{ custom:key }}` and paste it wherever you need it.
 2. **The canvas** — open a **Page** node and its settings panel lists every variable you can use — custom values, brand images, and the product's form fields — each as a click-to-copy token.
-3. **Ask Claude** — in a connector chat, say *"list my custom variables"* and Claude returns every token and image. It sees them through the `get_variables` tool.
+3. **Ask Claude** — in a connector chat, say _"list my custom variables"_ and Claude returns every token and image. It sees them through the `get_variables` tool.
 
 ## Using your images in Claude-built pages
 
-Productised pages are designed in Claude via the connector. When you ask Claude to build or edit a page, it can **see your uploaded images** (through the `get_variables` tool) and offer them — you don't have to remember the key. Just say *"use my logo in the header"* and Claude drops `{{ custom:brand_logo }}` into the right place.
+Productised pages are designed in Claude via the connector. When you ask Claude to build or edit a page, it can **see your uploaded images** (through the `get_variables` tool) and offer them — you don't have to remember the key. Just say _"use my logo in the header"_ and Claude drops `{{ custom:brand_logo }}` into the right place.
 
-<Callout kind="note">The connector can't accept a raw file dragged into the Claude chat. To use your own image on a page, upload it here as an image variable first, then reference it — or give Claude a public image URL.</Callout>
+The connector can't accept a raw file dragged into the Claude chat. To use your own image on a page, upload it here as an image variable first, then reference it — or give Claude a public image URL.
 
 ## Editing and deleting
 
@@ -77,11 +77,12 @@ Edit a variable's value (or replace its image) any time — the key can't change
 
 ## Practical examples
 
-| Key | Type | Value | Example use |
-|---|---|---|---|
-| `brand_logo` | Image | *(uploaded PNG/SVG)* | Header/footer logo across every page |
-| `founder_headshot` | Image | *(uploaded photo)* | "About" / trust sections on result pages |
-| `booking_url` | Text | `https://calendly.com/yourname/30min` | CTA links on result pages |
-| `offer_price` | Text | `£4,500` | Pricing shown on result pages |
-| `current_cohort` | Text | `May 2026` | Programme cohort name in onboarding products |
-| `standard_disclaimer` | Text | `Results may vary…` | Legal text in commercial outputs |
+| Key                   | Type  | Value                                 | Example use                                  |
+| --------------------- | ----- | ------------------------------------- | -------------------------------------------- |
+| `brand_logo`          | Image | _(uploaded PNG/SVG)_                  | Header/footer logo across every page         |
+| `founder_headshot`    | Image | _(uploaded photo)_                    | "About" / trust sections on result pages     |
+| `booking_url`         | Text  | `https://calendly.com/yourname/30min` | CTA links on result pages                    |
+| `offer_price`         | Text  | `£4,500`                              | Pricing shown on result pages                |
+| `current_cohort`      | Text  | `May 2026`                            | Programme cohort name in onboarding products |
+| `standard_disclaimer` | Text  | `Results may vary…`                   | Legal text in commercial outputs             |
+

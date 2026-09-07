@@ -1,11 +1,10 @@
 ---
 title: Analytics explained
-description: Everything you need to understand how your AI product is performing — and how to improve it.
+description: >-
+  Everything you need to understand how your AI product is performing — and how
+  to improve it.
 ---
-
 Every product on Productised has its own analytics dashboard, accessible from the product canvas. It gives you a complete picture of how your product is performing: who's going through it, how they're completing it, what outcomes they're receiving, and what the AI can tell you about patterns across your responses.
-
-<Callout kind="info">📸 **Screenshot needed:** The analytics dashboard for a product — showing the four tabs (Charts, All Results, AI Insights, Talking Points) and the key metrics row at the top</Callout>
 
 The analytics dashboard has four tabs: **Charts**, **All Results**, **AI Insights**, and **Talking Points**.
 
@@ -17,51 +16,49 @@ The Charts tab shows your aggregate performance metrics and a trend chart over t
 
 ### Metrics
 
-| Metric | What it means |
-|---|---|
-| **All Sessions** | Total response records created — including viewed, started, completed, and abandoned sessions |
-| **Completed** | Sessions that reached the end of the experience and were marked as complete |
-| **In Progress** | Active sessions that have started but not yet completed |
-| **Abandoned** | Sessions that went inactive for over 24 hours before completing |
-| **Leads** | Sessions where lead details (email or phone) were captured |
-| **Completion Rate** | Completed sessions divided by started sessions |
-| **Avg Messages** | Average number of user messages sent across started sessions |
-| **Avg Score** | Average scoring percentage across responses where scoring is enabled |
-| **Documents** | Completed sessions that generated a Document outcome |
-| **Reports** | Completed sessions that generated a Report outcome |
-| **Offers** | Completed sessions that generated an Offer outcome |
-| **Decisions** | How the AI classified completed sessions based on the hidden decision model |
+| Metric              | What it means                                                                                 |
+| ------------------- | --------------------------------------------------------------------------------------------- |
+| **All Sessions**    | Total response records created — including viewed, started, completed, and abandoned sessions |
+| **Completed**       | Sessions that reached the end of the experience and were marked as complete                   |
+| **In Progress**     | Active sessions that have started but not yet completed                                       |
+| **Abandoned**       | Sessions that went inactive for over 24 hours before completing                               |
+| **Leads**           | Sessions where lead details (email or phone) were captured                                    |
+| **Completion Rate** | Completed sessions divided by started sessions                                                |
+| **Avg Messages**    | Average number of user messages sent across started sessions                                  |
+| **Avg Score**       | Average scoring percentage across responses where scoring is enabled                          |
+| **Documents**       | Completed sessions that generated a Document outcome                                          |
+| **Reports**         | Completed sessions that generated a Report outcome                                            |
+| **Offers**          | Completed sessions that generated an Offer outcome                                            |
+| **Decisions**       | How the AI classified completed sessions based on the hidden decision model                   |
 
-<Callout kind="tip">**Completion Rate** is your most important headline metric. A healthy rate for a well-configured product is typically above 70%. Lower rates usually point to the conversation being too long, questions feeling too personal too early, or the welcome experience not setting expectations clearly.</Callout>
+**Completion Rate** is your most important headline metric. A healthy rate for a well-configured product is typically above 70%. Lower rates usually point to the conversation being too long, questions feeling too personal too early, or the welcome experience not setting expectations clearly.
 
 ### Trend chart
 
 The area chart plots completed sessions over time — useful for seeing the impact of a campaign, a social post, or a change to your product.
 
-<Callout kind="info">📸 **Screenshot needed:** The Charts tab showing the metrics row and the area chart with a visible trend over several weeks</Callout>
-
 ### Cost & Credits
 
 At the top of the Charts tab, the **Cost & Credits** card shows exactly what this product has used — broken into the four numbers that matter:
 
-| Tile | What it means |
-|---|---|
-| **Credits this month** | Plan credits this product has consumed in the current billing period. Pairs with the run count so you can see cost-per-run. |
-| **Credits all-time** | Lifetime credit usage. Pairs with a credits-per-response ratio if any responses have been captured. |
-| **Real $ this month** | Real Anthropic dollar cost — what this product would cost in the current month if you were paying Anthropic directly via BYOK. |
-| **Real $ all-time** | Lifetime equivalent. |
+| Tile                   | What it means                                                                                                                  |
+| ---------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
+| **Credits this month** | Plan credits this product has consumed in the current billing period. Pairs with the run count so you can see cost-per-run.    |
+| **Credits all-time**   | Lifetime credit usage. Pairs with a credits-per-response ratio if any responses have been captured.                            |
+| **Real $ this month**  | Real Anthropic dollar cost — what this product would cost in the current month if you were paying Anthropic directly via BYOK. |
+| **Real $ all-time**    | Lifetime equivalent.                                                                                                           |
 
 Below the tiles:
 
-* A **14-day sparkline** of daily credit usage — useful for spotting spikes after a campaign or a config change.
-* **Top cost drivers** — which nodes in your workflow consumed the most credits this month (e.g. *AI Advisor 77%*, *Standard Output 21%*). If one node dominates and feels too expensive, tighten its prompt or move it to a smaller model.
-* **Powered by** — the models that ran this product (e.g. `claude-sonnet-4-6`, `claude-haiku-4-5`). Productised routes calls automatically based on phase.
+- A **14-day sparkline** of daily credit usage — useful for spotting spikes after a campaign or a config change.
+- **Top cost drivers** — which nodes in your workflow consumed the most credits this month (e.g. _AI Advisor 77%_, _Standard Output 21%_). If one node dominates and feels too expensive, tighten its prompt or move it to a smaller model.
+- **Powered by** — the models that ran this product (e.g. `claude-sonnet-4-6`, `claude-haiku-4-5`). Productised routes calls automatically based on phase.
 
 If you have BYOK active (your own Anthropic key plugged in at **Settings → Secrets**), the card switches to "**BYOK is on**" and the real-$ tiles show your actual Anthropic spend — not an equivalent. Plan credits are not consumed.
 
-If you don't have BYOK, the footer suggests it: *"this product would cost you ~$0.84 this month direct to Anthropic"* — a real number from your own usage, not an estimate. Click through to **Settings → Secrets** to add a key.
+If you don't have BYOK, the footer suggests it: _"this product would cost you \~$0.84 this month direct to Anthropic"_ — a real number from your own usage, not an estimate. Click through to **Settings → Secrets** to add a key.
 
-<Callout kind="tip">The "real $" figure is what you would pay Anthropic directly for the same tokens. Productised's plan-credit pricing includes platform infrastructure and support; the gap between the two is your platform fee.</Callout>
+The "real $" figure is what you would pay Anthropic directly for the same tokens. Productised's plan-credit pricing includes platform infrastructure and support; the gap between the two is your platform fee.
 
 ---
 
@@ -79,13 +76,11 @@ See [Viewing results](/product-analytics/viewing-results) for a detailed walkthr
 
 ## AI Insights — AI Product Coach
 
-<Callout kind="warning">**Pro feature.** AI Insights is available on Pro plans and above.</Callout>
+**Pro feature.** AI Insights is available on Pro plans and above.
 
 AI Insights analyses your responses and gives you an objective view of how well your product is working — where it's performing strongly, where it's creating friction, and exactly what to change to improve it.
 
 This is not a dashboard of numbers. It is an AI-powered review of your product, run against your actual responses.
-
-<Callout kind="info">📸 **Screenshot needed:** The AI Insights tab in its idle state — showing the AI Product Coach card with the Generate button, before analysis runs</Callout>
 
 ### What AI Insights produces
 
@@ -103,12 +98,10 @@ Questions where people's responses were consistently vague, off-topic, or incomp
 **Prompt improvement suggestions**
 Specific, actionable suggestions for improving your AI Product's system prompt or individual node configurations — based on the gap between what the AI collected and what it produced.
 
-**Per-response insights**
+**Per-response insights**\
 For each sampled response: the inferred intent behind their answers, an output match rating (strong / partial / weak), and a specific observation about that session.
 
-<Callout kind="info">📸 **Screenshot needed:** The AI Insights panel after analysis — showing the output quality score, two or three theme cards, and a confusion point with its suggestion</Callout>
-
-<Callout kind="tip">Run AI Insights after every 20–30 responses. Patterns are much more reliable with a meaningful sample. The prompt suggestions alone are often worth the analysis — a single prompt change can shift your output quality score significantly.</Callout>
+Run AI Insights after every 20–30 responses. Patterns are much more reliable with a meaningful sample. The prompt suggestions alone are often worth the analysis — a single prompt change can shift your output quality score significantly.
 
 ---
 
@@ -118,18 +111,16 @@ The Talking Points tab converts your response data into live audience intelligen
 
 If you speak to audiences that overlap with your product's users, Talking Points gives you something no generic research can: data from your own audience, analysed and formatted for presentation use.
 
-<Callout kind="info">📸 **Screenshot needed:** The Talking Points tab showing the four mode buttons (Webinar, Sales Keynote, Workshop, Podcast) and generated output below — the audience summary and first talking point expanded</Callout>
-
 ### Modes
 
 Select the format before generating. Each mode shapes the output for a different presentation context:
 
-| Mode | Best for |
-|---|---|
-| **Webinar** | Educational, framework-led presentations with Q&A |
+| Mode              | Best for                                           |
+| ----------------- | -------------------------------------------------- |
+| **Webinar**       | Educational, framework-led presentations with Q\&A |
 | **Sales Keynote** | Pain → tension → solution arc, designed to convert |
-| **Workshop** | Discussion prompts and group exercises |
-| **Podcast** | Conversational hooks and soundbites |
+| **Workshop**      | Discussion prompts and group exercises             |
+| **Podcast**       | Conversational hooks and soundbites                |
 
 ### What Talking Points produces
 
@@ -145,6 +136,4 @@ Select the format before generating. Each mode shapes the output for a different
 
 **Call to action** — a suggested CTA for the end of your talk, informed by what your audience said they need next.
 
-<Callout kind="tip">Use the **Copy all** button to get the full output as plain text — ready to paste into your slide notes, speaker doc, or presentation prep.</Callout>
-
-<Callout kind="info">📸 **Screenshot needed:** The Talking Points output — showing the surprise finding card, two talking points expanded with audience questions and transition tips visible, and the session arc section</Callout>
+Use the **Copy all** button to get the full output as plain text — ready to paste into your slide notes, speaker doc, or presentation prep.

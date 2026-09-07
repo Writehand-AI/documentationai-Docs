@@ -1,17 +1,16 @@
 ---
 title: Webhook
-description: Send response data to external systems every time someone completes your product.
+description: >-
+  Send response data to external systems every time someone completes your
+  product.
 ---
-
 The Webhook tab gives you two URLs: one for triggering your product from external systems (incoming), and one for sending response data out when someone completes it (outgoing). Webhooks are the primary way to connect Productised to your CRM, email platform, or any automation tool.
-
-<Callout kind="info">📸 **Screenshot needed:** The Webhook tab showing both the Incoming Webhook URL (read-only with copy button) and the Outgoing Webhook URL input with the Save and Send Test buttons</Callout>
 
 ## Incoming webhook
 
 Your product has a unique incoming webhook URL:
 
-```
+```typescript
 https://app.productised.ai/api/webhooks/incoming/{product-id}
 ```
 
@@ -24,6 +23,7 @@ The outgoing webhook fires a POST request to a URL you specify every time someon
 **Compatible with:** Zapier (Webhooks by Zapier → Catch Hook), Make (Webhooks), HubSpot, Google Sheets, or any service that accepts POST requests with a JSON body.
 
 **To set up with Zapier:**
+
 1. Create a new Zap
 2. Choose "Webhooks by Zapier" as the trigger and "Catch Hook" as the event
 3. Copy the webhook URL Zapier gives you

@@ -1,13 +1,12 @@
 ---
 title: Marketplace
-description: Share your AI products as reusable templates — privately with specific users, or publicly on the Marketplace.
+description: >-
+  Share your AI products as reusable templates — privately with specific users,
+  or publicly on the Marketplace.
 ---
-
 Once you've built a product that works well, you can share it. Productised gives you two ways to do that: a private share link that lets anyone install an exact copy into their own workspace, and the public Marketplace where your product becomes a template available to the entire Productised community.
 
 These are different things with different purposes. Understanding the distinction matters.
-
-<Callout kind="info">📸 **Screenshot needed:** The Marketplace view — showing available template cards, with the category filters and a template card expanded or hovered</Callout>
 
 ---
 
@@ -30,15 +29,16 @@ The Marketplace is the public template library for Productised. When you list a 
 To list a product on the Marketplace:
 
 <Steps>
-  <Step title="Deploy your product">
+  <Step title="Deploy your product" title-type="p">
     Your product must be deployed and set to **Public** visibility. A private or draft product cannot be listed. Go to **Product Settings → Deployment** and ensure your product is live.
   </Step>
-  <Step title="Enable List on Marketplace">
+
+  <Step title="Enable List on Marketplace" title-type="p">
     In **Product Settings → Deployment**, scroll to the **List on Marketplace** toggle and enable it. This makes your product discoverable in the public Marketplace and marks its card with a yellow border in your gallery.
   </Step>
 </Steps>
 
-<Callout kind="tip">Complete your product thoroughly before listing it — a clear name, a descriptive setup, and a well-configured workflow make your template genuinely useful to others. Templates that deliver clear, well-structured starting points are the ones that get used.</Callout>
+Complete your product thoroughly before listing it — a clear name, a descriptive setup, and a well-configured workflow make your template genuinely useful to others. Templates that deliver clear, well-structured starting points are the ones that get used.
 
 Once listed, your product appears in the Marketplace with its name and configuration. Other users can preview the product's structure and install a copy into their workspace with one click. They cannot modify your original — they only ever receive a copy.
 
@@ -48,13 +48,13 @@ To remove a product from the Marketplace, disable the **List on Marketplace** to
 
 ## Private link vs Marketplace — when to use each
 
-| | Private link | Marketplace listing |
-|---|---|---|
-| **Who can access it** | Anyone with the link | All Productised users |
-| **Discovery** | Only if you share the link directly | Publicly discoverable |
-| **Best for** | Sharing with specific people | Making a template broadly available |
-| **Requires deployment** | Yes | Yes |
-| **Requires Marketplace toggle** | No | Yes |
+|                                 | Private link                        | Marketplace listing                 |
+| ------------------------------- | ----------------------------------- | ----------------------------------- |
+| **Who can access it**           | Anyone with the link                | All Productised users               |
+| **Discovery**                   | Only if you share the link directly | Publicly discoverable               |
+| **Best for**                    | Sharing with specific people        | Making a template broadly available |
+| **Requires deployment**         | Yes                                 | Yes                                 |
+| **Requires Marketplace toggle** | No                                  | Yes                                 |
 
 ---
 
@@ -62,8 +62,8 @@ To remove a product from the Marketplace, disable the **List on Marketplace** to
 
 If you've connected the [Productised Claude connector](/claude-connector/overview), you can do both flows directly from a Claude conversation.
 
-* **Get a share link for your own product** — *"Give me a share link for my Pricing Health Check product"* → Claude calls `get_template_share_link` and hands you the marketplace install URL. Anyone you forward it to lands on the marketplace install page and clicks Copy to Workspace.
-* **Browse the public marketplace** — *"Show me marketplace templates for coaches"* or *"What lead-generation templates exist?"* → Claude calls `list_marketplace_templates` and renders a visual gallery. Each card has Install (opens the marketplace install URL) and Preview (opens the live demo). Filters: industry, GROW stage (G/R/O/W), keyword search.
+- **Get a share link for your own product** — _"Give me a share link for my Pricing Health Check product"_ → Claude calls `get_template_share_link` and hands you the marketplace install URL. Anyone you forward it to lands on the marketplace install page and clicks Copy to Workspace.
+- **Browse the public marketplace** — _"Show me marketplace templates for coaches"_ or _"What lead-generation templates exist?"_ → Claude calls `list_marketplace_templates` and renders a visual gallery. Each card has Install (opens the marketplace install URL) and Preview (opens the live demo). Filters: industry, GROW stage (G/R/O/W), keyword search.
 
 Install always happens on the web — the marketplace install page handles the plan-limit check and creates the workspace copy. Claude only hands you the URL.
 
@@ -75,4 +75,4 @@ For consultants and educators who build high-quality products, the Marketplace i
 
 Every product listed under your workspace carries your brand. Build templates you're proud of.
 
-<Callout kind="info">The Marketplace is an evolving part of Productised. Templates, categories, and discovery features are actively being developed. Products you list now will be part of the library as it grows.</Callout>
+The Marketplace is an evolving part of Productised. Templates, categories, and discovery features are actively being developed. Products you list now will be part of the library as it grows.
