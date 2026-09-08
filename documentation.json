@@ -672,7 +672,17 @@
       "primary": {
         "title": "Get Started",
         "link": "https://app.productised.ai/register"
-      }
+      },
+      "links": [
+        {
+          "title": "Login",
+          "link": "https://app.productised.ai/login"
+        },
+        {
+          "title": "Get Started",
+          "link": "https://app.productised.ai/register"
+        }
+      ]
     }
   },
   "customCss": [
