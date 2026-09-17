@@ -1,0 +1,44 @@
+---
+title: Billing a client's AI to them
+description: Give one client their own Claude key so their AI usage is billed directly to their Anthropic account.
+---
+
+Some clients want their AI usage on their own bill — either because they already have an Anthropic account, or because they'd rather pay the model provider directly than have it marked up.
+
+You can give any single workspace its own Claude API key. Everything in that client's workspace then runs on their key and appears on their Anthropic invoice. Every other client carries on using yours.
+
+## How keys are chosen
+
+When one of your products runs, Productised picks a key in this order:
+
+<Steps>
+  <Step title="The workspace's own key">
+    If this client has their own key set, it's used — and Anthropic bills them directly.
+  </Step>
+  <Step title="Your account key">
+    Otherwise the key on your account is used, so it covers every client by default. Set it once, not once per workspace.
+  </Step>
+  <Step title="Productised credits">
+    If there's no key anywhere, the product runs on the platform's own key and draws from your plan's credit allowance.
+  </Step>
+</Steps>
+
+## Setting a client's key
+
+Switch into that client's workspace, then go to **Settings → Claude API Key**. You'll see two cards: your account key, and one for the workspace you're in.
+
+Paste the client's key into the workspace card and save. To undo it, choose **Remove, use account key** — the client goes back to running on yours.
+
+<Callout kind="warning">**Check you're in the right workspace before saving.** A key saved here applies to that client only, and it's easy to set it against the wrong one if you've just switched.</Callout>
+
+## How keys are stored
+
+Keys are encrypted before they're stored and are never shown again in full. Once saved, the page shows only a masked version like `sk-ant-…4f2a`, so you can confirm *which* key is set without the key itself being sent back to your browser.
+
+If you need the original value later, get it from the Anthropic Console — Productised can't show it to you.
+
+<Callout kind="info">A key that doesn't begin with `sk-ant-` is rejected when you save it. That's deliberate: a mistyped key would otherwise be stored happily and every run would quietly fall back to your credits while you believed the client was being billed.</Callout>
+
+## What it doesn't change
+
+Giving a client their own key changes who pays Anthropic for running the products. It doesn't change your Productised subscription, your plan's product limits, or your Brain allowance — those stay with your account.

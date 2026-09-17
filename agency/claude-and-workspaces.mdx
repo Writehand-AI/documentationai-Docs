@@ -1,0 +1,48 @@
+---
+title: Claude follows your workspace
+description: One connector connection for the whole agency — switch client in the app and Claude moves with you.
+---
+
+The obvious worry about running many clients through one Claude connection is that you'd have to reconnect every time you changed client. You don't.
+
+**You connect Claude once. It always works in whichever workspace you're currently in.**
+
+## How it works
+
+<Steps>
+  <Step title="Switch client in the app">
+    Use the workspace switcher in the sidebar, exactly as you would to work in the app.
+  </Step>
+  <Step title="Go back to Claude">
+    Nothing to reconnect, no setting to change, no need to start a new chat.
+  </Step>
+  <Step title="Claude is now working on that client">
+    From your next message, it reads that client's products, brand voice, branding and Brain — and anything it creates lands in their workspace.
+  </Step>
+</Steps>
+
+Your connection isn't tied to one client. It reads which workspace you're in each time you send a message.
+
+## Knowing which client Claude is on
+
+Because switching happens in the app, it's worth confirming where Claude thinks it is before you build something. Ask it to **list your products**. It reports the workspace those products came from, and tells you when your account has others.
+
+<Callout kind="tip">Worth doing at the start of a session, or any time you've been away from the app for a while. Claude answers from the workspace you were last in — which may not be the one you have in mind.</Callout>
+
+## Switching from inside Claude
+
+Not yet. Today the switch happens in the app and Claude follows.
+
+Asking Claude to "switch to client B" won't move it, because the connector has no tool for changing workspace — that's a planned addition, and it will arrive with a future update to the connector.
+
+<Callout kind="info">If you want to be certain which client you're building for, switch in the app first, then ask Claude to list your products to confirm before you start.</Callout>
+
+## If you work in two clients at once
+
+Claude works in whichever workspace you switched to most recently. If you're moving between clients quickly, the safe pattern is one client per sitting: switch, confirm with a product list, build, then switch.
+
+## Using a key for a single client
+
+If you'd rather have a connection that's permanently locked to one client — for a build machine or an automation that should never touch anything else — an **API key** can be pinned to a single workspace, and it ignores whatever you're doing in the app. Keys are managed under Settings → API.
+
+For everyday agency work, the normal Claude connection following the app is what you want.

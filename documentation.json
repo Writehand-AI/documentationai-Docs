@@ -439,6 +439,32 @@
                 "icon": "list"
               }
             ]
+          },
+          {
+            "group": "Agency",
+            "icon": "users",
+            "pages": [
+              {
+                "title": "Running an agency",
+                "path": "agency/overview",
+                "icon": "briefcase"
+              },
+              {
+                "title": "What's separate per client",
+                "path": "agency/workspaces",
+                "icon": "layers"
+              },
+              {
+                "title": "Claude follows your workspace",
+                "path": "agency/claude-and-workspaces",
+                "icon": "zap"
+              },
+              {
+                "title": "Billing a client's AI to them",
+                "path": "agency/client-api-keys",
+                "icon": "key"
+              }
+            ]
           }
         ]
       },

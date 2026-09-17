@@ -1,0 +1,52 @@
+---
+title: What's separate per client
+description: Exactly what a workspace holds on its own, and the few things that stay shared across your account.
+---
+
+Switching workspace changes almost everything you see. This page is the precise list, so you know what you're changing when you set something.
+
+## Separate for every client
+
+Each workspace holds its own:
+
+| | What that means in practice |
+|---|---|
+| **Products** | Your product list shows only this client's products. Building, cloning and deleting all happen inside the workspace you're in. |
+| **Result and landing pages** | Pages belong to their product, so they move with it. |
+| **Leads and responses** | Every submission stays with the product that collected it. One client's leads never appear in another's analytics. |
+| **Brand voice** | What this client does, who they serve, their credentials, approved claims and claims to avoid. Every AI product in the workspace speaks in *their* voice. |
+| **Branding and design system** | Colours, fonts, logo and default product theme. |
+| **Custom variables** | The `{{ custom:key }}` tokens you reuse across pages — booking links, pricing, disclaimers. |
+| **Custom domain** | Each client's products can be served from their own domain. |
+| **Brain** | Memories, uploaded knowledge sources, saved product ideas, Journey Plans and weekly briefings. The advisor answers about the client you're in, in their voice. |
+| **Claude API key** | Optional. See [billing a client's AI to them](/agency/client-api-keys). |
+
+## Shared across your account
+
+A few things belong to the account as a whole, on purpose:
+
+- **Your subscription and plan limits.** Product limits count across every workspace — you can't raise your allowance by spreading products between clients.
+- **Your credit allowance.** One pool for the account.
+- **Your Brain allowance.** The number of Brain conversations and Journey Plans your plan includes is per account, not per client.
+- **Your login and team seats.**
+
+<Callout kind="info">**Your account key is inherited, not copied.** Settings like your Claude API key are set once on the account and used by every workspace unless that workspace overrides them. Set it once, not once per client.</Callout>
+
+## Creating a workspace for a new client
+
+Open the workspace switcher in the sidebar and create one. It starts **completely empty** — no brand voice, no branding, no variables, no Brain.
+
+That's the point. An empty workspace can't leak the previous client's positioning into the new client's pages. Fill in their Brand Voice first, then build.
+
+<Callout kind="tip">Name workspaces after the client, not the project. You'll be reading this list in the switcher every day.</Callout>
+
+## Switching between clients
+
+Use the switcher in the sidebar. The page reloads into that client's workspace — their products, their settings, their Brain.
+
+Two things to know:
+
+- **Creating a workspace switches you into it.** So the settings you fill in next belong to the new client, not the previous one.
+- **Claude follows you.** See [Claude follows your workspace](/agency/claude-and-workspaces).
+
+<Callout kind="warning">**Deleting a workspace is permanent, and it takes everything with it** — the client's products, their result pages, every lead those products collected, their brand voice, variables and Brain. There is no undo. Export anything you need first.</Callout>
