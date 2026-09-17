@@ -25,9 +25,17 @@ Your connection isn't tied to one client. It reads which workspace you're in eac
 
 ## Knowing which client Claude is on
 
-Because switching happens in the app, it's worth confirming where Claude thinks it is before you build something. Ask it to **list your products**. It reports the workspace those products came from, and tells you when your account has others.
+Ask Claude to **list your products**. It reports the workspace those products came from, names the other workspaces on your account, and links you to the switcher.
 
-<Callout kind="tip">Worth doing at the start of a session, or any time you've been away from the app for a while. Claude answers from the workspace you were last in — which may not be the one you have in mind.</Callout>
+The same happens when you **create a product** — Claude confirms which client it was created for, so a product built against the wrong workspace doesn't go unnoticed.
+
+<Callout kind="tip">Worth checking at the start of a session, or any time you've been away from the app for a while. Claude answers from the workspace you were last in — which may not be the one you have in mind.</Callout>
+
+## If you ask for a product from another client
+
+Claude will tell you. Because a connection only reaches the workspace it's currently in, asking it to edit a product belonging to another client returns an explanation rather than a dead end: which workspace it's looking in, which other workspaces exist on your account, and a link to switch.
+
+Switch in the app, come back, and ask again — nothing to reconnect.
 
 ## Switching from inside Claude
 
