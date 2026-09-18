@@ -28,7 +28,7 @@ A few things belong to the account as a whole, on purpose:
 - **Your subscription and plan limits.** Product limits count across every workspace — you can't raise your allowance by spreading products between clients.
 - **Your credit allowance.** One pool for the account.
 - **Your Brain allowance.** The number of Brain conversations and Journey Plans your plan includes is per account, not per client.
-- **Your login and team seats.**
+- **Your login.**
 
 <Callout kind="info">**Your account key is inherited, not copied.** Settings like your Claude API key are set once on the account and used by every workspace unless that workspace overrides them. Set it once, not once per client.</Callout>
 
@@ -49,4 +49,22 @@ Two things to know:
 - **Creating a workspace switches you into it.** So the settings you fill in next belong to the new client, not the previous one.
 - **Claude follows you.** See [Claude follows your workspace](/agency/claude-and-workspaces).
 
+## Deleting a workspace
+
+Only an account **owner or admin** can delete a workspace, and you can't delete your only one.
+
+Before anything is deleted you'll see exactly what would go — the number of products, pages, leads and Brain items — and you'll be asked to type the workspace's name to confirm. If the workspace has a custom domain, it stops serving those products.
+
 <Callout kind="warning">**Deleting a workspace is permanent, and it takes everything with it** — the client's products, their result pages, every lead those products collected, their brand voice, variables and Brain. There is no undo. Export anything you need first.</Callout>
+
+## What each client cost
+
+**Settings → Billing → Usage & cost** shows what the AI in every workspace cost to run, month by month, side by side. It's the tokens each AI call used, priced at the model's published rate — so it's the real cost of running that client's products, whether it came out of your credits or was billed to a Claude key.
+
+Download it as CSV to invoice clients.
+
+## Keeping leads for a set time
+
+**Settings → Advanced → Data retention** lets you set how long leads collected in a workspace are kept — for example 365 days. Anything older is deleted automatically once a day. By default leads are kept indefinitely.
+
+Useful when a client asks how long you hold their prospects' details. Individual leads can also be deleted from a product's results table — for instance when someone asks for their data to be removed.

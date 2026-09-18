@@ -23,7 +23,14 @@ Your plan includes a monthly credit allocation. Allocations reset at the start o
 
 ## Bring Your Own Key
 
-Pro plan users can add their own Anthropic API key to a product (in **Product Settings → Secrets**). When a BYOK key is set, core Claude model usage for that product is billed directly to your Anthropic account and does not consume Productised model credits.
+You can run your products on your own Claude API key on **any plan**, under **Settings → Claude API Key**. When a key is set, core Claude usage is billed directly to your Anthropic account and does not use Productised credits.
+
+Keys can be set at several levels, and the most specific one wins:
+
+1. **A product's own key** — for one product only
+2. **A workspace's key** — for every product in that workspace; useful on the [Agency plan](/agency/client-api-keys) to bill a client directly
+3. **Your account key** — the default for everything else
+4. **No key anywhere** — the product runs on Productised's key and uses your credits
 
 Knowledge retrieval, Research, and image generation still use Productised infrastructure and credits even with BYOK enabled.
 

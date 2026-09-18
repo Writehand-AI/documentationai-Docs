@@ -1,94 +1,73 @@
 ---
 title: Subscription
-description: 'Manage your Productised plan, billing, payment methods and cancellation.'
+description: 'Manage your Productised plan, billing, payment methods, cancellation and refunds.'
 ---
-The Subscription page is where you manage your plan, view invoices, and update payment methods. Billing is handled through Stripe — Productised does not store card details directly.
+The Subscription page is where you manage your plan, view invoices and update how you pay. Billing is handled by Stripe — Productised never sees or stores your card details.
 
-If you're trying to decide which plan is right for you, see [Plans](/workspace/plans). This page is about _managing_ an active subscription.
+To decide which plan suits you, see [Plans](/workspace/plans). This page is about managing a subscription you already have.
 
-## Current plan
+## Billing basics
 
-Your active plan and billing cycle are shown at the top of the page. Productised plans differ in:
-
-- Live product limit (Productised is single-user — there are no seats)
-- Custom branding, Page SEO, and custom domains (Starter and above)
-- AI Insights, Talking Points, and Bring Your Own Anthropic API key (Pro)
-- Brain conversation and Journey Plan allowances
-- Monthly model credit allocation
-
-For the full feature breakdown by plan, see [Plans](/workspace/plans). For current pricing and credit allocations, see the [pricing page](https://app.productised.ai/pricing).
+- **Monthly or annual.** Annual plans cost less per month and are paid up front for the year.
+- **No free trial.** Your plan starts, and is charged, when you subscribe.
+- **Charged in advance.** Each payment covers the billing period ahead, and renews automatically until you cancel.
+- **Invoices** are emailed to you and available in the Stripe customer portal.
 
 ## Managing your subscription
 
-Click **Manage Subscription** to open the Stripe customer portal. From there you can:
+Click **Manage Subscription** to open the Stripe customer portal, where you can:
 
-- **Upgrade or downgrade your plan**
-- **Update your payment method** (card, link, etc.)
-- **View and download past invoices**
-- **Update billing details** (company name, tax ID, billing address)
-- **Cancel your subscription**
+- Update your payment method
+- View and download invoices
+- Update billing details — company name, tax ID, billing address
+- Cancel your subscription
 
-The customer portal is hosted by Stripe and uses your Productised email to authenticate.
+The portal is hosted by Stripe and signs you in with your Productised email.
 
-## Upgrading
+## Changing plan
 
-Upgrades take effect immediately. Stripe pro-rates the difference between your old and new plan for the remainder of the current billing cycle — you'll see a single line item on your next invoice covering the prorated upgrade plus the new plan's regular charge.
+Plan changes take effect **immediately**, and Stripe prorates them to the day:
 
-Features unlock the moment the upgrade is confirmed: a Free → Starter upgrade gives you custom branding on every existing product instantly; a Starter → Pro upgrade unlocks AI Insights and Talking Points on the analytics tab of every product without re-running anything.
+- **Moving up** — you're charged straight away for the difference, covering the rest of your current billing period. The higher plan's features are available the moment the change is confirmed.
+- **Moving down** — the unused part of what you've already paid is added to your account as **credit**, and that credit is used up against your next invoices before your card is charged again. It isn't returned to your card.
 
-## Downgrading
+Nothing you've built is deleted when you change plan. Your products, pages, leads, Brain and settings all stay exactly as they are.
 
-Downgrades take effect at the start of your **next billing cycle**, so you continue to get what you paid for through the current period.
+## Cancelling
 
-What happens to your products at a downgrade:
+You can cancel at any time from the Stripe customer portal. **You keep full access until the end of the billing period you've already paid for**, and you won't be charged again.
 
-- **All products remain intact.** Workflows, responses, output pages, knowledge bases, and brand voice stay exactly as you left them. Nothing is deleted.
-- **Features tied to a higher plan stop working at the cycle change.** For example, if you downgrade from Pro to Starter, the AI Insights and Talking Points panels stop generating new content; existing past summaries remain visible.
-- **Custom domains keep resolving** as long as you stay on Starter or above. If you downgrade from Starter to Free, custom domains stop routing and your products fall back to their `app.productised.ai/c/<id>` URL.
-- **If you exceed the new plan's live-product limit**, the most recently created products beyond the limit are automatically set to draft (unpublished). They are not deleted — you can re-publish them after upgrading again, or pick which ones to keep live by adjusting their published state before the downgrade takes effect.
+### Offer to switch to Starter
 
-## Cancellation
+If you're on Pro and start to cancel, you'll be offered a switch to **Starter** instead. If the reason is cost, this keeps your products running under your own brand and domain for less.
 
-You can cancel at any time from the Stripe customer portal. Your access continues until the **end of the current billing period**, then your subscription ends and your workspace falls back to Free-plan limits.
+Accepting switches you to Starter immediately, and the unused part of your Pro payment is credited to your account as described above. If you decline, the cancellation goes ahead as normal.
 
-### The Starter retention offer
+### What happens to your data
 
-If you're on Pro and start the cancellation flow, you'll see a one-time offer to switch to **Starter** instead of cancelling outright — Starter keeps your custom branding, custom domain, and Page SEO active so your live products keep working under your brand. If cost is the reason you're cancelling, Starter is usually the right move rather than a full cancel-and-restart later.
+Cancelling doesn't delete anything. Your products, pages, leads, Brain, and settings are kept, and if you subscribe again later you pick up where you left off.
 
-You can accept the offer in one click; it switches you to Starter at the next billing cycle. If you decline, the cancellation proceeds as normal.
+If you'd like your account and its data deleted rather than kept, email [hello@productised.ai](mailto:hello@productised.ai).
 
-### What's preserved after cancellation
+## Failed payments
 
-Everything you've built stays in your workspace:
-
-- All AI Products, their canvases, configurations, prompts, and theming
-- All responses (leads) collected from your products
-- All Brain conversations, ideas, memory, and uploaded knowledge bases
-- All output pages and result templates
-- Workspace settings, variables, secrets, and connected accounts
-
-What changes:
-
-- Features tied to paid tiers are restricted to Free-plan limits
-- Products beyond the Free-plan live-product limit are auto-unpublished (but not deleted)
-- Custom domains stop routing — products fall back to their `app.productised.ai/c/<id>` URL
-- Custom branding reverts to Productised default on public pages
-- AI Insights, Talking Points, and BYOK stop working
-
-If you resubscribe later (any plan), everything reactivates in the state you left it.
-
-## Payment methods
-
-Payment method management is handled in the Stripe customer portal. Productised does not store card details — Stripe is the source of truth.
-
-If your card fails on renewal, Stripe will retry several times over the following week and notify you by email. After Stripe gives up retrying, your subscription enters a _past due_ state; your products continue running for a short grace period, then your workspace is moved to the Free-plan restrictions described above. You can resolve this any time by updating your card in the portal.
+If a renewal payment fails, Stripe retries it automatically over the following days and emails you. You can fix it at any time by updating your card in the customer portal. If the payment still can't be collected once Stripe stops retrying, the subscription ends.
 
 ## Refunds
 
-Productised does not have a standing refund policy. If you've been billed for something unexpected — a charge for a plan you didn't intend to be on, a duplicate charge, a billing error — email [**hello@productised.ai**](mailto:hello@productised.ai) and the team will work it out with you.
+Refunds aren't automatic. Here's how they work:
 
-For voluntary cancellations within a billing period, you continue to have access until the end of that period (no partial refund is issued, as you keep the service for the time you've paid for).
+- **Cancelling doesn't trigger a refund.** You keep access for the rest of the period you've paid for, so there's nothing to refund.
+- **Billing mistakes are refunded in full** — a duplicate charge, a charge for a plan you didn't choose, or a charge after you'd cancelled. Email [hello@productised.ai](mailto:hello@productised.ai) with the invoice and we'll put it right.
+- **Anything else is considered case by case.** Get in touch and explain what happened.
+- **Moving to a cheaper plan isn't a refund.** The difference becomes account credit used against future invoices, as described under [Changing plan](#changing-plan).
+
+When a refund is issued, it goes back to the payment method you originally paid with, through Stripe. It usually appears within **5–10 business days**, depending on your bank.
+
+## AI credit packs
+
+Credit packs are one-off purchases that top up your AI credits. They're charged once and don't renew. See [Credits](/workspace/credits) for how credits are used — and note that if you run your products on your own Claude API key, credits aren't consumed at all.
 
 ## Need help
 
-For anything the Stripe portal can't resolve — billing disputes, plan questions, custom enterprise terms, account merges — email [**hello@productised.ai**](mailto:hello@productised.ai) and the team will pick it up.
+For anything the portal can't resolve — billing questions, disputes, or moving to the [Agency plan](/workspace/plans) — email [hello@productised.ai](mailto:hello@productised.ai).
