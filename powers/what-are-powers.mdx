@@ -1,40 +1,48 @@
 ---
-title: Giving your AI more context
+title: Giving your AI more capabilities
 description: >-
-  How to ground your AI product in your knowledge, give it live web access,
-  and connect it to your business tools.
+  Connect your AI product to live tools and data with an MCP connection, send
+  results anywhere with webhooks, and let end users bring their own files.
 ---
 
-Your AI Product is capable by default. These features make it specifically yours — grounded in your expertise, connected to live data, and wired into your business tools.
+Your AI Product is capable on its own — it runs the conversation, reasons over the answers and writes the result. These are the ways to extend it beyond that: live access to your own tools, a route for the data to travel, and a way for end users to bring their own material.
 
-## Three ways to extend your AI
+## Connect any tool with MCP
 
-<Columns cols="3">
-  <Card title="Reference Material" href="/powers/knowledge" icon="book-open" horizontal="false">
-    Paste your pricing, methodology, FAQs, or any background context directly into the AI Chat settings. Claude has it available for every conversation — free, private, always on.
+The **MCP node** is the main way to give your product capabilities Productised doesn't build itself.
+
+MCP (Model Context Protocol) is an open standard. Any service that publishes an MCP server can be connected — your CRM, your calendar, your database, a search provider, your own internal API. You supply the server URL and a token, choose which of its tools your product may use, and Claude can call them during a conversation.
+
+<Card title="MCP connections" href="/powers/mcp" icon="plug" horizontal="false">
+  How to add an MCP node, connect a server, and choose which tools your product can use.
+</Card>
+
+This replaced a set of narrower built-in nodes. Rather than Productised picking a search vendor and a document store on your behalf, you connect the providers you already use, with your own account and your own credentials — so your data stays in your relationships, and the capability isn't limited to what we happened to integrate.
+
+## Send results wherever you need them
+
+A **webhook** posts each completed response to any URL you choose, so leads and AI output can flow into your CRM, your email platform, a spreadsheet or an automation tool.
+
+<Columns cols="2">
+  <Card title="Webhooks" href="/integrations/webhooks" icon="radio" horizontal="false">
+    Post every completed response to a URL of your choice.
   </Card>
 
-  <Card title="Web Search" href="/powers/research" icon="search" horizontal="false">
-    Claude can search the web natively, without any additional nodes or configuration. It activates automatically when a conversation needs current data.
-  </Card>
-
-  <Card title="Integrations" href="/integrations/connections" icon="arrows-right-left" horizontal="false">
-    Use webhooks to send completed response data to any CRM, email platform, or tool. For deeper two-way connections, add an MCP node to give Claude live access to your tools during conversations.
+  <Card title="Zapier" href="/integrations/zapier" icon="zap" horizontal="false">
+    Route responses into thousands of apps without writing code.
   </Card>
 </Columns>
 
-## File uploads during conversations
+## Let end users bring their own content
 
-If your product needs to analyse content your end user brings — a CV, a brief, a website URL — you can add a **file upload** or **URL** question type in your AI Chat node's Collection Goals. Your end user uploads their file mid-conversation, and Claude reviews it as part of the session.
+If your product needs to read something the end user has — a CV, a brief, a website — add an **Upload** or **URL** question in the AI Product node's Questions panel. The end user attaches it mid-conversation and Claude reviews it as part of the session.
 
-This is different from Reference Material: Reference Material is your knowledge (always present), file uploads are your end user's content (session-specific).
+This is the end user's content, specific to their session. It is not your reference library, and it is not retained as one.
 
-## The MCP node
+## Getting the AI to know your business
 
-The **MCP node** connects your product to any MCP-compatible server. Claude can call that server's tools during a conversation — looking up live CRM data, checking availability, writing back records — or after, based on instructions in the system prompt.
+Everything the AI knows about *your* business comes from the prompt in the AI Product node's **Collection Instructions**. That is where your persona, your methodology and the way you talk about your work belong.
 
-[Read the full MCP node guide →](/powers/connections)
-
-<Callout kind="info" collapsed="false">
-  Most products work well with just the AI Chat node and an outcome. Add Reference Material when you want Claude to know your specific methodology and pricing. Use the webhook when you want leads routed automatically after completion.
-</Callout>
+<Note>
+  The **Reference Material** field in the AI Product node is not currently active. Anything entered there is saved but is not yet passed to the AI. Put context you need the AI to use in Collection Instructions instead.
+</Note>

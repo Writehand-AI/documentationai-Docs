@@ -56,22 +56,21 @@ Each AI Product has a **collection goal** (what you're trying to learn), a **dec
 
 <Image src="https://blob-cdn.documentation.ai/org-708d97b3-a195-4b0f-8911-093c012c99d6/doc-8283fb6b-099f-47ea-b32b-34e7f582103c/1781833694340-8avdtmhxitb-AI-Product-Node.png?fm=auto&auto=compress%2Cformat" width="2928" height="1830" alt="" />
 
-## Powers (Reference Material)&#x20;
+## Capabilities
 
-Powers extend what your AI Product can do. Add them to an AI Product node on the canvas to give it more capabilities:
+Your AI Product runs the conversation and writes the result on its own. The MCP node is how you extend it beyond that.
 
-- **Knowledge** — upload your own documents (PDFs, text files, spreadsheets) or index URLs direct to Claude, then allow it to provide productised additional context. The AI draws on your content when generating responses, so outputs reflect your methodology, not just the model's defaults.
+**MCP connections** — connect any service that publishes an MCP server: your CRM, your calendar, a search provider, your own internal API. Claude can call that service's tools *while an end user is answering*, so it can check a record, confirm live availability or look something up before deciding what to recommend.
 
-**Research** — give your AI Product live web search via Claude. Useful for products that need up-to-date market data, news, or competitor context. Simply add the urls in the reference material input area.&#x20;
+Because MCP is an open standard, this isn't a fixed list of integrations — you connect the providers you already use, with your own account and credentials.
 
-<Image src="https://blob-cdn.documentation.ai/org-708d97b3-a195-4b0f-8911-093c012c99d6/doc-8283fb6b-099f-47ea-b32b-34e7f582103c/1781834032327-knfcdtkhejl-Reference-Material.png?fm=auto&auto=compress%2Cformat" width="2924" height="1826" alt="" />
-
-## Connections&#x20;
-
-\
-**Connections (MCP)** — send collected data to your other tools after a product is completed. Supports Gmail, Google Sheets, HubSpot, Slack, Airtable, and Zapier.
+Only tools the server declares read-only are enabled when you first connect. Anything that could create, edit or delete data waits until you switch it on, because the AI calls these tools unsupervised while talking to a member of the public.
 
 <Image src="https://blob-cdn.documentation.ai/org-708d97b3-a195-4b0f-8911-093c012c99d6/doc-8283fb6b-099f-47ea-b32b-34e7f582103c/1781834265780-xz2ek2jqrh-MCP-Node.png?fm=auto&auto=compress%2Cformat" width="2932" height="1826" alt="" />
+
+**Webhooks** — post each completed response to any URL, so leads and AI output reach your CRM, email platform or automation tool.
+
+**End-user uploads** — add an Upload or URL question in the Questions panel when your product needs to read something the end user brings, such as a CV or a website.
 
 ## Outcomes
 
