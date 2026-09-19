@@ -151,8 +151,8 @@
                 "icon": "message-circle"
               },
               {
-                "title": "Design node",
-                "path": "canvas/design-node",
+                "title": "Page node",
+                "path": "canvas/page-node",
                 "icon": "code"
               }
             ]
