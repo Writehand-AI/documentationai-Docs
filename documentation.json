@@ -158,7 +158,7 @@
             ]
           },
           {
-            "group": "Powers",
+            "group": "Capabilities",
             "icon": "bolt",
             "pages": [
               {
@@ -167,19 +167,9 @@
                 "icon": "star"
               },
               {
-                "title": "Research",
-                "path": "powers/research",
-                "icon": "search"
-              },
-              {
-                "title": "Knowledge",
-                "path": "powers/knowledge",
-                "icon": "book-open"
-              },
-              {
-                "title": "Connections",
-                "path": "powers/connections",
-                "icon": "share-2"
+                "title": "MCP connections",
+                "path": "powers/mcp",
+                "icon": "plug"
               }
             ]
           },
@@ -623,11 +613,6 @@
                 "title": "Zapier",
                 "path": "integrations/zapier",
                 "icon": "zap"
-              },
-              {
-                "title": "Connections",
-                "path": "integrations/connections",
-                "icon": "share-2"
               }
             ]
           }

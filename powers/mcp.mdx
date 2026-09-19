@@ -1,0 +1,65 @@
+---
+title: MCP connections
+description: >-
+  Connect any MCP-compatible server to your product so Claude can use its tools
+  during a conversation — your CRM, your calendar, a search provider, your own API.
+---
+
+The **MCP node** connects your product to any service that speaks the Model Context Protocol. Once connected, Claude can call that service's tools while it is talking to an end user — looking something up, checking availability, or writing a record.
+
+MCP is an open standard, so this is not a fixed list of integrations. If a service publishes an MCP server, your product can use it.
+
+## Why it works this way
+
+Productised used to ship narrow built-in nodes for particular jobs — one for web research, one for document storage — each wired to a vendor we chose, on an account we owned.
+
+The MCP node replaces that. You connect the providers you already pay for, with your own credentials. Your data stays in relationships you control, the capability isn't limited to what we integrated, and you are not billed through us for a third party's service.
+
+## Adding a connection
+
+<Steps>
+  <Step title="Add the node">
+    On the canvas, click **MCP** in the toolbar. Connect it to your AI Product node.
+  </Step>
+  <Step title="Enter the server URL">
+    Paste the MCP server endpoint. It must start with `https://` — plain `http://` is refused so your token is never sent unencrypted.
+  </Step>
+  <Step title="Add a token, if the server needs one">
+    Most servers require a bearer token or API key. It is encrypted before it is stored, and it is never shown again once saved.
+  </Step>
+  <Step title="Test the connection">
+    Click **Test connection**. Productised performs the MCP handshake and lists the tools the server offers.
+  </Step>
+  <Step title="Choose which tools to allow">
+    Tick the tools this product may use. See below — this matters more than it looks.
+  </Step>
+</Steps>
+
+## Choose tools deliberately
+
+When a connection is first tested, only tools the server itself declares as **read-only** are switched on. Everything else starts off.
+
+That default is deliberate. The AI calls these tools while talking to a member of the public, and it does so without stopping to ask you. A tool that reads a record is a very different thing from one that creates, edits or deletes one — so anything that could change data waits until you switch it on yourself.
+
+<Warning>
+  Only enable a write or delete tool if you genuinely want the AI to use it unsupervised, mid-conversation, on behalf of a stranger. For most lead-generation products, read-only access is all you need.
+</Warning>
+
+## What Claude sees
+
+Each enabled tool appears to the AI with the connection's name in front of it — for example `[HubSpot CRM] search_contacts` — so it knows where the tool came from and when it applies. The tool's own description tells it what the tool does.
+
+You don't write any wiring. If the tools are relevant to the conversation, the AI calls them.
+
+## What it's good for
+
+- **Qualify against records you already hold.** Check whether the person is an existing customer before the product decides what to recommend.
+- **Answer with live facts.** Real availability, current pricing, genuine stock — rather than whatever was true when you wrote the prompt.
+- **Write the lead where it belongs.** Create the contact or deal in your own system as the conversation ends.
+- **Search the web.** Connect a search provider's MCP server if your product needs current information.
+
+## Limits worth knowing
+
+- The server must be reachable over public HTTPS. Internal and private addresses are refused.
+- Each tool call has a timeout. A slow server returns an error to the AI, which carries on without the result rather than stalling the conversation.
+- The tool results are handed to the AI as context. Only connect servers you trust, for the same reason you would not paste an unknown document into your prompt.
