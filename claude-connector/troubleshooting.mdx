@@ -126,6 +126,23 @@ The most common errors:
 
 ---
 
+## The product talks in the wrong language
+
+Ask Claude: *"Set the language of [product name] to German"* (or any of English, German, French, Spanish, Italian, Dutch, Portuguese). That sets the product's Language, which covers the questions, the AI Agents' analysis and the result page. It works better than adding "reply in German" to the prompt, because it's applied after all of Productised's built-in instructions.
+
+To go back to following the prompt's own language, ask Claude to *"set the language of [product name] to Auto"*, or choose **Auto** on the canvas under **Collection Instructions → Language**.
+
+---
+
+## The result page doesn't appear at the end of a test run
+
+The result page belongs to the live product. Either:
+
+- **Publish it:** *"Publish [product name]"* (`publish_product`), then run through the live link again, or
+- **Test with the demo link:** open the `?demo=true` link Claude shares. A run started there goes all the way through to its result page, even while the product is unpublished.
+
+---
+
 ## Demo URLs return 404
 
 Two causes:

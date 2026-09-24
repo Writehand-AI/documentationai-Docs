@@ -67,6 +67,8 @@ Claude handles this transparently:
 
 For landing pages (`/c/<product>?demo=true`) and the AI conversation surface, no response is needed — they're respondent-agnostic.
 
+**Test runs carry the demo flag through.** When you run through a product from its demo link, the conversation hands off to the result page with `?demo=true` still attached, so you land on your result even while the product is unpublished. Anyone opening the live URL of an unpublished product still sees nothing until you publish it.
+
 ---
 
 ## The "Live Preview" pattern in design conversations

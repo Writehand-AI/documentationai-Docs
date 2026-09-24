@@ -14,6 +14,17 @@ description: Common issues and how to resolve them.
 - Check that your collection goals are clearly defined — vague field labels produce vague questions.
 - Consider switching to **Adaptive** collection style if answers are frequently incomplete.
 
+## Product replies in the wrong language
+
+- Open the AI Product node and set **Collection Instructions → Language** to the language you want. On **Auto**, the product follows the language your instructions are written in, so English instructions give an English product.
+- The setting covers the questions, the AI Agents' analysis and the result page, so you don't need to repeat "reply in German" in every prompt.
+- Building with Claude? Just say *"Set the language of [product name] to German."*
+
+## Result page doesn't appear at the end of a test run
+
+- The result page is part of the live product, so publish the product (Product Settings → Deployment, or ask Claude to *"publish [product name]"*) and run through it again from the live link.
+- To test before publishing, use the product's demo link (the one ending in `?demo=true` that Claude shares). A run started from that link goes all the way through to the result page.
+
 ## Outcome not generating after the conversation ends
 
 - Check the **Behaviour** tab of your AI Product node — confirm that the After Collection setting matches the output node you've connected (e.g. "Generate standard output" requires a Standard node to be connected).
