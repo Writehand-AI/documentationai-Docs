@@ -3,53 +3,100 @@ title: Troubleshooting
 description: Common issues and how to resolve them.
 ---
 
-## Product not loading or showing a blank screen
+## Product not loading, or visitors see "not found"
 
-- Check that your product is set to **Published** in Product Settings → Deployment. Draft products are not accessible via the public URL.
-- If you're testing via the embed code, make sure the domain you're testing on is listed in the Allowed Domains field in Deployment settings, or that the field is left empty (which allows all domains).
+- Check **Publish Product** is on in **Product Settings → Deployment → Publishing & Visibility**. The switch stays greyed out until the product's workflow is complete.
+- An unpublished product only opens for the person who created it, while logged in. Teammates and visitors see "not found" — unless they use the product's demo link (ending in `?demo=true`).
+
+## Product won't show when embedded on my website
+
+- Add your site's domain (for example `example.com`) to **Allowed Domains for Embedding** in **Product Settings → Deployment**. Subdomains are included automatically.
+- If the field is empty, the product can't be embedded on other websites.
+
+## "You've reached your live products limit" when publishing
+
+- Your plan allows a set number of live products. Switch off **Publish Product** on one you no longer need, or upgrade your plan.
+
+## A lead is missing from my results
+
+- A lead is only recorded once the visitor sends their first message. Opening the page or reading the welcome screen doesn't create one.
+- Check the workspace's **Data retention** setting in **Settings → Client settings** — leads older than the period you set are removed in a daily clean-up.
+- Make sure you're in the right workspace. Each workspace has its own products and leads.
+
+## Test runs are showing up as leads
+
+- Runs from the demo link (`?demo=true`) are real conversations, so they appear in your results like any other lead. Delete test leads from **Analytics → All Results** when you're done.
 
 ## AI conversation feels off or generic
 
-- Review your system prompt in the AI Product node's Content tab. The more specific you are about the AI's role, your audience, and the tone, the better the conversation will be.
-- Check that your collection goals are clearly defined — vague field labels produce vague questions.
-- Consider switching to **Adaptive** collection style if answers are frequently incomplete.
+- Review your instructions on the AI Product node, under **Conversation → Collection Instructions**. The more specific you are about the AI's role, your audience and the tone, the better the conversation.
+- Check each question under **Conversation → Questions** is clear — vague questions get vague answers.
 
 ## Product replies in the wrong language
 
-- Open the AI Product node and set **Collection Instructions → Language** to the language you want. On **Auto**, the product follows the language your instructions are written in, so English instructions give an English product.
+- Open the AI Product node and set **Conversation → Collection Instructions → Language**. On **Auto**, the product follows the language your instructions are written in, so English instructions give an English product.
 - The setting covers the questions, the AI Agents' analysis and the result page, so you don't need to repeat "reply in German" in every prompt.
-- Building with Claude? Just say *"Set the language of [product name] to German."*
 
 ## Result page doesn't appear at the end of a test run
 
-- The result page is part of the live product, so publish the product (Product Settings → Deployment, or ask Claude to *"publish [product name]"*) and run through it again from the live link.
-- To test before publishing, use the product's demo link (the one ending in `?demo=true` that Claude shares). A run started from that link goes all the way through to the result page.
+- Publish the product and run through it again from the live link.
+- To test before publishing, use the product's demo link (ending in `?demo=true`). A run started from that link goes all the way through to a Standard or Page result. Document results from a demo run only open for the product's creator.
 
 ## Outcome not generating after the conversation ends
 
-- Check the **Behaviour** tab of your AI Product node — confirm that the After Collection setting matches the output node you've connected (e.g. "Generate standard output" requires a Standard node to be connected).
-- Confirm the Outcome node is properly connected to the AI Product node on the canvas (a line should run between them).
-- Check your credit balance — if your workspace has run out of credits, outcome generation will not complete.
+- Open the AI Product node's **Outcome** tab. Check **Continue to outcome** is selected, and under **Output format** pick the output you've connected — Standard, Page, Advisor Chat or Document. A format with nothing connected shows **(Add node)**.
+- Confirm the output node (Standard, Page, Advisor or Document) is connected to the AI Product node on the canvas — a line should run between them.
+- Check your credit balance under **Settings → Account & billing → Subscription → Usage**, or that your own key is working in **Settings → AI & connections → Claude API Key**.
+
+## Visitors see "Sorry, something went wrong. Please try again."
+
+- The AI couldn't respond. The most common causes are a rejected Claude key, an Anthropic account out of credit, or your workspace running out of Productised credits.
+- Check your notifications, then **Settings → AI & connections → Claude API Key** and your balance under **Subscription → Usage**. A replaced key or new credits work straight away — there's no need to republish.
+
+## Custom domain isn't working
+
+- Check the DNS record at your registrar matches the one shown in **Settings → Client settings → Custom Domain** exactly: a **CNAME** to `productisedai.fly.dev` for a subdomain, or an **A** record to `66.241.125.89` and an **AAAA** record to `2a09:8280:1::6b:61da:0` for a root domain.
+- DNS usually updates within 5–30 minutes, but can take up to 24 hours. Then click **Check status** again.
+- A product without a web address opens at `yourdomain.com/c/<product-id>` instead of `yourdomain.com/product-name`. New products get one automatically; ask Claude to set one for older products.
+
+## Productised branding still shows on my pages
+
+- The "made by" badge shows Productised until you add your own logo and link in **Product Settings → Branding** (paid plans), or ask Claude to set custom branding.
+- Set a favicon in **Product Settings → Page SEO**, or a default favicon for the whole domain in **Custom Domain** settings.
+- Set your own share image in **Page SEO** so link previews show your brand.
+
+## The AI disclosure isn't showing on a product
+
+- Check **Show AI disclosure** is on in **Settings → AI & connections → AI Disclosure**.
+- Check the product is ticked under **Products** on the same page. Products created before the disclosure launched start unticked.
+- No "Privacy Policy" link? Add a link or write your policy on the same page — without one, the line links only the AI Notice.
+
+## Claude changed the wrong workspace
+
+- The connector works in the workspace you last had open in the app. Switch workspace in the app, then ask Claude again.
+- If Claude can't find a product, its reply names the workspace it's working in — check that's the one you meant.
+
+## I can't see a setting
+
+- Some settings are for Admins only: Subscription, Usage & cost, the Team, Claude and API keys, Data retention, AI Disclosure and Logs.
+- Ask the account owner or an Admin to change your role in **Settings → Account & billing → Team**.
+
+## Lead emails aren't arriving
+
+- Check **Lead Notifications** is on in the product's **Settings → Deployment**. It's off by default and set per product.
+- Emails are sent when someone **completes** the product, not when they start. Check your spam folder.
 
 ## Webhook not receiving data
 
-- Use the **Test Webhook** button in Product Settings → Webhook to confirm your endpoint is reachable.
-- Check that the outgoing webhook URL is saved correctly — it should start with `https://`.
-- If using Zapier, make sure the Zap is turned on and the trigger URL is the most recent one from your Zap.
+- Check **Enable outgoing webhook** is ticked in **Product Settings → Webhook**, then use **Send Test** to confirm your endpoint is reachable.
+- Webhooks fire when a lead completes the product. Use an `https://` address.
+- A webhook switches itself off after 5 failed deliveries in a row. Fix the endpoint, then switch it back on.
+- If you're using Zapier, make sure the Zap is on and the trigger URL is the latest one from your Zap.
 
-## Knowledge Power not influencing the output
+## MCP node not working
 
-- Make sure at least one file has been successfully uploaded to the Knowledge Power — the file list should show a green status.
-- Check the Query tab in the Knowledge Power settings — the search query should reference variables from your product (e.g. `{{form:industry}}`) so it retrieves relevant content for each person.
-
-## Research Power returning no results
-
-- Check the objective or search queries in the Research Power's Content tab — the more specific they are, the better the results.
-- If using Extract mode, verify the URLs you've specified are publicly accessible (not behind a login).
-
-## Pages showing 404 in the docs
-
-If you're seeing a 404 on any page in these docs, the page may not have been published yet. Try refreshing — if the issue persists, contact support.
+- The server must be reachable on the public internet over `https://`. Addresses on private or internal networks are blocked for security.
+- Check the access token you entered is current, then use **Test Connection** in the node's settings.
 
 ---
 

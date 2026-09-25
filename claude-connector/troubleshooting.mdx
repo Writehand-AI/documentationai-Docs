@@ -3,7 +3,7 @@ title: Troubleshooting
 description: Quick fixes for the most common issues with the Claude Connector.
 ---
 
-If something isn't working, start here. Most issues are easy to resolve, and the rest can be diagnosed from the API logs in your dashboard.
+If something isn't working, start here. Most issues are easy to resolve — and if not, we're an email away.
 
 ---
 
@@ -45,7 +45,7 @@ The MCP server keeps sessions in memory. When the server restarts (during a depl
 
 **Fix:** Start a new Claude conversation. The next message creates a fresh session and the connector re-initialises. Your OAuth token (or API key) is still valid — the session is just a per-conversation construct.
 
-This was a frequent issue before v1.38 when multi-machine deploys could route follow-up requests to the wrong machine. With session affinity in place, mid-conversation drops are very rare.
+Follow-up requests are routed back to the same server, so mid-conversation drops are rare outside a deploy.
 
 ---
 
@@ -53,12 +53,12 @@ This was a frequent issue before v1.38 when multi-machine deploys could route fo
 
 **If you connected via OAuth:**
 - Your access token may have expired and refresh failed. Remove the Productised connector from **Settings → Connectors**, then add it again to re-run the OAuth flow.
-- Your account may have been revoked from inside Productised — check **Settings → API → Connected apps**.
+- If it still fails, remove Productised in Claude's **Settings → Connectors** and connect it again.
 
 **If you connected via API key:**
-- Double-check the key in your Claude config matches a key listed in **Productised → Settings → API → Keys**.
+- Double-check the key in your Claude config matches a key listed in **Productised → Settings → Advanced → API** (Admins only).
 - The key may have been revoked. Generate a new one and update your config.
-- Key in the wrong place: Claude.ai expects it in the URL query (`?apiKey=...`), Claude Desktop's manual config expects it in the `Authorization: Bearer ...` header.
+- Key in the wrong place: Claude Desktop's manual config expects it in the `Authorization: Bearer ...` header. Claude.ai doesn't use an API key at all — it connects by signing in.
 
 ---
 
@@ -94,14 +94,14 @@ For existing responses created **before** the fix, the new fields won't backfill
 
 Two common causes:
 
-1. **The page contains `<script>` tags.** The HTML is injected via `innerHTML` which never executes scripts. Build score visuals as pure CSS/SVG. The built-in result designs already work this way. If you wrote custom HTML, ask Claude: *"my gauge is blank — rebuild it as a CSS/SVG ring instead of JS."*
+1. **The page relies on `<script>` tags.** Designed page sections are placed straight into the result page, where scripts don't run. Build score visuals as pure CSS/SVG. The built-in result designs already work this way. If you wrote custom HTML, ask Claude: *"my gauge is blank — rebuild it as a CSS/SVG ring instead of JS."*
 2. **You used `{{ object:* }}` inside an SVG/HTML attribute.** Object tokens get wrapped in `<p>` by the markdown renderer, corrupting attributes. Use `{{ chart:fieldName }}` instead for any value inside an attribute. See the [tokens reference](/claude-connector/tokens).
 
 ---
 
 ## The result page renders but is off-centre or sprawls full-width
 
-The result-page surface renders inside a centred ~720px card. If your design isn't self-centring, ask Claude:
+The result page renders inside a centred card up to 1200px wide. If your design isn't self-centring, ask Claude:
 
 > *"My result page is rendering flush-left. Update the page so the content is centred — wrap in a max-width container with margin auto."*
 
@@ -111,26 +111,18 @@ Claude calls `get_page` → wraps the content → `update_page`.
 
 ## Claude says the tool returned an error
 
-Open **Settings → API → Logs** in your Productised workspace. Find the call by timestamp. The log will show:
+Claude shows you the error the tool sent back. The most common ones:
 
-- Exactly what was called
-- The full error message
-- The full response
-
-The most common errors:
-
+- **Product not found** — Claude is probably working in a different workspace. The error names the workspace it's in; switch workspace in the app, then ask again. Or ask Claude to call `list_products` to confirm what it can see.
 - **Missing required parameter** — Claude didn't include `product_id` or similar. Re-prompt with the explicit value.
-- **Product not found** — Check the `product_id` Claude was given (or ask Claude to call `list_products` to confirm).
-- **Rate limited (429)** — Wait a minute. You're hitting the per-key or per-IP cap.
-- **Internal server error (500)** — Email `support@productised.ai` with the timestamp.
+- **Rate limited (429)** — wait a minute. The connector allows up to 200 requests a minute from one connection.
+- **Internal server error (500)** — email `support@productised.ai` with the time it happened and your workspace name.
 
 ---
 
 ## The product talks in the wrong language
 
-Ask Claude: *"Set the language of [product name] to German"* (or any of English, German, French, Spanish, Italian, Dutch, Portuguese). That sets the product's Language, which covers the questions, the AI Agents' analysis and the result page. It works better than adding "reply in German" to the prompt, because it's applied after all of Productised's built-in instructions.
-
-To go back to following the prompt's own language, ask Claude to *"set the language of [product name] to Auto"*, or choose **Auto** on the canvas under **Collection Instructions → Language**.
+Set the product's language on the canvas: open the AI Product node and choose **Conversation → Collection Instructions → Language** (English, German, French, Spanish, Italian, Dutch or Portuguese). It covers the questions, the AI Agents' analysis and the result page, and works better than adding "reply in German" to the prompt. **Auto** follows the language your instructions are written in.
 
 ---
 
@@ -145,10 +137,11 @@ The result page belongs to the live product. Either:
 
 ## Demo URLs return 404
 
-Two causes:
+Every demo link is a product link ending in `?demo=true`, and it works even while the product is unpublished. If one returns "not found":
 
-- **The product was deleted.** Demo URLs are tied to live products; deleting the product 404s the URL.
-- **The page was deleted.** Result-page demo URLs are tied to a specific Page record. If you re-applied a template or deleted the page, the old URL 404s. Run `get_page` to find the new page ID.
+- **The product was deleted**, or you're signed in to a different account.
+- **The product has no AI Product node** — ask Claude to check the product's structure.
+- **It's a Document result** — Document results from a demo run only open for the product's creator.
 
 ---
 
@@ -169,5 +162,5 @@ If `list_products`, `get_product`, or other read tools are slow, that's worth re
 If you're stuck on something this page doesn't cover, you have three options:
 
 1. **Ask Claude.** *"How do I do X with the connector?"* — Claude knows its full tool list and will point you at the right tool or the right page in these docs.
-2. **Check your logs.** **Settings → API → Logs** in your workspace — every call is recorded with full detail.
+2. **Check your workspace.** If Claude can't find something, make sure the app has the right workspace open — the connector follows it.
 3. **Email us.** `support@productised.ai` — include the timestamp of the issue and your workspace name.

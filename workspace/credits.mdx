@@ -1,39 +1,38 @@
 ---
 title: Credits
-description: How model credits work and how to monitor your usage.
+description: How credits work, what uses them, and where to see your balance.
 ---
-Productised uses a credit system to manage AI model usage across your workspace. Credits are consumed when your products run AI operations — conversations, report generation, document creation, and similar.
+Credits pay for the AI when Productised's own Claude key runs your products. If you add your own Claude key, your products don't use credits at all.
 
 ## What uses credits
 
-Credits are consumed by AI operations within your products:
+**Each visitor conversation uses 1 credit**, taken when the visitor sends their first message. It's the same single credit however long the conversation is and whatever result it generates.
 
-- **Collection conversations** — each message exchange in an AI Product conversation
-- **Report generation** — generating a personalised Report outcome
-- **Document generation** — generating a Document outcome
-- **Page generation** — filling a custom result page for a respondent
-- **Knowledge retrieval** — searching your uploaded knowledge base
-- **Research / web search** — the Research power
+These don't use credits:
 
-The amount of credits consumed per operation varies based on the complexity of the operation and the length of the input and output.
+- Building products — in the app, with Build with AI, or through the Claude connector
+- Brain (it has its own monthly conversation limit on each plan)
+- Any conversation run on your own Claude key
 
-## Credit allocations
+## Your allowance
 
-Your plan includes a monthly credit allocation. Allocations reset at the start of each billing period. If you exceed your allocation, you may need to upgrade your plan or wait for the next reset.
+Your plan includes a credit allowance that resets at the start of each billing period. If you use it up, you can buy add-on credits or upgrade your plan.
 
-## Bring Your Own Key
+## Where to see your balance
 
-You can run your products on your own Claude API key on **any plan**, under **Settings → Claude API Key**. When a key is set, core Claude usage is billed directly to your Anthropic account and does not use Productised credits.
+Open **Settings → Account & billing → Subscription** and choose the **Usage** tab. The **Credits** tab on the same page is where you buy add-on credits.
 
-Keys can be set at several levels, and the most specific one wins:
+**Settings → Account & billing → Usage & cost** shows what the AI cost to run in each workspace, and how many credits each one used.
 
-1. **A product's own key** — for one product only
-2. **A workspace's key** — for every product in that workspace; useful on the [Agency plan](/agency/client-api-keys) to bill a client directly
-3. **Your account key** — the default for everything else
-4. **No key anywhere** — the product runs on Productised's key and uses your credits
+## Bring your own key
 
-Knowledge retrieval, Research, and image generation still use Productised infrastructure and credits even with BYOK enabled.
+You can run your products on your own Claude API key on **any plan**. An Admin adds it in **Settings → AI & connections → Claude API Key**.
 
-## Monitoring usage
+Keys can be set at two levels, and the more specific one wins:
 
-The Credits page shows your current balance and usage for the current billing period. If you are approaching your allocation limit, consider reviewing which products have the heaviest usage or upgrading your plan.
+1. **A workspace's key** — for every product in that workspace; useful on the [Agency plan](/agency/client-api-keys) to bill a client directly
+2. **Your account key** — the default for every other workspace
+
+With no key set, products run on Productised's key and use your credits.
+
+With your own key, product conversations and results are billed to your Anthropic account. Brain, Build with AI, voice input, AI Insights and Talking Points still run on Productised's services, at no credit cost. See [AI keys](/product-settings/secrets).
