@@ -36,6 +36,7 @@ description: Common issues and how to resolve them.
 
 - Open the AI Product node and set **Conversation → Collection Instructions → Language**. On **Auto**, the product follows the language your instructions are written in, so English instructions give an English product.
 - The setting covers the questions, the AI Agents' analysis and the result page, so you don't need to repeat "reply in German" in every prompt.
+- Building with Claude? Just say _"Set the language of [product name] to German."_
 
 ## Result page doesn't appear at the end of a test run
 
@@ -56,8 +57,8 @@ description: Common issues and how to resolve them.
 ## Custom domain isn't working
 
 - Check the DNS record at your registrar matches the one shown in **Settings → Client settings → Custom Domain** exactly: a **CNAME** to `productisedai.fly.dev` for a subdomain, or an **A** record to `66.241.125.89` and an **AAAA** record to `2a09:8280:1::6b:61da:0` for a root domain.
-- DNS usually updates within 5–30 minutes, but can take up to 24 hours. Then click **Check status** again.
-- A product without a web address opens at `yourdomain.com/c/<product-id>` instead of `yourdomain.com/product-name`. New products get one automatically; ask Claude to set one for older products.
+- DNS usually updates within 5–30 minutes, but can take up to 24 hours. Then click **Check status** — it issues the HTTPS certificate and activates the domain. This applies to domains set up through Claude too.
+- A product without a web address opens at `yourdomain.com/c/<product-id>` instead of `yourdomain.com/product-name`. New products get one automatically; set or change one next to the product on the **Custom Domain** page, or ask Claude.
 
 ## Productised branding still shows on my pages
 
