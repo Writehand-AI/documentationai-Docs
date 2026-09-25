@@ -52,15 +52,21 @@ If you build products for clients, they will eventually ask who processes their 
 
 **Who is responsible for what.** You are the controller of the leads your products collect — they are your prospects, or your client's. Productised processes that data on your instructions. When you run products for a client, we are a sub-processor in their chain.
 
-**Where the data lives.** The application and database are hosted in the United States (Fly.io and Supabase, both `us-east-1`), with files on Cloudflare R2. Productised Ltd is a New Zealand company, but the hosting is what matters for a data question, so it is the thing to say.
+**Where the data lives.** The application and database are hosted in the United States — the app on Fly.io (Ashburn, Virginia) and the database on Supabase (AWS `us-east-1`) — with files on Cloudflare R2. Productised Ltd is a New Zealand company, but the hosting is what matters for a data question, so it is the thing to say.
 
-**Which AI sees what.** Products run on Anthropic's Claude by default. A few paths still use OpenAI: speech-to-text when someone uses the hold-to-speak button in a chat, and parts of the Brain. Neither provider uses this data to train models — API traffic is excluded from training at both.
+**Which AI sees what.** Products run on Anthropic's Claude. Some features use other providers:
 
-**What the people filling in your products are told.** Every public product page carries a line under your own disclaimer: *"Your answers are processed by AI to create your result, and are not used to train AI models."* You remain responsible for your own privacy notice; this makes the AI itself impossible to miss.
+- **OpenAI** — AI Insights, Talking Points and the Growth Playbook (which read your leads' answers), speech-to-text when someone uses the hold-to-speak button in a chat, and parts of the Brain.
+- **Supermemory** — files a visitor uploads during a chat, and Brain knowledge.
+- **Parallel** — web search, where a product uses it.
 
-**Erasing someone's data.** You can delete an individual lead from the results table, and set a retention period per workspace under **Settings → Data retention** so leads are removed automatically after a set number of days. Deletion is permanent and covers the answers and the AI output generated from them.
+Productised doesn't train AI models on this data, and Anthropic and OpenAI exclude API traffic from model training.
 
-**Putting the AI on your client's own account.** Giving a client's workspace its own Claude key moves that processing onto their Anthropic account, under their agreement — see [Billing a client's AI to them](/agency/client-api-keys).
+**What the people filling in your products are told.** Products can show a line in the footer of their landing, chat and result pages: *"You're engaging with AI. By continuing, you acknowledge our Privacy Policy and AI Notice."* It links your own privacy policy and an AI Notice we draft in your workspace's name. It's on by default for products created from 25 September 2026, and you choose which products show it in **Settings → AI & connections → AI Disclosure**. You remain responsible for your own privacy notice.
+
+**Erasing someone's data.** You can delete an individual lead from a product's **Analytics → All Results** table, and set a retention period per workspace under **Settings → Client settings → Data retention** so leads are removed automatically after a set number of days. Deletion is permanent and covers the answers and the AI output generated from them. Files the visitor uploaded, and anything already sent on by webhook or email, are not removed.
+
+**Putting the AI on your client's own account.** Giving a client's workspace its own Claude key moves the product conversations and results onto their Anthropic account, under their agreement. The OpenAI-based features above, Brain and Build with AI stay on Productised's accounts — see [Billing a client's AI to them](/agency/client-api-keys).
 
 <Callout kind="info">Need a data processing agreement, or a sub-processor list for a client's procurement review? Email [hello@productised.ai](mailto:hello@productised.ai) and we will send one.</Callout>
 

@@ -50,11 +50,11 @@ DNS propagation usually takes **5–30 minutes**, though some providers can take
 
 ### Step 4 — Verify
 
-Back in settings, click **Check status**. Once the cert is active, the page shows `Status: Active ✓` and your products are live at their workspace-domain URLs.
+Back in settings, click **Check status**. This issues the HTTPS certificate if the domain doesn't have one yet, then shows the status. Once the certificate is active, the page shows `Status: Active ✓` and your products are live at their workspace-domain URLs.
 
-You can also check from Claude:
-
-> "Check my workspace domain"
+<Callout kind="info">
+Set the domain up by asking Claude? Claude saves it and gives you the DNS record, but the certificate is issued when you click **Check status** here in the app — so finish with this step either way.
+</Callout>
 
 ## Setting product slugs
 
@@ -62,11 +62,11 @@ Each product needs a slug to get a clean URL under your workspace domain. The sl
 
 Products without a slug fall back to `https://tools.acme.com/c/<product-id>` — still works, just uglier.
 
-The fastest way to set slugs is via Claude:
+New products get a slug from their name automatically. To change one, edit it next to the product on the **Custom Domain** page and click **Save**, or ask Claude:
 
 > "Set the slug for my Leadership Readiness product to 'leadership-readiness'"
 
-This calls `set_product_slug`. Slugs are unique within your workspace — if you try to use one that's taken, the tool auto-deduplicates with `-2`, `-3` suffixes.
+Slugs are unique within your workspace — if you pick one that's taken, `-2`, `-3` and so on is added automatically.
 
 ## Per-product domain overrides
 

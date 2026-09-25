@@ -4,25 +4,63 @@ description: 'Every update, improvement, and new feature — newest first.'
 ---
 We ship continuously. This page logs every meaningful release — new features, improvements, and the occasional breaking change.
 
-<Update label="September 2026" description="Product language setting" tags={["feature","improvement"]}>
+<Update label="September 2026" description="A new Brain, 24 result page designs, workspace controls and EU privacy tools" tags={["feature","improvement","fix"]}>
   ### New
 
-  - **Language setting for every product** — choose the language a product speaks: English, German, French, Spanish, Italian, Dutch, or Portuguese. It covers the whole experience: the greeting, every question and answer option, the AI Agents' analysis, and the result page. Find it on the canvas under **AI Product → Collection Instructions → Language**. [Read the guide →](/canvas/understanding-your-ai-product#language)
-  - **Set the language from Claude** — with the connector, just say _"Set the language of [product name] to German."_ Changes from Claude and from the canvas are the same setting, so the latest one always wins.
+  - **A new Brain, with a Workspace map** — Brain has been rebuilt. The chat shows which sources it's drawing on (switch them on or off per chat), keeps a record of what it looked up, and shows its plans coming together step by step. The new **Workspace map** puts your whole workspace on one screen:
+    - Your products stand in lanes for their funnel stage — **TOFU**, **MOFU**, **BOFU** and **Delivery** (plus **Community**, if you use it).
+    - Each product is a column. Its **height** shows how many leads it brought in over the period you pick (**Last 30 days** or **All time**).
+    - Each column is banded by **lead quality** — Strong, Developing and Opportunity, with unscored leads in cream.
+    - The **Knowledge** lane holds your sources and memories, and dashed outlines mark ideas and gaps.
+    - Click a product to see its leads, quality, last response and whether it's live, then **Ask Brain** what to do next. **Gaps to look at** lists your saved ideas and products with no leads in 30 days, and **Map / List** switches to rows.
+  - **19 new result page designs** — products can now finish on a designed result page that fills itself from the conversation: Growth Diagnostic, Readiness Scorecard, Maturity Ladder, Audit Checklist, Benchmark, Coaching Fit Check, SWOT Analysis, Priority Matrix, Cost of Inaction, Best-fit Recommendation, Risk Register, Action Plan, Timeline, Scope & Price Estimate, Budget Allocation, Strategy Report, Proposal, Future-state Story and Content Kit. That's 24 designs in all. Every design except Risk Register can be picked in **Build with AI**; all 24 are available through the Claude connector.
+  - **Language setting for every product** — choose the language a product speaks: English, German, French, Spanish, Italian, Dutch or Portuguese. It covers the greeting, every question and answer option, the AI Agents' analysis and the result page. Find it on the AI Product node under **Conversation → Collection Instructions → Language**.
+  - **AI disclosure** — your landing, chat and result pages can now show _"You're engaging with AI. By continuing, you acknowledge our Privacy Policy and AI Notice."_ Link your own privacy policy or write it in the app, and we host it on your product's own address. The AI Notice is drafted for you in your workspace's name, and you can edit it or link to your own. It's on for new products by default, and you tick which existing products show it, in **Settings → AI & connections → AI Disclosure**.
+  - **Data retention** — choose how long each workspace keeps its leads, for example 365 days. Leads older than that are deleted automatically in a daily clean-up. Find it in **Settings → Client settings → Data retention**.
+  - **Delete a single lead** — when someone asks to be erased, delete their lead permanently from the product's **Analytics → All Results** table.
+  - **Settings for each workspace** — Brand Voice, variables, branding, Brain and lead emails now belong to the workspace you're in, so different clients or brands never mix. Every settings page says whether it applies to one workspace (**This client only**) or the whole account (**Every client on the account**).
+  - **A Claude key per workspace** — on any plan, give a workspace its own Claude key from the **This workspace** card in **Settings → AI & connections → Claude API Key**, or let it use the account's key.
+  - **Usage & cost** — see what the AI cost to run in each workspace, month by month, with a breakdown by product for the workspace you're in, and download the monthly figures as a CSV. Find it in **Settings → Account & billing → Usage & cost**.
+  - **A new dashboard** — an overview of your workspace, including your latest response.
+  - **Verified in Claude's directory** — the Productised connector is now verified in Claude's connector directory.
 
   ### Improved
 
+  - **Build with AI** — result designs appear as preview cards, so you can see a result before you build. Choose how your product opens (a written landing page is recommended), pick from all 20 themes, and your theme carries through to the landing and result pages. A build screen shows each part as it comes together.
+  - **Faster, more reliable builds** — Build with AI now runs on our servers, and results use your product's scoring, settings and AI Agents' analysis.
   - **Auto language** — on **Auto** (the default), a product speaks the language its instructions are written in, from the very first question. Existing products need no changes.
   - **Test runs reach the result page** — a run started from a product's demo link (`?demo=true`) now goes all the way through to its result page, so you can test an unpublished product end to end.
+  - **Workspace custom domains** — product links on a workspace domain now open the right product, pages show the product's own favicon and title, you can choose where the domain's home page sends visitors and set a default favicon, and new products get a web address automatically.
+  - **Connector cards** — all 18 of Claude's in-chat cards for Productised have been redesigned, now with dark mode.
+  - **Settings, analytics and product settings** — redesigned to be clearer and more consistent, with helpful empty states when there's nothing to show yet.
+  - **Translated pages** — product pages declare their own language and keep working when a visitor's browser translates them.
   - **Simpler Profile settings** — the interface-language option has been removed from Profile. Language is now set per product, so one workspace can run products in different languages.
+  - **Security** — tighter protections across product pages, uploads, sign-up and the API.
+
+  ### Fixed
+
+  - Result pages no longer run bullet lists together into a single paragraph.
+  - Reference Material now reaches the AI when a product runs.
+  - Workspace design system changes now save.
+  - Demo sessions no longer end after the first answer.
+  - The MCP node now works when a product runs from the app.
+  - Revising a product from Claude no longer blanks its designed pages.
+  - Result pages keep their borders and full-size headline score.
+  - Pages no longer flash or reload while loading.
+
+  ### Removed
+
+  - The Credits page and the review-for-credits offer. Your credit balance is on **Settings → Account & billing → Subscription**, under the **Usage** tab.
+  - The Digital card and Debug settings pages.
 </Update>
 
-<Update label="August 2026" description="Image variables + reusable brand assets" tags={["feature","improvement","fix"]}>
+<Update label="August 2026" description="Image variables, reusable brand assets and lead emails" tags={["feature","improvement","fix"]}>
   ### New
 
-  - **Image variables** — variables can now hold an **image**, not just text. Upload your logo, headshot, or product photo once in **Settings → Variables**, and reuse it on every result and landing page with a single `{{ custom:key }}` token. It drops straight into an image tag — `<img src="{{ custom:brand_logo }}">` — and swapping the image in Settings updates every page that references it, with no rebuild. [Read the guide →](/workspace/variables)
-  - **Variable palette on the canvas** — open a **Page** node and its settings panel now lists every variable you can use — custom values, brand images, and the product's form fields — each as a click-to-copy token. No more remembering keys.
-  - **Claude sees your variables** — ask the connector _"list my custom variables"_ at any time and it returns every token and image, ready to place. Say _"use my logo in the header"_ and Claude wires it into the page for you (`get_variables` now returns your custom values and images).
+  - **Image variables** — variables can now hold an **image**, not just text. Upload your logo, headshot or product photo once in **Settings → Variables**, and reuse it on every result and landing page with a single `{{ custom:key }}` token. It drops straight into an image tag — `<img src="{{ custom:brand_logo }}">` — and swapping the image in Settings updates every page that uses it, with no rebuild.
+  - **Variable palette on the canvas** — open a **Page** node and its **Variables you can use** panel lists your custom values, brand images, form fields and AI outputs, each as a click-to-copy token.
+  - **Claude sees your variables** — ask the connector _"list my custom variables"_ while working on a product and it returns every token and image, ready to place. Say _"use my logo in the header"_ and Claude wires it into the page for you.
+  - **Lead emails** — switch on **Lead Notifications** in a product's **Settings → Deployment** and you get an email each time someone completes it, with their name, email, status, and score and segment if the product scores leads. High scorers are flagged as hot. It's off by default, so you choose which products email you.
 
   ### Improved
 
@@ -30,7 +68,7 @@ We ship continuously. This page logs every meaningful release — new features, 
 
   ### Fixed
 
-  - **Workspace image upload** — uploading an image variable from Settings → Variables no longer fails with a "Product ID is required" error; workspace-level assets now save correctly (and `.svg` logos are accepted).
+  - **Workspace image upload** — uploading an image variable from Settings → Variables no longer fails with a "Product ID is required" error, and `.svg` logos are accepted.
 </Update>
 
 <Update label="June 2026" description="Claude Design support + connector reliability" tags={["feature","improvement","fix"]}>
@@ -146,25 +184,3 @@ We ship continuously. This page logs every meaningful release — new features, 
   - Report and Document outcomes now inherit Brand Voice styling defaults on creation.
   - Outcome preview loads faster — no longer requires a full page reload when switching between responses.
 </Update>
-
-<Update label="December 2024" description="Research Power + advisor mode" tags={["feature"]}>
-  ### New
-
-  - **Research Power** — give your AI Product live web search capabilities. Useful for products that need current data, market context, or competitor information.
-  - **Advisor mode** — after the collection phase ends, the AI shifts into an open-ended Q\&A conversation. Respondents can ask follow-up questions and get personalised answers based on everything collected.
-  - **Knowledge Power URL indexing** — alongside file uploads, you can now paste a URL and have it indexed into your product's knowledge base.
-
-  ### Improved
-
-  - Knowledge Power file processing now handles larger PDFs more reliably.
-</Update>
-
-<Update label="October 2024" description="Initial launch" tags={["feature"]}>
-  ### New
-
-  - **Productised public launch** — the canvas, AI Product node, Knowledge Power, Report and Document outcomes.
-  - **Collection goals** — 10 field types available: text, email, choice (single and multi), scale, yes/no, image selection, and more.
-  - **Decision model** — two modes for how the AI evaluates responses: AI Judgement (holistic) and AI Scorecard (rubric-based).
-  - **Product deployment** — share via link or embed code. Product-level settings for visibility and email collection.
-</Update>
-

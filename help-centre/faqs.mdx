@@ -6,79 +6,124 @@ description: Answers to the most common questions about Productised.
 ## Getting started
 
 **Do I need to know how to code?**
-No. Productised is built for coaches and consultants, not developers. If you can describe what you want your product to do, you can build it.
+No. Productised is built for coaches, consultants and agencies, not developers. You never write code. The only technical steps are optional — pasting an embed snippet into your website, or adding a DNS record for a custom domain — and both come with copy-ready instructions.
 
 **How long does it take to build a product?**
-Most products take between 10 and 30 minutes to build using the Create with AI flow. More complex products with custom Powers and a designed Output Page may take longer, but there is no coding involved at any stage.
+**Build with AI** makes a working first version in about a minute. Describe your idea, choose what people get at the end, choose how the product opens, and pick a theme. Refining the questions, scoring and result page usually takes another 10–30 minutes.
 
 **What is the difference between an AI product and a chatbot?**
-A chatbot is an open-ended conversation with no defined goal. An AI product is a structured experience — it collects specific information, evaluates it using your decision model, and delivers a personalised outcome. It has a beginning, a middle, and an end. Every person goes through it once and receives something tangible.
+A chatbot is an open-ended conversation with no defined goal. An AI product has a clear goal: it asks the right questions, works through the answers using your method, and ends in a defined outcome — a personalised result, a designed result page, or an ongoing Advisor session.
+
+**Can I build products from Claude?**
+Yes. The Productised connector is verified in Claude's connector directory. Connect it once, then build, edit and publish products by asking Claude. See [Claude connector](/claude-connector/overview).
 
 ---
 
-## Products and features
-
-**What is a Power?**
-The MCP node is how you extend what your AI Product can do. Connect any service that publishes an MCP server — your CRM, your calendar, a search provider, your own API — and Claude can call its tools while an end user is answering. See [MCP connections](/powers/mcp) for a full overview.
+## Building products
 
 **What is an Outcome?**
-An Outcome is what your audience receives at the end of the product experience — a Standard written result, a custom Page, a live Advisor session, or nothing at all if you only want the lead (Collect only). See [What are Outcomes?](/outcomes/what-are-outcomes) for a full overview.
+An Outcome is what happens at the end of the conversation — a Standard written result, a designed result page, a Document, a live Advisor session, or nothing at all if you only want the lead (Collect only). On the canvas, choose it in the AI Product node's **Outcome** tab. See [What are Outcomes?](/outcomes/what-are-outcomes).
+
+**What result page designs are there?**
+There are 24, each built to fill itself from the conversation — including Growth Diagnostic, Readiness Scorecard, Maturity Ladder, Audit Checklist, Benchmark, Coaching Fit Check, SWOT Analysis, Priority Matrix, Cost of Inaction, Best-fit Recommendation, Action Plan, Timeline, Scope & Price Estimate, Budget Allocation, Strategy Report, Proposal, Future-state Story and Content Kit. **Build with AI** shows 19 of them as preview cards. All 24 — including Risk Register, Radar Profile, Persona, Deep Insights and Grid Scorecard — are available through the Claude connector.
+
+**What is the MCP node?**
+The MCP node lets your product use other tools while someone is answering. Add it to the canvas and enter the web address of any hosted MCP server — your CRM, your calendar, a search provider, your own API — plus an access token if it needs one. Claude can then use that server's tools during the conversation and in an Advisor session. Servers that only run on your own computer, or that need you to sign in through a browser, can't be connected. See [MCP connections](/powers/mcp).
 
 **Can I customise how the product looks?**
-Yes. In the AI Product node's Design tab, you can set colours, fonts, background effects, and layout. Result pages are designed in Claude with the connector — there is no in-app page editor.
+Yes. Choose from 20 themes, or adjust colours, fonts, text size, animations and the background (an image or an animated effect) in the AI Product node's **Design** tab. You can also choose how the product opens — a landing page, a title page, a chat widget or straight into the chat. For fully custom pages, design them in Claude with the connector.
 
 **Can my product run in another language?**
-Yes. Each product speaks one language, set on the AI Product node under **Collection Instructions → Language**: English, German, French, Spanish, Italian, Dutch, or Portuguese. **Auto** (the default) follows the language your instructions are written in. The questions, the analysis and the result page all use it. With the Claude connector, just ask: *"Set the language of [product name] to French."* See [Understanding your AI Product](/canvas/understanding-your-ai-product#language).
+Yes. Each product speaks one language: English, German, French, Spanish, Italian, Dutch or Portuguese. Set it on the AI Product node under **Conversation → Collection Instructions → Language**, or ask Claude: _"Set the language of [product name] to French."_ **Auto** (the default) follows the language your instructions are written in. The questions, the analysis and the result page all use it. See [Understanding your AI Product](/canvas/understanding-your-ai-product#language).
 
 **Can I embed the product on my website?**
-Yes. From Product Settings → Deployment, you'll find your embed code and your public product URL. Both are available as soon as your product is published.
+Yes. **Product Settings → Deployment** shows your public link and embed code at any time. They work for visitors once **Publish Product** is switched on in the same tab. To embed the product on your own site, add your site's domain to **Allowed Domains for Embedding** — if that field is empty, other websites can't embed it.
 
-**Can I use my Lovable, WordPress, Webflow, or other website?**
-Yes — no embed code required. Copy your product's public URL from Product Settings → Deployment, then create a button or link on your site that points to it (open in a new tab). When a visitor clicks, they land on your Productised product and the AI begins the conversation. If you want the chat to start immediately without a welcome screen, set the Welcome Screen mode to **Direct Start** in the Canvas design panel.
+**Can I use my Lovable, WordPress, Webflow or other website?**
+Yes — no embed code required. Copy your product's public link from **Product Settings → Deployment** and add a button or link on your site that points to it. If you want the chat to start straight away with no welcome screen, open the AI Product node's **Design** tab and choose **Direct Start** under **Welcome Screen**.
+
+**Can I use my own domain?**
+Yes. Connect a domain to a workspace in **Settings → Client settings → Custom Domain**, and every product in it lives at `yourdomain.com/product-name`. New products get their web address automatically, and you can change any product's address on the same page, or ask Claude. See [Custom domain](/workspace/custom-domain).
+
+**Will visitors see Productised?**
+On a custom domain, the page title and the AI disclosure carry only your name. A few things show Productised until you replace them, product by product:
+- the **"made by" badge** in the bottom-left corner — upload your own logo and link in **Product Settings → Branding** (paid plans), or ask Claude to set custom branding;
+- the **browser tab icon** — set a favicon in **Product Settings → Page SEO**, or a default for the whole domain in **Custom Domain** settings;
+- the **link preview image** when someone shares the link — set your own share image in **Page SEO**.
 
 ---
 
-## Data and privacy
+## Workspaces and teams
+
+**What is a workspace?**
+A workspace keeps its own products, leads, Brand Voice, variables, branding, Brain, custom domain, data retention and AI disclosure settings, so different brands — or different clients — stay separate. Your plan, credits, team, prompts and account Claude key are shared across the account, though any workspace can have its own Claude key. Each settings page says whether it applies to **This client only** or **Every client on the account**.
+
+**Can I invite my team?**
+Team seats come with the Agency plan: 5 seats including you, so you can invite 4 people from **Settings → Account & billing → Team**. See [Agency](/agency/overview).
+
+**What can Members and Admins do?**
+- **Members** work on client workspaces: products, pages, leads (including deleting a lead), Brain, Brand Voice, variables, prompts and custom domains. They can also connect Claude.
+- **Admins** can do everything a Member can, plus manage billing and Usage & cost, the team, Claude and API keys, data retention, AI disclosure and logs.
+- Only the **owner** can delete the account. Owners and Admins can change other people's roles on the Team page.
+
+---
+
+## Data, privacy and AI
 
 **Where is response data stored?**
-All response data is stored securely and is accessible only to you in your Productised workspace. You can view, export, and manage all responses from your product's analytics dashboard.
+In the United States: the app runs on Fly.io (Ashburn, Virginia), the database on Supabase (AWS us-east-1), and files on Cloudflare R2. See [Legal](/legal).
+
+**Who can see responses?**
+In the app, only people on your account. Each visitor's result page also has its own private, unguessable link, and anyone holding that link can open it — for example, when a visitor forwards their result.
+
+**Which AI services see my data?**
+Products run on Anthropic's Claude. A few features use other services: AI Insights, Talking Points and the Growth Playbook (OpenAI), voice input in the chat (OpenAI), parts of Brain (OpenAI), files visitors upload in a chat (Supermemory) and web search (Parallel). Productised doesn't train AI models on your data, and Anthropic and OpenAI don't use API data to train their models.
+
+**Can I delete a lead?**
+Yes. Open the product's **Analytics → All Results** table and delete the lead — it's a permanent delete, not hidden. Use this when someone asks to be erased. Files they uploaded, and anything already sent on by webhook or email, aren't removed by this.
+
+**Can leads be deleted automatically?**
+Yes. In **Settings → Client settings → Data retention** (Admins only), choose how long a workspace keeps its leads, for example 365 days. Leads older than that are deleted in a daily clean-up. Leave it empty to keep leads indefinitely (the default).
+
+**How do I tell visitors they're talking to AI?**
+In **Settings → AI & connections → AI Disclosure** (Admins only). Your landing, chat and result pages then show _"You're engaging with AI. By continuing, you acknowledge our Privacy Policy and AI Notice."_ Link your privacy policy or write it in the app, and edit the AI Notice we draft for you. It's on for new products by default, and you tick which existing products show it. This helps you meet the EU AI Act's transparency rules.
+
+**Is AI-generated content marked?**
+Anthropic is adding invisible, machine-readable marks to text its Claude models generate, so it can be identified as AI-generated. This doesn't change what your visitors see. See our [AI Content & Disclosure Policy](https://www.productised.ai/ai-content-policy).
 
 **Can I export my data?**
-Yes. From the Analytics section of any product, you can export leads, all responses, or raw JSON. See [Exporting data](/product-analytics/exporting-data) for details.
+Yes. From any product's **Analytics**, export all responses, form data, leads, or the full JSON. See [Exporting data](/product-analytics/exporting-data).
 
 ---
 
 ## Billing and plans
 
 **What are credits?**
-Credits are consumed when your products are used — each AI conversation, generated report, document, or offer uses a small number of credits. Your plan includes a monthly credit allowance. See [Credits](/workspace/credits) for a breakdown of what uses credits.
+When Productised's own Claude key runs your product, each visitor conversation uses 1 credit, whatever it generates. Building products, Build with AI and Brain don't use credits. Your plan's allowance resets each billing period, and your balance is on **Settings → Account & billing → Subscription**, under the **Usage** tab. See [Credits](/workspace/credits).
 
-**Can I use my own AI API key?**
-Yes. On Pro plans and above, you can connect your own Anthropic API key under Product Settings → Secrets. This reduces credit consumption for core AI runs.
+**Can I use my own Claude API key?**
+Yes, on any plan. An Admin adds it in **Settings → AI & connections → Claude API Key**. To cover one workspace, switch to it and use the **This workspace** card on the same page. Your products' conversations and results then run on your Anthropic account and use no credits. Brain, Build with AI, voice input, AI Insights and Talking Points still run on Productised's services, at no credit cost.
+
+**How do I see what each workspace costs?**
+**Settings → Account & billing → Usage & cost** shows the AI cost of each workspace by month, with a breakdown by product for the workspace you're in. Download the monthly figures as a CSV for client billing.
 
 ---
 
 ## AI reliability and failures
 
 **What happens if the AI fails while someone is using my product?**
-Their answers are saved regardless. As soon as a visitor starts your product a response is recorded, so if the AI can't respond, everything they've told you up to that point — including their contact details — is kept and appears in your Analytics. A failed generation never costs you the lead. The visitor simply sees a friendly "the AI service is temporarily unavailable, please try again in a moment" message, never a technical error.
+Their answers are saved. A lead is recorded as soon as the visitor sends their first message, and if the AI can't respond, the conversation so far is kept in your Analytics. The visitor sees a short "Sorry, something went wrong. Please try again." message, not a technical error.
 
 **Will I know if my product stops working?**
-Yes. If AI generation fails for a visitor, you receive a notification telling you which product failed and why in plain terms — for example, that the AI provider rejected your API key, or reported that the account is out of credits. To avoid flooding you, you'll get at most one alert per product per hour, even if many visitors are affected.
+If your own Claude key is rejected, or its Anthropic account runs out of credit, Owners and Admins get an in-app notification naming the product and the reason in plain terms. You'll get at most one alert per product per hour.
 
-**How can I tell which submissions were affected?**
-Each response records a generation status you can see in Analytics: **Completed** (everything generated normally), **Partial** (the conversation worked but some output couldn't be generated), or **Failed** (the AI couldn't respond, but the visitor's answers were still saved). After a bad spell — say an expired key over a weekend — you can find the affected leads and follow up manually.
-
-**I use my own API key. What happens if it runs out of credits or gets revoked?**
-Your product doesn't silently break. Visitors' answers are still captured, you're alerted within the hour that your key was rejected or reported a billing problem, and the visitor sees a polite "try again shortly" message. To fix it, top up or replace your key in Product Settings → Secrets — new sessions pick up the working key immediately, with no need to republish. Productised never quietly switches to platform credits when your own key fails: your key means your billing, so we alert you instead of moving the cost.
+**I use my own API key. What happens if it runs out of credit or is revoked?**
+Visitors' answers are still captured, you're alerted, and visitors see a short "please try again" message. Top up or replace your key in **Settings → AI & connections → Claude API Key** — new messages use it straight away, with no need to republish. Productised never quietly switches to its own key when yours fails: your key means your billing.
 
 **Does a brief provider outage break my product?**
-Usually not. Temporary problems — rate limits, provider hiccups, network blips — are retried automatically before anything is treated as a failure, and most resolve on the first retry without the visitor noticing. Problems that retrying can't fix, such as an invalid key or an out-of-credits account, fail fast, save the lead, and alert you — because waiting wouldn't help.
+Usually not. In the conversation, rate limits and provider hiccups are retried automatically, and most resolve without the visitor noticing. Problems a retry can't fix, like an invalid key, fail straight away and alert you.
 
-**If I pick a specific Claude model with my own key, is that the model that runs?**
-Yes. The model you select on the AI Product node is the model that runs on your key. If you don't select one, a sensible default is used.
+**Can I choose which Claude model runs?**
+On **AI Agent** nodes, yes — the model you pick there is used whichever key runs it. The AI Product conversation itself uses a Claude model chosen by Productised.
 
-**Do visitors ever see technical error details?**
-No. Visitors only see a friendly, generic message. Technical details stay in your owner notification and our internal logs — they're never shown to your audience.
-
-<Callout kind="tip">If a product's alerts point to a key or billing problem, check Product Settings → Secrets and your [credit balance](/workspace/credits) first — those are the two most common causes.</Callout>
+<Callout kind="tip">If an alert points to a key or billing problem, check **Settings → AI & connections → Claude API Key** first, then your balance under **Subscription → Usage**.</Callout>
