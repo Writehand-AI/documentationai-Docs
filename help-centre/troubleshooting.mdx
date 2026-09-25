@@ -25,7 +25,14 @@ description: Common issues and how to resolve them.
 
 ## Test runs are showing up as leads
 
-- Runs from the demo link (`?demo=true`) are real conversations, so they appear in your results like any other lead. Delete test leads from **Analytics → All Results** when you're done.
+- Runs from the demo link (`?demo=true`) are **test runs**. They're marked **Test** in **Analytics → All Results**, and they show in your analytics by default, so a new product looks populated when you demo it.
+- To leave them out, switch on **Hide test runs** at the top of the product's **Analytics**. It applies to the whole workspace: every product's analytics, the dashboard, the Brain map and exports.
+- Test runs never use up a submission cap. You can also delete them one by one from **All Results**.
+
+## My webhook, Zapier or lead email didn't fire during a test
+
+- That's expected: test runs from the demo link (`?demo=true`) never send lead emails, notifications, webhooks or Zapier data, so a demo can't push fake leads into your inbox or CRM. The page shows a small **Test mode** label while you're on a demo link.
+- To check an integration, use **Send Test** in **Product Settings → Webhook**, or complete the product from its **live** link (without `?demo=true`).
 
 ## AI conversation feels off or generic
 

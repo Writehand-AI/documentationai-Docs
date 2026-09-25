@@ -12,6 +12,10 @@ When a response is completed, Productised sends a `POST` request to the URL you 
 
 You don't need to poll for new responses. The data arrives the moment the conversation ends.
 
+<Callout kind="warning">
+**Test runs don't trigger integrations.** Runs from your product's demo link (ending in `?demo=true`) are test runs. They appear in your analytics, marked **Test**, but they never send lead emails, notifications, webhooks or Zapier data. To check your integration, use **Send Test** in **Product Settings → Webhook**, or complete the product from its live link.
+</Callout>
+
 ## Setting up a webhook
 
 <Steps>
