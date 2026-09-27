@@ -54,6 +54,14 @@ If you need the original value later, get it from the Anthropic Console — Prod
 
 <Callout kind="info">A key that doesn't begin with `sk-ant-` is rejected when you save it. That's deliberate: a mistyped key would otherwise be stored happily and every run would quietly fall back to your credits while you believed the client was being billed.</Callout>
 
+## A key is used from the first run, not the last
+
+A key isn't held back until credits run out. The order above is checked on every run, so the moment a key exists it wins — your Productised credits stop being spent on that workspace entirely, rather than being spent first and handed over when they're gone.
+
+Those credits aren't wasted. They sit unused as a safety net: an agency that removes or rotates a key isn't instantly dead in the water while it sorts the key out.
+
+Because the balance stops moving, it can't tell you how much a client is actually using. **Settings → Account & billing → Usage & cost** breaks the real cost down per workspace, and the Claude connector will report runs and cost on your own Anthropic account if you ask it about usage.
+
 ## What it doesn't change
 
 Giving a client their own key changes who pays Anthropic for running the products. It doesn't change your Productised subscription, your plan's product limits, or your Brain allowance — those stay with your account.

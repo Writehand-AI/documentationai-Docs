@@ -14,6 +14,8 @@ These don't use credits:
 - Brain (it has its own monthly conversation limit on each plan)
 - Any conversation run on your own Claude key
 
+"Doesn't use credits" isn't the same as "doesn't cost anything". If you have your own Claude key, building a product through the Claude connector runs on that key and is billed to your Anthropic account — it just never touches your credit allowance. Building in the app always runs on Productised's key.
+
 ## Your allowance
 
 Your plan includes a credit allowance that resets at the start of each billing period. If you use it up, you can buy add-on credits or upgrade your plan.
@@ -35,4 +37,17 @@ Keys can be set at two levels, and the more specific one wins:
 
 With no key set, products run on Productised's key and use your credits.
 
-With your own key, product conversations and results are billed to your Anthropic account. Brain, Build with AI, voice input, AI Insights and Talking Points still run on Productised's services, at no credit cost. See [AI keys](/product-settings/secrets).
+### Your key takes over straight away
+
+A key is not held in reserve for when your credits run out. From the moment it's saved, every run it covers goes to Anthropic on that key, and your credits stop being spent at all — they sit unused, as a safety net for if you ever remove or rotate the key.
+
+Anthropic bills you for that usage directly. It doesn't appear on your Productised invoice, and we don't mark it up.
+
+With your own key, product conversations and results are billed to your Anthropic account, as are products you build through the Claude connector. Brain, in-app Build with AI, voice input, AI Insights and Talking Points still run on Productised's services, at no credit cost. See [AI keys](/product-settings/secrets).
+
+### Seeing what your key has cost
+
+Because your credit balance stops moving, it can't tell you how much you're using. Two places can:
+
+- **Settings → Account & billing → Usage & cost** — what the AI cost to run, per workspace.
+- **The Claude connector** — ask it about your usage or credits and it reports your runs and what they cost on your own Anthropic account, rather than a credit balance that no longer changes.
