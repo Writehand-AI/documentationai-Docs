@@ -62,6 +62,24 @@ Those credits aren't wasted. They sit unused as a safety net: an agency that rem
 
 Because the balance stops moving, it can't tell you how much a client is actually using. **Settings → Account & billing → Usage & cost** breaks the real cost down per workspace, and the Claude connector will report runs and cost on your own Anthropic account if you ask it about usage.
 
+## Book Builder picks its key differently
+
+Book Builder, the long-form book writer you unlock by leaving a review, is your own tool rather than one of your clients' products. It always runs on a Claude key — never on Productised credits — and it chooses that key in its own order:
+
+<Steps>
+  <Step title="Your account key" title-type="p">
+    The key on your account, under **Settings → Claude API Key**. This is the one almost everyone uses.
+  </Step>
+
+  <Step title="Your main workspace's key" title-type="p">
+    If there's no account key, the key set on your **main workspace** — the first workspace on your account, the one you started with. This covers agencies that only ever set keys per workspace.
+  </Step>
+</Steps>
+
+**A client's workspace key is never used for Book Builder**, even if it's the only key on your account. Your books are your own work, so they shouldn't land on a client's Anthropic invoice. If your only keys belong to clients, add a key to your account (or your main workspace) before opening Book Builder.
+
+With no key in either place, Book Builder asks you to add one rather than falling back to credits.
+
 ## What it doesn't change
 
 Giving a client their own key changes who pays Anthropic for running the products. It doesn't change your Productised subscription, your plan's product limits, or your Brain allowance — those stay with your account.
