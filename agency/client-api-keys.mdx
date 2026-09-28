@@ -1,8 +1,9 @@
 ---
 title: Billing a client's AI to them
-description: Give one client their own Claude key so their AI usage is billed directly to their Anthropic account — and runs under their agreement with Anthropic.
+description: >-
+  Give one client their own Claude key so their AI usage is billed directly to
+  their Anthropic account — and runs under their agreement with Anthropic.
 ---
-
 Some clients want their AI usage on their own bill — either because they already have an Anthropic account, or because they'd rather pay the model provider directly than have it marked up.
 
 You can give any single workspace its own Claude API key. Everything in that client's workspace then runs on their key and appears on their Anthropic invoice. Every other client carries on using yours.
@@ -12,13 +13,15 @@ You can give any single workspace its own Claude API key. Everything in that cli
 When one of your products runs, Productised picks a key in this order:
 
 <Steps>
-  <Step title="The workspace's own key">
+  <Step title="The workspace's own key" title-type="p">
     If this client has their own key set, it's used — and Anthropic bills them directly.
   </Step>
-  <Step title="Your account key">
+
+  <Step title="Your account key" title-type="p">
     Otherwise the key on your account is used, so it covers every client by default. Set it once, not once per workspace.
   </Step>
-  <Step title="Productised credits">
+
+  <Step title="Productised credits" title-type="p">
     If there's no key anywhere, the product runs on the platform's own key and draws from your plan's credit allowance.
   </Step>
 </Steps>
@@ -29,8 +32,9 @@ Switch into that client's workspace, then go to **Settings → Claude API Key**.
 
 Paste the client's key into the workspace card and save. To undo it, choose **Remove, use account key** — the client goes back to running on yours.
 
-<Callout kind="warning">**Check you're in the right workspace before saving.** A key saved here applies to that client only, and it's easy to set it against the wrong one if you've just switched.</Callout>
+**Check you're in the right workspace before saving.** A key saved here applies to that client only, and it's easy to set it against the wrong one if you've just switched.
 
+**Ask the client to create the key for one workspace in their Claude Console.** When they create it (Settings → API keys → Create key), they should pick a **Workspace** there — their Default workspace is fine. A key created for their whole Anthropic organisation won't work and fails with an error saying it "is not scoped to a workspace". This is a workspace inside their Claude Console, which has nothing to do with the Productised workspace you're saving it in. See [Create the key for one workspace](/workspace/secrets#create-the-key-for-one-workspace).
 
 ## It's also a privacy answer
 
@@ -44,15 +48,15 @@ Worth being straight about what it does not cover:
 - **Voice input and the Brain.** A few paths still run on OpenAI — speech-to-text when someone uses the hold-to-speak button, and parts of the Brain. A client's Claude key doesn't change those.
 - **Anthropic's training.** Neither their key nor ours puts data into model training; Anthropic excludes API traffic from it either way. The key is about whose account and whose agreement, not whether training happens.
 
-<Callout kind="info">If a client asks for this in writing, it belongs in your contract with them, not just in this setting. We can supply our own data processing agreement to sit behind it — email [hello@productised.ai](mailto:hello@productised.ai).</Callout>
+If a client asks for this in writing, it belongs in your contract with them, not just in this setting. We can supply our own data processing agreement to sit behind it — email [hello@productised.ai](mailto:hello@productised.ai).
 
 ## How keys are stored
 
-Keys are encrypted before they're stored and are never shown again in full. Once saved, the page shows only a masked version like `sk-ant-…4f2a`, so you can confirm *which* key is set without the key itself being sent back to your browser.
+Keys are encrypted before they're stored and are never shown again in full. Once saved, the page shows only a masked version like `sk-ant-…4f2a`, so you can confirm _which_ key is set without the key itself being sent back to your browser.
 
 If you need the original value later, get it from the Anthropic Console — Productised can't show it to you.
 
-<Callout kind="info">A key that doesn't begin with `sk-ant-` is rejected when you save it. That's deliberate: a mistyped key would otherwise be stored happily and every run would quietly fall back to your credits while you believed the client was being billed.</Callout>
+A key that doesn't begin with `sk-ant-` is rejected when you save it. That's deliberate: a mistyped key would otherwise be stored happily and every run would quietly fall back to your credits while you believed the client was being billed.
 
 ## A key is used from the first run, not the last
 
