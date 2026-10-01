@@ -1,52 +1,96 @@
 ---
 title: "How scoring works"
-description: "Scoring in Productised isn't a decision tree or a separate node — your AI Agent reads the whole conversation and produces the score, tier and analysis live, for each respondent."
+description: "Every finished lead gets a score from 0 to 100 — from your product's scored questions, or from Claude when there are none — plus the score your result page shows."
 ---
 
-There is no separate "scoring node" in Productised. Scoring is done by the **AI Agent** — the same node that writes your result. It reads the full pattern of answers and produces the score, the tier label, the per-dimension breakdown and the written analysis, generated for each end user in the moment.
+Productised scores people in two places, and it helps to keep them apart:
 
-This is the core of what makes a Productised assessment different from a quiz builder: the outcome is *reasoned*, not *selected from a shelf of pre-written results*.
+- **The lead score** — one number from 0 to 100 for each person who finishes your product. It's what you see on the **Leads** page, the dashboard's **Latest leads**, your product's **Analytics** and in exports, and it's what decides who counts as a **hot lead**.
+- **The result score** — the score, tier and analysis your **AI Agent** writes for the person's own result page.
 
 ---
 
-## The AI Agent is the scoring engine
+## The lead score
 
-When you build a scored product, the AI Agent is configured with **output fields** — for example `overall_score`, `tier_label`, `dim1_score`, `dim1_insight`, `action_1`. You set these by describing what you want in plain language; Claude wires them up (`set_agent_fields`).
+Every lead that reaches the end of your product gets a lead score. It comes from one of two places.
 
-At completion, the agent:
+### 1. Scored questions
 
-1. Reads every answer — including free text, tone and the tension between responses.
-2. Applies your scoring objective and framing.
-3. Writes each field — the score, the tier, the insights and the next steps — specifically for that end user.
+When a product has **scored questions**, the lead score is calculated from the person's answers. Only **scale**, **yes/no** and **multiple-choice** questions can be scored. Each one has:
 
-Those fields then populate your result page through `{{ object:* }}` tokens (e.g. `{{ object:overall_score }}`, `{{ object:tier_label }}`).
+- **Points per answer** — for a choice or yes/no question, how many points each answer is worth (the strongest answer is worth 10, the weakest 0). For a scale, where the answer sits on the scale, with higher or lower set as the better end.
+- **A weight** from 1 to 3 — how much the question matters. Each question is worth 10 points for every unit of weight.
 
-<Callout kind="note">
-Because the score is reasoned, two nearly identical end users can receive meaningfully different results when one detail changes the picture — something a fixed decision tree can't do.
+The lead score is the points earned out of the points possible, as a percentage. A question the person didn't answer is left out, rather than counted as zero. The same answers always give the same score, so it's consistent and easy to explain.
+
+### 2. The AI fit score
+
+When a product has **no scored questions**, Claude scores the lead instead. When the conversation finishes, Claude reads the person's answers against what your product is trying to learn about them and gives:
+
+- a **score from 0 to 100** — how strong a lead they are, on fit, need and readiness to act, and
+- a **one-line reason** for it.
+
+These leads show a small **AI** marker next to their score on the Leads page. Hover over the score to read the reason. The reason is also included in your CSV export.
+
+<Callout kind="info">
+The AI fit score runs in the background just after the lead is saved, so it never slows down the person finishing your product. It uses your product's Claude key — your own key if you've added one — and isn't charged in credits.
 </Callout>
 
----
+### Which leads get a score
 
-## Two ways to score
-
-**AI reasoning (default).** The agent judges the answers against your objective and assigns the scores. Best when the signal is qualitative — clarity, readiness, fit — and you want the result to read like a consultant wrote it.
-
-**Deterministic points (optional).** For any **scale**, **yes/no** or **choice** question, you can switch on scoring and assign points per answer plus a weight. Those combine into a fixed, auditable score. Best when you need the same answers to always produce the same number (lead-qualification gates, compliance).
-
-You can use either, or both together — the deterministic numbers anchor the headline score while the agent writes the analysis around it.
+- **Only finished leads are scored.** Someone who leaves part-way through has no score.
+- **A product with scored questions always uses them**, even if the person's answers only cover some of them. If they answered none of the scored questions, Claude scores them instead.
+- **Leads that finished before the AI fit score was introduced** keep the score they had, or stay unscored.
 
 ---
 
-## Tiers and segments
+## Low, medium, high and hot leads
 
-The agent's `tier_label` (e.g. "Ready", "Stabilising", "Not yet") *is* your end user's segment. It shows on the result page, and it powers your **segment breakdown** analytics — so you can see how leads are distributed without configuring anything separately.
+Every scored lead also gets a rating:
 
-To tailor the outcome by tier, give the agent guidance on how each tier's result and call-to-action should differ. The single result page then adapts its message and CTA to the tier your end user lands in.
+| Rating     | Lead score            |
+| ---------- | --------------------- |
+| **Low**    | 0–39%                 |
+| **Medium** | 40–69%                |
+| **High**   | 70% and above         |
+
+These are the default cut-offs. A product's [decision model](/personalisation/decision-model) can set its own.
+
+A **hot lead** is one its product rates **high**. The **Hot leads** figure on the Leads page counts them, and the **Hot only** filter lists just those people.
+
+A rating and its label (for example *"High fit"*) are only given when there's a real score behind them. A lead without a score has no rating.
+
+---
+
+## Turning scoring on
+
+Scoring is set up when the product is built:
+
+- **Build with AI** and **building with Claude** switch scoring on for every scorecard, assessment, diagnostic, audit, readiness check and quiz. They choose which questions to score, the points for each answer, and each question's weight.
+- **Advice, intake and booking products** are built without scored questions. Their leads get an AI fit score instead.
+
+On the canvas, open the **AI Product** node to see which questions are scored. Each one is marked **Structured scoring enabled**, with its weight.
+
+---
+
+## The result score
+
+Your result page can show a score of its own, written by the **AI Agent**. The agent reads the whole conversation and writes **output fields** such as `overall_score`, `tier_label`, `dim1_score`, `dim1_insight` and `action_1`. You set these up by describing what you want in plain language, and Claude wires them up (`set_agent_fields`).
+
+Those fields fill your result page through `{{ object:* }}` tokens, for example `{{ object:overall_score }}` and `{{ object:tier_label }}`. Because the score is reasoned, two nearly identical people can get meaningfully different results when one detail changes the picture.
+
+<Callout kind="note">
+The result score is part of what the person sees. It doesn't change their **lead score**, which is what the Leads page, the dashboard and Analytics use.
+</Callout>
+
+### Tiers on the result page
+
+The agent's `tier_label` (for example "Ready", "Stabilising" or "Not yet") is the person's segment on their result page. To tailor the result by tier, tell the agent how each tier's message and call-to-action should differ. The single result page then adapts to the tier each person lands in.
 
 ---
 
 ## What this replaces
 
-Most quiz tools use **conditional logic**: hand-written if/then rules that route people through a fixed tree to one of a few pre-written outcomes. Productised doesn't. The AI Product node already adapts its questions conversationally, and the AI Agent generates the outcome — so there's no branching tree to build or maintain, and no shelf of pre-written result pages to match against.
+Most quiz tools use **conditional logic**: hand-written if/then rules that route people through a fixed tree to one of a few pre-written outcomes. Productised doesn't. The AI Product node adapts its questions as the conversation goes, the lead score ranks your leads for you, and the AI Agent writes each person's result — so there's no branching tree to build or maintain.
 
 [Set up your AI Agent's fields →](/claude-connector/result-pages)
