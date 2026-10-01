@@ -58,7 +58,7 @@ Collection goals are the specific pieces of information the AI needs to gather f
 
 The AI uses these goals to guide the conversation — it works through them naturally, one at a time, making the exchange feel like a real discussion rather than a form.
 
-You can enable **scoring** on individual collection goals (for choice, yes/no, and scale fields). This gives the AI a point value to assign per answer, which feeds into the decision model and allows you to route different people to different outcomes based on their total score.
+Choice, yes/no and scale questions can be **scored**: each answer is worth a number of points, and each question has a weight. Scoring is set up when the product is built — scorecards, assessments, diagnostics, audits, readiness checks and quizzes get it automatically — and scored questions are marked **Structured scoring enabled** on this node. The points add up to each lead's score. See [How scoring works](/canvas/scoring-node).
 
 ### Decision model
 
@@ -66,11 +66,11 @@ The decision model is how your AI Product determines what outcome — and what v
 
 <Columns cols="3">
   <Card title="AI Judgement" icon="cpu" horizontal="false">
-    The AI makes a holistic decision based on the full conversation. No structured scoring — it weighs everything it collected and makes a call. Best for nuanced, qualitative products.
+    The AI makes a holistic decision based on the full conversation, with no scored questions. Best for nuanced, qualitative products. Each lead still gets an AI fit score from Claude.
   </Card>
 
   <Card title="AI Scorecard" icon="bar-chart-2" horizontal="false">
-    The AI uses light structured scoring behind the scenes for more consistent results. Good when you want rough categories (low/medium/high fit) without manual configuration.
+    The product's scored questions give each person a score and a consistent rating (low, medium or high). Set up for you when you build a scorecard, assessment or diagnostic.
   </Card>
 
   <Card title="Advanced Manual" icon="sliders" horizontal="false">

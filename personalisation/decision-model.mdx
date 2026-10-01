@@ -16,15 +16,15 @@ Without a decision model, the AI produces an outcome that is informed by the con
 
 **AI Judgement**
 
-The AI weighs the full conversation and makes a holistic call. There is no structured scoring behind the scenes — the evaluation is qualitative, contextual, and entirely AI-driven. The AI considers everything: confidence level, depth of answers, contradictions, signals the person may not have stated directly.
+The AI weighs the full conversation and makes a holistic call. There are no scored questions behind it — the evaluation is qualitative, contextual and AI-driven. The AI considers everything: confidence level, depth of answers, contradictions, signals the person may not have stated directly.
 
-Use AI Judgement for nuanced products where context matters more than a number. It requires no configuration and produces excellent results for most use cases. This is the right starting point.
+Use AI Judgement for advice, intake and other nuanced products where context matters more than a number. It needs no configuration. Each lead still gets a score: Claude gives every finished lead an [AI fit score](/canvas/scoring-node) from 0 to 100.
 
 **AI Scorecard**
 
-The AI applies light structured scoring behind the scenes. This produces consistent categories — the equivalent of low, medium, or high fit — without requiring you to manually configure score maps or thresholds. The AI derives the scoring from the collection goals and its understanding of the domain.
+The product's [scored questions](/canvas/scoring-node) produce a score for each person, and that score gives them a consistent rating — low, medium or high. You don't set the points yourself: when you build a scorecard, assessment, diagnostic, audit, readiness check or quiz, Build with AI or Claude chooses the scored questions, the points for each answer and each question's weight.
 
-Use AI Scorecard when you want rough segmentation without the setup overhead. It adds predictability to the outcome without removing the AI's qualitative reasoning.
+Use AI Scorecard when you want to be able to say "this person rated high" and mean the same thing every time. It adds predictability without removing the AI's qualitative reasoning from the outcome.
 
 **Advanced Manual**
 
@@ -50,22 +50,27 @@ The objective shapes what the decision model is trying to determine, and in turn
 
 ## What the decision model produces
 
-At the end of the collection phase, the decision model produces a `DecisionResult`: a structured object that contains the overall status (low, medium, or high), the label that matches that status (using your custom labels or the defaults for the chosen objective), a short summary, and a confidence level.
+At the end of the collection phase, the decision model produces a `DecisionResult` for the person. When there's a score behind it, that includes:
 
-When Advanced Manual mode is used with scored fields, the result also includes a full score context: total score, maximum possible score, percentage, per-dimension breakdowns, top strengths, and top gaps.
+- the overall **status** — low, medium or high
+- the **label** for that status (your custom labels, or the defaults for the chosen objective)
+- a short **summary** and a **confidence** level
+- the full **score context** — total score, maximum possible score, percentage, a breakdown per scored question, and top strengths and gaps
+
+A status and label are only given when there's a real score behind them. Without scored questions there's no status: the AI reasons about the person directly in the outcome, and the lead gets an AI fit score instead.
 
 This result is passed to every connected Outcome. The Report uses it to shape the tone of the verdict, the emphasis of the breakdown, and the strength of the CTA. The Document uses it to frame recommendations. The Offer uses it to calibrate the pitch. Every outcome receives the full picture.
 
 ## How status and confidence work
 
-Status is straightforward: low, medium, or high. It maps to the outcome labels you configure (or the defaults for your chosen objective).
+Status is straightforward: low, medium or high, from the person's score. The default cut-offs are 0–39% low, 40–69% medium and 70% and above high. It maps to the outcome labels you configure (or the defaults for your chosen objective). A lead rated **high** is a **hot lead** on the Leads page.
 
-Confidence reflects how reliably the score was computed. In AI Judgement mode, confidence is not computed from structured data. In AI Scorecard and Advanced Manual modes, confidence is derived from the number of scored dimensions: four or more scored fields produces high confidence; two or three produces medium; fewer produces low. Higher confidence means the outcome can be more specific and more assertive.
+Confidence reflects how reliably the score was computed. It's based on how many scored questions the person answered: four or more gives high confidence, two or three medium, and fewer low. Higher confidence means the outcome can be more specific and more assertive.
 
 ## Practical advice
 
-Start with AI Judgement. It requires no configuration, handles nuance well, and produces excellent outcomes across most professional services products. The AI understands what you are trying to evaluate from your collection goals and system prompt context.
+For advice, intake and other nuanced products, AI Judgement is the right choice. It needs no configuration and handles nuance well, and Claude still gives every lead an AI fit score.
 
-Move to AI Scorecard if you find yourself wanting consistent categories across responses — if you want to be able to say "this person was high-fit" and mean the same thing every time.
+For scorecards, assessments, diagnostics, audits, readiness checks and quizzes, AI Scorecard is set up for you when the product is built, so every lead gets a consistent, explainable score.
 
 Use Advanced Manual only when you have a specific requirement: a known scoring framework, a particular threshold you need to enforce, or a structured diagnostic where the dimension breakdown is itself part of the value delivered.

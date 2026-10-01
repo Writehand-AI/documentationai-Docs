@@ -34,7 +34,7 @@ Click any row to open the full response detail. The detail view shows:
 - **User data** — all collected field values from the conversation, including any lead capture fields (name, email, phone, company)
 - **Extracted data** — the structured data the AI extracted from the conversation answers
 - **Conversation history** — the full exchange between the user and the AI during collection
-- **Decision result** — if the decision model was active: the status (low/medium/high), the label, the confidence level, and the dimension breakdown if scored fields were used
+- **Decision result** — when the lead has a score: the status (low/medium/high), the label, the confidence level, and the breakdown per scored question
 - **AI output** — the content this session generated
 
 ## Finding specific responses
@@ -47,7 +47,7 @@ Use the search and filter tools above the table to narrow down responses:
 
 ## What the decision result tells you
 
-The decision result in a response is the output of the decision model for that specific session. It shows:
+The decision result in a response is the output of the decision model for that specific session. It appears when the lead has a score from scored questions, and shows:
 
 - **Status** — low, medium, or high
 - **Label** — the human-readable label for that status (e.g. "High fit" or "Strong baseline")
