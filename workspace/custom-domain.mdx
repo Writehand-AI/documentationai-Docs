@@ -53,8 +53,12 @@ DNS propagation usually takes **5–30 minutes**, though some providers can take
 Back in settings, click **Check status**. This issues the HTTPS certificate if the domain doesn't have one yet, then shows the status. Once the certificate is active, the page shows `Status: Active ✓` and your products are live at their workspace-domain URLs.
 
 <Callout kind="info">
-Set the domain up by asking Claude? Claude saves it and gives you the DNS record, but the certificate is issued when you click **Check status** here in the app — so finish with this step either way.
+Set the domain up by asking Claude? Once the DNS record is in place, say _"check my workspace domain"_ — Claude issues the certificate and tells you when it's live (`get_workspace_domain_status`), the same as clicking **Check status** here.
 </Callout>
+
+### Home page and favicon
+
+A workspace domain only serves products at `/<product-slug>`, so you can choose where its bare address (`https://tools.acme.com/`) sends visitors, and a default favicon for its pages — on this page, or by asking Claude (`update_workspace`).
 
 ## Setting product slugs
 
@@ -89,7 +93,10 @@ If you decide to stop using a workspace-wide domain, click **Remove** on the set
 
 ## Related tools
 
-- [`set_workspace_domain`](/claude-connector/tools-reference) — set the workspace-wide domain via Claude (status checks and unlinking happen in the app under **Settings → Custom domain**)
+- [`set_workspace_domain`](/claude-connector/tools-reference) — set the workspace-wide domain via Claude
+- [`get_workspace_domain_status`](/claude-connector/tools-reference) — issue the certificate and check the domain is live
+- [`remove_workspace_domain`](/claude-connector/tools-reference) — remove it (Claude shows which live products use it and asks you to confirm)
+- [`update_workspace`](/claude-connector/tools-reference) — the domain's home-page redirect and favicon
 - [`set_product_slug`](/claude-connector/tools-reference) — set a product's URL slug from Claude
 - [`set_custom_domain`](/claude-connector/tools-reference) — set a per-product domain (overrides the workspace one)
 

@@ -1,6 +1,6 @@
 ---
 title: Claude follows your workspace
-description: One connector connection for the whole agency — switch client in the app and Claude moves with you.
+description: One connector connection for the whole agency — switch client from Claude or in the app, and set up new clients without leaving the chat.
 ---
 
 The obvious worry about running many clients through one Claude connection is that you'd have to reconnect every time you changed client. You don't.
@@ -10,18 +10,18 @@ The obvious worry about running many clients through one Claude connection is th
 ## How it works
 
 <Steps>
-  <Step title="Switch client in the app">
-    Use the workspace switcher in the sidebar, exactly as you would to work in the app.
+  <Step title="Tell Claude which client">
+    Say _"work on the Acme workspace"_. Claude switches with `switch_workspace` — or use the workspace switcher in the app's sidebar; both do the same thing.
   </Step>
-  <Step title="Go back to Claude">
-    Nothing to reconnect, no setting to change, no need to start a new chat.
+  <Step title="Nothing to reconnect">
+    No setting to change, no need to start a new chat.
   </Step>
   <Step title="Claude is now working on that client">
-    From your next message, it reads that client's products, brand voice, branding and Brain — and anything it creates lands in their workspace.
+    From its next step, it reads that client's products, leads, brand voice, branding and Brain — and anything it creates lands in their workspace.
   </Step>
 </Steps>
 
-Your connection isn't tied to one client. It reads which workspace you're in each time you send a message.
+Your connection isn't tied to one client. It reads which workspace you're in each time it acts. An app tab you already have open keeps its own workspace until you switch there too.
 
 ## Knowing which client Claude is on
 
@@ -35,15 +35,35 @@ The same happens when you **create a product** — Claude confirms which client 
 
 Claude will tell you. Because a connection only reaches the workspace it's currently in, asking it to edit a product belonging to another client returns an explanation rather than a dead end: which workspace it's looking in, which other workspaces exist on your account, and a link to switch.
 
-Switch in the app, come back, and ask again — nothing to reconnect.
+Ask it to switch, then ask again — nothing to reconnect.
 
-## Switching from inside Claude
+## Setting up a new client from Claude
 
-Not yet. Today the switch happens in the app and Claude follows.
+On the Agency plan, a whole client set-up can happen in one conversation:
 
-Asking Claude to "switch to client B" won't move it, because the connector has no tool for changing workspace — that's a planned addition, and it will arrive with a future update to the connector.
+<Steps>
+  <Step title="Create the workspace">
+    _"Create a workspace for Acme"_ — Claude creates it (`create_workspace`) and switches to it.
+  </Step>
+  <Step title="Set their brand voice">
+    Tell Claude about the client, or paste their details, and it saves the brand voice (`set_brand_voice`) — including the business name and booking link their result pages use. Add their logo and colours with `upload_image` and `set_design_system`.
+  </Step>
+  <Step title="Connect their domain">
+    _"Use acme.youragency.com"_ — Claude gives you the DNS record (`set_workspace_domain`), then finishes activating it once the record is in place (`get_workspace_domain_status`). `update_workspace` sets where the bare domain sends visitors and its favicon.
+  </Step>
+  <Step title="Bring in products you've already built">
+    _"Copy the ROI calculator into Acme"_ — a complete copy, unpublished, ready for the client's branding (`copy_product_to_workspace`).
+  </Step>
+  <Step title="Hand over the leads">
+    _"Export Acme's leads"_ — a spreadsheet download link (`export_data`).
+  </Step>
+</Steps>
 
-<Callout kind="info">If you want to be certain which client you're building for, switch in the app first, then ask Claude to list your products to confirm before you start.</Callout>
+### Let the client fill in their own details
+
+Ask Claude to _"send Acme a brand set-up form"_. It builds a short intake product in the client's workspace, on their domain (for example `acme.youragency.com/brand-setup`), asking the same questions as the Brand Voice page. When the client has filled it in, ask Claude to apply their answers: it shows you what it would save, and saves it only after you confirm.
+
+<Callout kind="info">If you want to be certain which client you're building for, ask Claude to list your products first — it names the workspace they came from.</Callout>
 
 ## If you work in two clients at once
 
