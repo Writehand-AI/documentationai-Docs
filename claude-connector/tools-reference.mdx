@@ -1,38 +1,49 @@
 ---
 title: All tools
-description: The full set of 73 tools the Claude Connector exposes, organised by category.
+description: The full set of 89 tools the Claude Connector exposes, organised by category.
 ---
 
-The connector exposes 73 live tools against your Productised workspace. They're grouped here by purpose so you can quickly find the right one. Each tool returns a structured result Claude can reason about, and most write operations return a **demo URL** so you can see the change immediately.
+The connector exposes 89 live tools against your Productised workspace. They're grouped here by purpose so you can quickly find the right one. Each tool returns a structured result Claude can reason about, and most write operations return a **demo URL** so you can see the change immediately.
+
+Every tool works in the workspace the connection is currently in. On an agency account, that means one client at a time — see [Client workspaces](#client-workspaces) below.
 
 ---
 
-## Daily briefing & pipeline
+## Daily briefing & leads
 
 <Columns cols="2">
   <Card title="get_morning_briefing" icon="sun">
-    Start every session with a full daily briefing — new leads today vs yesterday, hot prospects needing attention, per-product activity breakdown. No parameters needed.
+    Start every session with a daily briefing for the current workspace — new leads today vs yesterday, hot prospects needing attention, per-product activity. No parameters needed.
+  </Card>
+  <Card title="list_leads" icon="users">
+    Every lead in the workspace, across all its products — the same list as the **Leads** page in the app. Filter by search text, product, status, score (0–100), hot leads, date range, or leads who left contact details. Renders a leads card with a link to the Leads page.
   </Card>
   <Card title="get_hot_leads" icon="flame">
-    Return your most promising leads — responses tagged "hot-lead" or with a high AI score — across all products. Optional filters: product, score threshold, lookback period.
+    Your best prospects in the current workspace — leads their product rates high, or tagged "hot-lead". Optional filters: product, score threshold, lookback period.
   </Card>
   <Card title="get_recent_activity" icon="activity">
-    A feed of recent submissions across all products — contact details, product, segment, pipeline status, tags.
+    A chronological feed of recent submissions in the current workspace — contact details, product, segment, pipeline status, tags.
   </Card>
   <Card title="search_responses" icon="search">
-    Filter responses by date, segment, status, tags, keyword, or contact details. The general-purpose find tool.
+    Filter one product's submissions by date, status or keyword, with paging. For every product at once, use `list_leads`.
   </Card>
   <Card title="get_response" icon="user">
-    Full detail on one response — all form answers, AI outputs, tags, status, and contact info.
+    Full detail on one lead — all answers, AI outputs, tags, status, and contact info.
   </Card>
   <Card title="tag_response" icon="tag">
-    Add, remove, or replace tags on a response. Common: hot-lead, booked-call, converted.
+    Add, remove, or replace tags on a lead. Common: hot-lead, booked-call, converted.
   </Card>
   <Card title="update_response_status" icon="check-circle">
     Move a lead through your pipeline: new → contacted → in_progress → converted / lost.
   </Card>
+  <Card title="delete_leads" icon="trash-2">
+    Permanently delete up to 100 leads — how you honour a person's request to have their data erased. Shows exactly what will go first, then needs `confirm:true`. Recorded in your account's logs without the lead's details.
+  </Card>
+  <Card title="export_data" icon="download">
+    Download your data as spreadsheets (CSV) — every lead with their answers, attribution and AI results, and/or your product list — for one product, the workspace or the whole account. Available on every plan. Returns download links that work for 15 minutes, in your browser while signed in; lead details are never pasted into the chat.
+  </Card>
   <Card title="get_talking_points" icon="mic">
-    Ready-to-use conversation starters for sales follow-up, generated from an end user's data.
+    Ready-to-use conversation starters for sales follow-up, generated from your leads' answers. Included on the Pro and Agency plans.
   </Card>
 </Columns>
 
@@ -42,7 +53,7 @@ The connector exposes 73 live tools against your Productised workspace. They're 
 
 <Columns cols="2">
   <Card title="list_products" icon="layers">
-    All your AI products — names, response counts, visibility, public URLs.
+    All your AI products in the current workspace — names, response counts, visibility, public URLs.
   </Card>
   <Card title="get_product" icon="file-text">
     Full details for a specific product: form questions, workflow structure, node IDs.
@@ -51,16 +62,16 @@ The connector exposes 73 live tools against your Productised workspace. They're 
     The product's node graph — what nodes exist, how they're connected, what each one does.
   </Card>
   <Card title="get_product_url" icon="link">
-    Shareable link, optionally pre-filled with a contact's name and email — ready to send. For outbound campaigns with arbitrary fields, prefer `generate_outbound_url`.
+    A product's public link (on its custom domain when it has one), optionally pre-filled with one contact's name, email and company. For links personalised with other fields, or many prospects at once, use `generate_outbound_url`.
   </Card>
   <Card title="get_analytics" icon="bar-chart-2">
     Response count, last submission, 14-day trend, completion rate for any product.
   </Card>
   <Card title="get_segment_breakdown" icon="pie-chart">
-    How respondents segment by AI-determined persona/tier across products.
+    How respondents segment by AI-determined persona/tier.
   </Card>
   <Card title="get_product_insights" icon="lightbulb">
-    AI-generated insights across all submissions for a product — patterns, surprises, opportunities.
+    AI-generated insights across all submissions for a product — patterns, surprises, opportunities. Included on the Pro and Agency plans.
   </Card>
   <Card title="get_form_questions" icon="list">
     The current intake questions for a product — names, labels, required flags.
@@ -69,14 +80,14 @@ The connector exposes 73 live tools against your Productised workspace. They're 
 
 ---
 
-## Build new products
+## Build & test products
 
 <Columns cols="2">
   <Card title="plan_product" icon="compass">
     Analyse a product description and recommend outcome type and funnel stage. Renders a Blueprint card and a Build CTA.
   </Card>
   <Card title="create_product" icon="plus">
-    Create a new (empty) product record. Conversation flow and prompts remain unpopulated until `generate_product` runs.
+    Create a new (empty) product record. New products start with the workspace's logo in the footer badge. Conversation flow and prompts remain unpopulated until `generate_product` runs.
   </Card>
   <Card title="generate_product" icon="zap">
     Run AI generation to build the full conversation flow, collection goals, system prompt, and canvas workflow for a newly-created product.
@@ -84,14 +95,44 @@ The connector exposes 73 live tools against your Productised workspace. They're 
   <Card title="revise_product" icon="refresh-cw">
     Re-run generation on an existing product with a revised prompt. Lossy — replaces the whole workflow. For surgical edits, prefer `update_node`.
   </Card>
+  <Card title="run_test" icon="flask-conical">
+    Test a product instantly, for free: checks the build for the gaps that leave a result blank (unused questions, disconnected nodes, page tokens with nothing to fill them), then makes a sample submission with placeholder content — no AI, no credits — and links to the real result page in its real design, marked as a test. Advisor products get the checks only.
+  </Card>
   <Card title="generate_plan" icon="map">
     Generate a full-funnel Journey Plan from Brain — product recommendations across all funnel stages.
   </Card>
   <Card title="clone_product" icon="copy">
-    Clone an existing product to use as a template for a new niche or audience.
+    Copy a product within the workspace — conversation, canvas, result pages and theme — to use as a template for a new niche or audience.
   </Card>
   <Card title="get_started" icon="home">
     Show the personalised welcome / getting-started panel. Useful on a user's first interaction.
+  </Card>
+</Columns>
+
+---
+
+## Client workspaces
+
+For agencies running one workspace per client, and anyone with more than one brand. Creating workspaces is part of the [Agency plan](/agency/overview); every plan can switch between and set up the workspaces it has.
+
+<Columns cols="2">
+  <Card title="switch_workspace" icon="arrow-left-right">
+    Move the connection to another workspace on your account, by name. Claude works there from its next step — no reconnecting. See [Claude follows your workspace](/agency/claude-and-workspaces).
+  </Card>
+  <Card title="create_workspace" icon="folder-plus">
+    Create a workspace for a new client and switch to it. Agency plan; other plans include one workspace and get an upgrade link.
+  </Card>
+  <Card title="copy_product_to_workspace" icon="copy">
+    Copy a product from any workspace on your account into another — conversation, prompts, canvas, landing page, result pages and theme. The copy starts unpublished, without the original's logo, domain, link name, webhook or lead alerts.
+  </Card>
+  <Card title="update_workspace" icon="settings">
+    Change the current workspace's settings: rename it, set the default theme for new products, where the bare workspace domain sends visitors and its favicon, the AI disclosure footer and privacy policy, lead retention, and hiding test runs. Disclosure, policies and retention need an owner or admin.
+  </Card>
+  <Card title="get_brand_voice" icon="mic">
+    Show the workspace's brand voice — what the business does, who it serves, how it works, its signature result, credentials, industry, main focus, business name, booking link and claims to make or avoid — as an editable card.
+  </Card>
+  <Card title="set_brand_voice" icon="pen-line">
+    Set or update the brand voice, field by field. The business name and booking link also fill the footer and call-to-action button on result pages. See [Brand Voice](/workspace/offer-profile).
   </Card>
 </Columns>
 
@@ -101,7 +142,7 @@ The connector exposes 73 live tools against your Productised workspace. They're 
 
 <Columns cols="2">
   <Card title="update_product" icon="edit-2">
-    Patch top-level product config — name, visibility, AI chat config (welcome message, button text, button colour, system prompt).
+    Patch top-level product config — name, visibility, welcome screen style, AI chat config (welcome message, button text, button colour, system prompt).
   </Card>
   <Card title="update_node" icon="sliders">
     Patch any canvas node's configuration by ID or type.
@@ -137,11 +178,23 @@ The connector exposes 73 live tools against your Productised workspace. They're 
 ## Pages — landing & result
 
 <Columns cols="2">
+  <Card title="list_welcome_styles" icon="monitor">
+    The four ways a product can greet a visitor — title page, chat, landing page or straight in — as a card with a preview of each and the current one marked. Apply the choice with `update_product`.
+  </Card>
   <Card title="get_welcome_html" icon="eye">
     Fetch a product's current custom landing page so Claude can iterate on it.
   </Card>
   <Card title="set_welcome_html" icon="globe">
     Save a custom HTML landing page to a product.
+  </Card>
+  <Card title="get_landing_page_template" icon="layout">
+    Fetch the designer-built default landing-page template, auto-themed to your product's brand colour — the starting point for `set_welcome_html`.
+  </Card>
+  <Card title="list_result_templates" icon="grid">
+    Gallery of the 24 result-page designs — scorecards, radar charts, personas, action plans, proposals, SWOT analyses and more — with live previews. Shows six first, with a "Show all" button.
+  </Card>
+  <Card title="apply_result_template" icon="layout-template">
+    Apply a design from the gallery to a result-page product: rebuilds its result page in that design, themed to the product, and sets up the AI Agent's fields so every section fills in.
   </Card>
   <Card title="get_page" icon="file">
     Retrieve the current HTML and tokens for a product's Page node output pages.
@@ -155,15 +208,25 @@ The connector exposes 73 live tools against your Productised workspace. They're 
   <Card title="delete_page" icon="x-square">
     Remove a single output page from a Page node.
   </Card>
-  <Card title="get_landing_page_template" icon="layout">
-    Fetch the designer-built default landing-page template (grid or signature style), auto-themed to your product's brand colour — the starting point for `set_welcome_html`.
-  </Card>
-  <Card title="list_result_templates" icon="grid">
-    Gallery of result-page designs — preview Dimensions, Radar, Persona, Deep Insights, Grid, and Narrative Report. Design products get Dimensions applied automatically at build time.
-  </Card>
 </Columns>
 
 Pasting a design from another tool (Figma export, v0, Lovable, plain HTML)? Just paste it into the chat — Claude cleans it up (strips scripts and external CSS, fixes layout), proposes which text should become `{{ tokens }}`, and saves it with `create_page` or `update_page`.
+
+---
+
+## Publishing & sharing
+
+<Columns cols="2">
+  <Card title="publish_product" icon="globe">
+    Set a product to public and return the live shareable URL.
+  </Card>
+  <Card title="get_share_options" icon="share-2">
+    Everything to share a product: its public link, a LinkedIn share link, and ready-to-paste embed code — inline, full page, pop-up or chat widget, as HTML, React or Next.js — plus step-by-step instructions for Kajabi, Circle, GoHighLevel, WordPress, Shopify, Wix, Notion and more. The same code as the app's Share card.
+  </Card>
+  <Card title="delete_product" icon="trash">
+    Permanently delete a product AND all of its responses, pages, and digital-card links. Requires `confirm:true`.
+  </Card>
+</Columns>
 
 ---
 
@@ -179,7 +242,7 @@ Send one unique link per prospect with their details baked into the URL. See the
     Render the welcome, subtitle, custom HTML, and starters with two sample sets (with params + empty) so the user sees both versions before saving. Critical safety net for non-coders.
   </Card>
   <Card title="generate_outbound_url" icon="link">
-    Single URL with arbitrary `{key:value}` params. Replaces the older `get_product_url` for outbound use. Warns on params not wired into the product.
+    A personalised link for one prospect, with any fields the product personalises on. Warns on params not wired into the product. For a plain public link, use `get_product_url`.
   </Card>
   <Card title="generate_outbound_urls_from_csv" icon="file-text">
     Bulk. Accepts CSV text, returns enriched CSV with a new `outbound_url` column appended. Optional `key_mapping` renames headers (e.g. "First Name" → `firstName`).
@@ -192,11 +255,11 @@ To remove personalisation later, ask Claude to re-save the affected content with
 
 ## Marketplace & template sharing
 
-Two tools that let users share their own products as installable templates, or browse and install templates other users have shared. Install happens entirely on the web — Claude hands the user the marketplace URL and they click "Copy to Workspace" from there (the existing plan-limit check applies).
+Two tools that let users share their own products as installable templates, or browse and install templates other users have shared. Install happens on the web — Claude hands the user the marketplace URL and they click "Copy to Workspace" from there (the existing plan-limit check applies). To copy a product into another workspace on your own account, use `copy_product_to_workspace` instead.
 
 <Columns cols="2">
   <Card title="get_template_share_link" icon="share-2">
-    Returns a shareable marketplace URL for one of the user's own products. Anyone with the link clicks → marketplace install page → "Copy to Workspace" → the product lands in their workspace. The original stays untouched.
+    Returns a shareable marketplace URL for one of the user's own products. Anyone on your account can copy it straight away; someone on another account can copy it once the product is listed on the Marketplace (Product Settings → List on Marketplace). The original stays untouched.
   </Card>
   <Card title="list_marketplace_templates" icon="grid">
     Browse public marketplace templates inside Claude. Renders a visual gallery widget with filter chips (industry, GROW stage, search). Each card has Install and Preview buttons that open the marketplace page in a new tab.
@@ -205,23 +268,26 @@ Two tools that let users share their own products as installable templates, or b
 
 ---
 
-## Plan, credits & billing
+## Plans, credits & billing
 
-Transparency tools so users can see exactly where they stand against their plan.
+Transparency tools so users can see exactly where they stand, and upgrade in one click.
 
 <Columns cols="2">
+  <Card title="get_plans" icon="layers">
+    The plans side by side — price, live products, AI credits, client workspaces, team seats, custom domain, branding and AI insights — with your current plan marked and a checkout button for each other plan. Checkout opens in your browser; payment never happens in the chat.
+  </Card>
   <Card title="get_plan_status" icon="gauge">
-    Returns the user's current plan, usage for every gated feature (live products, AI credits), BYOK status, and the upgrade + BYOK URLs. Read-only. Claude calls this before answering "what plan am I on" or "am I close to my limit".
+    Your current plan, usage for every gated feature (live products, AI credits), own-key status, and an upgrade link that opens checkout for the next plan up. Read-only.
   </Card>
   <Card title="get_credits" icon="zap">
-    Visual credit gauge — plan title, balance, usage this period, all-time usage, per-product breakdown, BYOK status. Use whenever the user asks about credits, usage, or cost impact.
+    Visual credit gauge — plan, balance, usage this period, all-time usage, per-product breakdown, own-key status, and (with more than one workspace) usage per workspace, so agencies can bill each client.
   </Card>
   <Card title="get_workspace_stats" icon="bar-chart-2">
-    Account-wide totals — products created, live products, responses, leads — plus ready-made workspace URLs (settings, billing/subscription management, members, variables). Pairs with `get_plan_status` to show value alongside usage.
+    Totals for the current workspace — products created, live products, responses, leads — plus ready-made URLs (settings, billing/subscription management, members, variables).
   </Card>
 </Columns>
 
-When a write tool (e.g. `create_product`, `publish_product`, `generate_product`) is blocked by a plan limit, the response is a structured `limit_reached` payload with the upgrade URL and a list of next-step options — Claude surfaces these verbatim. BYOK on `ai-credits` bypasses the cap entirely.
+When a tool is blocked by your plan, the response is a structured `limit_reached` payload — the plan that lifts the limit (`upgrade_plan`), a link straight to its checkout, and a list of next-step options. Claude surfaces these verbatim and can show `get_plans` to compare. Your own Claude key removes the AI-credit cap entirely.
 
 ---
 
@@ -250,7 +316,13 @@ When a write tool (e.g. `create_product`, `publish_product`, `generate_product`)
     Check whether DNS has propagated for a per-product custom domain.
   </Card>
   <Card title="set_workspace_domain" icon="globe">
-    Configure a workspace-wide hostname — every product is served under it unless they have their own per-product override. Status checks and unlinking happen in the app under Settings → Custom domain.
+    Configure a workspace-wide hostname — every product is served under it unless it has its own per-product override. Returns the DNS record to add.
+  </Card>
+  <Card title="get_workspace_domain_status" icon="radio">
+    Finish activating the workspace domain once DNS is in place — requests the HTTPS certificate and reports when it's live. Same as **Check status** in the app.
+  </Card>
+  <Card title="remove_workspace_domain" icon="unlink">
+    Remove the workspace domain and its certificate. Shows which live products use it first, then needs `confirm:true`.
   </Card>
   <Card title="set_product_slug" icon="hash">
     Name a product's URL slug under the workspace domain (e.g. /leadership-readiness).
@@ -275,7 +347,7 @@ When a write tool (e.g. `create_product`, `publish_product`, `generate_product`)
     List every `{{ form:x }}`, `{{ node:x }}`, `{{ object:x }}`, and `{{ custom:x }}` token available in a product — with labels and copy-ready syntax.
   </Card>
   <Card title="set_variable" icon="key">
-    Create or update a workspace variable — available as `{{ custom:key }}` across all products.
+    Create or update a workspace variable — available as `{{ custom:key }}` across all products in the workspace.
   </Card>
   <Card title="set_webhook" icon="radio">
     Add, replace, or remove an outgoing webhook — Productised POSTs full response data to your URL on each submission. (There's no separate getter — the current webhook shows in the product's settings in the app.)
@@ -288,13 +360,13 @@ When a write tool (e.g. `create_product`, `publish_product`, `generate_product`)
 
 <Columns cols="2">
   <Card title="brain_ask" icon="cpu">
-    Ask Brain a strategic question. Loads your workspace context automatically.
+    Ask Brain a strategic question. Draws on the current workspace's brand voice, products and memory.
   </Card>
   <Card title="save_idea" icon="lightbulb">
     Save a product idea directly to Brain's Ideas tab.
   </Card>
   <Card title="add_brain_memory" icon="database">
-    Add a fact or preference to Brain's long-term memory.
+    Add a fact or preference to Brain's long-term memory for the current workspace.
   </Card>
   <Card title="add_brain_source" icon="upload">
     Add a knowledge source (URL or text) to Brain's knowledge base.
@@ -304,19 +376,6 @@ When a write tool (e.g. `create_product`, `publish_product`, `generate_product`)
   </Card>
   <Card title="delete_brain_item" icon="trash-2">
     Remove a memory or source from Brain.
-  </Card>
-</Columns>
-
----
-
-## Publishing
-
-<Columns cols="2">
-  <Card title="publish_product" icon="globe">
-    Set a product to public and return the live shareable URL.
-  </Card>
-  <Card title="delete_product" icon="trash">
-    Permanently delete a product AND all of its responses, pages, and digital-card links. Requires `confirm:true`.
   </Card>
 </Columns>
 

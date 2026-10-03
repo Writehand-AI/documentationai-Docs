@@ -9,22 +9,31 @@ If you already start your day in Claude, this turns your Claude window into your
 
 ---
 
+Everything here works in the workspace you're in — on an agency account, one client at a time.
+
 ## The daily / weekly views
 
 <Columns cols="2">
   <Card title="get_morning_briefing" icon="sun">
     The start-of-day summary. New leads today vs yesterday, hot prospects needing attention, and a per-product breakdown. No parameters needed.
   </Card>
+  <Card title="list_leads" icon="users">
+    Every lead across all your products — the same list as the **Leads** page in the app, with the same filters: search, product, status, score (0–100), hot leads, date range, and leads who left contact details. Shows a leads card with a link to the Leads page.
+  </Card>
   <Card title="get_recent_activity" icon="activity">
-    A feed of recent submissions across all products — contact details, product, segment, pipeline status, tags. Great for a quick scan before a follow-up session.
+    A feed of recent submissions — contact details, product, segment, pipeline status, tags. Great for a quick scan before a follow-up session.
   </Card>
   <Card title="get_hot_leads" icon="flame">
-    Your highest-priority prospects — responses tagged "hot-lead" or with a high AI score — across all products. Optionally filter by product, score threshold, or lookback period.
+    Your highest-priority prospects — leads their product rates high, or tagged "hot-lead". Optionally filter by product, score threshold, or lookback period.
   </Card>
   <Card title="get_workspace_stats" icon="bar-chart">
     High-level totals — product counts, response counts, top products by activity. The "is the business growing?" view.
   </Card>
 </Columns>
+
+> *"Show me every lead from the last 30 days who scored 70 or more and left an email."*
+
+Claude calls `list_leads` with those filters and shows them in a card, newest first.
 
 ---
 
@@ -32,7 +41,7 @@ If you already start your day in Claude, this turns your Claude window into your
 
 <Columns cols="2">
   <Card title="search_responses" icon="search">
-    Filter responses by date range, segment, status, tags, keyword in the answers, or contact details. The general-purpose find tool.
+    Filter one product's submissions by date range, status or keyword. For every product at once, use `list_leads`.
   </Card>
   <Card title="get_response" icon="user">
     Full detail on one response — all form answers, AI-generated outputs, tags, status, contact info. The drill-down view.
@@ -72,10 +81,10 @@ Claude calls `search_responses` to find Sarah, then `tag_response({ tags: ["hot-
     How your respondents segment by their AI-determined persona/tier across all products or a specific one. Useful for understanding what kinds of leads each product attracts.
   </Card>
   <Card title="get_product_insights" icon="lightbulb">
-    AI-generated insights across all submissions for a product — patterns, surprises, opportunities. The "what is this data telling me?" view.
+    AI-generated insights across all submissions for a product — patterns, surprises, opportunities. The "what is this data telling me?" view. Pro and Agency plans.
   </Card>
   <Card title="get_talking_points" icon="mic">
-    Ready-to-use conversation starters for sales follow-up, generated from a specific respondent's data. The "what should I say on the call?" tool.
+    Ready-to-use conversation starters for sales follow-up, generated from your leads' answers. The "what should I say on the call?" tool. Pro and Agency plans.
   </Card>
 </Columns>
 
@@ -103,9 +112,25 @@ A pattern many users settle into:
 
 ---
 
+## Deleting and exporting
+
+<Columns cols="2">
+  <Card title="delete_leads" icon="trash-2">
+    Permanently delete up to 100 leads — how you honour someone's request to have their data erased. Claude shows exactly which leads will go and asks you to confirm first.
+  </Card>
+  <Card title="export_data" icon="download">
+    Leads and products as spreadsheets (CSV), for one product, the workspace or the whole account — on every plan. Claude gives you download links that work for 15 minutes in your browser; it never pastes lead details into the chat.
+  </Card>
+</Columns>
+
+> *"Jo Smith asked us to delete her data."*
+
+Claude finds Jo's lead, shows you what would be deleted, and deletes it once you say yes. You can also set a retention period so old leads go automatically (**Settings → Client settings → Data retention**, or ask Claude — `update_workspace`).
+
+---
+
 ## What the connector can't do
 
-- **Delete responses.** Deleting a lead happens in the app — from the product's **Analytics → All Results** table, or automatically through a retention period (**Settings → Client settings → Data retention**). Useful when someone asks you to erase their data.
 - **Read or send email.** Email follow-up happens in your email tool. (You can forward Claude's talking-points output to an outbound email manually.)
 - **Edit response content.** You can tag and re-status a response, but not rewrite what someone answered or what the AI returned. A lead is a record of what actually happened.
 
