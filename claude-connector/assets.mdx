@@ -1,9 +1,53 @@
 ---
 title: Add images, logos & favicons
-description: Re-host any image from a URL onto the Productised CDN, or upload reusable brand images as variables to drop into any page.
+description: Put your own images on landing and result pages from Claude: drop one into the chat, design it in Canva, re-host it from a link, or reuse your brand images. Show different images depending on answers.
 ---
 
-There are two ways to get images into your products: **`upload_image`** (re-host an image from a URL, great for scraping a customer's logo) and **image variables** (upload reusable brand assets in the app and reference them anywhere as `{{ custom:key }}`). This page covers both.
+You can put your own images anywhere on a landing page or result page, straight from Claude. There are five ways in:
+
+| Way in | Best for | How |
+|---|---|---|
+| **Drop it into the chat** | A one-off photo, banner or graphic | Attach it in Claude and say where it goes |
+| **Design it in Canva** | Banners, hero images, social graphics | Connect Canva in Claude and ask for the design |
+| **From a link** | Images already online | Give Claude the link, or a website to take it from |
+| **Brand images** | Things you reuse: logo, headshot, team photos | Upload once in **Settings → Variables & images** |
+| **Drawn by Claude** | Icons, badges, illustrations, diagrams | Just ask: Claude draws them in the page |
+
+Every image ends up hosted on Productised, so it never breaks when the original moves. And on result pages, you can [show a different image depending on someone's answers](#show-a-different-image-depending-on-answers).
+
+---
+
+## Drop an image into the chat
+
+Attach an image in Claude and say where it goes:
+
+> *"Use this photo at the top of my landing page."* (with the photo attached)
+
+Claude makes a web-ready copy of the file, uploads it to Productised and places it in the page. It tells you the uploaded copy is compressed, which keeps your pages fast.
+
+<Note>
+This needs **Code execution and file creation** switched on in Claude (**Settings → Capabilities**), which is what lets Claude read the file you attached. In Claude Code it works without that setting. If Claude says it can't read your file, switch the setting on, or upload the image as a [brand image](#reusable-brand-images-image-variables) instead.
+</Note>
+
+For large, detailed photos (a high-resolution team photo, say), the compressed copy can lose a little sharpness. Upload those as a brand image for full quality.
+
+---
+
+## Design it in Canva
+
+With the **Canva** connector added in Claude alongside Productised, you can design an image and drop it straight into your product in one message:
+
+> *"Create a 1200×600 hero banner in Canva for my Growth Marketing SWOT, export it as a PNG, then use it as the hero image on its landing page."*
+
+Claude creates the design in Canva, exports it, uploads the export to Productised (Canva's download links expire, so it always keeps its own copy) and places it on the page.
+
+---
+
+## Graphics Claude draws
+
+For icons, badges, simple illustrations and diagrams, you don't need a file at all. Ask Claude and it draws them as SVG directly in the page. They stay sharp at any size and load instantly.
+
+> *"Add a small rocket illustration next to the headline."*
 
 ---
 
@@ -28,7 +72,7 @@ Re-hosting **snapshots the asset** onto your CDN: durable, owned, optimisable, s
     A direct link to an image. The server downloads it (with SSRF guards), re-hosts it, returns a permanent CDN URL. This is what Claude uses for scraped logos.
   </Card>
   <Card title="base64_data" icon="file">
-    Raw image bytes encoded as base64. Useful when an image isn't reachable by URL — but uncommon, since Claude works in text/JSON.
+    Raw image bytes encoded as base64. This is how an image you attach in the chat gets uploaded: Claude makes a compressed copy and sends it this way.
   </Card>
 </Columns>
 
@@ -63,7 +107,7 @@ All four steps happen in one round-trip. The customer never uploads anything.
 
 ## Reusable brand images (image variables)
 
-For images you'll use across **many** pages — your logo, headshot, product photos — upload them once as **image variables** in the app (**Settings → Variables**, switch the type to *Image*). Each becomes a named `{{ custom:key }}` token. See [Variables](/workspace/variables) for the full walkthrough.
+For images you'll use across **many** pages — your logo, headshot, product photos — upload them once as **image variables** in the app (**Settings → Variables & images**, switch the type to *Image*). Each becomes a named `{{ custom:key }}` token. See [Variables](/workspace/variables) for the full walkthrough.
 
 When you build a page in Claude, the connector **sees your uploaded images** (via `get_variables`, which returns an `images` list) and offers them — you don't have to recall the key:
 
@@ -75,7 +119,39 @@ Claude drops the token straight into the tag:
 <img src="{{ custom:brand_logo }}" alt="Logo" />
 ```
 
-Because the page uses the **token** (not a baked-in URL), swapping the image in Settings updates every page at once. This is the recommended way to put *your own* files on a page — see the limitation below.
+Because the page uses the **token** (not a baked-in URL), swapping the image in Settings updates every page at once. It's also the best way to add large photos at full quality.
+
+---
+
+## Show a different image depending on answers
+
+On **result pages**, any image (or any section) can show only for the people it suits. Tell Claude what you want:
+
+> *"Show the family-home photo if they pick First home, and the apartment photo if they pick Investment."*
+
+> *"Only show the 'You're ready' banner to people who score 70 or more."*
+
+> *"Show a different illustration for each persona."*
+
+Claude adds a **show-if rule** to each image. Everyone sees only the images that match their answers. Rules can use:
+
+- **Their answers:** what they picked or typed (for multi-select questions, any of their choices).
+- **The AI's result:** a field the AI fills in, like their persona or recommendation.
+- **Their score:** e.g. an overall score of 70 or more, or below 50.
+
+Under the hood the rule is an attribute on the image, which you'll see if you look at the page's HTML:
+
+```html
+<img src="{{ custom:family_home }}" data-show-if="form:goal = First home" alt="A family home">
+<img src="{{ custom:apartment }}" data-show-if="form:goal = Investment" alt="An apartment">
+<section data-show-if="chart:overall_score >= 70">…</section>
+```
+
+<Tip>
+Give every option its own rule, and add a default for anyone who matches none of them. An image whose rule doesn't match stays hidden.
+</Tip>
+
+Landing pages can't do this, because nobody has answered anything yet when they see it. To check your rules, complete the product yourself on its test link with real answers.
 
 ---
 
@@ -108,8 +184,8 @@ The download and re-host happen on the Productised side (via the app's storage c
 
 ## Limitations
 
-- **No binary upload from the Claude chat.** You can't drag a file into Claude and have it arrive at Productised — MCP is a text/JSON protocol. To use *your own* image on a page, either upload it as an [image variable](/workspace/variables) in the app and reference `{{ custom:key }}`, or give Claude a public URL for `upload_image`.
-- **No transformations.** The image is stored as-fetched. If you need a resize, crop, or format conversion, do it before uploading (or ask Claude to fetch a specific size from the source site if it offers multiple).
+- **Chat uploads are compressed.** An image attached in Claude is uploaded as a smaller web-ready copy, and it needs Claude's code execution setting (see [above](#drop-an-image-into-the-chat)). For full-quality photos, use a [brand image](/workspace/variables).
+- **Links are stored as-fetched.** An image re-hosted from a link isn't resized or converted. If you need a different size, resize it first or ask Claude to fetch a specific size from the source site.
 - **No deletion via the connector.** Old uploads stay on the CDN until you remove them via the app. They're scoped to your tenant/product folder.
 
 ---
@@ -124,6 +200,15 @@ The download and re-host happen on the Productised side (via the app's storage c
 
 **Use your own uploaded logo on a page:**
 > *"Use my logo from Settings in the result page header."*
+
+**Add a photo from your computer:**
+> *"Put this photo in the hero of my landing page."* (attach the photo)
+
+**Design and add a banner:**
+> *"Make a hero banner in Canva for my scorecard and add it to the landing page."*
+
+**Change the picture by answer:**
+> *"On the result page, show a different image for each of the three personas."*
 
 **Update branding on every product in my workspace:**
 > *"Apply the logo I just uploaded to all my products."*

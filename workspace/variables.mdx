@@ -41,7 +41,7 @@ Because Productised pages are real HTML, an image token works **directly** in an
 
 ## Adding a text variable
 
-1. Go to **Workspace Settings → Variables**
+1. Go to **Settings → Variables & images**
 2. Leave the type on **Text**
 3. Enter a **key** — lowercase letters, numbers, and underscores, no spaces. This is what you type in `{{ custom:key }}`.
 4. Enter a **value** — the text rendered wherever the variable is referenced
@@ -49,7 +49,7 @@ Because Productised pages are real HTML, an image token works **directly** in an
 
 ## Adding an image variable
 
-1. Go to **Workspace Settings → Variables**
+1. Go to **Settings → Variables & images**
 2. Switch the type toggle to **Image**
 3. Enter a **key** (e.g. `brand_logo`, `founder_headshot`)
 4. **Upload your image** — drag-and-drop or pick a file. It's hosted on Productised's CDN and a thumbnail appears.
@@ -69,7 +69,7 @@ You never have to memorise a key. There are three places to get the exact token 
 
 Productised pages are designed in Claude via the connector. When you ask Claude to build or edit a page, it can **see your uploaded images** (through the `get_variables` tool) and offer them — you don't have to remember the key. Just say _"use my logo in the header"_ and Claude drops `{{ custom:brand_logo }}` into the right place.
 
-The connector can't accept a raw file dragged into the Claude chat. To use your own image on a page, upload it here as an image variable first, then reference it — or give Claude a public image URL.
+For a one-off image you don't need to upload here: drop it into your Claude chat, or design it in Canva with the Canva connector, and Claude adds it to the page for you. Uploading it here is best for images you reuse, and for large photos you want at full quality. See [Add images](/claude-connector/assets).
 
 ## Editing and deleting
 
