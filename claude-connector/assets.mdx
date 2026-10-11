@@ -25,9 +25,9 @@ Attach an image in Claude and say where it goes:
 
 Claude makes a web-ready copy of the file, uploads it to Productised and places it in the page. It tells you the uploaded copy is compressed, which keeps your pages fast.
 
-<Note>
+<Callout kind="info">
 This needs **Code execution and file creation** switched on in Claude (**Settings → Capabilities**), which is what lets Claude read the file you attached. In Claude Code it works without that setting. If Claude says it can't read your file, switch the setting on, or upload the image as a [brand image](#reusable-brand-images-image-variables) instead.
-</Note>
+</Callout>
 
 For large, detailed photos (a high-resolution team photo, say), the compressed copy can lose a little sharpness. Upload those as a brand image for full quality.
 
@@ -147,9 +147,9 @@ Under the hood the rule is an attribute on the image, which you'll see if you lo
 <section data-show-if="chart:overall_score >= 70">…</section>
 ```
 
-<Tip>
+<Callout kind="tip">
 Give every option its own rule, and add a default for anyone who matches none of them. An image whose rule doesn't match stays hidden.
-</Tip>
+</Callout>
 
 Landing pages can't do this, because nobody has answered anything yet when they see it. To check your rules, complete the product yourself on its test link with real answers.
 
