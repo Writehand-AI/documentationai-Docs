@@ -1,17 +1,19 @@
 ---
 title: Quickstart
-description: Get from sign-up to a live, shareable assessment or lead magnet in under five minutes — through Claude, or in the dashboard.
+description: >-
+  Get from sign-up to a live, shareable assessment or lead magnet in under five
+  minutes — through Claude, or in the dashboard.
 ---
-
 Productised is the delivery layer between Claude and your audience. This page covers the two fastest paths from sign-up to a live, branded, shareable assessment or lead magnet — building through the **Claude Connector** by talking to Claude, or building in the **dashboard** with the Create-with-AI flow.
 
-<Callout kind="info" title="Before you begin">
-You need:
-- A valid email address for account verification
-- A modern browser (Chrome, Firefox, Safari, Edge)
-- For the Claude Connector path: a Claude.ai or Claude Desktop account
+<Callout kind="info" collapsed="false">
+  You need:
 
-No coding knowledge required either way — Productised is fully no-code.
+  - A valid email address for account verification
+  - A modern browser (Chrome, Firefox, Safari, Edge)
+  - For the Claude Connector path: a Claude.ai or Claude Desktop account
+
+  No coding knowledge required either way — Productised is fully no-code.
 </Callout>
 
 ---
@@ -19,10 +21,11 @@ No coding knowledge required either way — Productised is fully no-code.
 ## Step 1 — Create your account
 
 <Steps>
-  <Step title="Sign up">
+  <Step title="Sign up" title-type="p">
     Go to `https://app.productised.ai/signup` and enter your email. Verify the email when the confirmation arrives.
   </Step>
-  <Step title="Sign in">
+
+  <Step title="Sign in" title-type="p">
     Sign back in and you land on your dashboard. Brain is on the left, Products in the centre, and Settings in the top-right.
   </Step>
 </Steps>
@@ -38,26 +41,31 @@ Choose how you want to build your first product. You can switch between them any
     The Create-with-AI flow gets you from idea to live product in one step.
 
     <Steps>
-      <Step title="Click 'Create with AI'">
+      <Step title="Click 'Create with AI'" title-type="p">
         From the dashboard, click **New product → Create with AI**. A panel opens.
       </Step>
-      <Step title="Describe what you want to build">
+
+      <Step title="Describe what you want to build" title-type="p">
         Write a short brief in plain English. Include:
+
         - **Who** it's for ("first-time executive coaches")
         - **What** they'll learn or get ("a readiness score across six dimensions")
         - **The outcome** ("a branded results page with the score, a personalised insight per dimension, and a CTA to book a call")
 
         The richer the brief, the better the result.
       </Step>
-      <Step title="Let AI build it">
-        Click **Generate**. The platform's build pipeline runs (~30 seconds): intake questions, system prompts, decision logic, canvas workflow, default theme.
+
+      <Step title="Let AI build it" title-type="p">
+        Click **Generate**. The platform's build pipeline runs (\~30 seconds): intake questions, system prompts, decision logic, canvas workflow, default theme.
 
         You'll see a progress card with each phase completing.
       </Step>
-      <Step title="Open the preview">
+
+      <Step title="Open the preview" title-type="p">
         Click the preview button. You're now experiencing your product the way your end user would. Run through it once — answer the questions, see the outcome.
       </Step>
-      <Step title="Brand it and publish">
+
+      <Step title="Brand it and publish" title-type="p">
         Open the AI Product node's settings (right panel on the canvas) to tweak the welcome copy, button colour, system prompt. Use the **Themes** panel to apply a coordinated colour palette. When ready, click **Publish** — you'll get a public shareable URL.
       </Step>
     </Steps>
@@ -69,28 +77,33 @@ Choose how you want to build your first product. You can switch between them any
     If you already work in Claude, the Connector is the fastest path. One message builds the entire product.
 
     <Steps>
-      <Step title="Install the Connector">
+      <Step title="Install the Connector" title-type="p">
         Search the [Claude directory](https://claude.ai/directory/connectors/productised) for **"Productised"** and click **Connect**. A Productised sign-in popup opens — sign in (or sign up) and click Authorise. Done — no URLs to paste, no keys to copy. Full setup details (including manual setup and Claude Desktop): [Setup](/claude-connector/setup).
       </Step>
-      <Step title="Open a new Claude conversation">
+
+      <Step title="Open a new Claude conversation" title-type="p">
         With the Connector installed, start a new Claude chat. Claude has 73 tools against your Productised workspace.
       </Step>
-      <Step title="Build the product in one message">
+
+      <Step title="Build the product in one message" title-type="p">
         Paste something like this:
 
-        > *"Build me a Readiness Scorecard for first-time executive coaches. Six questions across leadership presence, team dynamics, strategic thinking, business acumen, emotional intelligence, and growth mindset. Score 0–10 per pillar with a personalised insight, deliver a branded result page using the Dimensions template, and the CTA should be 'Book a discovery call'."*
+        > _"Build me a Readiness Scorecard for first-time executive coaches. Six questions across leadership presence, team dynamics, strategic thinking, business acumen, emotional intelligence, and growth mindset. Score 0–10 per pillar with a personalised insight, deliver a branded result page using the Dimensions template, and the CTA should be 'Book a discovery call'."_
 
         Claude calls `plan_product → create_product → generate_product` — the build auto-applies a branded result design — and gives you a **live demo URL** in about 30 seconds.
       </Step>
-      <Step title="Click the demo URL">
+
+      <Step title="Click the demo URL" title-type="p">
         Your product is live and previewable. Run through it once.
       </Step>
-      <Step title="Iterate and publish">
+
+      <Step title="Iterate and publish" title-type="p">
         Keep going in the same conversation:
-        - *"Apply the dark serif theme."*
-        - *"Make the welcome headline more direct."*
-        - *"Switch the result template to Radar."*
-        - *"Publish it and give me the live URL."*
+
+        - _"Apply the dark serif theme."_
+        - _"Make the welcome headline more direct."_
+        - _"Switch the result template to Radar."_
+        - _"Publish it and give me the live URL."_
 
         Each tweak is a real, persistent change with a fresh preview URL.
       </Step>
@@ -107,13 +120,15 @@ Choose how you want to build your first product. You can switch between them any
 Whichever path you took, your product now has a public URL. Share it as a link, embed it on your website, or set a custom domain so it lives at `quiz.yoursite.com`.
 
 <Columns cols="3">
-  <Card title="Share link" icon="link">
+  <Card title="Share link" icon="link" horizontal="false">
     Copy the live URL from the canvas or from Claude (`publish_product` returns it). Send it directly or include it in a CTA button.
   </Card>
-  <Card title="Embed on your site" icon="code">
+
+  <Card title="Embed on your site" icon="code" horizontal="false">
     Generate an embed snippet from **Product settings → Deployment**. Drop it into any website or landing page.
   </Card>
-  <Card title="Custom domain" icon="globe">
+
+  <Card title="Custom domain" icon="globe" horizontal="false">
     Configure a subdomain (e.g. `quiz.yoursite.com`) — in the dashboard or via Claude (`set_custom_domain`). The platform handles SSL and routing.
   </Card>
 </Columns>
@@ -125,17 +140,20 @@ Whichever path you took, your product now has a public URL. Share it as a link, 
 Your first product is live. Three good places to go next:
 
 <Columns cols="3">
-  <Card title="Understand the AI Product node" href="/canvas/understanding-your-ai-product" icon="cpu">
+  <Card title="Understand the AI Product node" href="/canvas/understanding-your-ai-product" icon="cpu" horizontal="false">
     The conversational engine at the heart of every product. Learn what every setting does.
   </Card>
-  <Card title="Read your analytics" href="/product-analytics/analytics-explained" icon="bar-chart-2">
+
+  <Card title="Read your analytics" href="/product-analytics/analytics-explained" icon="bar-chart-2" horizontal="false">
     Each response is stored with full detail — answers, AI output, scoring. See trends, hot leads, and AI-generated insights.
   </Card>
-  <Card title="Connect a webhook or Zapier" href="/integrations/webhooks" icon="radio">
+
+  <Card title="Connect a webhook or Zapier" href="/integrations/webhooks" icon="radio" horizontal="false">
     Route every new lead into your CRM, email tool, or spreadsheet automatically.
   </Card>
 </Columns>
 
-<Callout kind="success">
-Share your product link with five people in your audience this week. Every submission is a real test of the conversation, the personalisation, and the deliverable — and you'll see exactly where to refine next.
+<Callout kind="success" collapsed="false">
+  Share your product link with five people in your audience this week. Every submission is a real test of the conversation, the personalisation, and the deliverable — and you'll see exactly where to refine next.
 </Callout>
+
