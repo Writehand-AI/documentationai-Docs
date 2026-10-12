@@ -1,31 +1,38 @@
 ---
 title: Page (custom HTML)
-description: A fully custom HTML results page, generated per respondent — scores, charts, branded layout. Designed in Claude via the connector.
+description: >-
+  A fully custom HTML results page, generated per respondent — scores, charts,
+  branded layout. Designed in Claude via the connector.
 ---
+The **Page** outcome (the _Page_ / dynamic\_output\_page node, sometimes called an Assessment) delivers a completely custom HTML result page at the end of a product. You design the page in Claude using the connector, embed `{{ }}` tokens, and the platform resolves them live for every end user.
 
-The **Page** outcome (the *Page* / dynamic_output_page node, sometimes called an Assessment) delivers a completely custom HTML result page at the end of a product. You design the page in Claude using the connector, embed `{{ }}` tokens, and the platform resolves them live for every end user.
+<Callout kind="tip" collapsed="false">
+  Pages now include Slide decks and Document Outcomes! Fully editable in Claude. Personalised to each lead.&#x20;
+</Callout>
+
+<Image src="https://blob-cdn.documentation.ai/org-708d97b3-a195-4b0f-8911-093c012c99d6/doc-8283fb6b-099f-47ea-b32b-34e7f582103c/1791768773201-jytawog5qoc-Screenshot-2026-10-12-at-2-33-04-PM.png?fm=auto&auto=compress%2Cformat" width="1683" height="929" alt="Screenshot 2026 10 12 at 2.33.04 PM" />
 
 Reach for **Page** when you want a premium, branded, visual deliverable: a scorecard with dimension bars and a score ring, a personalised report with sections and a CTA, or any result that should feel built just for that person.
 
-<Callout kind="info">Pages are designed and edited **entirely in Claude** using the [Productised connector](/claude-connector/overview) — there is no in-app page editor. See [Design custom result pages](/claude-connector/result-pages) for the full workflow, and the [Page node](/canvas/page-node) for the canvas-side details.</Callout>
+Pages are designed and edited **entirely in Claude** using the [Productised connector](/claude-connector/overview) — there is no in-app page editor. See [Design custom result pages](/claude-connector/result-pages) for the full workflow, and the [Page node](/canvas/page-node) for the canvas-side details.
 
 ## How it works
 
 1. Add a **Page** node to the canvas and connect it below your AI Agent.
-2. In Claude, ask for the page you want — e.g. *"design a scorecard results page for my Leadership product."* Claude writes the HTML and applies it with `update_page`.
+2. In Claude, ask for the page you want — e.g. _"design a scorecard results page for my Leadership product."_ Claude writes the HTML and applies it with `update_page`.
 3. The HTML contains `{{ }}` tokens (form answers, AI outputs, your brand images). They're resolved **per respondent, at view time**.
 4. Publish. Every client who completes the product gets their own personalised page at a shareable URL.
 
 ## Variable tokens
 
-| Token | Source |
-|---|---|
-| `{{ form:fieldName }}` | A field from the product's intake |
-| `{{ node:varName }}` | Full text output from an AI node |
-| `{{ object:varName }}` | A named field inside a structured AI output |
-| `{{ custom:key }}` | A [workspace variable or brand image](/workspace/variables) |
+| Token                  | Source                                                      |
+| ---------------------- | ----------------------------------------------------------- |
+| `{{ form:fieldName }}` | A field from the product's intake                           |
+| `{{ node:varName }}`   | Full text output from an AI node                            |
+| `{{ object:varName }}` | A named field inside a structured AI output                 |
+| `{{ custom:key }}`     | A [workspace variable or brand image](/workspace/variables) |
 
-<Callout kind="tip">Not sure what tokens exist? Ask Claude *"list the variable tokens for my [product] product"* — it calls `get_variables` and returns every token ready to copy. See [Token resolution](/claude-connector/tokens).</Callout>
+Not sure what tokens exist? Ask Claude _"list the variable tokens for my \[product] product"_ — it calls `get_variables` and returns every token ready to copy. See [Token resolution](/claude-connector/tokens).
 
 ## Page vs Standard
 

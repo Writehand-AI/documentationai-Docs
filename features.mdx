@@ -1,111 +1,23 @@
 ---
-title: Platform Features
+title: Platform Overview
 description: >-
-  A complete overview of what Productised can do — from the canvas to Brain to
-  the Claude Connector.
+  Introducing the Productised platform for creating AI-powered products and
+  deliverables.
 ---
-Productised takes your assessments, scorecards, diagnostics, and lead magnets live — at your URL, branded for you, capturing and scoring every lead automatically. Build the products by talking to Claude through the [Claude Connector](/claude-connector/overview), or work directly in the Productised canvas. Here's everything the platform can do.
+# The Dashboard
 
-<Columns cols="2">
-  <Card title="The Productised Canvas" href="#the-canvas" icon="layout" horizontal="false" target="_self">
-    Drag-and-drop workspace where every product is built.
-  </Card>
+The productised dashboard allows you to see at a glance your top performing products, leads, and responses. \
 
-  <Card title="AI Products" href="#ai-product-node" icon="cpu" horizontal="false">
-    The conversational AI at the heart of every product.
-  </Card>
 
-  <Card title="Capabilities" href="#capabilities" icon="zap" horizontal="false">
-    Extend your AI products with knowledge, research, and integrations.
-  </Card>
+<Image src="https://blob-cdn.documentation.ai/org-708d97b3-a195-4b0f-8911-093c012c99d6/doc-8283fb6b-099f-47ea-b32b-34e7f582103c/1791757820200-pkstxygnuog-screencapture-app-productised-ai-app-productised-dashboard-2026-10-12-11_30_10.png?fm=auto&auto=compress%2Cformat" width="2926" height="2884" alt="screencapture app productised ai app productised dashboard 2026 10 12 11 30 10" />
 
-  <Card title="Outcomes" href="#outcomes" icon="file-text" horizontal="false">
-    What your audience actually receives at the end.
-  </Card>
+# Products
 
-  <Card title="Prompt Chaining" href="#prompt-chaining" icon="link" horizontal="false">
-    Chain multiple AI nodes for better context within your products.
-  </Card>
+The products tab is where all of your products live.&#x20;
 
-  <Card title="The Brain" href="#the-brain" icon="brain" horizontal="false" target="_self">
-    Your strategic AI assistant for deciding what to build.
-  </Card>
+<Image src="https://blob-cdn.documentation.ai/org-708d97b3-a195-4b0f-8911-093c012c99d6/doc-8283fb6b-099f-47ea-b32b-34e7f582103c/1791757922427-pfbh1b5sy5f-Screenshot-2026-10-12-at-11-32-06-AM.png?fm=auto&auto=compress%2Cformat" width="2920" height="1428" alt="Screenshot 2026 10 12 at 11.32.06 AM" />
 
-  <Card title="Claude Connector" href="#claude-connector" icon="sparkles" horizontal="false">
-    Build, design, edit, and publish products conversationally from inside Claude — 73 tools against your live workspace.
-  </Card>
-
-  <Card title="Analytics" href="#analytics" icon="bar-chart-2" horizontal="false">
-    Responses, insights, talking points, and exports.
-  </Card>
-</Columns>
-
-## The Canvas
-
-The canvas is your building workspace. Every product you create lives here as a visual graph — drag nodes onto the canvas, connect them with edges, and wire up your logic without writing a line of code. Changes save automatically as you work.
-
-Node types fall into three categories: **AI Product** (the conversational core), **capabilities** you attach to it, and **Outcomes** (the deliverables your audience receives). You can have multiple nodes of each type on a single canvas and chain them together.
-
-<Image src="https://blob-cdn.documentation.ai/org-708d97b3-a195-4b0f-8911-093c012c99d6/doc-8283fb6b-099f-47ea-b32b-34e7f582103c/1781833250217-q4suv4jbh7r-Blank-Canvas.png?fm=auto&auto=compress%2Cformat" width="2930" height="1834" alt="" />
-
-## AI Product Node
-
-The AI Product node is the conversational engine inside every product. It collects inputs from your audience through a structured flow — text fields, choice questions, scales, yes/no prompts, image selections, and more — then processes those inputs through your configured AI model to produce a personalised result.
-
-Each AI Product has a **collection goal** (what you're trying to learn), a **decision model** (how the AI evaluates responses — AI Judgement or AI Scorecard), and optional scoring to segment your audience into persona profiles. This is where you set up your prompts, configure your Brand Voice guardrails, and define what gets passed downstream.
-
-<Image src="https://blob-cdn.documentation.ai/org-708d97b3-a195-4b0f-8911-093c012c99d6/doc-8283fb6b-099f-47ea-b32b-34e7f582103c/1781833694340-8avdtmhxitb-AI-Product-Node.png?fm=auto&auto=compress%2Cformat" width="2928" height="1830" alt="" />
-
-## Capabilities
-
-Your AI Product runs the conversation and writes the result on its own. The MCP node is how you extend it beyond that.
-
-**MCP connections** — connect any service that publishes an MCP server: your CRM, your calendar, a search provider, your own internal API. Claude can call that service's tools _while an end user is answering_, so it can check a record, confirm live availability or look something up before deciding what to recommend.
-
-Because MCP is an open standard, this isn't a fixed list of integrations — you connect the providers you already use, with your own account and credentials.
-
-Only tools the server declares read-only are enabled when you first connect. Anything that could create, edit or delete data waits until you switch it on, because the AI calls these tools unsupervised while talking to a member of the public.
-
-<Image src="https://blob-cdn.documentation.ai/org-708d97b3-a195-4b0f-8911-093c012c99d6/doc-8283fb6b-099f-47ea-b32b-34e7f582103c/1781834265780-xz2ek2jqrh-MCP-Node.png?fm=auto&auto=compress%2Cformat" width="2932" height="1826" alt="" />
-
-**Webhooks** — post each completed response to any URL, so leads and AI output reach your CRM, email platform or automation tool.
-
-**End-user uploads** — add an Upload or URL question in the Questions panel when your product needs to read something the end user brings, such as a CV or a website.
-
-## Outcomes
-
-Outcomes are what your audience receives after completing a product. Connect an Outcome node to your AI Product on the canvas to define the deliverable:
-
-- **Document** — a written deliverable: strategy brief, action plan, proposal. Structured, text-forward, and fully personalised.
-- **Pages/Assessments**— Pages made Claude create fully custom HTML pages. Simply leverage the productised connector inside of Claude to create custom pages you can port to your productised product. Works for both landing pages AND outcome pages.&#x20;
-- **Advisor Chat** — a full-screen, personalised advisory session. The AI speaks first using everything it collected — no prompting required — then opens the floor for follow-up questions. The closest a Productised product gets to a real-time advisor conversation.
-- **Collect only** — no AI output at all. The conversation ends warmly and the person becomes a qualified lead. Useful for applications, waitlists and intake. You can also send them onward to a URL when it completes.
-
-<Image src="https://blob-cdn.documentation.ai/org-708d97b3-a195-4b0f-8911-093c012c99d6/doc-8283fb6b-099f-47ea-b32b-34e7f582103c/1781834518561-krny2zots98-Outcomes.png?fm=auto&auto=compress%2Cformat" width="2932" height="1834" alt="" />
-
-## Prompt Chaining
-
-You're not limited to a single AI Agent node. Add multiple AI Agent nodes to the canvas and connect them in sequence — the output of one becomes the input of the next. Reference outputs using `{{ node:varName }}` syntax anywhere downstream.
-
-This lets you build sophisticated multi-step products: collect information in the first node, run a scoring pass in the second, generate a detailed report in the third. Each step can have its own prompt, model, and configuration.
-
-<Image src="https://blob-cdn.documentation.ai/org-708d97b3-a195-4b0f-8911-093c012c99d6/doc-8283fb6b-099f-47ea-b32b-34e7f582103c/1781834682799-gyyhip6vff9-Prompt-Chaining.png?fm=auto&auto=compress%2Cformat" width="2926" height="1828" alt="" />
-
-## The Brain
-
-The Brain is your workspace-level strategic AI assistant. Unlike AI Products — which are built for your audience — Brain is built for you. It helps you decide what to build, how to position it, and where it fits in your funnel.
-
-Brain has five sections:
-
-- **Chat** — have a strategy conversation. Ask it to help you design a product, stress-test an idea, or figure out where your funnel is weakest.
-- **Memory** — Brain automatically saves context from every conversation — your niche, audience, methodology, and preferences. Every session starts from where the last one left off.
-- **Sources** — Brain has its own knowledge base (separate from the Knowledge Power). Upload your methodology documents, frameworks, and positioning material. Brain draws on them in every conversation.
-- **Ideas** — BUILD\_THIS cards surface build-ready concepts you've discussed. Open any card directly on the canvas to start building immediately.
-- **Journey Plan** — generate a full-funnel product roadmap across all five stages of your client journey (ToFU, MoFU, BoFU, Delivery, Community). Brain synthesises everything it knows about your practice into a prioritised, niche-specific plan — showing what to build, in what order, and why.
-
-<Image src="https://blob-cdn.documentation.ai/org-708d97b3-a195-4b0f-8911-093c012c99d6/doc-8283fb6b-099f-47ea-b32b-34e7f582103c/1791758118550-4dvykc2nacf-screencapture-app-productised-ai-app-productised-brain-2026-10-12-11_34_55.png?fm=auto&auto=compress%2Cformat" width="2926" height="1462" alt="screencapture app productised ai app productised brain 2026 10 12 11 34 55" />
-
-## Funnel View
+### Product Funnel View 
 
 Your products gallery includes a funnel view so you can see your product suite the way your audience moves through it — top of funnel to bottom:
 
@@ -113,35 +25,157 @@ Your products gallery includes a funnel view so you can see your product suite t
 - **MoFU** — deeper strategy sessions and assessments for warmer leads
 - **BoFU** — proposals, ROI calculators, and decision tools for buyers ready to commit
 
+<Image src="https://blob-cdn.documentation.ai/org-708d97b3-a195-4b0f-8911-093c012c99d6/doc-8283fb6b-099f-47ea-b32b-34e7f582103c/1791772274836-v2m25kl0na-Screenshot-2026-10-12-at-3-31-17-PM.png?fm=auto&auto=compress%2Cformat" width="1688" height="860" alt="Screenshot 2026 10 12 at 3.31.17 PM" />
+
 Filter by funnel tier, switch between compact and visual view modes, and use colour labels to organise your product library at a glance.
 
-<Image src="https://blob-cdn.documentation.ai/org-708d97b3-a195-4b0f-8911-093c012c99d6/doc-8283fb6b-099f-47ea-b32b-34e7f582103c/1791757922427-pfbh1b5sy5f-Screenshot-2026-10-12-at-11-32-06-AM.png?fm=auto&auto=compress%2Cformat" width="2920" height="1428" alt="Screenshot 2026 10 12 at 11.32.06 AM" />
+# Leads &#x20;
 
-## Product Personalisation
+The leads page allows you to view all leads from all products you have created in your workspace at a glance.&#x20;
 
-Every product produces a unique output for the person who went through it. Personalisation is driven by three mechanisms:
+<Callout kind="tip" collapsed="false">
+  You can also download leads and information per product in the individual product settings area.&#x20;
+</Callout>
 
-- **AI judgement** — the model reads all collected inputs holistically and generates a response tailored to that specific person.
-- **Scoring** — the AI Agent evaluates the answers and produces the score, tier and analysis live. You set the objective and fields; optional per-question points give a deterministic score where you need one.
-- **Tiers** — the agent assigns a named tier (e.g. "Strong fit", "Not yet"), and the result page adapts its content and CTA to that tier — a high-scoring respondent sees a different message and call-to-action than a low-scoring one.
+<Image src="https://blob-cdn.documentation.ai/org-708d97b3-a195-4b0f-8911-093c012c99d6/doc-8283fb6b-099f-47ea-b32b-34e7f582103c/1791772443926-sbf2y1dsiff-screencapture-app-productised-ai-app-productised-leads-2026-10-12-15_34_06.png?fm=auto&auto=compress%2Cformat" width="1686" height="1985" alt="screencapture app productised ai app productised leads 2026 10 12 15 34 06" />
 
-## Claude Connector
+# The Brain
 
-Productised is an **official listing in the&#x20;**[**Claude directory**](https://claude.ai/directory/connectors/productised) — search for "Productised" in Claude's connectors and connect in one click (the native MCP server is at `https://mcp.productised.ai/mcp` for manual setup). Once connected, your entire workspace becomes accessible from inside a Claude conversation — no dashboard required.
+The Brain is your workspace-level strategic AI assistant. Unlike AI Products — which are built for your audience — Brain is built for you. It helps you decide what to build, how to position it, and where it fits in your funnel.
 
-With **73 live tools**, Claude can:
+Use Brain when you're thinking about product strategy, exploring funnel gaps, or you want a confident recommendation for what to build first. Brain knows your workspace — your existing products, your niche, your positioning, your previous ideas — and surfaces build-ready concepts you can open on the canvas or hand to Claude.
 
-- **Read** your products, leads, analytics, and Brain context
-- **Build** new products end-to-end from a single description — including the conversation flow, system prompts, canvas workflow, and a default themed result page
-- **Design custom result pages** conversationally — Claude writes the HTML, the connector validates it against your AI agent's fields, you get a live preview
-- **Re-host images** from any URL onto Productised's CDN — perfect for branding a product with assets scraped from a customer's site
-- **Apply themes, fonts, logos, SEO metadata, and custom domains** in single-message brand passes
-- **Manage leads conversationally** — morning briefings, hot-lead lists, tagging, status changes, talking points
-- **Ask your Brain** strategic questions with full workspace context
+<Callout kind="info" collapsed="false">
+  The brain is a **powerful** feature. In order to get the best value from the brain, ensure to enter as much information about your business and offerings in the onboarding or master settings > brand voice. It is designed specifically to aid users in building products that deliver value to their particular audience, rather than provide generic results pages that decrease chances of prospects taking the next step.&#x20;
+</Callout>
 
-Every write operation returns a **demo URL** — a fully-functional, publicly accessible preview that bypasses authentication, custom domains, and submission gates — so you see every change in one click.
+<Image src="https://blob-cdn.documentation.ai/org-708d97b3-a195-4b0f-8911-093c012c99d6/doc-8283fb6b-099f-47ea-b32b-34e7f582103c/1791758118550-4dvykc2nacf-screencapture-app-productised-ai-app-productised-brain-2026-10-12-11_34_55.png?fm=auto&auto=compress%2Cformat" width="2926" height="1462" alt="screencapture app productised ai app productised brain 2026 10 12 11 34 55" />
 
-The Connector is purely additive. Productised works perfectly standalone in the browser; the Connector is for people who already live in Claude and want their workspace accessible there.
+Brain has five unique sections:
+
+- **Chat** — have a strategy conversation. Ask it to help you design a product, stress-test an idea, or figure out where your funnel is weakest.
+- **Memory** — Brain automatically saves context from every conversation — your niche, audience, methodology, and preferences. Every session starts from where the last one left off.
+- **Sources** — Brain has its own knowledge base. Upload your methodology documents, frameworks, and positioning material. Brain draws on them in every conversation.
+- **Ideas** — The brain produces build-ready concepts you've discussed. You can open any product idea directly on the canvas to start building immediately.
+- **Journey Plan** — generate a full-funnel product roadmap across all five stages of your client journey (ToFU, MoFU, BoFU, Delivery, Community). Brain synthesises everything it knows about your practice into a prioritised, niche-specific plan — showing what to build, in what order, and why.
+
+# AI-Powered Product Templates
+
+\
+Productised features over 40+ templates that can be easily imported into your workspace. You can edit them easily via our Claude Connector and the productised app canvas.&#x20;
+
+<Callout kind="tip" collapsed="false">
+  Have an existing scorecard/quiz/lead magnet you want to bring into productised? Our team will convert it into an AI-powered product for FREE. Simply send the link to [hello@productised.ai](mailto:hello@productised.ai)&#x20;
+</Callout>
+
+<Image src="https://blob-cdn.documentation.ai/org-708d97b3-a195-4b0f-8911-093c012c99d6/doc-8283fb6b-099f-47ea-b32b-34e7f582103c/1791772794832-wp60leswwkh-Screenshot-2026-10-12-at-3-39-58-PM.png?fm=auto&auto=compress%2Cformat" width="1685" height="860" alt="Screenshot 2026 10 12 at 3.39.58 PM" />
+
+# Product Editing: The Canvas
+
+The canvas is your building workspace. Every product you create lives here as a visual graph — drag nodes onto the canvas, connect them with edges, and wire up your logic without writing a line of code. Changes save automatically as you work.
+
+<Callout kind="tip" collapsed="false">
+  Node types fall into three categories: **AI Product** (the conversational core), **capabilities** you attach to it (typically AI agents), and **Outcomes** (the deliverables your audience receives). You can have multiple nodes of each type on a single canvas and can also chain them together for complex products.
+</Callout>
+
+<Image src="https://blob-cdn.documentation.ai/org-708d97b3-a195-4b0f-8911-093c012c99d6/doc-8283fb6b-099f-47ea-b32b-34e7f582103c/1791768343602-8t6pwt9eke6-screencapture-app-productised-ai-products-cmuuiq9zt000p356oh8ns2tum-canvas-2026-10-12-14_25_20.png?fm=auto&auto=compress%2Cformat" width="1686" height="934" alt="screencapture app productised ai products cmuuiq9zt000p356oh8ns2tum canvas 2026 10 12 14 25 20" />
+
+## AI Product Node
+
+The AI Product node is the conversational engine inside every product. It collects inputs from your audience through a structured flow — text fields, choice questions, scales, yes/no prompts, image selections, and more — then processes those inputs through your configured AI model to produce a personalised result.
+
+<Callout kind="tip" collapsed="false">
+  Each AI Product has a **collection goal** (what you're trying to learn), a **decision model** (how the AI evaluates responses — AI Judgement or AI Scorecard), and optional scoring to segment your audience into persona profiles.&#x20;
+</Callout>
+
+<Image src="https://blob-cdn.documentation.ai/org-708d97b3-a195-4b0f-8911-093c012c99d6/doc-8283fb6b-099f-47ea-b32b-34e7f582103c/1791768453489-7znhhgrnrgs-screencapture-app-productised-ai-products-cmuuiq9zt000p356oh8ns2tum-canvas-2026-10-12-14_27_36.png?fm=auto&auto=compress%2Cformat" width="1686" height="934" alt="screencapture app productised ai products cmuuiq9zt000p356oh8ns2tum canvas 2026 10 12 14 27 36" />
+
+The AI Product node includes the landing page/welcome page -the entry point for each product. You can preview the welcome page directly on the canvas, and switch between welcome screen types.
+
+<Image src="https://blob-cdn.documentation.ai/org-708d97b3-a195-4b0f-8911-093c012c99d6/doc-8283fb6b-099f-47ea-b32b-34e7f582103c/1791769194830-it163jthnvs-Screenshot-2026-10-12-at-2-40-02-PM.png?fm=auto&auto=compress%2Cformat" width="1685" height="931" alt="Screenshot 2026 10 12 at 2.40.02 PM" />
+
+\
+**Collection Instructions**\
+\
+Collection instructions in the AI Product node allow you to specify the form collection instructions where the AI will create the questions for the AI product in real-time, rather than follow a set collection of questions. You can also add data summaries to provide more context to the AI to aid in asking questions.&#x20;
+
+<Image src="https://blob-cdn.documentation.ai/org-708d97b3-a195-4b0f-8911-093c012c99d6/doc-8283fb6b-099f-47ea-b32b-34e7f582103c/1791769868525-w1japivc6yn-Screenshot-2026-10-12-at-2-45-46-PM.png?fm=auto&auto=compress%2Cformat" width="1685" height="931" alt="Screenshot 2026 10 12 at 2.45.46 PM" />
+
+
+
+**Expand View**\
+\
+The Expand button located on the top of the AI Product Node settings area allows you to view the full welcome screen in the app and view/edit the questions in the product.&#x20;
+
+<Image src="https://blob-cdn.documentation.ai/org-708d97b3-a195-4b0f-8911-093c012c99d6/doc-8283fb6b-099f-47ea-b32b-34e7f582103c/1791769411874-qbr1kcwkxe-Screenshot-2026-10-12-at-2-42-30-PM.png?fm=auto&auto=compress%2Cformat" width="1685" height="934" alt="Screenshot 2026 10 12 at 2.42.30 PM" />
+
+<Image src="https://blob-cdn.documentation.ai/org-708d97b3-a195-4b0f-8911-093c012c99d6/doc-8283fb6b-099f-47ea-b32b-34e7f582103c/1791769420704-38sjili5i99-Screenshot-2026-10-12-at-2-42-44-PM.png?fm=auto&auto=compress%2Cformat" width="1682" height="931" alt="Screenshot 2026 10 12 at 2.42.44 PM" />
+
+
+
+## AI Agent Node
+
+The AI Agent Node powers the AI output to your outcome pages.&#x20;
+
+<Callout kind="tip" collapsed="false">
+  You can chain multiple AI agents together for advanced capabilities and better quality outcomes.&#x20;
+</Callout>
+
+<Image src="https://blob-cdn.documentation.ai/org-708d97b3-a195-4b0f-8911-093c012c99d6/doc-8283fb6b-099f-47ea-b32b-34e7f582103c/1791770958696-5s3eqqcaq26-Screenshot-2026-10-12-at-3-00-34-PM.png?fm=auto&auto=compress%2Cformat" width="1683" height="933" alt="Screenshot 2026 10 12 at 3.00.34 PM" />
+
+### Prompt Chaining
+
+You're not limited to a single AI Agent node. Add multiple AI Agent nodes to the canvas and connect them in sequence — the output of one becomes the input of the next. Reference outputs using `{{ node:varName }}` syntax anywhere downstream.
+
+This lets you build sophisticated multi-step products: collect information in the first node, run a scoring pass in the second, generate a detailed report in the third. Each step can have its own prompt, model, and configuration.
+
+\
+MCP Node&#x20;
+--------------
+
+Your AI Product runs the conversation and writes the result on its own. The MCP node is how you extend it beyond that.
+
+**MCP connections** — connect any service that publishes an MCP server: your CRM, your calendar, a search provider, your own internal API. Claude can call that service's tools _while an end user is answering_, so it can check a record, confirm live availability or look something up before deciding what to recommend.
+
+Because MCP is an open standard, this isn't a fixed list of integrations — you connect the providers you already use, with your own account and credentials.
+
+<Callout kind="info" collapsed="false">
+  Only tools the server declares read-only are enabled when you first connect. Anything that could create, edit or delete data waits until you switch it on, because the AI calls these tools unsupervised while talking to a member of the public.
+</Callout>
+
+<Image src="https://blob-cdn.documentation.ai/org-708d97b3-a195-4b0f-8911-093c012c99d6/doc-8283fb6b-099f-47ea-b32b-34e7f582103c/1791768516037-d2qpvwyku5q-screencapture-app-productised-ai-products-cmuuiq9zt000p356oh8ns2tum-canvas-2026-10-12-14_28_30.png?fm=auto&auto=compress%2Cformat" width="1686" height="985" alt="screencapture app productised ai products cmuuiq9zt000p356oh8ns2tum canvas 2026 10 12 14 28 30" />
+
+## Outcome Nodes&#x20;
+
+Outcomes are what your audience receives after completing a product. Connect an Outcome node to your AI Product on the canvas to define the deliverable.&#x20;
+
+<Callout kind="tip" collapsed="false">
+  Want to see outcomes in action? Visit [https://www.productised.ai/templates](https://www.productised.ai/templates)
+</Callout>
+
+- **Document** — a personalised written deliverable: strategy brief, action plan, proposal. Structured, text-forward, and fully editable in Claude.&#x20;
+  <Image src="https://blob-cdn.documentation.ai/org-708d97b3-a195-4b0f-8911-093c012c99d6/doc-8283fb6b-099f-47ea-b32b-34e7f582103c/1791768621956-f37xt9k7b2k-Screenshot-2026-10-12-at-2-30-26-PM.png?fm=auto&auto=compress%2Cformat" width="1681" height="929" alt="Screenshot 2026 10 12 at 2.30.26 PM" />
+- **Slides**— Produce fully personalised slide decks and presentations for each prospect.&#x20;
+  <Image src="https://blob-cdn.documentation.ai/org-708d97b3-a195-4b0f-8911-093c012c99d6/doc-8283fb6b-099f-47ea-b32b-34e7f582103c/1791768773201-jytawog5qoc-Screenshot-2026-10-12-at-2-33-04-PM.png?fm=auto&auto=compress%2Cformat" width="1683" height="929" alt="Screenshot 2026 10 12 at 2.33.04 PM" />
+- **Pages/Assessments**— Custom outcome pages, including graphs, scores, images, content - all personalised per prospect instantly. \
+
+  <Image src="https://blob-cdn.documentation.ai/org-708d97b3-a195-4b0f-8911-093c012c99d6/doc-8283fb6b-099f-47ea-b32b-34e7f582103c/1791779334645-pwnjtwrvz2r-Screenshot-2026-10-12-at-5-28-43-PM.png?fm=auto&auto=compress%2Cformat" width="1685" height="859" alt="Screenshot 2026 10 12 at 5.28.43 PM" />
+- **Advisor Chat** — a full-screen, personalised advisory session. The AI speaks first using everything it collected — no prompting required — then opens the floor for follow-up questions. The closest a Productised product gets to a real-time advisor conversation.
+
+<Callout kind="tip" collapsed="false">
+  Advisor chat works similar to a chatbot, where you can train the chatbot on your content, limit its responses, and provide a contrast to other outcome types in your offerings.&#x20;
+</Callout>
+
+<Image src="https://blob-cdn.documentation.ai/org-708d97b3-a195-4b0f-8911-093c012c99d6/doc-8283fb6b-099f-47ea-b32b-34e7f582103c/1791779412375-wsjuhptduvh-Screenshot-2026-10-12-at-5-30-20-PM.png?fm=auto&auto=compress%2Cformat" width="1683" height="862" alt="Screenshot 2026 10 12 at 5.30.20 PM" />
+
+- **Collect only** — no AI output at all. The conversation ends warmly and the person becomes a qualified lead. Useful for applications, waitlists and intake. You can also send them onward to a URL when it completes.&#x20;
+  <Callout kind="tip" collapsed="false">
+    Ensure to select 'Collect & Complete' option in the 'Outcome' section of the AI Product node. Or you can simply tell Claude or the AI Product Maker upon product creation.&#x20;
+  </Callout>
+
+<Image src="https://blob-cdn.documentation.ai/org-708d97b3-a195-4b0f-8911-093c012c99d6/doc-8283fb6b-099f-47ea-b32b-34e7f582103c/1791779489762-3662lavupkc-Screenshot-2026-10-12-at-5-31-36-PM.png?fm=auto&auto=compress%2Cformat" width="1681" height="863" alt="Screenshot 2026 10 12 at 5.31.36 PM" />
+
+
 
 ## Analytics
 
@@ -150,7 +184,11 @@ Every response is stored and accessible in your product's analytics view. From t
 - Browse individual responses with all collected inputs and AI-generated outputs
 - View AI-generated insights that summarise trends across all responses
 - Get talking points — ready-to-use conversation starters for sales follow-up
-- Export response data to CSV
+- Export response data to CSV\
+
+  <Callout kind="tip" collapsed="false">
+    AI Insights & Talking Points are available on Pro & Agency plans. These are extremely powerful modules that allow you to utilize sentiment analysis that will provide detailed insights on your prospects responses, recommended next steps, and even talking points to aid in producing content to attract users to your lead magnets.&#x20;
+  </Callout>
 
 <Image src="https://blob-cdn.documentation.ai/org-708d97b3-a195-4b0f-8911-093c012c99d6/doc-8283fb6b-099f-47ea-b32b-34e7f582103c/1791758007484-s2biidp0n-screencapture-app-productised-ai-products-cmuuiq9zt000p356oh8ns2tum-analytics-2026-10-12-11_33_21.png?fm=auto&auto=compress%2Cformat" width="2926" height="4016" alt="screencapture app productised ai products cmuuiq9zt000p356oh8ns2tum analytics 2026 10 12 11 33 21" />
 
@@ -163,5 +201,22 @@ When your product is ready, deploy it in seconds. Options include:
 - **Custom domain** — map your own domain to the product
 - **Product settings** — control visibility, collect email, set redirect behaviour after completion
 
-<Image src="https://blob-cdn.documentation.ai/org-708d97b3-a195-4b0f-8911-093c012c99d6/doc-8283fb6b-099f-47ea-b32b-34e7f582103c/1781834926615-sv3l17ewb7-Deploy.png?fm=auto&auto=compress%2Cformat" width="2922" height="1836" alt="" />
+* **Webhooks** — post each completed response to any URL, so leads and AI output reach your CRM, email platform or automation tool.
+
+<Image src="https://blob-cdn.documentation.ai/org-708d97b3-a195-4b0f-8911-093c012c99d6/doc-8283fb6b-099f-47ea-b32b-34e7f582103c/1791774117037-wbia7xpw3t-Screenshot-2026-10-12-at-4-01-00-PM.png?fm=auto&auto=compress%2Cformat" width="1686" height="864" alt="Screenshot 2026 10 12 at 4.01.00 PM" />
+
+Share and Embed options allow you to embed your AI Product in other platforms.&#x20;
+
+<Callout kind="tip" collapsed="false">
+  Make sure to also allow specified domains in the Domain & URL settings to ensure your AI product can only be embedded in domains you approve.
+</Callout>
+
+<Image src="https://blob-cdn.documentation.ai/org-708d97b3-a195-4b0f-8911-093c012c99d6/doc-8283fb6b-099f-47ea-b32b-34e7f582103c/1791774125505-a7wb8rp6a0l-Screenshot-2026-10-12-at-4-01-50-PM.png?fm=auto&auto=compress%2Cformat" width="1685" height="861" alt="Screenshot 2026 10 12 at 4.01.50 PM" />
+
+<Image src="https://blob-cdn.documentation.ai/org-708d97b3-a195-4b0f-8911-093c012c99d6/doc-8283fb6b-099f-47ea-b32b-34e7f582103c/1791774139138-ova0igcvw5p-Screenshot-2026-10-12-at-4-02-06-PM.png?fm=auto&auto=compress%2Cformat" width="1686" height="862" alt="Screenshot 2026 10 12 at 4.02.06 PM" />
+
+\
+Deployment settings also include Webhook settings, Page SEO, Social Sharing, Outbound Personalisation and Tracking.&#x20;
+
+<Image src="https://blob-cdn.documentation.ai/org-708d97b3-a195-4b0f-8911-093c012c99d6/doc-8283fb6b-099f-47ea-b32b-34e7f582103c/1791779221973-nncvlhfjagl-screencapture-app-productised-ai-products-cmutfou4t0004356o3yt0f6x2-settings-2026-10-12-17_27_07.png?fm=auto&auto=compress%2Cformat" width="1686" height="863" alt="screencapture app productised ai products cmutfou4t0004356o3yt0f6x2 settings 2026 10 12 17 27 07" />
 

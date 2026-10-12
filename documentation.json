@@ -28,12 +28,7 @@
                 "icon": "home"
               },
               {
-                "title": "How it works",
-                "path": "how-it-works",
-                "icon": "layers"
-              },
-              {
-                "title": "Platform features",
+                "title": "Platform Overview",
                 "path": "features",
                 "icon": "grid"
               },
@@ -41,6 +36,37 @@
                 "title": "Create your first product",
                 "path": "getting-started/create-with-ai",
                 "icon": "zap"
+              }
+            ]
+          },
+          {
+            "group": "Use Cases",
+            "icon": "compass",
+            "pages": [
+              {
+                "title": "Overview",
+                "path": "use-cases/overview",
+                "icon": "map"
+              },
+              {
+                "title": "Lead generation",
+                "path": "use-cases/lead-generation",
+                "icon": "user-plus"
+              },
+              {
+                "title": "Client onboarding",
+                "path": "use-cases/client-onboarding",
+                "icon": "clipboard"
+              },
+              {
+                "title": "Proposal delivery",
+                "path": "use-cases/offer-and-proposal",
+                "icon": "tag"
+              },
+              {
+                "title": "Training and learning",
+                "path": "use-cases/training-and-learning",
+                "icon": "book-open"
               }
             ]
           },
@@ -77,37 +103,6 @@
                 "title": "Journey Plan",
                 "path": "brain/plan",
                 "icon": "map"
-              }
-            ]
-          },
-          {
-            "group": "Use Cases",
-            "icon": "compass",
-            "pages": [
-              {
-                "title": "Overview",
-                "path": "use-cases/overview",
-                "icon": "map"
-              },
-              {
-                "title": "Lead generation",
-                "path": "use-cases/lead-generation",
-                "icon": "user-plus"
-              },
-              {
-                "title": "Client onboarding",
-                "path": "use-cases/client-onboarding",
-                "icon": "clipboard"
-              },
-              {
-                "title": "Proposal delivery",
-                "path": "use-cases/offer-and-proposal",
-                "icon": "tag"
-              },
-              {
-                "title": "Training and learning",
-                "path": "use-cases/training-and-learning",
-                "icon": "book-open"
               }
             ]
           },
@@ -158,22 +153,6 @@
             ]
           },
           {
-            "group": "Capabilities",
-            "icon": "bolt",
-            "pages": [
-              {
-                "title": "What are Powers?",
-                "path": "powers/what-are-powers",
-                "icon": "star"
-              },
-              {
-                "title": "MCP connections",
-                "path": "powers/mcp",
-                "icon": "plug"
-              }
-            ]
-          },
-          {
             "group": "Outcomes",
             "icon": "flag",
             "pages": [
@@ -205,54 +184,33 @@
             ]
           },
           {
-            "group": "Personalisation",
-            "icon": "sliders",
+            "group": "Product Analytics",
+            "icon": "bar-chart",
             "pages": [
               {
-                "title": "Conditional vs AI personalisation",
-                "path": "personalisation/conditional-vs-ai",
-                "icon": "git-branch"
+                "title": "Analytics explained",
+                "path": "product-analytics/analytics-explained",
+                "icon": "pie-chart"
               },
               {
-                "title": "Decision model",
-                "path": "personalisation/decision-model",
+                "title": "Viewing results",
+                "path": "product-analytics/viewing-results",
+                "icon": "eye"
+              },
+              {
+                "title": "AI Insights",
+                "path": "product-analytics/ai-insights",
                 "icon": "cpu"
               },
               {
-                "title": "Adaptive collection",
-                "path": "personalisation/adaptive-collection",
-                "icon": "activity"
+                "title": "Talking Points",
+                "path": "product-analytics/talking-points",
+                "icon": "mic"
               },
               {
-                "title": "Why this is the future",
-                "path": "personalisation/why-this-is-the-future",
-                "icon": "trending-up"
-              }
-            ]
-          },
-          {
-            "group": "Outbound Personalisation",
-            "icon": "send",
-            "pages": [
-              {
-                "title": "What is Outbound Personalisation?",
-                "path": "outbound-personalisation/overview",
-                "icon": "send"
-              },
-              {
-                "title": "The URL token syntax",
-                "path": "outbound-personalisation/url-tokens",
-                "icon": "hash"
-              },
-              {
-                "title": "Set it up via Claude",
-                "path": "outbound-personalisation/via-claude",
-                "icon": "sparkles"
-              },
-              {
-                "title": "Common patterns",
-                "path": "outbound-personalisation/examples",
-                "icon": "copy"
+                "title": "Exporting data",
+                "path": "product-analytics/exporting-data",
+                "icon": "download"
               }
             ]
           },
@@ -309,53 +267,6 @@
                 "title": "Tracking",
                 "path": "product-settings/tracking",
                 "icon": "bar-chart"
-              }
-            ]
-          },
-          {
-            "group": "Product Analytics",
-            "icon": "bar-chart",
-            "pages": [
-              {
-                "title": "Analytics explained",
-                "path": "product-analytics/analytics-explained",
-                "icon": "pie-chart"
-              },
-              {
-                "title": "Viewing results",
-                "path": "product-analytics/viewing-results",
-                "icon": "eye"
-              },
-              {
-                "title": "AI Insights",
-                "path": "product-analytics/ai-insights",
-                "icon": "cpu"
-              },
-              {
-                "title": "Talking Points",
-                "path": "product-analytics/talking-points",
-                "icon": "mic"
-              },
-              {
-                "title": "Exporting data",
-                "path": "product-analytics/exporting-data",
-                "icon": "download"
-              }
-            ]
-          },
-          {
-            "group": "Products",
-            "icon": "grid",
-            "pages": [
-              {
-                "title": "Products gallery",
-                "path": "products/products-gallery",
-                "icon": "layers"
-              },
-              {
-                "title": "Marketplace",
-                "path": "products/marketplace",
-                "icon": "share-2"
               }
             ]
           },
@@ -453,6 +364,58 @@
                 "title": "Billing a client's AI to them",
                 "path": "agency/client-api-keys",
                 "icon": "key"
+              }
+            ]
+          },
+          {
+            "group": "Personalisation (Advanced)",
+            "icon": "sliders",
+            "pages": [
+              {
+                "title": "Conditional vs AI personalisation",
+                "path": "personalisation/conditional-vs-ai",
+                "icon": "git-branch"
+              },
+              {
+                "title": "Decision model",
+                "path": "personalisation/decision-model",
+                "icon": "cpu"
+              },
+              {
+                "title": "Adaptive collection",
+                "path": "personalisation/adaptive-collection",
+                "icon": "activity"
+              },
+              {
+                "title": "Why this is the future",
+                "path": "personalisation/why-this-is-the-future",
+                "icon": "trending-up"
+              }
+            ]
+          },
+          {
+            "group": "Outbound Personalisation (Advanced)",
+            "icon": "send",
+            "pages": [
+              {
+                "title": "What is Outbound Personalisation?",
+                "path": "outbound-personalisation/overview",
+                "icon": "send"
+              },
+              {
+                "title": "The URL token syntax",
+                "path": "outbound-personalisation/url-tokens",
+                "icon": "hash"
+              },
+              {
+                "title": "Set it up via Claude",
+                "path": "outbound-personalisation/via-claude",
+                "icon": "sparkles"
+              },
+              {
+                "title": "Common patterns",
+                "path": "outbound-personalisation/examples",
+                "icon": "copy"
               }
             ]
           }
