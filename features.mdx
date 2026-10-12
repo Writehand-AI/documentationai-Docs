@@ -129,22 +129,6 @@ You're not limited to a single AI Agent node. Add multiple AI Agent nodes to the
 
 This lets you build sophisticated multi-step products: collect information in the first node, run a scoring pass in the second, generate a detailed report in the third. Each step can have its own prompt, model, and configuration.
 
-\
-MCP Node&#x20;
---------------
-
-Your AI Product runs the conversation and writes the result on its own. The MCP node is how you extend it beyond that.
-
-**MCP connections** — connect any service that publishes an MCP server: your CRM, your calendar, a search provider, your own internal API. Claude can call that service's tools _while an end user is answering_, so it can check a record, confirm live availability or look something up before deciding what to recommend.
-
-Because MCP is an open standard, this isn't a fixed list of integrations — you connect the providers you already use, with your own account and credentials.
-
-<Callout kind="info" collapsed="false">
-  Only tools the server declares read-only are enabled when you first connect. Anything that could create, edit or delete data waits until you switch it on, because the AI calls these tools unsupervised while talking to a member of the public.
-</Callout>
-
-<Image src="https://blob-cdn.documentation.ai/org-708d97b3-a195-4b0f-8911-093c012c99d6/doc-8283fb6b-099f-47ea-b32b-34e7f582103c/1791768516037-d2qpvwyku5q-screencapture-app-productised-ai-products-cmuuiq9zt000p356oh8ns2tum-canvas-2026-10-12-14_28_30.png?fm=auto&auto=compress%2Cformat" width="1686" height="985" alt="Productised MCP Node" />
-
 ## Outcome Nodes&#x20;
 
 Outcomes are what your audience receives after completing a product. Connect an Outcome node to your AI Product on the canvas to define the deliverable.&#x20;
@@ -176,6 +160,20 @@ Outcomes are what your audience receives after completing a product. Connect an 
 <Image src="https://blob-cdn.documentation.ai/org-708d97b3-a195-4b0f-8911-093c012c99d6/doc-8283fb6b-099f-47ea-b32b-34e7f582103c/1791779489762-3662lavupkc-Screenshot-2026-10-12-at-5-31-36-PM.png?fm=auto&auto=compress%2Cformat" width="1681" height="863" alt="Productised Collection Only Product" />
 
 
+
+## MCP Node (Advanced)
+
+Your AI Product runs the conversation and writes the result on its own. The MCP node is how you extend it beyond that.
+
+**MCP connections** — connect any service that publishes an MCP server: your CRM, your calendar, a search provider, your own internal API. Claude can call that service's tools _while an end user is answering_, so it can check a record, confirm live availability or look something up before deciding what to recommend.
+
+Because MCP is an open standard, this isn't a fixed list of integrations — you connect the providers you already use, with your own account and credentials.
+
+<Image src="https://blob-cdn.documentation.ai/org-708d97b3-a195-4b0f-8911-093c012c99d6/doc-8283fb6b-099f-47ea-b32b-34e7f582103c/1791768516037-d2qpvwyku5q-screencapture-app-productised-ai-products-cmuuiq9zt000p356oh8ns2tum-canvas-2026-10-12-14_28_30.png?fm=auto&auto=compress%2Cformat" width="1686" height="985" alt="Productised MCP Node" />
+
+<Callout kind="info" collapsed="false">
+  Only tools the server declares read-only are enabled when you first connect. Anything that could create, edit or delete data waits until you switch it on, because the AI calls these tools unsupervised while talking to a member of the public.
+</Callout>
 
 ## Analytics
 
