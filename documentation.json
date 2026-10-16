@@ -31,11 +31,6 @@
                 "title": "Platform Overview",
                 "path": "features",
                 "icon": "grid"
-              },
-              {
-                "title": "Create your first product",
-                "path": "getting-started/create-with-ai",
-                "icon": "zap"
               }
             ]
           },
